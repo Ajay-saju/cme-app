@@ -311,7 +311,7 @@ class _LoginState extends State<Login> {
 
                         GestureDetector(
                             onTap: () {
-                              Get.to(Forgotpassword());
+                              Get.off(Forgotpassword());
                             },
                             child: Center(
                                 child: Text(

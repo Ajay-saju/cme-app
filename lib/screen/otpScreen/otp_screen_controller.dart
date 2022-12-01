@@ -14,6 +14,7 @@ class OptScreenController extends GetxController {
   @override
   void dispose() {
     isStopTimer.value = false;
+    startTimer();
   }
 
   static const maxSeconds = 60;
@@ -36,6 +37,8 @@ class OptScreenController extends GetxController {
     });
     update();
   }
+
+  
 
   
 }

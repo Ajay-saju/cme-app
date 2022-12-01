@@ -4,7 +4,8 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 class DashboardController extends GetxController {
   GlobalKey<ScaffoldState> drawerKey = GlobalKey();
-
+bool iconOne=false;
+bool iconTwo =false;
   var tabIndex = 0;
   String? dropvalue;
   final dropitems = ['Members Details', 'Education Details'];

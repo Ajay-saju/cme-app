@@ -8,6 +8,8 @@ import 'package:hslr/screen/login/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
+
+  
   static final GlobalKey<FormState> regformkey = GlobalKey<FormState>();
 
   TextEditingController mobNumb = TextEditingController();
@@ -82,4 +84,5 @@ otpGenarate(String mobileNumber) {
     print(otp);
     return otp;
   }
+ 
 }
