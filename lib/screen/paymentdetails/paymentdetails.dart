@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/get_instance.dart';
-import 'package:hslr/screen/login/login_controller.dart';
 import 'package:hslr/screen/member_details/member_controller.dart';
 
 class PaymentDetails extends StatefulWidget {
@@ -87,11 +83,12 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       child: Row(
                         children: [
                           Column(
+                            // crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
                                 margin: EdgeInsets.only(top: 10),
-                                height: 60,
-                                width: 80,
+                                height: 30,
+                                width: 25,
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                     color: Colors.black,
@@ -100,7 +97,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    'SL No',
+                                    'No',
                                     style: TextStyle(
                                         fontSize: 15,
                                         fontFamily: "Nunito",
@@ -114,7 +111,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 80,
+                                width: 25,
                                 decoration: BoxDecoration(
                                   border: Border(
                                       // bottom:
@@ -128,7 +125,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                   child: Text(
                                     '1',
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 14,
                                       fontFamily: "Nunito",
                                     ),
                                   ),
@@ -137,7 +134,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 80,
+                                width: 25,
                                 decoration: BoxDecoration(
                                   border: Border(
                                       top: BorderSide(
@@ -153,14 +150,14 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                   child: Text(
                                     '2',
                                     style: TextStyle(
-                                        fontSize: 18, fontFamily: "Nunito"),
+                                        fontSize: 14, fontFamily: "Nunito"),
                                   ),
                                 ),
                               ),
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 80,
+                                width: 25,
                                 decoration: BoxDecoration(
                                   border: Border(
                                       bottom: BorderSide(
@@ -176,18 +173,23 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                   child: Text(
                                     '3',
                                     style: TextStyle(
-                                        fontSize: 18, fontFamily: "Nunito"),
+                                        fontSize: 14, fontFamily: "Nunito"),
                                   ),
                                 ),
                               ),
                             ],
                           ),
+
+
+
                           Column(
+                            // mainAxisAlignment: MainAxisAlignment.start,
+                            // crossAxisAlignment: cros,
                             children: [
                               Container(
                                 margin: EdgeInsets.only(top: 10),
-                                height: 60,
-                                width: 100,
+                                height: 30,
+                                width: 59,
                                 decoration: BoxDecoration(
                                   border: Border(
                                       bottom: BorderSide(
@@ -212,7 +214,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 100,
+                                width: 59,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     // bottom:
@@ -227,14 +229,14 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                   child: Text(
                                     'Shreyas',
                                     style: TextStyle(
-                                        fontSize: 18, fontFamily: "Nunito"),
+                                        fontSize: 14, fontFamily: "Nunito"),
                                   ),
                                 ),
                               ),
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 100,
+                                width: 59,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     top: BorderSide(
@@ -251,14 +253,14 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                   child: Text(
                                     'Pavan',
                                     style: TextStyle(
-                                        fontSize: 18, fontFamily: "Nunito"),
+                                        fontSize: 14, fontFamily: "Nunito"),
                                   ),
                                 ),
                               ),
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 100,
+                                width: 59,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     bottom: BorderSide(
@@ -275,18 +277,20 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                   child: Text(
                                     'Ramesh',
                                     style: TextStyle(
-                                        fontSize: 18, fontFamily: "Nunito"),
+                                        fontSize: 14, fontFamily: "Nunito"),
                                   ),
                                 ),
                               ),
                             ],
                           ),
+
+
                           Column(
                             children: [
                               Container(
                                 margin: EdgeInsets.only(top: 10),
-                                height: 60,
-                                width: 125,
+                                height: 30,
+                                width: 80,
                                 decoration: BoxDecoration(
                                   border: Border(
                                       bottom: BorderSide(
@@ -300,7 +304,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                   child: Text(
                                     'Register No',
                                     style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 14,
                                       fontFamily: "Nunito",
                                       fontWeight: FontWeight.bold,
                                       color: Color(0xffDC3638),
@@ -311,7 +315,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 125,
+                                width: 80,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     // bottom:
@@ -333,7 +337,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 125,
+                                width: 80,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     top: BorderSide(
@@ -357,7 +361,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 125,
+                                width: 80,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     bottom: BorderSide(
@@ -380,12 +384,14 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               ),
                             ],
                           ),
+
+                          
                           Column(
                             children: [
                               Container(
                                 margin: EdgeInsets.only(top: 10),
-                                height: 60,
-                                width: 150,
+                                height: 30,
+                                width: 110,
                                 decoration: BoxDecoration(
                                   border: Border(
                                       bottom: BorderSide(
@@ -399,6 +405,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                   child: Text(
                                     'Program Name',
                                     style: TextStyle(
+                                       fontWeight: FontWeight.bold,
                                         fontSize: 15,
                                         fontFamily: "Nunito",
                                         color: Color(
@@ -410,7 +417,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 150,
+                                width: 110,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     // bottom:
@@ -432,7 +439,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 150,
+                                width: 110,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     top: BorderSide(
@@ -456,7 +463,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 150,
+                                width: 110,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     bottom: BorderSide(
@@ -479,12 +486,17 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               ),
                             ],
                           ),
+
+
+
+
+
                           Column(
                             children: [
                               Container(
                                 margin: EdgeInsets.only(top: 10),
-                                height: 60,
-                                width: 150,
+                                height: 30,
+                                width: 90,
                                 decoration: BoxDecoration(
                                   border: Border(
                                       bottom: BorderSide(
@@ -498,8 +510,9 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                   child: Text(
                                     'Others Name',
                                     style: TextStyle(
+                                      fontWeight: FontWeight.bold,
                                         fontFamily: "Nunito",
-                                        fontSize: 15,
+                                        fontSize: 14,
                                         color: Color(
                                           0xffDC3638,
                                         )),
@@ -509,7 +522,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 150,
+                                width: 90,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     // bottom:
@@ -531,7 +544,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 150,
+                                width: 90,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     top: BorderSide(
@@ -555,7 +568,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 150,
+                                width: 90,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     bottom: BorderSide(

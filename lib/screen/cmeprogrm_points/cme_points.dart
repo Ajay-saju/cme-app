@@ -91,7 +91,7 @@ class _CmepointsState extends State<Cmepoints> {
                               Container(
                                 margin: EdgeInsets.only(top: 10),
                                 height: 60,
-                                width: 80,
+                                width: 25,
                                 decoration: BoxDecoration(
                                   border: Border(
                                       bottom: BorderSide(
@@ -105,7 +105,7 @@ class _CmepointsState extends State<Cmepoints> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    'SL No',
+                                    'No',
                                     style: TextStyle(
                                       fontSize: 15,
                                       fontFamily: "Nunito",
@@ -118,7 +118,7 @@ class _CmepointsState extends State<Cmepoints> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 80,
+                                width: 25,
                                 decoration: BoxDecoration(
                                   border: Border(
                                       top: BorderSide(
@@ -132,7 +132,7 @@ class _CmepointsState extends State<Cmepoints> {
                                   child: Text(
                                     '1',
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 14,
                                       fontFamily: "Nunito",
                                     ),
                                   ),
@@ -141,7 +141,7 @@ class _CmepointsState extends State<Cmepoints> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 80,
+                                width: 25,
                                 decoration: BoxDecoration(
                                   border: Border(
                                       top: BorderSide(
@@ -157,7 +157,7 @@ class _CmepointsState extends State<Cmepoints> {
                                   child: Text(
                                     '2',
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 14,
                                       fontFamily: "Nunito",
                                     ),
                                   ),
@@ -166,7 +166,7 @@ class _CmepointsState extends State<Cmepoints> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 80,
+                                width: 25,
                                 decoration: BoxDecoration(
                                   border: Border(
                                       bottom: BorderSide(
@@ -182,7 +182,7 @@ class _CmepointsState extends State<Cmepoints> {
                                   child: Text(
                                     '3',
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 14,
                                       fontFamily: "Nunito",
                                     ),
                                   ),
@@ -190,12 +190,15 @@ class _CmepointsState extends State<Cmepoints> {
                               ),
                             ],
                           ),
+
+
+
                           Column(
                             children: [
                               Container(
                                 margin: EdgeInsets.only(top: 10),
                                 height: 60,
-                                width: 160,
+                                width: 80,
                                 decoration: BoxDecoration(
                                   border: Border(
                                       bottom: BorderSide(
@@ -219,7 +222,7 @@ class _CmepointsState extends State<Cmepoints> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 160,
+                                width: 80,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     top: BorderSide(
@@ -234,7 +237,7 @@ class _CmepointsState extends State<Cmepoints> {
                                   child: Text(
                                     'Program 1',
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 14,
                                       fontFamily: "Nunito",
                                     ),
                                   ),
@@ -243,7 +246,7 @@ class _CmepointsState extends State<Cmepoints> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 160,
+                                width: 80,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     top: BorderSide(
@@ -260,7 +263,7 @@ class _CmepointsState extends State<Cmepoints> {
                                   child: Text(
                                     'Program 2',
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 14,
                                       fontFamily: "Nunito",
                                     ),
                                   ),
@@ -269,7 +272,7 @@ class _CmepointsState extends State<Cmepoints> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 160,
+                                width: 80,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     bottom: BorderSide(
@@ -286,7 +289,7 @@ class _CmepointsState extends State<Cmepoints> {
                                   child: Text(
                                     'Program 3',
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 14,
                                       fontFamily: "Nunito",
                                     ),
                                   ),
@@ -294,12 +297,16 @@ class _CmepointsState extends State<Cmepoints> {
                               ),
                             ],
                           ),
+
+
+
+
                           Column(
                             children: [
                               Container(
                                 margin: EdgeInsets.only(top: 10),
                                 height: 60,
-                                width: 125,
+                                width: 50,
                                 decoration: BoxDecoration(
                                   border: Border(
                                       bottom: BorderSide(
@@ -313,7 +320,7 @@ class _CmepointsState extends State<Cmepoints> {
                                   child: Text(
                                     'Points',
                                     style: TextStyle(
-                                        fontSize: 15,
+                                        fontSize: 14,
                                         fontFamily: "Nunito",
                                         fontWeight: FontWeight.bold,
                                         color: Color(0xffDC3638)),
@@ -323,7 +330,7 @@ class _CmepointsState extends State<Cmepoints> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 125,
+                                width: 50,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     top: BorderSide(
@@ -338,7 +345,7 @@ class _CmepointsState extends State<Cmepoints> {
                                   child: Text(
                                     '120',
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 15,
                                       fontFamily: "Nunito",
                                     ),
                                   ),
@@ -347,7 +354,7 @@ class _CmepointsState extends State<Cmepoints> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 125,
+                                width: 50,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     top: BorderSide(
@@ -364,7 +371,7 @@ class _CmepointsState extends State<Cmepoints> {
                                   child: Text(
                                     '130',
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 15,
                                       fontFamily: "Nunito",
                                     ),
                                   ),
@@ -373,7 +380,7 @@ class _CmepointsState extends State<Cmepoints> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 125,
+                                width: 50,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     bottom: BorderSide(
@@ -390,7 +397,7 @@ class _CmepointsState extends State<Cmepoints> {
                                   child: Text(
                                     '140',
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 15,
                                       fontFamily: "Nunito",
                                     ),
                                   ),
@@ -398,12 +405,14 @@ class _CmepointsState extends State<Cmepoints> {
                               ),
                             ],
                           ),
+
+
                           Column(
                             children: [
                               Container(
                                 margin: EdgeInsets.only(top: 10),
                                 height: 60,
-                                width: 150,
+                                width: 80,
                                 decoration: BoxDecoration(
                                   border: Border(
                                       bottom: BorderSide(
@@ -427,7 +436,7 @@ class _CmepointsState extends State<Cmepoints> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 150,
+                                width: 80,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     top: BorderSide(
@@ -441,14 +450,14 @@ class _CmepointsState extends State<Cmepoints> {
                                 child: Center(
                                   child: Text(
                                     '10/06/2022',
-                                    style: TextStyle(fontSize: 18),
+                                    style: TextStyle(fontSize: 14),
                                   ),
                                 ),
                               ),
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 150,
+                                width: 80,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     top: BorderSide(
@@ -465,7 +474,7 @@ class _CmepointsState extends State<Cmepoints> {
                                   child: Text(
                                     '11/06/2022',
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 14,
                                       fontFamily: "Nunito",
                                     ),
                                   ),
@@ -474,7 +483,7 @@ class _CmepointsState extends State<Cmepoints> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 150,
+                                width: 80,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     bottom: BorderSide(
@@ -491,7 +500,7 @@ class _CmepointsState extends State<Cmepoints> {
                                   child: Text(
                                     '12/06/2022',
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 14,
                                       fontFamily: "Nunito",
                                     ),
                                   ),
@@ -499,12 +508,14 @@ class _CmepointsState extends State<Cmepoints> {
                               ),
                             ],
                           ),
+
+
                           Column(
                             children: [
                               Container(
                                 margin: EdgeInsets.only(top: 10),
                                 height: 60,
-                                width: 150,
+                                width: 125,
                                 decoration: BoxDecoration(
                                   border: Border(
                                       bottom: BorderSide(
@@ -528,7 +539,7 @@ class _CmepointsState extends State<Cmepoints> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 150,
+                                width: 125,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     top: BorderSide(
@@ -552,7 +563,7 @@ class _CmepointsState extends State<Cmepoints> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 150,
+                                width: 125,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     top: BorderSide(
@@ -578,7 +589,7 @@ class _CmepointsState extends State<Cmepoints> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 150,
+                                width: 125,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     bottom: BorderSide(

@@ -86,6 +86,43 @@ class _LoginState extends State<Login> {
                           ),
                         ),
 
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: Center(
+                            child: Container(
+                              margin: EdgeInsets.only(top: 0),
+                              height: 50, //context.height * 0.06,
+                              width: context.width * 0.9,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 4),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  border: Border.all(color: Colors.black)),
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton<String>(
+                                    value: logController.dropvalue,
+                                    isExpanded: true,
+                                    icon: Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child:
+                                          Image.asset('assets/Dropdownb.png'),
+                                    ),
+                                    hint: Text(
+                                      "  Select Profession",
+                                      style: TextStyle(fontFamily: "Nunito"),
+                                    ),
+                                    items: logController.dropitems
+                                        .map(logController.buildMenuItem)
+                                        .toList(),
+                                    onChanged: (value) {
+                                      logController.dropvalue = value;
+                                      logController.update();
+                                    }),
+                              ),
+                            ),
+                          ),
+                        ),
+
                         Center(
                           child: Padding(
                             padding: const EdgeInsets.only(
@@ -129,7 +166,7 @@ class _LoginState extends State<Login> {
                                   focusedErrorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10.0),
                                     borderSide: BorderSide(
-                                      color: Colors.transparent,
+                                      color: Colors.black,
                                     ),
                                   ),
                                   hintText: "Mobile Number",
@@ -168,7 +205,7 @@ class _LoginState extends State<Login> {
                               inputFormatters: [
                                 LengthLimitingTextInputFormatter(4),
                               ],
-                              keyboardType: TextInputType.text,
+                              keyboardType: TextInputType.number,
                               controller: logController.password,
                               validator: (value) {
                                 if (value!.isNotEmpty && value.length > 3) {
@@ -218,8 +255,8 @@ class _LoginState extends State<Login> {
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10.0),
-                                    borderSide:const BorderSide(
-                                      color: Colors.transparent,
+                                    borderSide: const BorderSide(
+                                      color: Colors.black,
                                     ),
                                   ),
                                   hintStyle: TextStyle(
@@ -239,38 +276,7 @@ class _LoginState extends State<Login> {
                         // SizedBox(
                         //   height: context.width > 410 ? 0 : 20,
                         // ),
-                        Center(
-                          child: Container(
-                            margin: EdgeInsets.only(top: 0),
-                            height: 50, //context.height * 0.06,
-                            width: context.width * 0.9,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 4),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                border: Border.all(color: Colors.black)),
-                            child: DropdownButtonHideUnderline(
-                              child: DropdownButton<String>(
-                                  value: logController.dropvalue,
-                                  isExpanded: true,
-                                  icon: Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: Image.asset('assets/Dropdownb.png'),
-                                  ),
-                                  hint: Text(
-                                    "  Select Profession",
-                                    style: TextStyle(fontFamily: "Nunito"),
-                                  ),
-                                  items: logController.dropitems
-                                      .map(logController.buildMenuItem)
-                                      .toList(),
-                                  onChanged: (value) {
-                                    logController.dropvalue = value;
-                                    logController.update();
-                                  }),
-                            ),
-                          ),
-                        ),
+
                         SizedBox(
                           height: 45,
                         ),
@@ -287,7 +293,7 @@ class _LoginState extends State<Login> {
                                 }
                               },
                               style: ElevatedButton.styleFrom(
-                                  primary: Colors.black,
+                                  backgroundColor: Colors.black,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30),
                                   )),

@@ -7,12 +7,12 @@ class ResultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final columns = [
-      'SL\nNO',
-      'Programm Name',
-      'Date Taken',
+      'NO',
+      'Programm\nName',
+      'Date',
       'Marks',
-      'Time Taken',
-      'Total People Attended',
+      'Time',
+      'Total',
       'Rank'
     ];
     return Scaffold(
@@ -75,7 +75,7 @@ class ResultScreen extends StatelessWidget {
             child: Text(
               'Results',
               style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 15,
                   fontFamily: "Nunito",
                   fontWeight: FontWeight.w900,
                   color: Color(0xffDC3638)),
@@ -122,18 +122,19 @@ class ResultScreen extends StatelessWidget {
           //           )),
           // ),
           SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
+              // scrollDirection: Axis.horizontal,
               child: Padding(
-                padding: const EdgeInsets.only(left: 15),
+                padding: const EdgeInsets.only(left: 5),
                 child: DataTable(
-                    // columnSpacing: 20,
+                    columnSpacing: 4,
+                    
                     dataTextStyle: const TextStyle(
                       color: Colors.black,
-                      fontSize: 18,
+                      fontSize: 13,
                       fontFamily: "Nunito",
                     ),
                     headingTextStyle: const TextStyle(
-                        fontSize: 15,
+                        fontSize: 14,
                         fontFamily: "Nunito",
                         fontWeight: FontWeight.bold,
                         color: Color(0xffDC3638)),
@@ -191,184 +192,184 @@ class ResultScreen extends StatelessWidget {
     ),
   ];
 
-  List<TableRow> tableContent = [
-    const TableRow(
-      children: <Widget>[
-        TableCell(
-          // verticalAlignment: TableCellVerticalAlignment.middle,
-          child: Text(
-            'SL\nNo',
-            style: TextStyle(
-                fontSize: 15,
-                fontFamily: "Nunito",
-                fontWeight: FontWeight.bold,
-                color: Color(0xffDC3638)),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        TableCell(
-          verticalAlignment: TableCellVerticalAlignment.middle,
-          child: Text(
-            'Programm Name',
-            style: TextStyle(
-                fontSize: 15,
-                fontFamily: "Nunito",
-                fontWeight: FontWeight.bold,
-                color: Color(0xffDC3638)),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        TableCell(
-          verticalAlignment: TableCellVerticalAlignment.middle,
-          child: Text(
-            'Date Taken',
-            style: TextStyle(
-                fontSize: 15,
-                fontFamily: "Nunito",
-                fontWeight: FontWeight.bold,
-                color: Color(0xffDC3638)),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        TableCell(
-          verticalAlignment: TableCellVerticalAlignment.middle,
-          child: Text(
-            'Marks',
-            style: TextStyle(
-                fontSize: 15,
-                fontFamily: "Nunito",
-                fontWeight: FontWeight.bold,
-                color: Color(0xffDC3638)),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        TableCell(
-          verticalAlignment: TableCellVerticalAlignment.middle,
-          child: Text(
-            'Time Tak',
-            style: TextStyle(
-                fontSize: 15,
-                fontFamily: "Nunito",
-                fontWeight: FontWeight.bold,
-                color: Color(0xffDC3638)),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        TableCell(
-          verticalAlignment: TableCellVerticalAlignment.middle,
-          child: Text(
-            'Total People Attended',
-            style: TextStyle(
-                fontSize: 15,
-                fontFamily: "Nunito",
-                fontWeight: FontWeight.bold,
-                color: Color(0xffDC3638)),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        TableCell(
-          verticalAlignment: TableCellVerticalAlignment.middle,
-          child: Text(
-            'Rank',
-            style: TextStyle(
-                fontSize: 15,
-                fontFamily: "Nunito",
-                fontWeight: FontWeight.bold,
-                color: Color(0xffDC3638)),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ],
-    ),
-    const TableRow(
-      children: <Widget>[
-        TableCell(
-          // verticalAlignment: TableCellVerticalAlignment.middle,
-          child: Text(
-            'SL\nNo',
-            style: TextStyle(
-                fontSize: 15,
-                fontFamily: "Nunito",
-                fontWeight: FontWeight.bold,
-                color: Color(0xffDC3638)),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        TableCell(
-          verticalAlignment: TableCellVerticalAlignment.middle,
-          child: Text(
-            'Programm Name',
-            style: TextStyle(
-                fontSize: 15,
-                fontFamily: "Nunito",
-                fontWeight: FontWeight.bold,
-                color: Color(0xffDC3638)),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        TableCell(
-          verticalAlignment: TableCellVerticalAlignment.middle,
-          child: Text(
-            'Date Taken',
-            style: TextStyle(
-                fontSize: 15,
-                fontFamily: "Nunito",
-                fontWeight: FontWeight.bold,
-                color: Color(0xffDC3638)),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        TableCell(
-          verticalAlignment: TableCellVerticalAlignment.middle,
-          child: Text(
-            'Marks',
-            style: TextStyle(
-                fontSize: 15,
-                fontFamily: "Nunito",
-                fontWeight: FontWeight.bold,
-                color: Color(0xffDC3638)),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        TableCell(
-          verticalAlignment: TableCellVerticalAlignment.middle,
-          child: Text(
-            'Time Tak',
-            style: TextStyle(
-                fontSize: 15,
-                fontFamily: "Nunito",
-                fontWeight: FontWeight.bold,
-                color: Color(0xffDC3638)),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        TableCell(
-          verticalAlignment: TableCellVerticalAlignment.middle,
-          child: Text(
-            'Total People Attended',
-            style: TextStyle(
-                fontSize: 15,
-                fontFamily: "Nunito",
-                fontWeight: FontWeight.bold,
-                color: Color(0xffDC3638)),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        TableCell(
-          verticalAlignment: TableCellVerticalAlignment.middle,
-          child: Text(
-            'Rank',
-            style: TextStyle(
-                fontSize: 15,
-                fontFamily: "Nunito",
-                fontWeight: FontWeight.bold,
-                color: Color(0xffDC3638)),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ],
-    ),
-  ];
+  // List<TableRow> tableContent = [
+  //   const TableRow(
+  //     children: <Widget>[
+  //       TableCell(
+  //         // verticalAlignment: TableCellVerticalAlignment.middle,
+  //         child: Text(
+  //           'SL\nNo',
+  //           style: TextStyle(
+  //               fontSize: 15,
+  //               fontFamily: "Nunito",
+  //               fontWeight: FontWeight.bold,
+  //               color: Color(0xffDC3638)),
+  //           textAlign: TextAlign.center,
+  //         ),
+  //       ),
+  //       TableCell(
+  //         verticalAlignment: TableCellVerticalAlignment.middle,
+  //         child: Text(
+  //           'Programm Name',
+  //           style: TextStyle(
+  //               fontSize: 15,
+  //               fontFamily: "Nunito",
+  //               fontWeight: FontWeight.bold,
+  //               color: Color(0xffDC3638)),
+  //           textAlign: TextAlign.center,
+  //         ),
+  //       ),
+  //       TableCell(
+  //         verticalAlignment: TableCellVerticalAlignment.middle,
+  //         child: Text(
+  //           'Date Taken',
+  //           style: TextStyle(
+  //               fontSize: 15,
+  //               fontFamily: "Nunito",
+  //               fontWeight: FontWeight.bold,
+  //               color: Color(0xffDC3638)),
+  //           textAlign: TextAlign.center,
+  //         ),
+  //       ),
+  //       TableCell(
+  //         verticalAlignment: TableCellVerticalAlignment.middle,
+  //         child: Text(
+  //           'Marks',
+  //           style: TextStyle(
+  //               fontSize: 15,
+  //               fontFamily: "Nunito",
+  //               fontWeight: FontWeight.bold,
+  //               color: Color(0xffDC3638)),
+  //           textAlign: TextAlign.center,
+  //         ),
+  //       ),
+  //       TableCell(
+  //         verticalAlignment: TableCellVerticalAlignment.middle,
+  //         child: Text(
+  //           'Time Tak',
+  //           style: TextStyle(
+  //               fontSize: 15,
+  //               fontFamily: "Nunito",
+  //               fontWeight: FontWeight.bold,
+  //               color: Color(0xffDC3638)),
+  //           textAlign: TextAlign.center,
+  //         ),
+  //       ),
+  //       TableCell(
+  //         verticalAlignment: TableCellVerticalAlignment.middle,
+  //         child: Text(
+  //           'Total People Attended',
+  //           style: TextStyle(
+  //               fontSize: 15,
+  //               fontFamily: "Nunito",
+  //               fontWeight: FontWeight.bold,
+  //               color: Color(0xffDC3638)),
+  //           textAlign: TextAlign.center,
+  //         ),
+  //       ),
+  //       TableCell(
+  //         verticalAlignment: TableCellVerticalAlignment.middle,
+  //         child: Text(
+  //           'Rank',
+  //           style: TextStyle(
+  //               fontSize: 15,
+  //               fontFamily: "Nunito",
+  //               fontWeight: FontWeight.bold,
+  //               color: Color(0xffDC3638)),
+  //           textAlign: TextAlign.center,
+  //         ),
+  //       ),
+  //     ],
+  //   ),
+  //   const TableRow(
+  //     children: <Widget>[
+  //       // TableCell(
+  //       //   // verticalAlignment: TableCellVerticalAlignment.middle,
+  //       //   child: Text(
+  //       //     'SL\nNo',
+  //       //     style: TextStyle(
+  //       //         fontSize: 15,
+  //       //         fontFamily: "Nunito",
+  //       //         fontWeight: FontWeight.bold,
+  //       //         color: Color(0xffDC3638)),
+  //       //     textAlign: TextAlign.center,
+  //       //   ),
+  //       // ),
+  //       // TableCell(
+  //       //   verticalAlignment: TableCellVerticalAlignment.middle,
+  //       //   child: Text(
+  //       //     'Programm Name',
+  //       //     style: TextStyle(
+  //       //         fontSize: 15,
+  //       //         fontFamily: "Nunito",
+  //       //         fontWeight: FontWeight.bold,
+  //       //         color: Color(0xffDC3638)),
+  //       //     textAlign: TextAlign.center,
+  //       //   ),
+  //       // ),
+  //       // TableCell(
+  //       //   verticalAlignment: TableCellVerticalAlignment.middle,
+  //       //   child: Text(
+  //       //     'Date Taken',
+  //       //     style: TextStyle(
+  //       //         fontSize: 15,
+  //       //         fontFamily: "Nunito",
+  //       //         fontWeight: FontWeight.bold,
+  //       //         color: Color(0xffDC3638)),
+  //       //     textAlign: TextAlign.center,
+  //       //   ),
+  //       // ),
+  //       // TableCell(
+  //       //   verticalAlignment: TableCellVerticalAlignment.middle,
+  //       //   child: Text(
+  //       //     'Marks',
+  //       //     style: TextStyle(
+  //       //         fontSize: 15,
+  //       //         fontFamily: "Nunito",
+  //       //         fontWeight: FontWeight.bold,
+  //       //         color: Color(0xffDC3638)),
+  //       //     textAlign: TextAlign.center,
+  //       //   ),
+  //       // ),
+  //       // TableCell(
+  //       //   verticalAlignment: TableCellVerticalAlignment.middle,
+  //       //   child: Text(
+  //       //     'Time Tak',
+  //       //     style: TextStyle(
+  //       //         fontSize: 15,
+  //       //         fontFamily: "Nunito",
+  //       //         fontWeight: FontWeight.bold,
+  //       //         color: Color(0xffDC3638)),
+  //       //     textAlign: TextAlign.center,
+  //       //   ),
+  //       // ),
+  //       // TableCell(
+  //       //   verticalAlignment: TableCellVerticalAlignment.middle,
+  //       //   child: Text(
+  //       //     'Total People Attended',
+  //       //     style: TextStyle(
+  //       //         fontSize: 15,
+  //       //         fontFamily: "Nunito",
+  //       //         fontWeight: FontWeight.bold,
+  //       //         color: Color(0xffDC3638)),
+  //       //     textAlign: TextAlign.center,
+  //       //   ),
+  //       // ),
+  //       // TableCell(
+  //       //   verticalAlignment: TableCellVerticalAlignment.middle,
+  //       //   child: Text(
+  //       //     'Rank',
+  //       //     style: TextStyle(
+  //       //         fontSize: 15,
+  //       //         fontFamily: "Nunito",
+  //       //         fontWeight: FontWeight.bold,
+  //       //         color: Color(0xffDC3638)),
+  //       //     textAlign: TextAlign.center,
+  //       //   ),   
+  //       // ),
+  //     ],
+  //   ),
+  // ];
 
   List<DataColumn> getColumn(List<String> columns) {
     return columns

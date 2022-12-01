@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -61,5 +63,23 @@ class LoginController extends GetxController {
     sessionlog.setString('log_name', mobNumb.text);
 
     Get.to(Dashboard());
+  }
+  // final otpApiCall = OtpApiCall();
+  var otp = ''.obs;
+  
+    RxString phoneNo = ''.obs;
+    RxBool visibility =false .obs;
+
+otpGenarate(String mobileNumber) {
+    otp.value = grnarateOtp().toString();
+    // otpApiCall.getHttp(otp.value, mobileNumber);
+      }
+
+    int grnarateOtp() {
+    var rng = Random();
+
+    var otp = (rng.nextInt(5000) + 1001);
+    print(otp);
+    return otp;
   }
 }

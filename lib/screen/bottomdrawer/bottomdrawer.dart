@@ -1,15 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/get_instance.dart';
 import 'package:hslr/screen/cmeprogrm_points/cme_points.dart';
 import 'package:hslr/screen/creat_account/create_account.dart';
 import 'package:hslr/screen/dashboard/dashboard_controller.dart';
-import 'package:hslr/screen/forgotpassword/forgot_password.dart';
-import 'package:hslr/screen/home.dart/home.dart';
 import 'package:hslr/screen/login/login.dart';
-import 'package:hslr/screen/login/login_controller.dart';
 import 'package:hslr/screen/member_details/member_details.dart';
 import 'package:hslr/screen/online_cmeprog/online_cmeprogram.dart';
 import 'package:hslr/screen/paymentdetails/paymentdetails.dart';
@@ -26,6 +22,7 @@ class BottomDrawer extends StatefulWidget {
 }
 
 class _BottomDrawerState extends State<BottomDrawer> {
+  ScrollController controller = ScrollController();
   DashboardController bdrawerController = Get.put(DashboardController());
 
   @override
@@ -86,49 +83,38 @@ class _BottomDrawerState extends State<BottomDrawer> {
                       ),
                       Container(
                         height: context.width > 410
-                            ? context.height * 0.6
+                            ? context.height * 0.8
                             : context.height * 0.55,
                         child: SingleChildScrollView(
+                          controller: controller,
+                          reverse: true,
+                          // scrollDirection: Axis.,
                           child: Column(children: [
-                            InkWell(
+                            ListTile(
+                              leading: SizedBox(
+                                height: 22,
+                                width: 22,
+                                child: Image.asset(
+                                  'assets/hmwhite.png',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              title: Text(
+                                "Dashboard",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontFamily: "Nunito",
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
                               onTap: () {
-                                // Get.to(DashboardController());
                                 bdrawerController.sidedrawer(0);
                                 bdrawerController.update();
                                 Get.back();
                               },
-                              child: Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: Row(
-                                  children: [
-                                    SizedBox(
-                                      height: 22,
-                                      width: 22,
-                                      // padding: const EdgeInsets.all(0.0),
-                                      child: Image.asset(
-                                        'assets/hmwhite.png',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 5.0),
-                                      child: Text(
-                                        "Dashboard",
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontFamily: "Nunito",
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
                             ),
+
                             // InkWell(
                             //   onTap: () {
                             //     // Get.to(DashboardController());
@@ -141,67 +127,26 @@ class _BottomDrawerState extends State<BottomDrawer> {
                             //     child: Row(
                             //       children: [
                             //         SizedBox(
-                            //           height: 25,
-                            //           width: 25,
+                            //           height: 22,
+                            //           width: 22,
                             //           // padding: const EdgeInsets.all(0.0),
                             //           child: Image.asset(
-                            //             'assets/pr.png',
+                            //             'assets/hmwhite.png',
                             //             fit: BoxFit.cover,
                             //           ),
                             //         ),
                             //         SizedBox(
                             //           width: 20,
                             //         ),
-                            //         Center(
-                            //           child: Container(
-                            //             margin: EdgeInsets.all(0),
-                            //             height: context.height * 0.06,
-                            //             width: context.width * 0.4,
-                            //             padding: EdgeInsets.symmetric(
-                            //                 horizontal: 0, vertical: 0),
-                            //             // decoration: BoxDecoration(
-                            //             //     borderRadius: BorderRadius.circular(15.0),
-                            //             //     border: Border.all(color: Colors.black)),
-
-                            //             child: DropdownButtonHideUnderline(
-                            //               child: DropdownButton<String>(
-                            //                   value: bdrawerController.dropvalue,
-                            //                   isExpanded: true,
-                            //                   dropdownColor: Color(0xffFF6464),
-                            //                   icon: Padding(
-                            //                     padding:
-                            //                         const EdgeInsets.only(left: 8.0),
-                            //                     child: Image.asset(
-                            //                       'assets/Dropdownb.png',
-                            //                       color: Colors.white,
-                            //                     ),
-                            //                   ),
-                            //                   hint: Text(
-                            //                     "Profile",
-                            //                     style: TextStyle(
-                            //                       color: Colors.white,
-                            //                       fontSize: 20,
-                            //                       fontWeight: FontWeight.w500,
-                            //                     ),
-                            //                   ),
-                            //                   items: bdrawerController.dropitems
-                            //                       .map(
-                            //                           bdrawerController.buildMenuItem)
-                            //                       .toList(),
-                            //                   onChanged: (value) {
-                            //                     bdrawerController.dropvalue = value;
-                            //                     var dropcheck =
-                            //                         bdrawerController.dropvalue;
-                            //                     bdrawerController.update();
-
-                            //                     if (dropcheck == "Members Details") {
-                            //                       Get.to(Memberdetail());
-                            //                     } else {
-                            //                       // Get.to(Education);
-                            //                     }
-                            //                     print(
-                            //                         "dropdown:${bdrawerController.dropvalue}");
-                            //                   }),
+                            //         Padding(
+                            //           padding: const EdgeInsets.only(top: 5.0),
+                            //           child: Text(
+                            //             "Dashboard",
+                            //             style: TextStyle(
+                            //               fontSize: 18,
+                            //               fontFamily: "Nunito",
+                            //               fontWeight: FontWeight.bold,
+                            //               color: Colors.white,
                             //             ),
                             //           ),
                             //         ),
@@ -212,6 +157,9 @@ class _BottomDrawerState extends State<BottomDrawer> {
 
                             InkWell(
                               onTap: () {
+                                // controller.animateTo(5,
+                                //     duration: Duration(seconds: 5),
+                                //     curve: Curves.slowMiddle);
                                 bdrawerController.visibledrop =
                                     !bdrawerController.visibledrop;
                                 bdrawerController.update();
@@ -503,6 +451,10 @@ class _BottomDrawerState extends State<BottomDrawer> {
 
                             InkWell(
                               onTap: () {
+                                // scrollToTop();
+                                controller.animateTo(5,
+                                    duration: Duration(seconds: 5),
+                                    curve: Curves.easeIn);
                                 bdrawerController.visibleDropOne =
                                     !bdrawerController.visibleDropOne;
                                 bdrawerController.update();
@@ -546,18 +498,18 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                       padding: const EdgeInsets.only(
                                           left: 8.0, top: 0),
                                       child: GetBuilder<DashboardController>(
-                                        
                                         builder: (controller) {
-
-                                          return controller.visibleDropOne? Image.asset(
-                                            'assets/ffe.png',
-                                            height: 10,
-                                            color: Colors.white,
-                                          ):Image.asset(
-                                            'assets/gg.png',
-                                            height: 10,
-                                            color: Colors.white,
-                                          );
+                                          return controller.visibleDropOne
+                                              ? Image.asset(
+                                                  'assets/ffe.png',
+                                                  height: 10,
+                                                  color: Colors.white,
+                                                )
+                                              : Image.asset(
+                                                  'assets/gg.png',
+                                                  height: 10,
+                                                  color: Colors.white,
+                                                );
                                         },
                                       ),
                                     ),
@@ -697,6 +649,13 @@ class _BottomDrawerState extends State<BottomDrawer> {
                               ),
                             ),
 
+                            // bdrawerController.visibledrop == true &&
+                            //         bdrawerController.visibledrop == true
+                            //     ? const SizedBox(
+                            //         height: 170,
+                            //       )
+                            //     : SizedBox(),
+
                             context.width > 410
                                 ? SizedBox(
                                     height: bdrawerController.visibledrop
@@ -708,16 +667,16 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                         ? context.height * 0.0
                                         : context.height * 0.0,
                                   ),
-                                //   context.width>410? SizedBox(
-                                //     height: bdrawerController.visibleDropOne
-                                //         ? context.height * 0.05
-                                //         : context.height * 0.2,
-                                //   )
-                                // : SizedBox(
-                                //     height: bdrawerController.visibleDropOne
-                                //         ? context.height * 0.0
-                                //         : context.height * 0.1,
-                                //   ),
+                            //   context.width>410? SizedBox(
+                            //     height: bdrawerController.visibleDropOne
+                            //         ? context.height * 0.05
+                            //         : context.height * 0.2,
+                            //   )
+                            // : SizedBox(
+                            //     height: bdrawerController.visibleDropOne
+                            //         ? context.height * 0.0
+                            //         : context.height * 0.1,
+                            //   ),
                           ]),
                         ),
                       ),
@@ -785,6 +744,14 @@ class _BottomDrawerState extends State<BottomDrawer> {
           ),
         );
       }),
+    );
+  }
+
+  scrollToTop() {
+    Timer(
+      Duration(seconds: 0),
+      () => controller.animateTo(5,
+          curve: Curves.easeOut, duration: const Duration(seconds: 10)),
     );
   }
 }

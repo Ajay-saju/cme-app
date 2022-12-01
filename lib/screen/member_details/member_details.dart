@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/get_instance.dart';
-import 'package:hslr/screen/login/login_controller.dart';
 import 'package:hslr/screen/member_details/member_controller.dart';
+
+import '../change_password/change_password_screen.dart';
+import '../change_profile_pick/change_profile_pick_screen.dart';
 
 class Memberdetail extends StatefulWidget {
   const Memberdetail({Key? key}) : super(key: key);
@@ -365,83 +365,83 @@ class _MemberdetailState extends State<Memberdetail> {
                       SizedBox(
                         height: 25.0,
                       ),
-                      SizedBox(
-                        height: mebController.sizechangepass
-                            ? context.height * 0.1
-                            : context.height * 0.06,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20.0, right: 20),
-                          child: TextFormField(
-                            onTap: () {},
-                            obscureText: mebController.isObscure,
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(6),
-                            ],
-                            keyboardType: TextInputType.text,
-                            controller: mebController.changepass,
-                            validator: (value) {
-                              if (value!.isNotEmpty && value.length > 5) {
-                                return null;
-                              } else if (value.length < 5 && value.isNotEmpty) {
-                                return "Your Password is Short";
-                              } else {
-                                mebController.sizepass();
-                                return 'Required Password';
-                              }
-                            },
-                            decoration: InputDecoration(
-                                suffix: Container(
-                                  transform:
-                                      Matrix4.translationValues(-10, 8, 0),
-                                  child: IconButton(
-                                      // iconSize: 15.0,
-                                      color: Colors.grey,
-                                      onPressed: () {
-                                        mebController.isObscure =
-                                            !mebController.isObscure;
-                                        mebController.update();
-                                      },
-                                      icon: Icon(mebController.isObscure
-                                          ? Icons.visibility_off
-                                          : Icons.visibility)),
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  borderSide:
-                                      const BorderSide(color: Colors.black),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  borderSide:
-                                      const BorderSide(color: Colors.black),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  borderSide:
-                                      const BorderSide(color: Colors.grey),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  borderSide: BorderSide(color: Colors.black),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  borderSide: BorderSide(
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                // hintStyle: TextStyle(color: Colors.white),
-                                hintText: "Password",
-                                hintStyle: TextStyle(
-                                  fontFamily: "Nunito",
-                                ),
-                                filled: true,
-                                fillColor: Colors.white,
-                                contentPadding:
-                                    EdgeInsets.only(left: 20.0, bottom: 30)),
-                          ),
-                        ),
-                      ),
+                      // SizedBox(
+                      //   height: mebController.sizechangepass
+                      //       ? context.height * 0.1
+                      //       : context.height * 0.06,
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.only(left: 20.0, right: 20),
+                      //     child: TextFormField(
+                      //       onTap: () {},
+                      //       obscureText: mebController.isObscure,
+                      //       inputFormatters: [
+                      //         LengthLimitingTextInputFormatter(6),
+                      //       ],
+                      //       keyboardType: TextInputType.text,
+                      //       controller: mebController.changepass,
+                      //       validator: (value) {
+                      //         if (value!.isNotEmpty && value.length > 5) {
+                      //           return null;
+                      //         } else if (value.length < 5 && value.isNotEmpty) {
+                      //           return "Your Password is Short";
+                      //         } else {
+                      //           mebController.sizepass();
+                      //           return 'Required Password';
+                      //         }
+                      //       },
+                      //       decoration: InputDecoration(
+                      //           suffix: Container(
+                      //             transform:
+                      //                 Matrix4.translationValues(-10, 8, 0),
+                      //             child: IconButton(
+                      //                 // iconSize: 15.0,
+                      //                 color: Colors.grey,
+                      //                 onPressed: () {
+                      //                   mebController.isObscure =
+                      //                       !mebController.isObscure;
+                      //                   mebController.update();
+                      //                 },
+                      //                 icon: Icon(mebController.isObscure
+                      //                     ? Icons.visibility_off
+                      //                     : Icons.visibility)),
+                      //           ),
+                      //           border: OutlineInputBorder(
+                      //             borderRadius: BorderRadius.circular(15.0),
+                      //             borderSide:
+                      //                 const BorderSide(color: Colors.black),
+                      //           ),
+                      //           enabledBorder: OutlineInputBorder(
+                      //             borderRadius: BorderRadius.circular(15.0),
+                      //             borderSide:
+                      //                 const BorderSide(color: Colors.black),
+                      //           ),
+                      //           errorBorder: OutlineInputBorder(
+                      //             borderRadius: BorderRadius.circular(15.0),
+                      //             borderSide:
+                      //                 const BorderSide(color: Colors.grey),
+                      //           ),
+                      //           focusedBorder: OutlineInputBorder(
+                      //             borderRadius: BorderRadius.circular(15.0),
+                      //             borderSide: BorderSide(color: Colors.black),
+                      //           ),
+                      //           focusedErrorBorder: OutlineInputBorder(
+                      //             borderRadius: BorderRadius.circular(15.0),
+                      //             borderSide: BorderSide(
+                      //               color: Colors.black,
+                      //             ),
+                      //           ),
+                      //           // hintStyle: TextStyle(color: Colors.white),
+                      //           hintText: "Password",
+                      //           hintStyle: TextStyle(
+                      //             fontFamily: "Nunito",
+                      //           ),
+                      //           filled: true,
+                      //           fillColor: Colors.white,
+                      //           contentPadding:
+                      //               EdgeInsets.only(left: 20.0, bottom: 30)),
+                      //     ),
+                      //   ),
+                      // ),
                       SizedBox(
                         height: 30,
                       ),
@@ -450,17 +450,27 @@ class _MemberdetailState extends State<Memberdetail> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "Change Password",
-                              style: TextStyle(
-                                  color: Colors.grey.shade900,
-                                  fontFamily: "Nunito"),
+                            InkWell(
+                              onTap: () {
+                                Get.to(ChangePasswordScreen());
+                              },
+                              child: Text(
+                                "Change Password",
+                                style: TextStyle(
+                                    color: Colors.grey.shade900,
+                                    fontFamily: "Nunito"),
+                              ),
                             ),
-                            Text(
-                              "Change Profile Pitcture",
-                              style: TextStyle(
-                                  color: Colors.grey.shade900,
-                                  fontFamily: "Nunito"),
+                            InkWell(
+                              onTap: () {
+                                Get.to(ChangeProfilePicture());
+                              },
+                              child: Text(
+                                "Change Profile Pitcture",
+                                style: TextStyle(
+                                    color: Colors.grey.shade900,
+                                    fontFamily: "Nunito"),
+                              ),
                             ),
                           ],
                         ),

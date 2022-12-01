@@ -6,7 +6,7 @@ class ReceiptScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final columns = ['SL\nNO', 'Progamme Name', 'Date Taken', 'Amount'];
+    final columns = ['SL\nNO', 'Progamme\nName', 'Date Taken', 'Amount'];
     // final row = ['1', 'phycology', '11/05/2022', '55,000 Rs'];
     return Scaffold(
       backgroundColor: Colors.white,
@@ -58,43 +58,42 @@ class ReceiptScreen extends StatelessWidget {
               height: 2,
               color: Colors.black,
             ),
-           const SizedBox(
-            height: 25,
-          ),
-
-          const Padding(
-            padding: EdgeInsets.only(left: 29),
-            child: Text(
-              'Receipts',
-              style: TextStyle(
-                  fontSize: 30,
-                  fontFamily: "Nunito",
-                  fontWeight: FontWeight.w900,
-                  color: Color(0xffDC3638)),
+            const SizedBox(
+              height: 25,
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
+            const Padding(
+              padding: EdgeInsets.only(left: 29),
+              child: Text(
+                'Receipts',
+                style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: "Nunito",
+                    fontWeight: FontWeight.w900,
+                    color: Color(0xffDC3638)),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Padding(
-                padding: const EdgeInsets.only(left: 20),
+                padding: const EdgeInsets.only(left: 10),
                 child: DataTable(
-                  
-                    // columnSpacing:25 ,
-                        dataTextStyle: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontFamily: "Nunito",
-                        ),
-                        headingTextStyle: const TextStyle(
-                            fontSize: 15,
-                            fontFamily: "Nunito",
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xffDC3638)),
-                        border: TableBorder.all(),
-                  columns: getColumn( columns), rows: rows),
+                    columnSpacing: 25,
+                    dataTextStyle: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontFamily: "Nunito",
+                    ),
+                    headingTextStyle: const TextStyle(
+                        fontSize: 15,
+                        fontFamily: "Nunito",
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xffDC3638)),
+                    border: TableBorder.all(),
+                    columns: getColumn(columns),
+                    rows: rows),
               ),
             )
           ],
@@ -103,14 +102,19 @@ class ReceiptScreen extends StatelessWidget {
     );
   }
 
-  List<DataColumn> getColumn(List<String> columns) {
+  List<DataColumn> getColumn(List<String> columns) {  
     return columns
-        .map((String colum) => DataColumn(label: Text(colum,textAlign: TextAlign.center,)))
+        .map((String colum) => DataColumn(
+                label: Container(
+                    child: Text(
+              colum,
+              textAlign: TextAlign.left,
+            ))))
         .toList();
   }
 
   List<DataRow> rows = [
-    const DataRow(
+    DataRow(
       cells: [
         DataCell(Center(child: Text('1'))),
         DataCell(Text('Phycology')),
@@ -118,7 +122,7 @@ class ReceiptScreen extends StatelessWidget {
         DataCell(Text('70')),
       ],
     ),
-   const DataRow(
+    DataRow(
       cells: [
         DataCell(Center(child: Text('1'))),
         DataCell(Text('Phycology')),
@@ -126,7 +130,7 @@ class ReceiptScreen extends StatelessWidget {
         DataCell(Text('70')),
       ],
     ),
-   const DataRow(
+    DataRow(
       cells: [
         DataCell(Center(child: Text('1'))),
         DataCell(Text('Phycology')),

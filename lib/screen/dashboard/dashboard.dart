@@ -115,11 +115,4 @@ class _DashboardState extends State<Dashboard> {
       ),
     );
   }
-
-  // _bottomNavigationBarItem({ImageIcon? icon, String? label}) {
-  //   return BottomNavigationBarItem(
-  //     // icon: ImageIcon(AssetImage(icon)),
-  //     label: label,
-  //   );
-  // }
 }

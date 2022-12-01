@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/get_instance.dart';
 import 'package:hslr/screen/login/login_controller.dart';
+
+import '../otpScreen/otp_screen.dart';
 
 class Forgotpassword extends StatefulWidget {
   const Forgotpassword({Key? key}) : super(key: key);
@@ -13,6 +13,7 @@ class Forgotpassword extends StatefulWidget {
 }
 
 class _ForgotpasswordState extends State<Forgotpassword> {
+  String? otp;
   LoginController logController = Get.put(LoginController());
 
   static final GlobalKey<FormState> forpasskey = GlobalKey<FormState>();
@@ -159,14 +160,14 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                           padding: const EdgeInsets.all(20.0),
                           child: TextFormField(
                             inputFormatters: [
-                              LengthLimitingTextInputFormatter(10),
+                              LengthLimitingTextInputFormatter(4),
                             ],
                             keyboardType: TextInputType.number,
                             controller: logController.forregnumb,
                             validator: (value) {
-                              if (value!.isNotEmpty && value.length > 9) {
+                              if (value!.isNotEmpty && value.length > 3) {
                                 return null;
-                              } else if (value.length < 9 && value.isNotEmpty) {
+                              } else if (value.length < 3 && value.isNotEmpty) {
                                 return "Your Reg No Is Short";
                               } else {
                                 return 'Required Reg No ';
@@ -225,7 +226,7 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                                   Get.back();
                                 },
                                 style: ElevatedButton.styleFrom(
-                                    primary: Colors.white,
+                                    backgroundColor: Colors.white,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30),
                                     )),
@@ -242,11 +243,25 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                               child: SizedBox(
                             width: context.width * 0.3,
                             child: ElevatedButton(
-                                onPressed: () {
-                                  forpasskey.currentState!.validate();
+                                onPressed: () async {
+                                  
+                                  if (forpasskey.currentState!.validate()) {
+                                   otp= logController.grnarateOtp().toString();
+                                     print(otp);
+                                    print(logController.formobnumb.text);
+                                    Get.to(OtpScreen(
+                                      no: logController.formobnumb.text,
+                                      otp: otp.toString(),
+                                      
+                                    ));
+                                  }else{
+                                    print("not valid");
+                                  }
+
+                                  // forpasskey.currentState!.validate();
                                 },
                                 style: ElevatedButton.styleFrom(
-                                    primary: Colors.black,
+                                    backgroundColor: Colors.black,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30),
                                     )),
