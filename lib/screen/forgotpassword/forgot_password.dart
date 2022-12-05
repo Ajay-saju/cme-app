@@ -26,7 +26,8 @@ class _ForgotpasswordState extends State<Forgotpassword> {
             FocusScope.of(context).unfocus();
           },
           child: Scaffold(
-            backgroundColor: Colors.white, //Color(0xff63c3fe),
+            backgroundColor: Colors.white,
+             //Color(0xff63c3fe),
             // appBar: AppBar(
             //   backgroundColor: Colors.white,
             //   title: Text(
@@ -199,7 +200,7 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                                     color: Colors.black,
                                   ),
                                 ),
-                                hintText: "Register Number",
+                                hintText: "Council register Number",
                                 hintStyle: TextStyle(
                                   // fontWeight: FontWeight.bold,
                                   fontFamily: "Nunito",
@@ -244,17 +245,16 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                             width: context.width * 0.3,
                             child: ElevatedButton(
                                 onPressed: () async {
-                                  
                                   if (forpasskey.currentState!.validate()) {
-                                   otp= logController.grnarateOtp().toString();
-                                     print(otp);
+                                    otp =
+                                        logController.grnarateOtp().toString();
+                                    print(otp);
                                     print(logController.formobnumb.text);
                                     Get.to(OtpScreen(
                                       no: logController.formobnumb.text,
                                       otp: otp.toString(),
-                                      
                                     ));
-                                  }else{
+                                  } else {
                                     print("not valid");
                                   }
 

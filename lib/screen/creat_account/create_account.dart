@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/login/login_controller.dart';
+
+import '../login/login.dart';
 
 class CreateAccount extends StatefulWidget {
   const CreateAccount({Key? key}) : super(key: key);
@@ -104,8 +108,9 @@ class _CreateAccountState extends State<CreateAccount> {
                             20.0,
                           ),
                           child: TextFormField(
+                            cursorColor: Colors.black,
                             inputFormatters: [
-                              LengthLimitingTextInputFormatter(10),
+                              LengthLimitingTextInputFormatter(25),
                             ],
                             keyboardType: TextInputType.name,
                             controller: logController.regName,
@@ -161,6 +166,7 @@ class _CreateAccountState extends State<CreateAccount> {
                           padding:
                               const EdgeInsets.only(left: 20.0, right: 20.0),
                           child: TextFormField(
+                            cursorColor: Colors.black,
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(10),
                             ],
@@ -216,10 +222,11 @@ class _CreateAccountState extends State<CreateAccount> {
                         child: Padding(
                           padding: const EdgeInsets.all(20),
                           child: TextFormField(
+                            cursorColor: Colors.black,
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(10),
                             ],
-                            keyboardType: TextInputType.number,
+                            keyboardType: TextInputType.text,
                             controller: logController.regno,
                             validator: (value) {
                               if (value!.isNotEmpty && value.length > 9) {
@@ -270,87 +277,79 @@ class _CreateAccountState extends State<CreateAccount> {
                       SizedBox(
                         height: 0,
                       ),
-                      SizedBox(
-                        height: logController.creatsize
-                            ? context.height * 0.1
-                            : context.height * 0.06,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20.0, right: 20),
-                          child: TextFormField(
-                            onTap: () {},
-                            obscureText: logController.isObscure,
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(6),
-                            ],
-                            keyboardType: TextInputType.text,
-                            controller: logController.password,
-                            validator: (value) {
-                              if (value!.isNotEmpty && value.length > 5) {
-                                return null;
-                              } else if (value.length < 5 && value.isNotEmpty) {
-                                return "Your Password is Short";
-                              } else {
-                                logController.creatsized();
-                                return 'Required Password';
-                              }
-                            },
-                            decoration: InputDecoration(
-                                suffix: Container(
-                                  transform:
-                                      Matrix4.translationValues(-10, 8, 0),
-                                  child: IconButton(
-                                      // iconSize: 15.0,
-                                      color: Colors.grey,
-                                      onPressed: () {
-                                        logController.isObscure =
-                                            !logController.isObscure;
-                                        logController.update();
-                                      },
-                                      icon: Icon(logController.isObscure
-                                          ? Icons.visibility_off
-                                          : Icons.visibility)),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20.0, right: 20),
+                        child: TextFormField(
+                          cursorColor: Colors.black,
+                          onTap: () {},
+                          obscureText: logController.isObscure,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(4),
+                          ],
+                          keyboardType: TextInputType.number,
+                          controller: logController.password,
+                          validator: (value) {
+                            if (value!.isNotEmpty && value.length > 5) {
+                              return null;
+                            } else if (value.length < 5 && value.isNotEmpty) {
+                              return "Your Password is Short";
+                            } else {
+                              logController.creatsized();
+                              return 'Required Password';
+                            }
+                          },
+                          decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                  // iconSize: 15.0,
+                                  color: Colors.grey,
+                                  onPressed: () {
+                                    logController.isObscure =
+                                        !logController.isObscure;
+                                    logController.update();
+                                  },
+                                  icon: Icon(logController.isObscure
+                                      ? Icons.visibility_off
+                                      : Icons.visibility)),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide:
+                                    const BorderSide(color: Colors.green),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide:
+                                    const BorderSide(color: Colors.black),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide:
+                                    const BorderSide(color: Colors.grey),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: BorderSide(color: Colors.black),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: BorderSide(
+                                  color: Colors.black,
                                 ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  borderSide:
-                                      const BorderSide(color: Colors.green),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  borderSide:
-                                      const BorderSide(color: Colors.black),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  borderSide:
-                                      const BorderSide(color: Colors.grey),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  borderSide: BorderSide(color: Colors.black),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  borderSide: BorderSide(
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                // hintStyle: TextStyle(color: Colors.white),
-                                hintText: "4 Digit Pin",
-                                hintStyle: TextStyle(
-                                  fontFamily: "Nunito",
-                                ),
-                                filled: true,
-                                fillColor: Colors.white,
-                                contentPadding:
-                                    EdgeInsets.only(left: 20.0, bottom: 30)),
-                          ),
+                              ),
+                              // hintStyle: TextStyle(color: Colors.white),
+                              hintText: "4 Digit Pin",
+                              hintStyle: TextStyle(
+                                fontFamily: "Nunito",
+                              ),
+                              filled: true,
+                              fillColor: Colors.white,
+                              contentPadding: EdgeInsets.only(
+                                left: 20.0,
+                              )),
                         ),
                       ),
                       SizedBox(
                         height: 5,
                       ),
-
                       Center(
                         child: Container(
                           margin: EdgeInsets.all(16),
@@ -386,7 +385,6 @@ class _CreateAccountState extends State<CreateAccount> {
                           ),
                         ),
                       ),
-
                       SizedBox(
                         height: 15,
                       ),
@@ -394,64 +392,28 @@ class _CreateAccountState extends State<CreateAccount> {
                           child: SizedBox(
                         width: context.width * 0.3,
                         child: ElevatedButton(
-                            onPressed: () {
-                              LoginController.regformkey.currentState!
-                                  .validate();
+                            onPressed: () async {
+                              if (LoginController.regformkey.currentState!
+                                  .validate()) {
+                                await Get.snackbar('Success',
+                                    'Password has been changed successfully',
+                                    colorText: Colors.white,
+                                    backgroundColor: Colors.black,
+                                    duration: Duration(seconds: 3));
+                                Timer(Duration(seconds: 2), () {
+                                  Get.off(Login());
+                                });
+                              } else {
+                                print('not valid');
+                              }
                             },
                             style: ElevatedButton.styleFrom(
-                                primary: Colors.black,
+                                backgroundColor: Colors.black,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30),
                                 )),
                             child: Text("Register")),
                       )),
-
-                      /////////////////
-                      //     Container(
-                      //       margin: EdgeInsets.only(top: 50.0),
-                      //       height: context.height * 0.7,
-                      //       decoration: BoxDecoration(
-                      //         borderRadius: BorderRadius.circular(25.0),
-                      //         color: Color(0xfff6f9fb),
-                      //         shape: BoxShape.rectangle,
-                      //         boxShadow: [
-                      //           BoxShadow(
-                      //               color: Colors.grey.shade300,
-                      //               spreadRadius: 0.0,
-                      //               blurRadius: 5,
-                      //               offset: const Offset(3.0, 3.0)),
-                      //           BoxShadow(
-                      //               color: Colors.grey.shade400,
-                      //               spreadRadius: 0.0,
-                      //               blurRadius: 5 / 2.0,
-                      //               offset: const Offset(3.0, 3.0)),
-                      //           const BoxShadow(
-                      //               color: Colors.white,
-                      //               spreadRadius: 2.0,
-                      //               blurRadius: 2,
-                      //               offset: Offset(-1.0, -1.0)),
-                      //           const BoxShadow(
-                      //               color: Colors.white,
-                      //               spreadRadius: 3.0,
-                      //               blurRadius: 5 / 2,
-                      //               offset: Offset(-1.0, -1.0)),
-                      //         ],
-                      //       ),
-                      //       child: Column(
-                      //         crossAxisAlignment: CrossAxisAlignment.start,
-                      //         children: [
-                      //           const Padding(
-                      //             padding: EdgeInsets.all(20.0),
-                      //             child: Text(
-                      //               "Register Form",
-                      //               style: TextStyle(
-                      //                   fontSize: 20.0, color: Colors.grey),
-                      //             ),
-                      //           ),
-                      //         ],
-                      //       ),
-                      //     ),
-                      // ////////////
                     ],
                   ),
                 ),

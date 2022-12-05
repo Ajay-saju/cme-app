@@ -128,6 +128,7 @@ class _LoginState extends State<Login> {
                             padding: const EdgeInsets.only(
                                 left: 20.0, right: 20, top: 20),
                             child: TextFormField(
+                              cursorColor: Colors.black,
                               inputFormatters: [
                                 LengthLimitingTextInputFormatter(10),
                               ],
@@ -190,86 +191,137 @@ class _LoginState extends State<Login> {
                         SizedBox(
                           height: 20,
                         ),
-                        SizedBox(
-                          height: logController.sizetext
-                              ? 70 //context.height * 0.084
-                              : 50,
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              left: 20.0,
-                              right: 20.0,
-                            ),
-                            child: TextFormField(
-                              onTap: () {},
-                              obscureText: logController.isObscure,
-                              inputFormatters: [
-                                LengthLimitingTextInputFormatter(4),
-                              ],
-                              keyboardType: TextInputType.number,
-                              controller: logController.password,
-                              validator: (value) {
-                                if (value!.isNotEmpty && value.length > 3) {
-                                  return null;
-                                } else if (value.length < 3 &&
-                                    value.isNotEmpty) {
-                                  return "Your Password is Short";
-                                } else {
-                                  logController.sizedtext();
-                                  return 'Required Password';
-                                }
-                              },
-                              decoration: InputDecoration(
-                                  suffix: Container(
-                                    transform:
-                                        Matrix4.translationValues(-10, 8, 0),
-                                    child: IconButton(
-                                        // iconSize: 15.0,
-                                        color: Colors.grey,
-                                        onPressed: () {
-                                          logController.isObscure =
-                                              !logController.isObscure;
-                                          logController.update();
-                                        },
-                                        icon: Icon(logController.isObscure
-                                            ? Icons.visibility_off
-                                            : Icons.visibility)),
+                        // Padding(
+                        //   padding: const EdgeInsets.symmetric(horizontal: 20),
+                        //   child: TextFormField(
+                        //     cursorColor: Colors.black,
+                        //     keyboardType: TextInputType.number,
+                        //     decoration: InputDecoration(
+                        //       suffix: IconButton(
+                        //             // iconSize: 15.0,
+                        //             color: Colors.grey,
+                                    
+                        //             icon: Icon(logController.isObscure
+                        //                 ? Icons.visibility_off
+                        //                 : Icons.visibility),
+                        //                 onPressed: () {
+                        //               logController.isObscure =
+                        //                   !logController.isObscure;
+                        //               logController.update();
+                        //             },
+                        //             ),
+                        //       border: OutlineInputBorder(
+                        //         borderRadius: BorderRadius.circular(10.0),
+                        //         borderSide:
+                        //             const BorderSide(color: Colors.black),
+                        //       ),
+                        //       enabledBorder: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(10.0),
+                        //           borderSide:
+                        //               const BorderSide(color: Colors.black),
+                        //         ),
+                        //         errorBorder: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(10.0),
+                        //           borderSide:
+                        //               const BorderSide(color: Colors.black),
+                        //         ),
+                        //         focusedBorder: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(10.0),
+                        //           borderSide: BorderSide(color: Colors.black),
+                        //         ),
+                        //         focusedErrorBorder: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(10.0),
+                        //           borderSide: const BorderSide(
+                        //             color: Colors.black,
+                        //           ),
+                        //         ),
+                        //          hintStyle: TextStyle(
+                        //           fontFamily: "Nunito",
+                        //         ),
+                        //         hintText: "Pin",
+                        //         filled: true,
+                        //         fillColor: Colors.white,
+                        //         contentPadding: EdgeInsets.only(
+                        //           left: 20.0,
+                        //         )
+                        //     ),
+                        //   ),
+                        // ),
+
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 20.0,
+                            right: 20.0,
+                          ),
+                          child: TextFormField(
+                            onTap: () {},
+                            cursorColor: Colors.black,
+                            obscureText: logController.isObscure,
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(4),
+                            ],
+                            keyboardType: TextInputType.number,
+                            controller: logController.password,
+                            validator: (value) {
+                              if (value!.isNotEmpty && value.length > 3) {
+                                return null;
+                              } else if (value.length < 3 && value.isNotEmpty) {
+                                return "Your Password is Short";
+                              } else {
+                                logController.sizedtext();
+                                return 'Required Password';
+                              }
+                            },
+                            decoration: InputDecoration(
+                                suffixIcon: IconButton(
+                                    // iconSize: 15.0,
+                                    color: Colors.grey,
+                                    onPressed: () {
+                                      logController.isObscure =
+                                          !logController.isObscure;
+                                      logController.update();
+                                    },
+                                    icon: Icon(logController.isObscure
+                                        ? Icons.visibility_off
+                                        : Icons.visibility)),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: BorderSide(color: Colors.black),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: const BorderSide(
+                                    color: Colors.black,
                                   ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    borderSide:
-                                        const BorderSide(color: Colors.black),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    borderSide:
-                                        const BorderSide(color: Colors.black),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    borderSide:
-                                        const BorderSide(color: Colors.black),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    borderSide: BorderSide(color: Colors.black),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    borderSide: const BorderSide(
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  hintStyle: TextStyle(
-                                    fontFamily: "Nunito",
-                                  ),
-                                  hintText: "Pin",
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  contentPadding:
-                                      EdgeInsets.only(left: 20.0, bottom: 30)),
-                            ),
+                                ),
+                                hintStyle: TextStyle(
+                                  fontFamily: "Nunito",
+                                ),
+                                hintText: "Pin",
+                                filled: true,
+                                fillColor: Colors.white,
+                                contentPadding: EdgeInsets.only(
+                                  left: 20.0,
+                                )
+                                ),
                           ),
                         ),
+
                         SizedBox(
                           height: 20,
                         ),
@@ -311,7 +363,7 @@ class _LoginState extends State<Login> {
 
                         GestureDetector(
                             onTap: () {
-                              Get.off(Forgotpassword());
+                              Get.to(Forgotpassword());
                             },
                             child: Center(
                                 child: Text(
@@ -338,83 +390,6 @@ class _LoginState extends State<Login> {
                                 fontFamily: "Nunito",
                               ),
                             ))),
-
-///////////////
-                        // Container(
-                        //   margin: EdgeInsets.only(top: 50.0),
-                        //   height: context.height * 0.6,
-                        //   decoration: BoxDecoration(
-                        //     borderRadius: BorderRadius.circular(25.0),
-                        //     color: Color(0xfff6f9fb),
-                        //     shape: BoxShape.rectangle,
-                        //     boxShadow: [
-                        //       BoxShadow(
-                        //           color: Colors.grey.shade300,
-                        //           spreadRadius: 0.0,
-                        //           blurRadius: 5,
-                        //           offset: const Offset(3.0, 3.0)),
-                        //       BoxShadow(
-                        //           color: Colors.grey.shade400,
-                        //           spreadRadius: 0.0,
-                        //           blurRadius: 5 / 2.0,
-                        //           offset: const Offset(3.0, 3.0)),
-                        //       const BoxShadow(
-                        //           color: Colors.white,
-                        //           spreadRadius: 2.0,
-                        //           blurRadius: 2,
-                        //           offset: Offset(-1.0, -1.0)),
-                        //       const BoxShadow(
-                        //           color: Colors.white,
-                        //           spreadRadius: 3.0,
-                        //           blurRadius: 5 / 2,
-                        //           offset: Offset(-1.0, -1.0)),
-                        //     ],
-                        //   ),
-                        //   child: Column(
-                        //     crossAxisAlignment: CrossAxisAlignment.start,
-                        //     children: [
-                        //       const Padding(
-                        //         padding: EdgeInsets.all(20.0),
-                        //         child: Text(
-                        //           "Welcome",
-                        //           style: TextStyle(
-                        //               fontSize: 25, color: Colors.grey),
-                        //         ),
-                        //       ),
-                        //       SizedBox(
-                        //         height: 15,
-                        //       ),
-                        //       SizedBox(
-                        //         height: 25,
-                        //       ),
-                        //       SizedBox(
-                        //         height: 10,
-                        //       ),
-                        //       GestureDetector(
-                        //           onTap: () {
-                        //             Get.to(Forgotpassword());
-                        //           },
-                        //           child:
-                        //               Center(child: Text("Forgot Password ?"))),
-                        //       SizedBox(
-                        //         height: 10,
-                        //       ),
-                        //       Center(
-                        //           child: SizedBox(
-                        //         width: context.width * 0.5,
-                        //         child: ElevatedButton(
-                        //             onPressed: () {
-                        //               Get.to(CreateAccount());
-                        //             },
-                        //             child: Text("Create New Account")),
-                        //       )),
-                        //     ],
-                        //   ),
-                        // ),
-                        // // SizedBox(
-                        //   height: context.height * 0.1,
-                        // ),
-                        //////////////////////////
                       ],
                     ),
                   ),

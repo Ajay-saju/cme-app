@@ -1,12 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/get_instance.dart';
-import 'package:hslr/screen/creat_account/create_account.dart';
-import 'package:hslr/screen/forgotpassword/forgot_password.dart';
 import 'package:hslr/screen/login/login_controller.dart';
 
 class Home extends StatefulWidget {
@@ -21,6 +14,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    int _selectedIndex = 0;
     return GetBuilder<LoginController>(
       builder: ((_) {
         return GestureDetector(
@@ -59,7 +53,7 @@ class _HomeState extends State<Home> {
                     height: context.width > 410
                         ? context.height * 0.75
                         : context.height * 0.73,
-                        width: 450,
+                    width: 450,
                     // color: Colors.amber,
                     child: SingleChildScrollView(
                       // scrollDirection: Axis.vertical,
@@ -79,7 +73,7 @@ class _HomeState extends State<Home> {
                             ),
                           ),
                           Container(
-                            margin:const EdgeInsets.only(top: 20.0, left: 20),
+                            margin: const EdgeInsets.only(top: 20.0, left: 20),
                             height: context.width > 410
                                 ? context.height * 0.15
                                 : context.height * 0.16,
@@ -335,6 +329,21 @@ class _HomeState extends State<Home> {
                 ],
               ),
             ),
+            // bottomNavigationBar:
+            //     BottomNavigationBar(items: <BottomNavigationBarItem>[
+            //   BottomNavigationBarItem(
+            //     icon: ImageIcon(
+            //       AssetImage("assets/hm.png"),
+            //       color: Colors.black87,
+            //     ),
+            //     label: "",
+            //   ),
+            //   BottomNavigationBarItem(
+            //     icon: ImageIcon(AssetImage("assets/nd.png"),
+            //         color: Colors.black87),
+            //     label: "",
+            //   ),
+            // ]),
           ),
         );
       }),

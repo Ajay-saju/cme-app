@@ -83,13 +83,14 @@ class _BottomDrawerState extends State<BottomDrawer> {
                       ),
                       Container(
                         height: context.width > 410
-                            ? context.height * 0.8
-                            : context.height * 0.55,
+                            ? context.height * 0.9
+                            : context.height * 0.75,
                         child: SingleChildScrollView(
                           controller: controller,
                           // reverse: true,
                           // scrollDirection: Axis.,
-                          child: Column(children: [
+                          child: Column(
+                            children: [
                             ListTile(
                               leading: SizedBox(
                                 height: 22,
@@ -199,82 +200,102 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                 ),
 
                                 children: [
-                                  InkWell(
-                                    onTap: () {
-                                      Get.to(Memberdetail());
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 20.0, top: 15),
-                                      child: Row(
-                                        children: [
-                                          SizedBox(
-                                            height: 22,
-                                            width: 22,
-                                            // padding: const EdgeInsets.all(0.0),
-                                            child: Image.asset(
-                                              'assets/ff.png',
-                                              fit: BoxFit.cover,
+                                  Container(
+                                    margin:
+                                        EdgeInsets.only(top: 20.0, left: 60),
+                                    height: 110,
+                                    width: 250,
+                                    // color: Colors.amber,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        border:
+                                            Border.all(color: Colors.white)),
+                                    child: Column(
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            Get.to(Memberdetail());
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 20.0, top: 15),
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                  height: 22,
+                                                  width: 22,
+                                                  // padding: const EdgeInsets.all(0.0),
+                                                  child: Image.asset(
+                                                    'assets/ff.png',
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 20,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5.0),
+                                                  child: Text(
+                                                    "Members Details",
+                                                    style: TextStyle(
+                                                      fontFamily: "Nunito",
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                          SizedBox(
-                                            width: 20,
-                                          ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 5.0),
-                                            child: Text(
-                                              "Members Details",
-                                              style: TextStyle(
-                                                fontFamily: "Nunito",
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.white,
-                                              ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            Get.to(Memberdetail());
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 20.0, top: 15),
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                  height: 22,
+                                                  width: 22,
+                                                  // padding: const EdgeInsets.all(0.0),
+                                                  child: Image.asset(
+                                                    'assets/ed.png',
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 20,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5.0),
+                                                  child: Text(
+                                                    "Education Details",
+                                                    style: TextStyle(
+                                                      fontFamily: "Nunito",
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  InkWell(
-                                    onTap: () {
-                                      Get.to(Memberdetail());
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 20.0, top: 15),
-                                      child: Row(
-                                        children: [
-                                          SizedBox(
-                                            height: 22,
-                                            width: 22,
-                                            // padding: const EdgeInsets.all(0.0),
-                                            child: Image.asset(
-                                              'assets/ed.png',
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 20,
-                                          ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 5.0),
-                                            child: Text(
-                                              "Education Details",
-                                              style: TextStyle(
-                                                fontFamily: "Nunito",
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  )
                                 ],
                               ),
                             ),
@@ -671,7 +692,15 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                   ),
                                 ),
                                 children: [
-                                   Column(
+                                  Container(
+                                margin: EdgeInsets.only(top: 20.0, left: 60),
+                                height: 140,
+                                width: 250,
+                                // color: Colors.amber,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    border: Border.all(color: Colors.white)),
+                                child: Column(
                                   children: [
                                     InkWell(
                                       onTap: () {
@@ -789,6 +818,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                     ),
                                   ],
                                 ),
+                              ),
                                 ],
                                 // trailing: Padding(
                                 //   padding:
@@ -885,6 +915,30 @@ class _BottomDrawerState extends State<BottomDrawer> {
                             //     ),
                             //   ),
                             // ),
+                            ListTile(
+                              onTap: ()async{
+                                 SharedPreferences sessionlog =
+                                    await SharedPreferences.getInstance();
+                                sessionlog.remove("log_name");
+                                Get.to(Login());
+                              },
+                            leading: SizedBox(
+                              height: 25,
+                              width: 25,
+                              // padding: const EdgeInsets.all(0.0),
+                              child: Image.asset(
+                                'assets/lgot.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ) ,
+                              title:Text(
+                                  "Logout",
+                                  style: TextStyle(
+                                      fontFamily: "Nunito",
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ) ,),
 
                             Visibility(
                               visible: bdrawerController.visibleDropOne,
@@ -1048,48 +1102,48 @@ class _BottomDrawerState extends State<BottomDrawer> {
                           ]),
                         ),
                       ),
-                      Divider(
-                        thickness: 2,
-                        color: Colors.white,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              height: 25,
-                              width: 25,
-                              // padding: const EdgeInsets.all(0.0),
-                              child: Image.asset(
-                                'assets/lgot.png',
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            GestureDetector(
-                              onTap: () async {
-                                SharedPreferences sessionlog =
-                                    await SharedPreferences.getInstance();
-                                sessionlog.remove("log_name");
-                                Get.to(Login());
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
-                                child: Text(
-                                  "Logout",
-                                  style: TextStyle(
-                                      fontFamily: "Nunito",
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      // Divider(
+                      //   thickness: 2,
+                      //   color: Colors.white,
+                      // ),
+                      // Padding(
+                      //   padding: const EdgeInsets.all(20.0),
+                      //   child: Row(
+                      //     children: [
+                      //       SizedBox(
+                      //         height: 25,
+                      //         width: 25,
+                      //         // padding: const EdgeInsets.all(0.0),
+                      //         child: Image.asset(
+                      //           'assets/lgot.png',
+                      //           fit: BoxFit.cover,
+                      //         ),
+                      //       ),
+                      //       SizedBox(
+                      //         width: 20,
+                      //       ),
+                      //       GestureDetector(
+                      //         onTap: () async {
+                      //           SharedPreferences sessionlog =
+                      //               await SharedPreferences.getInstance();
+                      //           sessionlog.remove("log_name");
+                      //           Get.to(Login());
+                      //         },
+                      //         child: Padding(
+                      //           padding: const EdgeInsets.only(top: 8.0),
+                      //           child: Text(
+                      //             "Logout",
+                      //             style: TextStyle(
+                      //                 fontFamily: "Nunito",
+                      //                 fontSize: 20,
+                      //                 color: Colors.white,
+                      //                 fontWeight: FontWeight.bold),
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                       Center(
                           child: Text(
                         "Copyright @ 2022",

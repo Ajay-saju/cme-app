@@ -13,7 +13,7 @@ import 'package:hslr/screen/dashboard/dashboard_controller.dart';
 import 'package:hslr/screen/home.dart/home.dart';
 // import 'package:hslr/screen/login/login_controller.dart';
 // import 'package:hslr/screen/my_profile/my_profile.dart';
-
+ValueNotifier<int> indexChaingeNotifier = ValueNotifier(0);
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
 
@@ -22,6 +22,14 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+     indexChaingeNotifier = ValueNotifier(0);
+  }
+
+  final screens = [Home()];
   DashboardController dashboardController = Get.put(DashboardController());
 
   @override
@@ -63,9 +71,9 @@ class _DashboardState extends State<Dashboard> {
                   )
                 ],
               ));
-        }
-        return Future.value(false);
-      },
+            }
+            return Future.value(false);
+                },
       child: GetBuilder<DashboardController>(
         builder: ((_) {
           //  var user_id = dashboardController.userid;
@@ -73,42 +81,56 @@ class _DashboardState extends State<Dashboard> {
             key: dashboardController.drawerKey,
             drawer: const BottomDrawer(),
             body: SafeArea(
-              child: IndexedStack(
-                index: dashboardController.tabIndex,
-                children: const [
-                  Home(),
+              child: Stack(
+                // index: dashboardController.tabIndex,
+                children: [
+                  ValueListenableBuilder(
+                      valueListenable: indexChaingeNotifier,
+                      builder: (context, int index, _) {
+                        return screens[index];
+                      }),
+
+                  // Home(),
                   // CmeProgram(),
                   // MyProfile(),
                 ],
               ),
             ),
-            bottomNavigationBar: BottomNavigationBar(
-                type: BottomNavigationBarType.fixed,
-                unselectedItemColor:const Color(0xffC8C8C8), //Colors.blue.shade200,
-                selectedItemColor: Colors
-                    .black87, //Color(0xffC8C8C8), //Colors.blue.shade700,00000
-                onTap: dashboardController.changeTabIndex,
-                currentIndex: dashboardController.tabIndex,
-                showSelectedLabels: false,
-                showUnselectedLabels: false,
-                items: const [
-                  BottomNavigationBarItem(
-                    icon: ImageIcon(AssetImage("assets/hm.png")),
-                    label: "",
-                  ),
-                  // BottomNavigationBarItem(
-                  //   icon: ImageIcon(AssetImage("assets/V.png")),
-                  //   label: "",
-                  // ),
-                  // BottomNavigationBarItem(
-                  //   icon: ImageIcon(AssetImage("assets/p.png")),
-                  //   label: "",
-                  // ),
-                  BottomNavigationBarItem(
-                    icon: ImageIcon(AssetImage("assets/nd.png")),
-                    label: "",
-                  ),
-                ]),
+            bottomNavigationBar: ValueListenableBuilder(
+                valueListenable: indexChaingeNotifier,
+                builder: (context, int newIndex, _) {
+                  return BottomNavigationBar(
+                      type: BottomNavigationBarType.fixed,
+                      // unselectedItemColor: Colors.black87, //Colors.blue.shade200,
+                      // selectedItemColor: Colors
+                      //     .black87, //Color(0xffC8C8C8), //Colors.blue.shade700,00000
+                      onTap: dashboardController.changeTabIndex,
+                      currentIndex: dashboardController.tabIndex,
+                      showSelectedLabels: false,
+                      showUnselectedLabels: false,
+                      items: const [
+                        BottomNavigationBarItem(
+                          icon: ImageIcon(
+                            AssetImage("assets/hm.png"),
+                            color: Colors.black87,
+                          ),
+                          label: "",
+                        ),
+                        // BottomNavigationBarItem(
+                        //   icon: ImageIcon(AssetImage("assets/V.png")),
+                        //   label: "",
+                        // ),
+                        // BottomNavigationBarItem(
+                        //   icon: ImageIcon(AssetImage("assets/p.png")),
+                        //   label: "",
+                        // ),
+                        BottomNavigationBarItem(
+                          icon: ImageIcon(AssetImage("assets/nd.png"),
+                              color: Colors.black87),
+                          label: "",
+                        ),
+                      ]);
+                }),
             // ),
           );
         }),
