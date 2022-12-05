@@ -6,18 +6,21 @@ import 'package:get/get.dart';
 class QuestionController extends GetxController {
   @override
   void onInit() {
-    isStopTimer.value = true;
-    startTimer();
+    // TODO: implement onInit
 
-    super.onInit();
+    startTimer();
+    for (var i = 0; i < 1; i++) {
+      // startSecTimer();
+    }
+    
   }
 
   @override
   void dispose() {
     isStopTimer.value = false;
-    startTimer();
   }
-var tabIndex = 0;
+
+  var tabIndex = 0;
   // final prefs =  SharedPreferences.getInstance();
   PageController pageController = PageController(initialPage: 0);
   int pageChange = 0;
@@ -25,11 +28,10 @@ var tabIndex = 0;
   bool optionB = false;
   bool optionC = false;
   bool optionD = false;
- String selectedOption ='' ;
+  String selectedOption = '';
 // List<Ans> answers=[
 //   Ans(answer: '')
 // ];
-
 
   Map answers = {};
 
@@ -40,28 +42,6 @@ var tabIndex = 0;
     } else {
       print("not able to decrement");
     }
-  }
-
-  static const maxSeconds = 10;
-  Timer? countdownTimer;
-  String enterdOtp = '';
-
-  RxInt seconds = maxSeconds.obs;
-  var isStopTimer = true.obs;
-  var isVisible = false.obs;
-
-  void startTimer() {
-    countdownTimer = Timer.periodic(Duration(minutes: 1), (_) {
-      if (seconds > 0 && isStopTimer == true) {
-        seconds--;
-        isVisible.value = false;
-        print(seconds);
-      } else {
-        isVisible.value = true;
-        isStopTimer.value = false;
-      }
-    });
-    update();
   }
 
   List<Question> questionlist = [
@@ -126,6 +106,38 @@ var tabIndex = 0;
         optionC: "optionC",
         optionD: "optionD")
   ];
+  static const maxSec = 20;
+  static const minMin = 10;
+  RxInt min = minMin.obs;
+  RxInt seconds = maxSec.obs;
+  var isStopTimer = true.obs;
+  Timer? countdownTimer;
+  Timer? countdownTimerMin;
+
+
+  void startTimer() {
+    countdownTimerMin = Timer.periodic(Duration(minutes: 10), (_) {
+      if (min > 0 && isStopTimer == true) {
+        min--;
+        // startSecTimer();
+        print(min);
+      } else {
+        isStopTimer.value = false;
+      }
+    });
+  }
+
+  startSecTimer() {
+    countdownTimer = Timer.periodic(Duration(seconds: 1), (_) {
+      if (seconds > 0 && isStopTimer == true) {
+        seconds--;
+
+        print(seconds);
+      } else {
+        isStopTimer.value = false;
+      }
+    });
+  }
 }
 
 class Question {

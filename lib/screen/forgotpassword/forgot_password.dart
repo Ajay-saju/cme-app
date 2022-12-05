@@ -163,7 +163,7 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(4),
                             ],
-                            keyboardType: TextInputType.number,
+                            keyboardType: TextInputType.text,
                             controller: logController.forregnumb,
                             validator: (value) {
                               if (value!.isNotEmpty && value.length > 3) {

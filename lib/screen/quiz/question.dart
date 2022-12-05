@@ -98,13 +98,22 @@ class _QuestionState extends State<Question> {
               appBar: AppBar(
                 actions: [
                   Obx(() => Padding(
-                        padding: const EdgeInsets.only(right: 15, top: 15),
-                        child: Text(' ${qController.seconds} min ',
+                        padding: const EdgeInsets.only(right: 10, top: 15),
+                        child: Text("${qController.min.toString()}",
                             style: TextStyle(
                                 fontFamily: "Nunito",
                                 color: Colors.black87,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16)),
+                      )),
+                  Obx(() => Padding(
+                        padding: const EdgeInsets.only(right: 15, top: 18),
+                        child: Text(qController.seconds.toString(),
+                            style: TextStyle(
+                                fontFamily: "Nunito",
+                                color: Colors.black87,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 13)),
                       )),
                 ],
 
