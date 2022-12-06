@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/main.dart';
-
 import 'package:hslr/screen/quiz/qutionCpntroller.dart';
-
 import '../../Widget/buttonwidget.dart';
 import '../dashboard/dashboard.dart';
 
@@ -97,18 +95,18 @@ class _QuestionState extends State<Question> {
               backgroundColor: Colors.white,
               appBar: AppBar(
                 actions: [
-                  Obx(() => Padding(
-                        padding: const EdgeInsets.only(right: 10, top: 15),
-                        child: Text("${qController.min.toString()}",
-                            style: TextStyle(
-                                fontFamily: "Nunito",
-                                color: Colors.black87,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16)),
-                      )),
+                  // Obx(() => Padding(
+                  //       padding: const EdgeInsets.only(right: 10, top: 15),
+                  //       child: Text("${qController.min.toString()}",
+                  //           style: TextStyle(
+                  //               fontFamily: "Nunito",
+                  //               color: Colors.black87,
+                  //               fontWeight: FontWeight.w600,
+                  //               fontSize: 16)),
+                  //     )),
                   Obx(() => Padding(
                         padding: const EdgeInsets.only(right: 15, top: 18),
-                        child: Text(qController.seconds.toString(),
+                        child: Text(qController.time.value,
                             style: TextStyle(
                                 fontFamily: "Nunito",
                                 color: Colors.black87,
@@ -655,41 +653,14 @@ class _QuestionState extends State<Question> {
                         SizedBox(
                           width: 20,
                         ),
+
+
                         SizedBox(
                           width: context.width * 0.25,
                           child: ElevatedButton(
                               onPressed: () async {
-                                qController.seconds == 0 ||
-                                        qController.pageChange == 9
-                                    ? Get.defaultDialog(
-                                        confirm: ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.black,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(30),
-                                                )),
-                                            onPressed: () {
-                                              Get.offAll(Dashboard());
-                                            },
-                                            child: Text(
-                                              'OK',
-                                              style: TextStyle(
-                                                fontFamily: "Nunito",
-                                              ),
-                                            )),
-                                        title: 'Complete',
-                                        titleStyle: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: "Nunito",
-                                        ),
-                                        middleText:
-                                            'Test Completed Successfully',
-                                        middleTextStyle: TextStyle(
-                                          fontFamily: "Nunito",
-                                        ),
-                                      )
+                                qController.pageChange == 9
+                                    ? qController.completeTest()
                                     : qController.answers[
                                             qController.pageChange + 1] =
                                         qController.selectedOption.toString();
@@ -711,18 +682,8 @@ class _QuestionState extends State<Question> {
                                 qController.optionC = false;
                                 qController.optionD = false;
                                 qController.pageController.nextPage(
-                                    duration: Duration(microseconds: 250),
+                                    duration: Duration(microseconds: 50),
                                     curve: Curves.bounceInOut);
-
-                                // qController.pageController.animateToPage(
-                                //     qController.pageChange >
-                                //             qController.questionlist.length
-                                //         ? ++qController.pageChange
-                                //         : qController.pageChange =
-                                //             qController.questionlist.length - 1,
-                                //     duration: Duration(microseconds: 250),
-                                //     curve: Curves.bounceInOut);
-                                // qController.update();
 
                                 print(
                                     "page_change++:${qController.pageChange}");
@@ -732,6 +693,8 @@ class _QuestionState extends State<Question> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30),
                                   )),
+
+
                               child: Text(
                                 qController.pageChange == 9 ? 'Submit' : "Next",
                                 style: TextStyle(
@@ -739,36 +702,9 @@ class _QuestionState extends State<Question> {
                                 ),
                               )),
                         ),
-                        // GetBuilder<QuestionController>(builder: (_) {
-                        //   return IconButton(
-                        //       onPressed: () {
-                        //         qController.pageController.animateToPage(
-                        //             qController.pageChange > 0
-                        //                 ? --qController.pageChange
-                        //                 : qController.pageChange = 0,
-                        //             // --qController.pageChange,
-                        //             duration: Duration(microseconds: 250),
-                        //             curve: Curves.bounceInOut);
-                        //         print(
-                        //             "page_change--:${qController.pageChange}");
-                        //         qController.update();
-                        //       },
-                        //       icon: Icon(Icons.arrow_back_ios));
-                        // }),
-                        // IconButton(
-                        //     onPressed: () {
-                        //       qController.pageController.animateToPage(
-                        //           qController.pageChange >
-                        //                   qController.questionlist.length
-                        //               ? ++qController.pageChange
-                        //               : qController.pageChange =
-                        //                   qController.questionlist.length - 1,
-                        //           duration: Duration(microseconds: 250),
-                        //           curve: Curves.bounceInOut);
-                        //       qController.update();
-                        //       print("page_change++:${qController.pageChange}");
-                        //     },
-                        //     icon: Icon(Icons.arrow_forward_ios)),
+
+
+
                       ],
                     ),
                     Divider(

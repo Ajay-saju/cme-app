@@ -27,10 +27,13 @@ class _BottomDrawerState extends State<BottomDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return GetBuilder<DashboardController>(
       builder: ((_) {
         return Container(
-          width: context.width * 0.8,
+          width: width * 0.8,
+          height: height * 1,
           child: Drawer(
             child: GestureDetector(
               onTap: () {
@@ -75,7 +78,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                         ),
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 8,
                       ),
                       Divider(
                         thickness: 2,
@@ -89,8 +92,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                           controller: controller,
                           // reverse: true,
                           // scrollDirection: Axis.,
-                          child: Column(
-                            children: [
+                          child: Column(children: [
                             ListTile(
                               leading: SizedBox(
                                 height: 22,
@@ -693,132 +695,141 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                 ),
                                 children: [
                                   Container(
-                                margin: EdgeInsets.only(top: 20.0, left: 60),
-                                height: 140,
-                                width: 250,
-                                // color: Colors.amber,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    border: Border.all(color: Colors.white)),
-                                child: Column(
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        Get.to(const TestScreen());
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 20.0, top: 15),
-                                        child: Row(
-                                          children: [
-                                            SizedBox(
-                                              height: 22,
-                                              width: 22,
-                                              // padding: const EdgeInsets.all(0.0),
-                                              child: Image.asset(
-                                                'assets/ff.png',
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 20,
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 5.0),
-                                              child: Text(
-                                                "TEST",
-                                                style: TextStyle(
-                                                  fontFamily: "Nunito",
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.white,
+                                    margin:
+                                        EdgeInsets.only(top: 20.0, left: 60),
+                                    height: 140,
+                                    width: 250,
+                                    // color: Colors.amber,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        border:
+                                            Border.all(color: Colors.white)),
+                                    child: Column(
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            Get.to(const TestScreen());
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 20.0, top: 15),
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                  height: 22,
+                                                  width: 22,
+                                                  // padding: const EdgeInsets.all(0.0),
+                                                  child: Image.asset(
+                                                    'assets/ff.png',
+                                                    fit: BoxFit.cover,
+                                                  ),
                                                 ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        Get.to(ResultScreen());
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 20.0, top: 15),
-                                        child: Row(
-                                          children: [
-                                            SizedBox(
-                                              height: 22,
-                                              width: 22,
-                                              // padding: const EdgeInsets.all(0.0),
-                                              child: Image.asset(
-                                                'assets/ed.png',
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 20,
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 5.0),
-                                              child: Text(
-                                                "RESULT",
-                                                style: TextStyle(
-                                                  fontFamily: "Nunito",
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.white,
+                                                SizedBox(
+                                                  width: 20,
                                                 ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        Get.to(ReceiptScreen());
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 20.0, top: 15),
-                                        child: Row(
-                                          children: [
-                                            SizedBox(
-                                              height: 22,
-                                              width: 22,
-                                              // padding: const EdgeInsets.all(0.0),
-                                              child: Image.asset(
-                                                'assets/ed.png',
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 20,
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 5.0),
-                                              child: Text(
-                                                "RECEIPTS",
-                                                style: TextStyle(
-                                                  fontFamily: "Nunito",
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.white,
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5.0),
+                                                  child: Text(
+                                                    "TEST",
+                                                    style: TextStyle(
+                                                      fontFamily: "Nunito",
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
+                                              ],
                                             ),
-                                          ],
+                                          ),
                                         ),
-                                      ),
+                                        InkWell(
+                                          onTap: () {
+                                            Get.to(ResultScreen());
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 20.0, top: 15),
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                  height: 22,
+                                                  width: 22,
+                                                  // padding: const EdgeInsets.all(0.0),
+                                                  child: Image.asset(
+                                                    'assets/ed.png',
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 20,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5.0),
+                                                  child: Text(
+                                                    "RESULT",
+                                                    style: TextStyle(
+                                                      fontFamily: "Nunito",
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            Get.to(ReceiptScreen());
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 20.0, top: 15),
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                  height: 22,
+                                                  width: 22,
+                                                  // padding: const EdgeInsets.all(0.0),
+                                                  child: Image.asset(
+                                                    'assets/ed.png',
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 20,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5.0),
+                                                  child: Text(
+                                                    "RECEIPTS",
+                                                    style: TextStyle(
+                                                      fontFamily: "Nunito",
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                              ),
+                                  ),
                                 ],
                                 // trailing: Padding(
                                 //   padding:
@@ -916,29 +927,30 @@ class _BottomDrawerState extends State<BottomDrawer> {
                             //   ),
                             // ),
                             ListTile(
-                              onTap: ()async{
-                                 SharedPreferences sessionlog =
+                              onTap: () async {
+                                SharedPreferences sessionlog =
                                     await SharedPreferences.getInstance();
                                 sessionlog.remove("log_name");
                                 Get.to(Login());
                               },
-                            leading: SizedBox(
-                              height: 25,
-                              width: 25,
-                              // padding: const EdgeInsets.all(0.0),
-                              child: Image.asset(
-                                'assets/lgot.png',
-                                fit: BoxFit.cover,
+                              leading: SizedBox(
+                                height: 25,
+                                width: 25,
+                                // padding: const EdgeInsets.all(0.0),
+                                child: Image.asset(
+                                  'assets/lgot.png',
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            ) ,
-                              title:Text(
-                                  "Logout",
-                                  style: TextStyle(
-                                      fontFamily: "Nunito",
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ) ,),
+                              title: Text(
+                                "Logout",
+                                style: TextStyle(
+                                    fontFamily: "Nunito",
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
 
                             Visibility(
                               visible: bdrawerController.visibleDropOne,

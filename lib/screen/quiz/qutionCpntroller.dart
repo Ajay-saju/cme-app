@@ -1,23 +1,46 @@
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class QuestionController extends GetxController {
-  @override
-  void onInit() {
-    // TODO: implement onInit
+import '../dashboard/dashboard.dart';
 
-    startTimer();
-    for (var i = 0; i < 1; i++) {
-      // startSecTimer();
-    }
-    
+class QuestionController extends GetxController {
+  var isStopTimer = true.obs;
+  Timer? _timer;
+  int remainingSeconds = 1;
+  final time = '00.00'.obs;
+
+  @override
+  void onReady() {
+    _startTimer(600);
+    super.onReady();
   }
 
   @override
-  void dispose() {
-    isStopTimer.value = false;
+  void onClose() {
+    if (_timer != null) {
+      _timer!.cancel();
+      // completeTest();
+    }
+    super.onClose();
+  }
+
+  void _startTimer(int seconds) {
+    const duration = Duration(seconds: 1);
+    remainingSeconds = seconds;
+    _timer = Timer.periodic(duration, (Timer timer) {
+      if (remainingSeconds == 0) {
+        completeTest();
+        timer.cancel();
+      } else {
+        int minutes = remainingSeconds ~/ 60;
+        int seconds = (remainingSeconds % 60);
+        time.value = minutes.toString().padLeft(2, '0') +
+            ":" +
+            seconds.toString().padLeft(2, "0");
+        remainingSeconds--;
+      }
+    });
   }
 
   var tabIndex = 0;
@@ -106,38 +129,69 @@ class QuestionController extends GetxController {
         optionC: "optionC",
         optionD: "optionD")
   ];
-  static const maxSec = 20;
-  static const minMin = 10;
-  RxInt min = minMin.obs;
-  RxInt seconds = maxSec.obs;
-  var isStopTimer = true.obs;
-  Timer? countdownTimer;
-  Timer? countdownTimerMin;
 
+  
 
-  void startTimer() {
-    countdownTimerMin = Timer.periodic(Duration(minutes: 10), (_) {
-      if (min > 0 && isStopTimer == true) {
-        min--;
-        // startSecTimer();
-        print(min);
-      } else {
-        isStopTimer.value = false;
-      }
-    });
+  completeTest() {
+    Get.defaultDialog(
+      confirm: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              )),
+          onPressed: () {
+            Get.offAll(Dashboard());
+          },
+          child: Text(
+            'OK',
+            style: TextStyle(
+              fontFamily: "Nunito",
+            ),
+          )),
+      title: 'Complete',
+      titleStyle: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        fontFamily: "Nunito",
+      ),
+      middleText: 'Test Completed Successfully',
+      middleTextStyle: TextStyle(
+        fontFamily: "Nunito",
+      ),
+    );
   }
 
-  startSecTimer() {
-    countdownTimer = Timer.periodic(Duration(seconds: 1), (_) {
-      if (seconds > 0 && isStopTimer == true) {
-        seconds--;
+  // void startTimer() {
+  //   countdownTimerMin = Timer.periodic(Duration(minutes: 1), (_) {
+  //     startSecTimer();
+  //     if (min > 0 && isStopTimer == true) {
 
-        print(seconds);
-      } else {
-        isStopTimer.value = false;
-      }
-    });
-  }
+  //       min--;
+  //       print(min);
+  //     } else {
+  //       isStopTimer.value = false;
+  //     }
+  //   });
+  // }
+
+  // startSecTimer() {
+  //   countdownTimer = Timer.periodic(Duration(seconds: 1), (_) {
+  //     if (seconds > 0 && min > 0) {
+  //       seconds--;
+
+  //       print(seconds);
+  //     }
+  //     if(seconds == 0 ){
+
+  //       min --;
+
+  //     }
+  //      else {
+  //       isStopTimer.value = false;
+  //     }
+  //   });
+  // }
 }
 
 class Question {
