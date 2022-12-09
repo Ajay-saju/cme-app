@@ -2,7 +2,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../cme_program/cme_prog.dart';
 import '../dashboard/dashboard.dart';
+import '../online_cmeprog/online_cmeprogram.dart';
 
 class QuestionController extends GetxController {
   var isStopTimer = true.obs;
@@ -130,10 +132,22 @@ class QuestionController extends GetxController {
         optionD: "optionD")
   ];
 
-  
-
   completeTest() {
     Get.defaultDialog(
+      barrierDismissible: false,
+      cancel: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.black,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            )),
+        onPressed: () {
+          Get.back();
+        },
+        child: Text('Cancel', style: TextStyle(
+              fontFamily: "Nunito",
+            ),),
+      ),
       confirm: ElevatedButton(
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.black,
@@ -141,7 +155,7 @@ class QuestionController extends GetxController {
                 borderRadius: BorderRadius.circular(30),
               )),
           onPressed: () {
-            Get.offAll(Dashboard());
+            Get.to(Onlinecmeprogram());
           },
           child: Text(
             'OK',

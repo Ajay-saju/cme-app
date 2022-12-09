@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hslr/main.dart';
 import 'package:hslr/screen/quiz/qutionCpntroller.dart';
-import '../../Widget/buttonwidget.dart';
-import '../dashboard/dashboard.dart';
+import '../online_cmeprog/online_cmeprogram.dart';
 
 class Question extends StatefulWidget {
   const Question({Key? key}) : super(key: key);
@@ -34,9 +32,14 @@ class _QuestionState extends State<Question> {
                       borderRadius: BorderRadius.circular(30),
                     )),
                 onPressed: () {
-                  Get.offAll(Dashboard());
+                  Get.to(Onlinecmeprogram());
                 },
-                child: Text('Ok')),
+                child: Text(
+                  'Ok',
+                  style: TextStyle(
+                    fontFamily: "Nunito",
+                  ),
+                )),
 
             cancel: ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -47,7 +50,12 @@ class _QuestionState extends State<Question> {
               onPressed: () {
                 Get.back();
               },
-              child: Text('Cancel'),
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                  fontFamily: "Nunito",
+                ),
+              ),
             ),
 
             middleText: "Your answers will be countable",
@@ -654,7 +662,6 @@ class _QuestionState extends State<Question> {
                           width: 20,
                         ),
 
-
                         SizedBox(
                           width: context.width * 0.25,
                           child: ElevatedButton(
@@ -693,8 +700,6 @@ class _QuestionState extends State<Question> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30),
                                   )),
-
-
                               child: Text(
                                 qController.pageChange == 9 ? 'Submit' : "Next",
                                 style: TextStyle(
@@ -702,9 +707,6 @@ class _QuestionState extends State<Question> {
                                 ),
                               )),
                         ),
-
-
-
                       ],
                     ),
                     Divider(

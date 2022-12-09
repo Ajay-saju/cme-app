@@ -12,9 +12,21 @@ class ChangeProfilePicture extends StatelessWidget {
 
   Image profilePick() {
     if (pickController.fileImage.value != '')
-      return Image.file(File(pickController.fileImage.value));
+      return Image.file(
+        File(
+          pickController.fileImage.value,
+        ),
+        width: 100,
+        height: 100,
+        fit: BoxFit.cover,
+      );
     else
-      return Image.asset('assets/profile.png');
+      return Image.asset(
+        'assets/profile.png',
+        width: 100,
+        height: 100,
+        fit: BoxFit.cover,
+      );
   }
 
   @override
@@ -73,13 +85,19 @@ class ChangeProfilePicture extends StatelessWidget {
                 height: 20,
               ),
               Center(
-                child: Obx(() => 
-                     CircleAvatar(
+                child: Obx(() => CircleAvatar(
+                      backgroundColor: Colors.grey,
+                      radius: 103,
+                      child: CircleAvatar(
+                        // child: ClipRRect(
+                        //   borderRadius: BorderRadius.circular(.0),
+                        //   child: profilePick(),
+                        // ),
+                        backgroundColor: Colors.white,
                         radius: 100,
-                        backgroundImage:
-                            profilePick().image,
-                      )
-                    ),
+                        backgroundImage: profilePick().image,
+                      ),
+                    )),
               ),
               SizedBox(
                 height: 20,
@@ -87,63 +105,78 @@ class ChangeProfilePicture extends StatelessWidget {
               ElevatedButton(
                 onPressed: () async {
                   Get.defaultDialog(
+                    barrierDismissible: false,
+                      title: 'Image from',
+                      titleStyle: TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500),
                       content: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              pickController.imageFromGallery();
-                              Get.back();
-                            },
-                            child: Text(
-                              'Gallery',
-                              style: TextStyle(
-                                  fontSize: 13, fontWeight: FontWeight.bold),
+                        padding: const EdgeInsets.symmetric(horizontal: 30),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  pickController.imageFromGallery();
+                                  Get.back();
+                                },
+                                child: Text(
+                                  'Gallery',
+                                  style: TextStyle(
+                                      fontFamily: "Nunito",
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    fixedSize: Size(80, 30),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    backgroundColor: Colors.black87),
+                              ),
                             ),
-                            style: ElevatedButton.styleFrom(
-                                fixedSize: Size(80, 30),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)),
-                                backgroundColor: Colors.amber),
-                          ),
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  pickController.imageFromCamara();
+                                  Get.back();
+                                },
+                                child: Text(
+                                  'Camara',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 13,
+                                  ),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    fixedSize: Size(80, 30),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    backgroundColor: Colors.black87),
+                              ),
+                            )
+                          ],
                         ),
-                        Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              pickController.imageFromCamara();
-                              Get.back();
-                            },
-                            child: Text(
-                              'Camara',
-                              style: TextStyle(
-                                  fontSize: 13, fontWeight: FontWeight.bold),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                                fixedSize: Size(80, 30),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)),
-                                backgroundColor: Colors.amber),
-                          ),
-                        )
-                      ],
-                    ),
-                  ));
+                      ));
                 },
                 child: Text(
                   'Upload Image',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontFamily: "Nunito",
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
                 ),
                 style: ElevatedButton.styleFrom(
                     fixedSize: Size(350, 60),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
-                    backgroundColor: Colors.amber),
+                    backgroundColor: Colors.black),
               ),
             ],
           )

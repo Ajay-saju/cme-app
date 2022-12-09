@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
+import 'package:hslr/screen/dashboard/dashboard.dart';
 import 'package:hslr/screen/login/login_controller.dart';
 import 'package:hslr/screen/member_details/member_controller.dart';
 import 'package:hslr/screen/quiz/question.dart';
@@ -77,7 +78,7 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.back();
+                      Get.off (Dashboard());
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -467,7 +468,7 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                   Center(
                                     child: ElevatedButton(
                                         onPressed: () {
-                                          Get.to(Question());
+                                          Get.off(Question());
                                         },
                                         style: ElevatedButton.styleFrom(
                                             backgroundColor: Color(

@@ -275,7 +275,7 @@ class _LoginState extends State<Login> {
                             decoration: InputDecoration(
                                 suffixIcon: IconButton(
                                     // iconSize: 15.0,
-                                    color: Colors.grey,
+                                    color: Colors.black,
                                     onPressed: () {
                                       logController.isObscure =
                                           !logController.isObscure;
