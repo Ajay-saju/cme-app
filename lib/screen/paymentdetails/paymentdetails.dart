@@ -1,6 +1,11 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/member_details/member_controller.dart';
+import 'package:hslr/screen/paymentdetails/pdf_api.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:open_file/open_file.dart';
 
 class PaymentDetails extends StatefulWidget {
   const PaymentDetails({Key? key}) : super(key: key);
@@ -10,6 +15,8 @@ class PaymentDetails extends StatefulWidget {
 }
 
 class _PaymentDetailsState extends State<PaymentDetails> {
+  
+  final pdf = pw.Document();
   MemberDetailsController mebController = Get.put(MemberDetailsController());
 
   TableRow buildRow(List<String> cells) =>
@@ -87,7 +94,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                             children: [
                               Container(
                                 margin: EdgeInsets.only(top: 10),
-                                height: 30,
+                                height: 40,
                                 width: 25,
                                 decoration: BoxDecoration(
                                   border: Border.all(
@@ -179,17 +186,14 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               ),
                             ],
                           ),
-
-
-
                           Column(
                             // mainAxisAlignment: MainAxisAlignment.start,
                             // crossAxisAlignment: cros,
                             children: [
                               Container(
                                 margin: EdgeInsets.only(top: 10),
-                                height: 30,
-                                width: 59,
+                                height: 40,
+                                width: 65,
                                 decoration: BoxDecoration(
                                   border: Border(
                                       bottom: BorderSide(
@@ -201,7 +205,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    'Name',
+                                    'Program\n  Name',
                                     style: TextStyle(
                                       fontSize: 15,
                                       fontFamily: "Nunito",
@@ -214,7 +218,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 59,
+                                width: 65,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     // bottom:
@@ -236,7 +240,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 59,
+                                width: 65,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     top: BorderSide(
@@ -260,7 +264,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 59,
+                                width: 65,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     bottom: BorderSide(
@@ -283,14 +287,12 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               ),
                             ],
                           ),
-
-
                           Column(
                             children: [
                               Container(
                                 margin: EdgeInsets.only(top: 10),
-                                height: 30,
-                                width: 80,
+                                height: 40,
+                                width: 72,
                                 decoration: BoxDecoration(
                                   border: Border(
                                       bottom: BorderSide(
@@ -302,7 +304,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    'Register No',
+                                    'Receipt\n   No',
                                     style: TextStyle(
                                       fontSize: 14,
                                       fontFamily: "Nunito",
@@ -315,7 +317,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 80,
+                                width: 72,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     // bottom:
@@ -337,7 +339,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 80,
+                                width: 72,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     top: BorderSide(
@@ -361,7 +363,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 80,
+                                width: 72,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     bottom: BorderSide(
@@ -384,14 +386,12 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               ),
                             ],
                           ),
-
-                          
                           Column(
                             children: [
                               Container(
                                 margin: EdgeInsets.only(top: 10),
-                                height: 30,
-                                width: 110,
+                                height: 40,
+                                width: 72,
                                 decoration: BoxDecoration(
                                   border: Border(
                                       bottom: BorderSide(
@@ -403,9 +403,9 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    'Program Name',
+                                    'Amount',
                                     style: TextStyle(
-                                       fontWeight: FontWeight.bold,
+                                        fontWeight: FontWeight.bold,
                                         fontSize: 15,
                                         fontFamily: "Nunito",
                                         color: Color(
@@ -417,7 +417,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 110,
+                                width: 72,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     // bottom:
@@ -439,7 +439,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 110,
+                                width: 72,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     top: BorderSide(
@@ -463,7 +463,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 110,
+                                width: 72,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     bottom: BorderSide(
@@ -486,16 +486,111 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               ),
                             ],
                           ),
-
-
-
-
-
                           Column(
                             children: [
                               Container(
                                 margin: EdgeInsets.only(top: 10),
-                                height: 30,
+                                height: 40,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(
+                                          color: Colors.black, width: 1),
+                                      right: BorderSide(
+                                          color: Colors.black, width: 1),
+                                      top: BorderSide(
+                                          color: Colors.black, width: 1)),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'Transaction\n Id',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: "Nunito",
+                                        fontSize: 14,
+                                        color: Color(
+                                          0xffDC3638,
+                                        )),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 0),
+                                height: 50,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    // bottom:
+                                    //     BorderSide(color: Colors.black, width: 1),
+                                    right: BorderSide(
+                                        color: Colors.black, width: 1),
+                                    // left:
+                                    //     BorderSide(color: Colors.black, width: 1)
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '********',
+                                    style: TextStyle(
+                                        fontSize: 18, fontFamily: "Nunito"),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 0),
+                                height: 50,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    top: BorderSide(
+                                        color: Colors.black, width: 1),
+                                    // bottom:
+                                    //     BorderSide(color: Colors.black, width: 1),
+                                    right: BorderSide(
+                                        color: Colors.black, width: 1),
+                                    // left:
+                                    //     BorderSide(color: Colors.black, width: 1)
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '********',
+                                    style: TextStyle(
+                                        fontSize: 18, fontFamily: "Nunito"),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 0),
+                                height: 50,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(
+                                        color: Colors.black, width: 1),
+                                    top: BorderSide(
+                                        color: Colors.black, width: 1),
+                                    right: BorderSide(
+                                        color: Colors.black, width: 1),
+                                    // left:
+                                    //     BorderSide(color: Colors.black, width: 1)
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '********',
+                                    style: TextStyle(
+                                        fontSize: 18, fontFamily: "Nunito"),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(top: 10),
+                                height: 40,
                                 width: 90,
                                 decoration: BoxDecoration(
                                   border: Border(
@@ -508,9 +603,9 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    'Others Name',
+                                    'Transaction\n Date',
                                     style: TextStyle(
-                                      fontWeight: FontWeight.bold,
+                                        fontWeight: FontWeight.bold,
                                         fontFamily: "Nunito",
                                         fontSize: 14,
                                         color: Color(
@@ -591,6 +686,135 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               ),
                             ],
                           ),
+                          Column(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(top: 10),
+                                height: 40,
+                                width: 70,
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(
+                                          color: Colors.black, width: 1),
+                                      right: BorderSide(
+                                          color: Colors.black, width: 1),
+                                      top: BorderSide(
+                                          color: Colors.black, width: 1)),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'Print',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: "Nunito",
+                                        fontSize: 14,
+                                        color: Color(
+                                          0xffDC3638,
+                                        )),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 0),
+                                height: 50,
+                                width: 70,
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    // bottom:
+                                    //     BorderSide(color: Colors.black, width: 1),
+                                    right: BorderSide(
+                                        color: Colors.black, width: 1),
+                                    // left:
+                                    //     BorderSide(color: Colors.black, width: 1)
+                                  ),
+                                ),
+                                child: InkWell(
+                                  onTap: () async {
+                                    print('working');
+                                    pdf.addPage(pw.Page(
+                                        pageFormat: PdfPageFormat.a4,
+                                        build: (pw.Context context) {
+                                          return pw.Center(
+                                            child: pw.Text("Hello World"),
+                                          ); // Center
+                                        }));
+                                    final file = File('example.pdf');
+                                    await file.writeAsBytes(await pdf.save());
+
+                                    await OpenFile.open(file.path);
+                                  },
+                                  child: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Image.asset(
+                                        'assets/hj.png',
+                                        height: 25,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 0),
+                                height: 50,
+                                width: 70,
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    top: BorderSide(
+                                        color: Colors.black, width: 1),
+                                    // bottom:
+                                    //     BorderSide(color: Colors.black, width: 1),
+                                    right: BorderSide(
+                                        color: Colors.black, width: 1),
+                                    // left:
+                                    //     BorderSide(color: Colors.black, width: 1)
+                                  ),
+                                ),
+                                child: InkWell(
+                                  onTap: () async {
+                                    // print('working');
+                                    // final pdf =await PdfApi.genaratePdf('sample text');
+                                    // PdfApi.openFile(pdfFile);
+                                  },
+                                  child: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Image.asset(
+                                        'assets/hj.png',
+                                        height: 25,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 0),
+                                height: 50,
+                                width: 70,
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(
+                                        color: Colors.black, width: 1),
+                                    top: BorderSide(
+                                        color: Colors.black, width: 1),
+                                    right: BorderSide(
+                                        color: Colors.black, width: 1),
+                                    // left:
+                                    //     BorderSide(color: Colors.black, width: 1)
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 8.0),
+                                    child: Image.asset(
+                                      'assets/hj.png',
+                                      height: 25,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
 
                         // textDirection: Axis.horizontal,
@@ -621,13 +845,13 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               ),
                         ),
                         Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Image.asset(
-                            'assets/hj.png',
-                            height: 25,
-                          ),
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(left: 8.0),
+                        //   child: Image.asset(
+                        //     'assets/hj.png',
+                        //     height: 25,
+                        //   ),
+                        // ),
                       ],
                     ),
                   )

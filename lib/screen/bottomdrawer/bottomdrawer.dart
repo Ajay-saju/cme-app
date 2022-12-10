@@ -749,7 +749,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                         ),
                                         InkWell(
                                           onTap: () {
-                                            Get.to(ResultScreen());
+                                            Get.to(Cmepoints());
                                           },
                                           child: Padding(
                                             padding: const EdgeInsets.only(
@@ -789,7 +789,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                         ),
                                         InkWell(
                                           onTap: () {
-                                            Get.to(ReceiptScreen());
+                                            Get.to(PaymentDetails());
                                           },
                                           child: Padding(
                                             padding: const EdgeInsets.only(

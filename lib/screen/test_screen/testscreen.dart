@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/cashback_screen/cashback_screen.dart';
+import 'package:hslr/screen/quiz/question.dart';
 import 'package:hslr/screen/ref&earn_screen/ref&earn_screen.dart';
 import 'package:hslr/screen/test_screen/testscreen_controller.dart';
 
@@ -79,7 +80,7 @@ class TestScreen extends StatelessWidget {
                         ? context.width * 0.45
                         : context.width * 0.4,
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 254, 84, 84),
+                      color: Colors.black87,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Padding(
@@ -115,8 +116,8 @@ class TestScreen extends StatelessWidget {
                                   style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w600,
-                                      color: Color(
-                                          0xff2D2D2D)) //Color(0xff4169e1)),#
+                                      color: Color.fromARGB(
+                                          0, 29, 27, 27)) //Color(0xff4169e1)),#
                                   ),
                             );
                           }).toList(),
@@ -208,7 +209,7 @@ class TestScreen extends StatelessWidget {
                         ? context.width * 0.45
                         : context.width * 0.4,
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 254, 84, 84),
+                      color: Colors.black87,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Padding(
@@ -312,7 +313,7 @@ class TestScreen extends StatelessWidget {
               height: 300,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 254, 84, 84),
+                color: Colors.black87,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
@@ -321,7 +322,7 @@ class TestScreen extends StatelessWidget {
                     height: 70,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 255, 184, 123),
+                      color: Colors.grey,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: const Padding(
@@ -368,7 +369,7 @@ class TestScreen extends StatelessWidget {
                           height: 75,
                           width: 100,
                           decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 254, 163, 84),
+                            color: Colors.grey,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Center(
@@ -388,7 +389,7 @@ class TestScreen extends StatelessWidget {
                           height: 75,
                           width: 100,
                           decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 254, 163, 84),
+                            color: Colors.grey,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Center(
@@ -411,7 +412,7 @@ class TestScreen extends StatelessWidget {
                           height: 75,
                           width: 100,
                           decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 254, 163, 84),
+                            color: Colors.grey,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Center(
@@ -433,6 +434,20 @@ class TestScreen extends StatelessWidget {
               // color: Colors.black,
             ),
           ),
+          SizedBox(
+            height: 10,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Get.offAll(Question());
+            },
+            child: Text('Take Test'),
+            style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                )),
+          )
         ],
       )),
     );

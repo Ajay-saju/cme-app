@@ -16,15 +16,15 @@ class ChangeProfilePicture extends StatelessWidget {
         File(
           pickController.fileImage.value,
         ),
-        width: 100,
-        height: 100,
+        // width: 100,
+        // height: 100,
         fit: BoxFit.cover,
       );
     else
       return Image.asset(
         'assets/profile.png',
-        width: 100,
-        height: 100,
+        // width: 100,
+        // height: 100,
         fit: BoxFit.cover,
       );
   }
