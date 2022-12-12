@@ -122,7 +122,6 @@ class _QuestionState extends State<Question> {
                         child: Text(qController.time.value,
                             style: TextStyle(
                                 fontFamily: "Nunito",
-                                
                                 color: qController.timerColorsChange(),
                                 fontWeight: FontWeight.w600,
                                 fontSize: 15)),

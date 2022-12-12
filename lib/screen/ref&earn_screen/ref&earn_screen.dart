@@ -75,7 +75,7 @@ class ReffEarnScreen extends StatelessWidget {
                     height: 80,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color:Colors.black87,
+                      color:Color.fromARGB(255, 138, 49, 49),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Column(

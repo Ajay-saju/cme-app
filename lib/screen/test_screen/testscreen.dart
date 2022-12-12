@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/cashback_screen/cashback_screen.dart';
@@ -81,7 +83,7 @@ class TestScreen extends StatelessWidget {
                         ? context.width * 0.45
                         : context.width * 0.4,
                     decoration: BoxDecoration(
-                      color: Colors.black87,
+                      color: Color.fromARGB(255, 138, 49, 49),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Padding(
@@ -210,7 +212,7 @@ class TestScreen extends StatelessWidget {
                         ? context.width * 0.45
                         : context.width * 0.4,
                     decoration: BoxDecoration(
-                      color: Colors.black87,
+                      color: Color.fromARGB(255, 138, 49, 49),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Padding(
@@ -314,7 +316,7 @@ class TestScreen extends StatelessWidget {
               height: 300,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.white10,
+                color: Colors.black87,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
@@ -323,7 +325,7 @@ class TestScreen extends StatelessWidget {
                     height: 70,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: Colors.black87,
+                      color: Color.fromARGB(255, 138, 49, 49),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: const Padding(
@@ -333,7 +335,7 @@ class TestScreen extends StatelessWidget {
                           'TITLE: Obstetrics & Gynecology',
                           style: TextStyle(
                               fontFamily: "Nunito",
-                              fontSize: 23,
+                              fontSize: 21,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
@@ -349,7 +351,7 @@ class TestScreen extends StatelessWidget {
                         fontFamily: "Nunito",
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black87),
+                        color: Colors.white60),
                   ),
                   SizedBox(
                     height: 35,
@@ -370,7 +372,7 @@ class TestScreen extends StatelessWidget {
                           height: 75,
                           width: 100,
                           decoration: BoxDecoration(
-                            color: Colors.black87,
+                            color: Color.fromARGB(255, 138, 49, 49),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Center(
@@ -390,7 +392,7 @@ class TestScreen extends StatelessWidget {
                           height: 75,
                           width: 100,
                           decoration: BoxDecoration(
-                            color: Colors.black87,
+                            color: Color.fromARGB(255, 138, 49, 49),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Center(
@@ -413,7 +415,7 @@ class TestScreen extends StatelessWidget {
                           height: 75,
                           width: 100,
                           decoration: BoxDecoration(
-                            color: Colors.black87,
+                            color: Color.fromARGB(255, 138, 49, 49),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Center(
@@ -445,7 +447,14 @@ class TestScreen extends StatelessWidget {
                 isGoingtoTest: testScreenController.isGoingtoTest,
               ));
             },
-            child: Text('Take Test'),
+            child: Text(
+              'Take Test',
+              style: TextStyle(
+                fontFamily: "Nunito",
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
                 shape: RoundedRectangleBorder(

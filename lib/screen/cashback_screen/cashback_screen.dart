@@ -66,7 +66,7 @@ class CashBackScreen extends StatelessWidget {
               height: 300,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 254, 84, 84),
+                color: Colors.black87,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
@@ -76,7 +76,7 @@ class CashBackScreen extends StatelessWidget {
                     height: 70,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 255, 184, 123),
+                      color: Color.fromARGB(255, 138, 49, 49),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: const Padding(
@@ -99,7 +99,7 @@ class CashBackScreen extends StatelessWidget {
                   SizedBox(
                     width: double.maxFinite,
                     child: Column(
-                      children:const [
+                      children: const [
                         Text(
                           'Earnd CASHBACK',
                           style: TextStyle(
@@ -108,12 +108,20 @@ class CashBackScreen extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
-                        Divider(thickness: 2,color: Colors.white,indent: 70,endIndent: 70,),
-                        Text('120 Rs',style: TextStyle(
+                        Divider(
+                          thickness: 2,
+                          color: Colors.white,
+                          indent: 70,
+                          endIndent: 70,
+                        ),
+                        Text(
+                          '120 Rs',
+                          style: TextStyle(
                               fontFamily: "Nunito",
                               fontSize: 25,
                               fontWeight: FontWeight.w900,
-                              color: Colors.white),)
+                              color: Colors.white),
+                        )
                       ],
                     ),
                   )

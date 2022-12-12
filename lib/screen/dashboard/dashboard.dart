@@ -5,7 +5,9 @@ import 'package:hslr/Widget/buttonwidget.dart';
 import 'package:hslr/screen/bottomdrawer/bottomdrawer.dart';
 import 'package:hslr/screen/dashboard/dashboard_controller.dart';
 import 'package:hslr/screen/home.dart/home.dart';
+
 ValueNotifier<int> indexChaingeNotifier = ValueNotifier(0);
+
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
 
@@ -18,7 +20,7 @@ class _DashboardState extends State<Dashboard> {
   void initState() {
     // TODO: implement initState
     super.initState();
-     indexChaingeNotifier = ValueNotifier(0);
+    indexChaingeNotifier = ValueNotifier(0);
   }
 
   final screens = [Home()];
@@ -35,37 +37,78 @@ class _DashboardState extends State<Dashboard> {
         } else {
           // return Future.value(true);
           Get.defaultDialog(
-              title: 'Alert',
+              backgroundColor: Colors.black87,
+              title: 'Are you Sure!',
+              titleStyle: TextStyle(
+                fontFamily: "Nunito",
+                color: Colors.white,
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+              ),
               content: Column(
                 children: [
-                  const Text('Are you Sure!'),
+                  // const Text('Are you Sure!'),
                   Row(
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: ButtonWidget(
-                            text: 'Back',
-                            onClicked: () {
-                              Get.back();
-                            }),
+                        child: ElevatedButton(
+                          child: Text(
+                            'Back',
+                            style: TextStyle(
+                              fontFamily: "Nunito",
+                              color: Colors.black87,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          onPressed: () {
+                            Get.back();
+                          },
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              )),
+                        ),
                       ),
                       Spacer(),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: ButtonWidget(
-                            text: 'Exit',
-                            onClicked: () {
-                              // Future.value(true);
+                        child: ElevatedButton(
+                            onPressed: () {
                               exit(0);
-                            }),
+                            },
+                            child: Text(
+                              'Exit',
+                              style: TextStyle(
+                                fontFamily: "Nunito",
+                                color: Colors.black87,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              )),
+                            ),
+
+                        // child: ButtonWidget(
+                        //     text: 'Exit',
+                        //     onClicked: () {
+                        //       // Future.value(true);
+                        //       exit(0);
+                        //     }),
                       ),
                     ],
                   )
                 ],
               ));
-            }
-            return Future.value(false);
-                },
+        }
+        return Future.value(false);
+      },
       child: GetBuilder<DashboardController>(
         builder: ((_) {
           //  var user_id = dashboardController.userid;
