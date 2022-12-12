@@ -1,18 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-// import 'package:get/get_core/src/get_main.dart';
-// import 'package:get/get_instance/get_instance.dart';
 import 'package:hslr/Widget/buttonwidget.dart';
 import 'package:hslr/screen/bottomdrawer/bottomdrawer.dart';
-// import 'package:hslr/screen/cme_program/cme_prog.dart';
-// import 'package:hslr/screen/creat_account/create_account.dart';
 import 'package:hslr/screen/dashboard/dashboard_controller.dart';
-// import 'package:hslr/screen/forgotpassword/forgot_password.dart';
 import 'package:hslr/screen/home.dart/home.dart';
-// import 'package:hslr/screen/login/login_controller.dart';
-// import 'package:hslr/screen/my_profile/my_profile.dart';
 ValueNotifier<int> indexChaingeNotifier = ValueNotifier(0);
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);

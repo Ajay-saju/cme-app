@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/quiz/qutionCpntroller.dart';
+import 'package:hslr/screen/test_screen/testscreen.dart';
 import '../online_cmeprog/online_cmeprogram.dart';
 
 class Question extends StatefulWidget {
-  const Question({Key? key}) : super(key: key);
+  final bool isGoingtoTest;
+  const Question({Key? key, required this.isGoingtoTest}) : super(key: key);
 
   @override
   State<Question> createState() => _QuestionState();
@@ -32,7 +34,10 @@ class _QuestionState extends State<Question> {
                       borderRadius: BorderRadius.circular(30),
                     )),
                 onPressed: () {
-                  Get.to(Onlinecmeprogram());
+                  qController.timer!.cancel();
+                  widget.isGoingtoTest == true
+                      ? Get.offAll(TestScreen())
+                      : Get.offAll(Onlinecmeprogram());
                 },
                 child: Text(
                   'Ok',
@@ -117,9 +122,10 @@ class _QuestionState extends State<Question> {
                         child: Text(qController.time.value,
                             style: TextStyle(
                                 fontFamily: "Nunito",
-                                color: Colors.black87,
+                                
+                                color: qController.timerColorsChange(),
                                 fontWeight: FontWeight.w600,
-                                fontSize: 13)),
+                                fontSize: 15)),
                       )),
                 ],
 
@@ -667,22 +673,12 @@ class _QuestionState extends State<Question> {
                           child: ElevatedButton(
                               onPressed: () async {
                                 qController.pageChange == 9
-                                    ? qController.completeTest()
+                                    ? qController
+                                        .completeTest(widget.isGoingtoTest)
                                     : qController.answers[
                                             qController.pageChange + 1] =
                                         qController.selectedOption.toString();
                                 print(qController.answers);
-                                //      sessionlog.setBool(
-                                //         'qus1', qController.selectedOption);
-                                // print(qController.selectedOption);
-                                // prefer.setBool(
-                                //     'qus2', qController.selectedOption);
-
-                                // for (var i = 0; i < qController.answer.length; i++) {
-                                //    qController.answer[i]=qController.selectedOption;
-                                //    print("===========$qController.answer[i]");
-                                // }
-                                //  qController.answer.add(qController.selectedOption);
 
                                 qController.optionA = false;
                                 qController.optionB = false;
@@ -722,6 +718,56 @@ class _QuestionState extends State<Question> {
             ),
           );
         }),
+      ),
+    );
+  }
+
+  completeTest() {
+    Get.defaultDialog(
+      barrierDismissible: false,
+      cancel: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.black,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            )),
+        onPressed: () {
+          Get.back();
+        },
+        child: Text(
+          'Cancel',
+          style: TextStyle(
+            fontFamily: "Nunito",
+          ),
+        ),
+      ),
+      confirm: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              )),
+          onPressed: () {
+            qController.timer!.cancel();
+            widget.isGoingtoTest == true
+                ? Get.offAll(TestScreen())
+                : Get.offAll(Onlinecmeprogram());
+          },
+          child: Text(
+            'OK',
+            style: TextStyle(
+              fontFamily: "Nunito",
+            ),
+          )),
+      title: 'Complete',
+      titleStyle: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        fontFamily: "Nunito",
+      ),
+      middleText: 'Test Completed Successfully',
+      middleTextStyle: TextStyle(
+        fontFamily: "Nunito",
       ),
     );
   }

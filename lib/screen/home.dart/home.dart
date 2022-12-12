@@ -79,8 +79,8 @@ class _HomeState extends State<Home> {
                                 : context.height * 0.16,
                             width: context.height * 0.35,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25.0),
-                              color: const Color(0xff9bb9c1), //9ac3a1
+                              borderRadius: BorderRadius.circular(8),
+                              color: Color.fromARGB(255, 23, 162, 184), //9ac3a1
                               shape: BoxShape.rectangle,
                               boxShadow: [
                                 BoxShadow(
@@ -88,11 +88,11 @@ class _HomeState extends State<Home> {
                                     spreadRadius: 0.0,
                                     blurRadius: 5,
                                     offset: const Offset(3.0, 3.0)),
-                                BoxShadow(
-                                    color: Colors.grey.shade400,
-                                    spreadRadius: 0.0,
-                                    blurRadius: 5 / 2.0,
-                                    offset: const Offset(3.0, 3.0)),
+                                // BoxShadow(
+                                //     color: Colors.grey.shade400,
+                                //     spreadRadius: 0.0,
+                                //     blurRadius: 5 / 2.0,
+                                //     offset: const Offset(3.0, 3.0)),
                                 const BoxShadow(
                                     color: Colors.white,
                                     spreadRadius: 2.0,
@@ -113,6 +113,14 @@ class _HomeState extends State<Home> {
                                       EdgeInsets.only(top: 50.0, left: 20.0),
                                   child: Column(
                                     children: [
+                                      // Text(
+                                      //   "Last Logged in",
+                                      //   style: TextStyle(
+                                      //       fontFamily: "Nunito",
+                                      //       fontSize:
+                                      //           context.width > 410 ? 25 : 20,
+                                      //       color: Colors.white),
+                                      // ),
                                       Text(
                                         "7/15/2020",
                                         style: TextStyle(
@@ -143,8 +151,9 @@ class _HomeState extends State<Home> {
                             height: context.height * 0.15,
                             width: context.height * 0.35,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25.0),
-                              color: const Color(0xff9ac3a1), //,be99c2
+                              borderRadius: BorderRadius.circular(8),
+                              color:
+                                  Color.fromARGB(255, 111, 66, 193), //,be99c2
                               shape: BoxShape.rectangle,
                               boxShadow: [
                                 BoxShadow(
@@ -152,11 +161,11 @@ class _HomeState extends State<Home> {
                                     spreadRadius: 0.0,
                                     blurRadius: 5,
                                     offset: const Offset(3.0, 3.0)),
-                                BoxShadow(
-                                    color: Colors.grey.shade400,
-                                    spreadRadius: 0.0,
-                                    blurRadius: 5 / 2.0,
-                                    offset: const Offset(3.0, 3.0)),
+                                // BoxShadow(
+                                //     color: Colors.grey.shade400,
+                                //     spreadRadius: 0.0,
+                                //     blurRadius: 5 / 2.0,
+                                //     offset: const Offset(3.0, 3.0)),
                                 const BoxShadow(
                                     color: Colors.white,
                                     spreadRadius: 2.0,
@@ -217,8 +226,8 @@ class _HomeState extends State<Home> {
                             height: context.height * 0.15,
                             width: context.height * 0.35,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25.0),
-                              color: const Color(0xffbe99c2), //,c1bc9b
+                              borderRadius: BorderRadius.circular(8),
+                              color: Color.fromARGB(255, 28,175,154), //,c1bc9b
                               shape: BoxShape.rectangle,
                               boxShadow: [
                                 BoxShadow(
@@ -226,11 +235,11 @@ class _HomeState extends State<Home> {
                                     spreadRadius: 0.0,
                                     blurRadius: 5,
                                     offset: const Offset(3.0, 3.0)),
-                                BoxShadow(
-                                    color: Colors.grey.shade400,
-                                    spreadRadius: 0.0,
-                                    blurRadius: 5 / 2.0,
-                                    offset: const Offset(3.0, 3.0)),
+                                // BoxShadow(
+                                //     color: Colors.grey.shade400,
+                                //     spreadRadius: 0.0,
+                                //     blurRadius: 5 / 2.0,
+                                //     offset: const Offset(3.0, 3.0)),
                                 const BoxShadow(
                                     color: Colors.white,
                                     spreadRadius: 2.0,
@@ -272,8 +281,9 @@ class _HomeState extends State<Home> {
                             height: context.height * 0.15,
                             width: context.height * 0.35,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25.0),
-                              color: const Color(0xffc1bc9b), //,c1bc9b,
+                              borderRadius: BorderRadius.circular(8),
+                              color:
+                                  Color.fromARGB(255, 8, 102, 198), //,c1bc9b,
                               shape: BoxShape.rectangle,
                               boxShadow: [
                                 BoxShadow(
@@ -281,11 +291,11 @@ class _HomeState extends State<Home> {
                                     spreadRadius: 0.0,
                                     blurRadius: 5,
                                     offset: const Offset(3.0, 3.0)),
-                                BoxShadow(
-                                    color: Colors.grey.shade400,
-                                    spreadRadius: 0.0,
-                                    blurRadius: 5 / 2.0,
-                                    offset: const Offset(3.0, 3.0)),
+                                // BoxShadow(
+                                //     color: Colors.grey.shade400,
+                                //     spreadRadius: 0.0,
+                                //     blurRadius: 5 / 2.0,
+                                //     offset: const Offset(3.0, 3.0)),
                                 const BoxShadow(
                                     color: Colors.white,
                                     spreadRadius: 2.0,

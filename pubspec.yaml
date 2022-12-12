@@ -32,7 +32,6 @@ dependencies:
   dio: ^4.0.6
   flutter:
     sdk: flutter
-  flutter_full_pdf_viewer: ^1.0.6
   get: ^4.6.5
   http: ^0.13.5
   image_cropper: ^3.0.1

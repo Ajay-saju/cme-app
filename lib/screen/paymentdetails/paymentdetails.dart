@@ -1,8 +1,9 @@
-import 'dart:io';
+import 'dart:io' as io;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/member_details/member_controller.dart';
 import 'package:hslr/screen/paymentdetails/pdf_api.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:open_file/open_file.dart';
@@ -15,7 +16,6 @@ class PaymentDetails extends StatefulWidget {
 }
 
 class _PaymentDetailsState extends State<PaymentDetails> {
-  
   final pdf = pw.Document();
   MemberDetailsController mebController = Get.put(MemberDetailsController());
 
@@ -41,6 +41,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   ),
                   Container(
                     height: 2,
+                    
                     color: Colors.black,
                   ),
                   InkWell(
@@ -731,17 +732,9 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 child: InkWell(
                                   onTap: () async {
                                     print('working');
-                                    pdf.addPage(pw.Page(
-                                        pageFormat: PdfPageFormat.a4,
-                                        build: (pw.Context context) {
-                                          return pw.Center(
-                                            child: pw.Text("Hello World"),
-                                          ); // Center
-                                        }));
-                                    final file = File('example.pdf');
-                                    await file.writeAsBytes(await pdf.save());
 
-                                    await OpenFile.open(file.path);
+                                    await PdfApi.genaratePdf(
+                                        'hello ', 'sample');
                                   },
                                   child: Center(
                                     child: Padding(
@@ -772,9 +765,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: InkWell(
                                   onTap: () async {
-                                    // print('working');
-                                    // final pdf =await PdfApi.genaratePdf('sample text');
-                                    // PdfApi.openFile(pdfFile);
+                                     await PdfApi.genaratePdf('hello ','sample');
                                   },
                                   child: Center(
                                     child: Padding(
@@ -787,28 +778,33 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                   ),
                                 ),
                               ),
-                              Container(
-                                margin: EdgeInsets.only(top: 0),
-                                height: 50,
-                                width: 70,
-                                decoration: BoxDecoration(
-                                  border: Border(
-                                    bottom: BorderSide(
-                                        color: Colors.black, width: 1),
-                                    top: BorderSide(
-                                        color: Colors.black, width: 1),
-                                    right: BorderSide(
-                                        color: Colors.black, width: 1),
-                                    // left:
-                                    //     BorderSide(color: Colors.black, width: 1)
+                              InkWell(
+                                onTap: () async {
+                                  await PdfApi.genaratePdf('hello ','sample');
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(top: 0),
+                                  height: 50,
+                                  width: 70,
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(
+                                          color: Colors.black, width: 1),
+                                      top: BorderSide(
+                                          color: Colors.black, width: 1),
+                                      right: BorderSide(
+                                          color: Colors.black, width: 1),
+                                      // left:
+                                      //     BorderSide(color: Colors.black, width: 1)
+                                    ),
                                   ),
-                                ),
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: Image.asset(
-                                      'assets/hj.png',
-                                      height: 25,
+                                  child: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Image.asset(
+                                        'assets/hj.png',
+                                        height: 25,
+                                      ),
                                     ),
                                   ),
                                 ),

@@ -1,16 +1,16 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../cme_program/cme_prog.dart';
-import '../dashboard/dashboard.dart';
+import 'package:hslr/screen/test_screen/testscreen.dart';
 import '../online_cmeprog/online_cmeprogram.dart';
 
 class QuestionController extends GetxController {
   var isStopTimer = true.obs;
-  Timer? _timer;
+  Timer? timer;
   int remainingSeconds = 1;
   final time = '00.00'.obs;
+  final minutes = 1.obs;
+  final timerColors = Colors.black.obs;
 
   @override
   void onReady() {
@@ -20,8 +20,8 @@ class QuestionController extends GetxController {
 
   @override
   void onClose() {
-    if (_timer != null) {
-      _timer!.cancel();
+    if (timer != null) {
+      timer!.cancel();
       // completeTest();
     }
     super.onClose();
@@ -30,12 +30,12 @@ class QuestionController extends GetxController {
   void _startTimer(int seconds) {
     const duration = Duration(seconds: 1);
     remainingSeconds = seconds;
-    _timer = Timer.periodic(duration, (Timer timer) {
+    timer = Timer.periodic(duration, ( timer) {
       if (remainingSeconds == 0) {
-        completeTest();
+        completeTest(false);
         timer.cancel();
       } else {
-        int minutes = remainingSeconds ~/ 60;
+        minutes.value = remainingSeconds ~/ 60;
         int seconds = (remainingSeconds % 60);
         time.value = minutes.toString().padLeft(2, '0') +
             ":" +
@@ -43,6 +43,18 @@ class QuestionController extends GetxController {
         remainingSeconds--;
       }
     });
+  }
+
+  Color timerColorsChange() {
+    List<Color> colors = <Color>[Colors.red, Colors.green, Colors.amber];
+    if (minutes.value < 11 && minutes.value > 7 || minutes.value == 00) {
+      timerColors.value = colors[1];
+    } else if (minutes.value < 6 && minutes.value > 3) {
+      timerColors.value = colors[2];
+    } else if (minutes.value < 3 && minutes.value > 0) {
+      timerColors.value = colors[0];
+    }
+    return timerColors.value;
   }
 
   var tabIndex = 0;
@@ -132,7 +144,7 @@ class QuestionController extends GetxController {
         optionD: "optionD")
   ];
 
-  completeTest() {
+  completeTest(bool isGoingtoTest) {
     Get.defaultDialog(
       barrierDismissible: false,
       cancel: ElevatedButton(
@@ -144,9 +156,12 @@ class QuestionController extends GetxController {
         onPressed: () {
           Get.back();
         },
-        child: Text('Cancel', style: TextStyle(
-              fontFamily: "Nunito",
-            ),),
+        child: Text(
+          'Cancel',
+          style: TextStyle(
+            fontFamily: "Nunito",
+          ),
+        ),
       ),
       confirm: ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -155,7 +170,9 @@ class QuestionController extends GetxController {
                 borderRadius: BorderRadius.circular(30),
               )),
           onPressed: () {
-            Get.to(Onlinecmeprogram());
+            isGoingtoTest == true
+                ? Get.off(TestScreen())
+                : Get.off(Onlinecmeprogram());
           },
           child: Text(
             'OK',

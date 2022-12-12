@@ -78,7 +78,7 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.off (Dashboard());
+                      Get.off(Dashboard());
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -93,10 +93,10 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                               fit: BoxFit.cover,
                             ),
                             // Spacer(),
-                          const  SizedBox(
+                            const SizedBox(
                               width: 25,
                             ),
-                           const Text(
+                            const Text(
                               "Online CME Program",
                               style: TextStyle(
                                   color: Colors.black,
@@ -468,7 +468,9 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                   Center(
                                     child: ElevatedButton(
                                         onPressed: () {
-                                          Get.off(Question());
+                                          Get.offAll(Question(
+                                            isGoingtoTest: false,
+                                          ));
                                         },
                                         style: ElevatedButton.styleFrom(
                                             backgroundColor: Color(
@@ -670,7 +672,7 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                       child: ElevatedButton(
                                           onPressed: () {},
                                           style: ElevatedButton.styleFrom(
-                                              primary: Color(
+                                              backgroundColor: Color(
                                                   0xffE0C152), //Color.fromARGB(255, 218, 206, 37),
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
@@ -1056,10 +1058,12 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                   Center(
                                     child: ElevatedButton(
                                         onPressed: () {
-                                          Get.to(Question());
+                                          Get.to(Question(
+                                            isGoingtoTest: false,
+                                          ));
                                         },
                                         style: ElevatedButton.styleFrom(
-                                            primary: Color(
+                                            backgroundColor: Color(
                                                 0xffE0C152), // Colors.orange,//// Color.fromARGB(255, 218, 206, 37),
                                             shape: RoundedRectangleBorder(
                                               borderRadius:

@@ -66,7 +66,7 @@ class ReffEarnScreen extends StatelessWidget {
               height: 565,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 254, 84, 84),
+                color: Colors.white12,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
@@ -75,7 +75,7 @@ class ReffEarnScreen extends StatelessWidget {
                     height: 80,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 255, 184, 123),
+                      color:Colors.black87,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Column(
@@ -238,7 +238,7 @@ class ReffEarnScreen extends StatelessWidget {
                               width: 150,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30),
-                                color: const Color.fromARGB(255, 255, 184, 123),
+                                color: Colors.black87,
                               ),
                               child: Center(
                                   child: Text(

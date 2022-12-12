@@ -11,6 +11,7 @@ import 'package:hslr/screen/test_screen/razor_credentials.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class TestScreenController extends GetxController {
+  bool isGoingtoTest=false;
   bool isLoading = true;
   bool isClicked = true;
   bool dropOne = false;

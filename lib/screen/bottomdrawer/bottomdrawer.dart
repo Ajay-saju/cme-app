@@ -465,29 +465,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                               ),
                             ),
 
-                            ListTile(
-                              leading: SizedBox(
-                                height: 25,
-                                width: 22,
-                                // padding: const EdgeInsets.all(0.0),
-                                child: Image.asset(
-                                  'assets/att.png',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              title: Text(
-                                "Receipt List",
-                                style: TextStyle(
-                                  fontFamily: "Nunito",
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              onTap: () {
-                                Get.to(PaymentDetails());
-                              },
-                            ),
+                           
 
                             // InkWell(
                             //   onTap: () {
@@ -600,7 +578,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                 ),
                               ),
                               title: Text(
-                                "Attended CME Programms and points",
+                                "Attended CME",
                                 style: TextStyle(
                                   fontFamily: "Nunito",
                                   fontSize: 18,
@@ -685,7 +663,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                   ),
                                 ),
                                 title: Text(
-                                  "PG NEET / PG CET",
+                                  "CET / NEET",
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontFamily: "Nunito",
@@ -926,6 +904,29 @@ class _BottomDrawerState extends State<BottomDrawer> {
                             //     ),
                             //   ),
                             // ),
+                             ListTile(
+                              leading: SizedBox(
+                                height: 25,
+                                width: 22,
+                                // padding: const EdgeInsets.all(0.0),
+                                child: Image.asset(
+                                  'assets/att.png',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              title: Text(
+                                "Receipt List",
+                                style: TextStyle(
+                                  fontFamily: "Nunito",
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              onTap: () {
+                                Get.to(PaymentDetails());
+                              },
+                            ),
                             ListTile(
                               onTap: () async {
                                 SharedPreferences sessionlog =

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/cashback_screen/cashback_screen.dart';
+import 'package:hslr/screen/dashboard/dashboard.dart';
 import 'package:hslr/screen/quiz/question.dart';
 import 'package:hslr/screen/ref&earn_screen/ref&earn_screen.dart';
 import 'package:hslr/screen/test_screen/testscreen_controller.dart';
@@ -26,7 +27,7 @@ class TestScreen extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Get.back();
+              Get.off(Dashboard());
             },
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -313,7 +314,7 @@ class TestScreen extends StatelessWidget {
               height: 300,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.black87,
+                color: Colors.white10,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
@@ -322,7 +323,7 @@ class TestScreen extends StatelessWidget {
                     height: 70,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: Colors.grey,
+                      color: Colors.black87,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: const Padding(
@@ -348,7 +349,7 @@ class TestScreen extends StatelessWidget {
                         fontFamily: "Nunito",
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                        color: Colors.black87),
                   ),
                   SizedBox(
                     height: 35,
@@ -369,7 +370,7 @@ class TestScreen extends StatelessWidget {
                           height: 75,
                           width: 100,
                           decoration: BoxDecoration(
-                            color: Colors.grey,
+                            color: Colors.black87,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Center(
@@ -389,7 +390,7 @@ class TestScreen extends StatelessWidget {
                           height: 75,
                           width: 100,
                           decoration: BoxDecoration(
-                            color: Colors.grey,
+                            color: Colors.black87,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Center(
@@ -412,7 +413,7 @@ class TestScreen extends StatelessWidget {
                           height: 75,
                           width: 100,
                           decoration: BoxDecoration(
-                            color: Colors.grey,
+                            color: Colors.black87,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Center(
@@ -439,7 +440,10 @@ class TestScreen extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              Get.offAll(Question());
+              testScreenController.isGoingtoTest = true;
+              Get.off(Question(
+                isGoingtoTest: testScreenController.isGoingtoTest,
+              ));
             },
             child: Text('Take Test'),
             style: ElevatedButton.styleFrom(
