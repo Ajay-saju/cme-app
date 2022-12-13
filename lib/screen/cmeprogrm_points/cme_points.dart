@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
+import 'package:hslr/screen/cmeprogrm_points/certificate_pdf.dart';
 import 'package:hslr/screen/login/login_controller.dart';
 import 'package:hslr/screen/member_details/member_controller.dart';
 
@@ -1053,12 +1054,17 @@ class _CmepointsState extends State<Cmepoints> {
                                     //     BorderSide(color: Colors.black, width: 1)
                                   ),
                                 ),
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: Image.asset(
-                                      'assets/hj.png',
-                                      height: 25,
+                                child: InkWell(
+                                  onTap: () {
+                                    CertificatePdf.createPdf();
+                                  },
+                                  child: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Image.asset(
+                                        'assets/hj.png',
+                                        height: 25,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -1105,12 +1111,15 @@ class _CmepointsState extends State<Cmepoints> {
                                     //     BorderSide(color: Colors.black, width: 1)
                                   ),
                                 ),
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: Image.asset(
-                                      'assets/hj.png',
-                                      height: 25,
+                                child: InkWell(
+                                  onTap: ()=>CertificatePdf.createPdf(),
+                                  child: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Image.asset(
+                                        'assets/hj.png',
+                                        height: 25,
+                                      ),
                                     ),
                                   ),
                                 ),

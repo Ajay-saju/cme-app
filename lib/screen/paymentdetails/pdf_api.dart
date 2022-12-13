@@ -1,5 +1,4 @@
-import 'package:flutter/animation.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
@@ -73,6 +72,7 @@ class PdfApi {
                           pw.Column(
                               crossAxisAlignment: pw.CrossAxisAlignment.start,
                               children: [
+                                
                                 pw.Text('Receipt Number :',
                                     style: pw.TextStyle(
                                       fontSize: 16,
@@ -121,6 +121,7 @@ class PdfApi {
                               crossAxisAlignment: pw.CrossAxisAlignment.start,
                               // mainAxisAlignment: pw.MainAxisAlignment.,
                               children: [
+                                 pw.SizedBox(height:50),
                                 pw.Text('2016000042',
                                     style: pw.TextStyle(
                                       fontSize: 16,

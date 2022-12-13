@@ -107,6 +107,7 @@ class _QuestionState extends State<Question> {
             child: Scaffold(
               backgroundColor: Colors.white,
               appBar: AppBar(
+                automaticallyImplyLeading: true,
                 actions: [
                   // Obx(() => Padding(
                   //       padding: const EdgeInsets.only(right: 10, top: 15),
