@@ -1,9 +1,23 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'dart:async';
 
-class ChangePasswordScreen extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:hslr/screen/change_password/change_password_controller.dart';
+import 'package:hslr/screen/login/login.dart';
+import 'package:hslr/screen/member_details/member_details.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({Key? key}) : super(key: key);
 
+  @override
+  State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
+}
+
+class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
+  ChangePasswordScreenController passwordController =
+      Get.put(ChangePasswordScreenController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,171 +73,192 @@ class ChangePasswordScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(
-                    20.0,
-                  ),
-                  child: TextFormField(
-                    inputFormatters: [
-                      // LengthLimitingTextInputFormatter(10),
-                    ],
-                    keyboardType: TextInputType.text,
-                    // controller: mebController.memName,
-                    validator: (value) {
-                      if (value!.isNotEmpty && value.length > 3) {
-                        return null;
-                      } else if (value.length < 3 && value.isNotEmpty) {
-                        return "Your Name Is Short";
-                      } else {
-                        return 'Required Name ';
-                      }
-                    },
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                          borderSide: const BorderSide(color: Colors.black),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                          borderSide: const BorderSide(color: Colors.black),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                          borderSide: BorderSide(color: Colors.black),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                          borderSide: BorderSide(
-                            color: Colors.black,
+              Form(
+                  key: passwordController.passformkey,
+                  child: Column(
+                    children: [
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(
+                            20.0,
+                          ),
+                          child: TextFormField(
+                            cursorColor: Colors.black,
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(4),
+                            ],
+                            keyboardType: TextInputType.number,
+                            controller: passwordController.oldPassword,
+                            validator: (value) {
+                              if (value!.isNotEmpty && value.length > 3) {
+                                return null;
+                              } else if (value.length < 3 && value.isNotEmpty) {
+                                return "Your Name Is Short";
+                              } else {
+                                return 'Required Name ';
+                              }
+                            },
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.grey),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide: BorderSide(color: Colors.black),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                hintText: "Old Password",
+                                hintStyle: TextStyle(
+                                  fontFamily: "Nunito",
+                                ),
+                                filled: true,
+                                fillColor: Colors.white,
+                                contentPadding:
+                                    const EdgeInsets.only(left: 20.0)),
                           ),
                         ),
-                        hintText: "Old Password",
-                        hintStyle: TextStyle(
-                          fontFamily: "Nunito",
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        contentPadding: const EdgeInsets.only(left: 20.0)),
-                  ),
-                ),
-              ),
-              // SizedBox(
-              //   height: 10,
-              // ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(
-                    20.0,
-                  ),
-                  child: TextFormField(
-                    inputFormatters: [
-                      // LengthLimitingTextInputFormatter(10),
-                    ],
-                    keyboardType: TextInputType.text,
-                    // controller: mebController.memName,
-                    validator: (value) {
-                      if (value!.isNotEmpty && value.length > 3) {
-                        return null;
-                      } else if (value.length < 3 && value.isNotEmpty) {
-                        return "Your Name Is Short";
-                      } else {
-                        return 'Required Name ';
-                      }
-                    },
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                          borderSide: const BorderSide(color: Colors.black),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                          borderSide: const BorderSide(color: Colors.black),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                          borderSide: BorderSide(color: Colors.black),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                          borderSide: BorderSide(
-                            color: Colors.black,
+                      ),
+                      // SizedBox(
+                      //   height: 10,
+                      // ),
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(
+                            20.0,
+                          ),
+                          child: TextFormField(
+                            cursorColor: Colors.black,
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(4),
+                            ],
+                            keyboardType: TextInputType.number,
+                            controller: passwordController.newPassword,
+                            validator: (value) {
+                              if (value!.isNotEmpty && value.length > 3) {
+                                return null;
+                              } else if (value.length < 3 && value.isNotEmpty) {
+                                return "Your Name Is Short";
+                              } else {
+                                return 'Required Name ';
+                              }
+                            },
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.grey),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide: BorderSide(color: Colors.black),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                hintText: "New Password",
+                                hintStyle: TextStyle(
+                                  fontFamily: "Nunito",
+                                ),
+                                filled: true,
+                                fillColor: Colors.white,
+                                contentPadding:
+                                    const EdgeInsets.only(left: 20.0)),
                           ),
                         ),
-                        hintText: "New Password",
-                        hintStyle: TextStyle(
-                          fontFamily: "Nunito",
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        contentPadding: const EdgeInsets.only(left: 20.0)),
-                  ),
-                ),
-              ),
-              // SizedBox(
-              //   height: 10,
-              // ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(
-                    20.0,
-                  ),
-                  child: TextFormField(
-                    inputFormatters: [
-                      // LengthLimitingTextInputFormatter(10),
-                    ],
-                    keyboardType: TextInputType.text,
-                    // controller: mebController.memName,
-                    validator: (value) {
-                      if (value!.isNotEmpty && value.length > 3) {
-                        return null;
-                      } else if (value.length < 3 && value.isNotEmpty) {
-                        return "Your Name Is Short";
-                      } else {
-                        return 'Required Name ';
-                      }
-                    },
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                          borderSide: const BorderSide(color: Colors.black),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                          borderSide: const BorderSide(color: Colors.black),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                          borderSide: BorderSide(color: Colors.black),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                          borderSide: BorderSide(
-                            color: Colors.black,
+                      ),
+                      // SizedBox(
+                      //   height: 10,
+                      // ),
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(
+                            20.0,
+                          ),
+                          child: TextFormField(
+                            cursorColor: Colors.black,
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(4),
+                            ],
+                            keyboardType: TextInputType.number,
+                            controller: passwordController.conformPassword,
+                            validator: (value) {
+                              if (value!.isNotEmpty && value.length > 3) {
+                                return null;
+                              } else if (value.length < 3 && value.isNotEmpty) {
+                                return "Your Name Is Short";
+                              } else {
+                                return 'Required Name ';
+                              }
+                            },
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.grey),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide: BorderSide(color: Colors.black),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                hintText: "Conform Password",
+                                hintStyle: TextStyle(
+                                  fontFamily: "Nunito",
+                                ),
+                                filled: true,
+                                fillColor: Colors.white,
+                                contentPadding:
+                                    const EdgeInsets.only(left: 20.0)),
                           ),
                         ),
-                        hintText: "Conform Password",
-                        hintStyle: TextStyle(
-                          fontFamily: "Nunito",
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        contentPadding: const EdgeInsets.only(left: 20.0)),
-                  ),
-                ),
-              ),
+                      ),
+                    ],
+                  )),
               SizedBox(
                 height: 20,
               ),
@@ -232,10 +267,10 @@ class ChangePasswordScreen extends StatelessWidget {
                 children: [
                   ElevatedButton(
                       onPressed: () {
-                        // mebController.formkey.currentState!.validate();
+                        Get.back();
                       },
                       style: ElevatedButton.styleFrom(
-                          primary: Colors.black,
+                          backgroundColor: Colors.black,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           )),
@@ -244,11 +279,28 @@ class ChangePasswordScreen extends StatelessWidget {
                         style: TextStyle(fontFamily: "Nunito"),
                       )),
                   ElevatedButton(
-                      onPressed: () {
-                        // mebController.formkey.currentState!.validate();
+                      onPressed: () async {
+                        if (passwordController.passformkey.currentState!
+                            .validate()) {
+                          await await Get.snackbar('Success',
+                              'Password has been changed successfully',
+                              colorText: Colors.white,
+                              backgroundColor: Colors.black,
+                              duration: Duration(seconds: 3));
+
+                          Timer(Duration(seconds: 2), () async{
+                            SharedPreferences sessionlog =
+                                    await SharedPreferences.getInstance();
+                                sessionlog.remove("log_name");
+                                Get.off(Login());
+                            
+                          });
+                        } else {
+                          print('not valid');
+                        }
                       },
                       style: ElevatedButton.styleFrom(
-                          primary: Colors.black,
+                          backgroundColor: Colors.black,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           )),

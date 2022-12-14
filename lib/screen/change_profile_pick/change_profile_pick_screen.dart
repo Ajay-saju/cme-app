@@ -105,7 +105,7 @@ class ChangeProfilePicture extends StatelessWidget {
               ElevatedButton(
                 onPressed: () async {
                   Get.defaultDialog(
-                    barrierDismissible: false,
+                      barrierDismissible: false,
                       title: 'Image from',
                       titleStyle: TextStyle(
                           fontFamily: "Nunito",
@@ -166,7 +166,7 @@ class ChangeProfilePicture extends StatelessWidget {
                       ));
                 },
                 child: Text(
-                  'Upload Image',
+                  'Change Image',
                   style: TextStyle(
                       fontFamily: "Nunito",
                       fontSize: 20,
@@ -178,6 +178,45 @@ class ChangeProfilePicture extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10)),
                     backgroundColor: Colors.black),
               ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        fixedSize: Size(150, 60),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        backgroundColor: Colors.black),
+                  ),
+                  // Spacer(),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Upload',
+                      style: TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        fixedSize: Size(150, 60),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        backgroundColor: Colors.black),
+                  ),
+                ],
+              )
             ],
           )
         ],

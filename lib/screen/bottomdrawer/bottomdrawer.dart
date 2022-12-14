@@ -465,8 +465,6 @@ class _BottomDrawerState extends State<BottomDrawer> {
                               ),
                             ),
 
-                           
-
                             // InkWell(
                             //   onTap: () {
                             //     Get.to(PaymentDetails());
@@ -508,138 +506,171 @@ class _BottomDrawerState extends State<BottomDrawer> {
                             //     ),
                             //   ),
                             // ),
-                            ListTile(
-                              leading: Image.asset(
-                                'assets/cme logo 1.png',
-                                height: 22,
-                                fit: BoxFit.cover,
-                              ),
-                              title: Text(
-                                "Online CME Programs",
-                                style: TextStyle(
-                                  fontFamily: "Nunito",
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              onTap: () {
-                                Get.to(Onlinecmeprogram());
-                              },
-                            ),
-                            // InkWell(
-                            //   onTap: () {
-                            //     Get.to(Onlinecmeprogram());
-                            //     // bdrawerController.sidedrawer(0);
-                            //     // bdrawerController.update();
-                            //     // Get.back();
-                            //   },
-                            //   child: Padding(
-                            //     padding:
-                            //         const EdgeInsets.only(left: 20.0, top: 30),
-                            //     child: Row(
-                            //       children: [
-                            //         Padding(
-                            //           padding: const EdgeInsets.only(top: 5.0),
-                            //           child: Image.asset(
-                            //             'assets/cme logo 1.png',
-                            //             height: 22,
-                            //             fit: BoxFit.cover,
-                            //           ),
-                            //         ),
-                            //         SizedBox(
-                            //           width: 20,
-                            //         ),
-                            //         Padding(
-                            //           padding: const EdgeInsets.only(top: 5.0),
-                            //           child: Text(
-                            //             "Online CME Programs",
-                            //             style: TextStyle(
-                            //               fontFamily: "Nunito",
-                            //               fontSize: 18,
-                            //               fontWeight: FontWeight.bold,
-                            //               color: Colors.white,
-                            //             ),
-                            //           ),
-                            //         ),
-                            //       ],
-                            //     ),
-                            //   ),
-                            // ),
 
-                            ListTile(
-                              leading: SizedBox(
-                                height: 22,
-                                child: Image.asset(
-                                  'assets/at.png',
+                            Theme(
+                              data: Theme.of(context).copyWith(
+                                unselectedWidgetColor:
+                                    Colors.white, // here for close state
+                                colorScheme: ColorScheme.light(
+                                  primary: Colors.white,
+                                ), // here for open state in replacement of deprecated accentColor
+                                dividerColor: Colors
+                                    .transparent, // if you want to remove the border
+                              ),
+                              child: ExpansionTile(
+                                leading: Image.asset(
+                                  'assets/event.png',
+                                  color: Colors.white,
+                                  height: 22,
                                   fit: BoxFit.cover,
-                                  // height: 22,
-                                  // width: 22,
                                 ),
-                              ),
-                              title: Text(
-                                "Attended CME",
-                                style: TextStyle(
-                                  fontFamily: "Nunito",
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                                title: Text(
+                                  'CME',
+                                  style: TextStyle(
+                                    fontFamily: "Nunito",
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
                                 ),
+                                children: [
+                                  Container(
+                                    margin:
+                                        EdgeInsets.only(top: 20.0, left: 60),
+                                    height: 150,
+                                    width: 250,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.white),
+                                        borderRadius:
+                                            BorderRadius.circular(10.0)),
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 20.0, top: 15),
+                                          child: InkWell(
+                                            onTap: () {
+                                              Get.to(Onlinecmeprogram());
+                                            },
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                  height: 22,
+                                                  child: Image.asset(
+                                                    'assets/cme logo 1.png',
+                                                    // height: 22,
+                                                    // width: 22,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 20,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5.0),
+                                                  child: Text(
+                                                    "Online CME",
+                                                    style: TextStyle(
+                                                      fontFamily: "Nunito",
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 25.0, top: 15),
+                                          child: InkWell(
+                                            onTap: () {
+                                              Get.to(Cmepoints());
+                                            },
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                  height: 22,
+                                                  child: Image.asset(
+                                                    'assets/at.png',
+                                                    // height: 22,
+                                                    // width: 22,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 25,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5.0),
+                                                  child: Text(
+                                                    "Attented CME",
+                                                    style: TextStyle(
+                                                      fontFamily: "Nunito",
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 25.0, top: 15,bottom: 10),
+                                          child: InkWell(
+                                            onTap: () {
+                                              Get.to(PaymentDetails());
+                                            },
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                  height: 22,
+                                                  child: Image.asset(
+                                                    'assets/att.png',
+                                                    // height: 22,
+                                                    // width: 22,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 22,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5.0),
+                                                  child: Text(
+                                                    "CME Receipts",
+                                                    style: TextStyle(
+                                                      fontFamily: "Nunito",
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
                               ),
-                              onTap: () {
-                                Get.to(Cmepoints());
-                              },
                             ),
-                            // InkWell(
-                            //   onTap: () {
-                            //     Get.to(Cmepoints());
-                            //     // bdrawerController.sidedrawer(0);
-                            //     // bdrawerController.update();
-                            //     // Get.back();
-                            //   },
-                            //   child: Padding(
-                            //     padding: const EdgeInsets.only(left: 20.0),
-                            //     child: Row(
-                            //       children: [
-                            //         SizedBox(
-                            //           height: 22,
-                            //           child: Image.asset(
-                            //             'assets/at.png',
-                            //             fit: BoxFit.cover,
-                            //             // height: 22,
-                            //             // width: 22,
-                            //           ),
-                            //         ),
-                            //         SizedBox(
-                            //           width: 30,
-                            //         ),
-                            //         Padding(
-                            //           padding: const EdgeInsets.only(top: 15.0),
-                            //           child: SizedBox(
-                            //             width: context.width * 0.5,
-                            //             child: Transform(
-                            //               transform: Matrix4.translationValues(
-                            //                   0, 15, 0),
-                            //               child: Text(
-                            //                 "Attended CME Programms and points",
-                            //                 style: TextStyle(
-                            //                   fontFamily: "Nunito",
-                            //                   fontSize: 18,
-                            //                   fontWeight: FontWeight.bold,
-                            //                   color: Colors.white,
-                            //                 ),
-                            //               ),
-                            //             ),
-                            //           ),
-                            //         ),
-                            //       ],
-                            //     ),
-                            //   ),
-                            // ),
-
-                            // const SizedBox(
-                            //   height: 25,
-                            // ),
 
                             Theme(
                               data: Theme.of(context).copyWith(
@@ -675,7 +706,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                   Container(
                                     margin:
                                         EdgeInsets.only(top: 20.0, left: 60),
-                                    height: 140,
+                                    height: 150,
                                     width: 250,
                                     // color: Colors.amber,
                                     decoration: BoxDecoration(
@@ -711,10 +742,10 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                                       const EdgeInsets.only(
                                                           top: 5.0),
                                                   child: Text(
-                                                    "TEST",
+                                                    "Test",
                                                     style: TextStyle(
                                                       fontFamily: "Nunito",
-                                                      fontSize: 18,
+                                                      fontSize: 19,
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       color: Colors.white,
@@ -751,10 +782,10 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                                       const EdgeInsets.only(
                                                           top: 5.0),
                                                   child: Text(
-                                                    "RESULT",
+                                                    "Result",
                                                     style: TextStyle(
                                                       fontFamily: "Nunito",
-                                                      fontSize: 18,
+                                                      fontSize: 19,
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       color: Colors.white,
@@ -791,12 +822,13 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                                       const EdgeInsets.only(
                                                           top: 5.0),
                                                   child: Text(
-                                                    "RECEIPTS",
+                                                    "Test Receipts",
                                                     style: TextStyle(
-                                                      fontFamily: "Nunito",
-                                                      fontSize: 18,
+                                                     fontFamily: "Nunito",
+                                                      fontSize: 19,
                                                       fontWeight:
                                                           FontWeight.w500,
+                                                      
                                                       color: Colors.white,
                                                     ),
                                                   ),
@@ -809,124 +841,32 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                     ),
                                   ),
                                 ],
-                                // trailing: Padding(
-                                //   padding:
-                                //       const EdgeInsets.only(left: 8.0, top: 0),
-                                //   child: GetBuilder<DashboardController>(
-                                //     builder: (controller) {
-                                //       return controller.visibleDropOne
-                                //           ? Image.asset(
-                                //               'assets/ffe.png',
-                                //               height: 10,
-                                //               color: Colors.white,
-                                //             )
-                                //           : Image.asset(
-                                //               'assets/gg.png',
-                                //               height: 10,
-                                //               color: Colors.white,
-                                //             );
-                                //     },
-                                //   ),
-                                // ),
-                                // onTap: () {
-                                //   bdrawerController.visibleDropOne =
-                                //       !bdrawerController.visibleDropOne;
-                                //   bdrawerController.update();
-                                // },
                               ),
                             ),
 
-                            // InkWell(
-                            //   onTap: () {
-                            //     // scrollToTop();
-                            //     controller.animateTo(5,
-                            //         duration: Duration(seconds: 5),
-                            //         curve: Curves.easeIn);
-                            //     bdrawerController.visibleDropOne =
-                            //         !bdrawerController.visibleDropOne;
-                            //     bdrawerController.update();
-                            //   },
-                            //   child: Padding(
-                            //     padding: const EdgeInsets.only(
-                            //         right: 20, left: 20.0, top: 10),
-                            //     child: Row(
-                            //       children: [
-                            //         SizedBox(
-                            //           height: 25,
-                            //           width: 22,
-                            //           // padding: const EdgeInsets.all(0.0),
-                            //           child: Image.asset(
-                            //             'assets/Untitled.png',
-                            //             // height: 15,
-                            //             fit: BoxFit.cover,
-                            //           ),
-                            //         ),
-                            //         const SizedBox(
-                            //           width: 20,
-                            //         ),
-                            //         const Padding(
-                            //           padding:
-                            //               EdgeInsets.only(top: 5.0, left: 5),
-                            //           child: Text(
-                            //             "PG NEET / PG CET",
-                            //             style: TextStyle(
-                            //               fontSize: 18,
-                            //               fontFamily: "Nunito",
-                            //               fontWeight: FontWeight.bold,
-                            //               color: Colors.white,
-                            //             ),
-                            //           ),
-                            //         ),
-                            //         const Spacer(),
-                            //         // SizedBox(
-                            //         //   width: 100,
-                            //         // ),
-                            //         Padding(
-                            //           padding: const EdgeInsets.only(
-                            //               left: 8.0, top: 0),
-                            //           child: GetBuilder<DashboardController>(
-                            //             builder: (controller) {
-                            //               return controller.visibleDropOne
-                            //                   ? Image.asset(
-                            //                       'assets/ffe.png',
-                            //                       height: 10,
-                            //                       color: Colors.white,
-                            //                     )
-                            //                   : Image.asset(
-                            //                       'assets/gg.png',
-                            //                       height: 10,
-                            //                       color: Colors.white,
-                            //                     );
-                            //             },
-                            //           ),
-                            //         ),
-                            //       ],
+                            // ListTile(
+                            //   leading: SizedBox(
+                            //     height: 25,
+                            //     width: 22,
+                            //     // padding: const EdgeInsets.all(0.0),
+                            //     child: Image.asset(
+                            //       'assets/att.png',
+                            //       fit: BoxFit.cover,
                             //     ),
                             //   ),
+                            //   title: Text(
+                            //     "Receipt List",
+                            //     style: TextStyle(
+                            //       fontFamily: "Nunito",
+                            //       fontSize: 18,
+                            //       fontWeight: FontWeight.bold,
+                            //       color: Colors.white,
+                            //     ),
+                            //   ),
+                            //   onTap: () {
+                            //     Get.to(PaymentDetails());
+                            //   },
                             // ),
-                             ListTile(
-                              leading: SizedBox(
-                                height: 25,
-                                width: 22,
-                                // padding: const EdgeInsets.all(0.0),
-                                child: Image.asset(
-                                  'assets/att.png',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              title: Text(
-                                "Receipt List",
-                                style: TextStyle(
-                                  fontFamily: "Nunito",
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              onTap: () {
-                                Get.to(PaymentDetails());
-                              },
-                            ),
                             ListTile(
                               onTap: () async {
                                 SharedPreferences sessionlog =
@@ -953,136 +893,136 @@ class _BottomDrawerState extends State<BottomDrawer> {
                               ),
                             ),
 
-                            Visibility(
-                              visible: bdrawerController.visibleDropOne,
-                              child: Container(
-                                margin: EdgeInsets.only(top: 20.0, left: 60),
-                                height: 140,
-                                width: 250,
-                                // color: Colors.amber,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    border: Border.all(color: Colors.white)),
-                                child: Column(
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        Get.to(const TestScreen());
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 20.0, top: 15),
-                                        child: Row(
-                                          children: [
-                                            SizedBox(
-                                              height: 22,
-                                              width: 22,
-                                              // padding: const EdgeInsets.all(0.0),
-                                              child: Image.asset(
-                                                'assets/ff.png',
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 20,
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 5.0),
-                                              child: Text(
-                                                "TEST",
-                                                style: TextStyle(
-                                                  fontFamily: "Nunito",
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        Get.to(ResultScreen());
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 20.0, top: 15),
-                                        child: Row(
-                                          children: [
-                                            SizedBox(
-                                              height: 22,
-                                              width: 22,
-                                              // padding: const EdgeInsets.all(0.0),
-                                              child: Image.asset(
-                                                'assets/ed.png',
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 20,
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 5.0),
-                                              child: Text(
-                                                "RESULT",
-                                                style: TextStyle(
-                                                  fontFamily: "Nunito",
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        Get.to(ReceiptScreen());
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 20.0, top: 15),
-                                        child: Row(
-                                          children: [
-                                            SizedBox(
-                                              height: 22,
-                                              width: 22,
-                                              // padding: const EdgeInsets.all(0.0),
-                                              child: Image.asset(
-                                                'assets/ed.png',
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 20,
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 5.0),
-                                              child: Text(
-                                                "RECEIPTS",
-                                                style: TextStyle(
-                                                  fontFamily: "Nunito",
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                            // Visibility(
+                            //   visible: bdrawerController.visibleDropOne,
+                            //   child: Container(
+                            //     margin: EdgeInsets.only(top: 20.0, left: 60),
+                            //     height: 140,
+                            //     width: 250,
+                            //     // color: Colors.amber,
+                            //     decoration: BoxDecoration(
+                            //         borderRadius: BorderRadius.circular(10.0),
+                            //         border: Border.all(color: Colors.white)),
+                            //     child: Column(
+                            //       children: [
+                            //         InkWell(
+                            //           onTap: () {
+                            //             Get.to(const TestScreen());
+                            //           },
+                            //           child: Padding(
+                            //             padding: const EdgeInsets.only(
+                            //                 left: 20.0, top: 15),
+                            //             child: Row(
+                            //               children: [
+                            //                 SizedBox(
+                            //                   height: 22,
+                            //                   width: 22,
+                            //                   // padding: const EdgeInsets.all(0.0),
+                            //                   child: Image.asset(
+                            //                     'assets/ff.png',
+                            //                     fit: BoxFit.cover,
+                            //                   ),
+                            //                 ),
+                            //                 SizedBox(
+                            //                   width: 20,
+                            //                 ),
+                            //                 Padding(
+                            //                   padding: const EdgeInsets.only(
+                            //                       top: 5.0),
+                            //                   child: Text(
+                            //                     "TEST",
+                            //                     style: TextStyle(
+                            //                       fontFamily: "Nunito",
+                            //                       fontSize: 18,
+                            //                       fontWeight: FontWeight.w500,
+                            //                       color: Colors.white,
+                            //                     ),
+                            //                   ),
+                            //                 ),
+                            //               ],
+                            //             ),
+                            //           ),
+                            //         ),
+                            //         InkWell(
+                            //           onTap: () {
+                            //             Get.to(ResultScreen());
+                            //           },
+                            //           child: Padding(
+                            //             padding: const EdgeInsets.only(
+                            //                 left: 20.0, top: 15),
+                            //             child: Row(
+                            //               children: [
+                            //                 SizedBox(
+                            //                   height: 22,
+                            //                   width: 22,
+                            //                   // padding: const EdgeInsets.all(0.0),
+                            //                   child: Image.asset(
+                            //                     'assets/ed.png',
+                            //                     fit: BoxFit.cover,
+                            //                   ),
+                            //                 ),
+                            //                 SizedBox(
+                            //                   width: 20,
+                            //                 ),
+                            //                 Padding(
+                            //                   padding: const EdgeInsets.only(
+                            //                       top: 5.0),
+                            //                   child: Text(
+                            //                     "RESULT",
+                            //                     style: TextStyle(
+                            //                       fontFamily: "Nunito",
+                            //                       fontSize: 18,
+                            //                       fontWeight: FontWeight.w500,
+                            //                       color: Colors.white,
+                            //                     ),
+                            //                   ),
+                            //                 ),
+                            //               ],
+                            //             ),
+                            //           ),
+                            //         ),
+                            //         InkWell(
+                            //           onTap: () {
+                            //             Get.to(ReceiptScreen());
+                            //           },
+                            //           child: Padding(
+                            //             padding: const EdgeInsets.only(
+                            //                 left: 20.0, top: 15),
+                            //             child: Row(
+                            //               children: [
+                            //                 SizedBox(
+                            //                   height: 22,
+                            //                   width: 22,
+                            //                   // padding: const EdgeInsets.all(0.0),
+                            //                   child: Image.asset(
+                            //                     'assets/ed.png',
+                            //                     fit: BoxFit.cover,
+                            //                   ),
+                            //                 ),
+                            //                 SizedBox(
+                            //                   width: 20,
+                            //                 ),
+                            //                 Padding(
+                            //                   padding: const EdgeInsets.only(
+                            //                       top: 5.0),
+                            //                   child: Text(
+                            //                     "RECEIPTS",
+                            //                     style: TextStyle(
+                            //                       fontFamily: "Nunito",
+                            //                       fontSize: 18,
+                            //                       fontWeight: FontWeight.w500,
+                            //                       color: Colors.white,
+                            //                     ),
+                            //                   ),
+                            //                 ),
+                            //               ],
+                            //             ),
+                            //           ),
+                            //         ),
+                            //       ],
+                            //     ),
+                            //   ),
+                            // ),
 
                             // bdrawerController.visibledrop == true &&
                             //         bdrawerController.visibledrop == true

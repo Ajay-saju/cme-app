@@ -171,8 +171,8 @@ class QuestionController extends GetxController {
               )),
           onPressed: () {
             isGoingtoTest == true
-                ? Get.off(TestScreen())
-                : Get.off(Onlinecmeprogram());
+                ? Get.offAll(TestScreen())
+                : Get.offAll(Onlinecmeprogram());
           },
           child: Text(
             'OK',

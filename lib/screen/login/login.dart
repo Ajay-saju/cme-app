@@ -96,6 +96,7 @@ class _LoginState extends State<Login> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 12, vertical: 4),
                               decoration: BoxDecoration(
+                                  color: Color(0xffDC3638),
                                   borderRadius: BorderRadius.circular(10.0),
                                   border: Border.all(color: Colors.black)),
                               child: DropdownButtonHideUnderline(
@@ -109,7 +110,9 @@ class _LoginState extends State<Login> {
                                     ),
                                     hint: Text(
                                       "  Select Profession",
-                                      style: TextStyle(fontFamily: "Nunito"),
+                                      style: TextStyle(
+                                          fontFamily: "Nunito",
+                                          color: Colors.white),
                                     ),
                                     items: logController.dropitems
                                         .map(logController.buildMenuItem)
@@ -200,7 +203,7 @@ class _LoginState extends State<Login> {
                         //       suffix: IconButton(
                         //             // iconSize: 15.0,
                         //             color: Colors.grey,
-                                    
+
                         //             icon: Icon(logController.isObscure
                         //                 ? Icons.visibility_off
                         //                 : Icons.visibility),
@@ -281,9 +284,12 @@ class _LoginState extends State<Login> {
                                           !logController.isObscure;
                                       logController.update();
                                     },
-                                    icon: Icon(logController.isObscure
-                                        ? Icons.visibility_off
-                                        : Icons.visibility)),
+                                    icon: Icon(
+                                      logController.isObscure
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                      color: Color(0xffDC3638),
+                                    )),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                   borderSide:
@@ -317,8 +323,7 @@ class _LoginState extends State<Login> {
                                 fillColor: Colors.white,
                                 contentPadding: EdgeInsets.only(
                                   left: 20.0,
-                                )
-                                ),
+                                )),
                           ),
                         ),
 

@@ -289,9 +289,9 @@ class _CreateAccountState extends State<CreateAccount> {
                           keyboardType: TextInputType.number,
                           controller: logController.password,
                           validator: (value) {
-                            if (value!.isNotEmpty && value.length > 5) {
+                            if (value!.isNotEmpty && value.length > 3) {
                               return null;
-                            } else if (value.length < 5 && value.isNotEmpty) {
+                            } else if (value.length < 3 && value.isNotEmpty) {
                               return "Your Password is Short";
                             } else {
                               logController.creatsized();
@@ -307,9 +307,11 @@ class _CreateAccountState extends State<CreateAccount> {
                                         !logController.isObscure;
                                     logController.update();
                                   },
-                                  icon: Icon(logController.isObscure
-                                      ? Icons.visibility_off
-                                      : Icons.visibility)),
+                                  icon: Icon(
+                                      logController.isObscure
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                      color: Color(0xffDC3638))),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                                 borderSide:
@@ -358,6 +360,7 @@ class _CreateAccountState extends State<CreateAccount> {
                           padding:
                               EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                           decoration: BoxDecoration(
+                              color: Color(0xffDC3638),
                               borderRadius: BorderRadius.circular(15.0),
                               border: Border.all(color: Colors.black)),
                           child: DropdownButtonHideUnderline(
@@ -371,9 +374,9 @@ class _CreateAccountState extends State<CreateAccount> {
                                 hint: Text(
                                   "Select Profession",
                                   style: TextStyle(
-                                    // fontWeight: FontWeight.bold,
-                                    fontFamily: "Nunito",
-                                  ),
+                                      // fontWeight: FontWeight.bold,
+                                      fontFamily: "Nunito",
+                                      color: Colors.white),
                                 ),
                                 items: logController.dropitems
                                     .map(logController.buildMenuItem)

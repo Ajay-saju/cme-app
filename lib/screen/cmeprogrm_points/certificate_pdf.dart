@@ -90,7 +90,8 @@ class CertificatePdf {
                                     fontSize: 15),
                                 children: <pw.TextSpan>[
                                   pw.TextSpan(
-                                      text: 'Rakshitha                                ',
+                                      text:
+                                          'Rakshitha                                ',
                                       style: pw.TextStyle(
                                           fontSize: 13,
                                           color: PdfColor(0.1, 0.1, 0.1),
@@ -185,7 +186,7 @@ class CertificatePdf {
                             pw.RichText(
                               text: pw.TextSpan(
                                 text:
-                                     'has participated as delegate / faculty in ',
+                                    'has participated as delegate / faculty in ',
                                 style: pw.TextStyle(
                                     font: font,
                                     color: PdfColor(
@@ -270,7 +271,8 @@ class CertificatePdf {
                                         fontWeight: pw.FontWeight.bold),
                                   ),
                                   pw.TextSpan(
-                                    text: 'credit hours for delegates/faculty.               ',
+                                    text:
+                                        'credit hours for delegates/faculty.               ',
                                     style: pw.TextStyle(
                                         font: font,
                                         color: PdfColor(
@@ -322,7 +324,8 @@ class CertificatePdf {
                                         fontSize: 10),
                                   ),
                                   pw.TextSpan(
-                                    text: '09 / 12 / 2022                                            ',
+                                    text:
+                                        '09 / 12 / 2022                                            ',
                                     style: pw.TextStyle(
                                         decoration: pw.TextDecoration.underline,
                                         fontSize: 12,
@@ -360,13 +363,12 @@ class CertificatePdf {
                                         width: 70, height: 70),
                                   ]),
                                   pw.Column(children: [
-                                    
                                     pw.Text('Registrar Signature',
                                         style: pw.TextStyle(
                                           font: font,
                                           fontSize: 14,
                                         )),
-                                        pw.SizedBox(height: 20),
+                                    pw.SizedBox(height: 20),
                                     pw.Image(pw.MemoryImage(signature),
                                         width: 70, height: 70),
                                     pw.SizedBox(height: 20),

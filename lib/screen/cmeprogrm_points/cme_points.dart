@@ -62,7 +62,7 @@ class _CmepointsState extends State<Cmepoints> {
                               width: 25,
                             ),
                             Text(
-                              "CME Points",
+                              "Attented CME",
                               style: TextStyle(
                                   fontFamily: "Nunito",
                                   color: Colors.black,

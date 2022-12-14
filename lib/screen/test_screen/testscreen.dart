@@ -83,7 +83,7 @@ class TestScreen extends StatelessWidget {
                         ? context.width * 0.45
                         : context.width * 0.4,
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 138, 49, 49),
+                      color: Color(0xffDC3638),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Padding(
@@ -212,7 +212,7 @@ class TestScreen extends StatelessWidget {
                         ? context.width * 0.45
                         : context.width * 0.4,
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 138, 49, 49),
+                      color: Color(0xffDC3638),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Padding(
@@ -325,7 +325,7 @@ class TestScreen extends StatelessWidget {
                     height: 70,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 138, 49, 49),
+                      color: Color(0xffDC3638),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: const Padding(
@@ -372,7 +372,7 @@ class TestScreen extends StatelessWidget {
                           height: 75,
                           width: 100,
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 138, 49, 49),
+                            color: Color(0xffDC3638),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Center(
@@ -392,7 +392,7 @@ class TestScreen extends StatelessWidget {
                           height: 75,
                           width: 100,
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 138, 49, 49),
+                            color: Color(0xffDC3638),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Center(
@@ -415,7 +415,7 @@ class TestScreen extends StatelessWidget {
                           height: 75,
                           width: 100,
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 138, 49, 49),
+                            color: Color(0xffDC3638),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Center(

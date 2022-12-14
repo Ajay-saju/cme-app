@@ -41,7 +41,6 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   ),
                   Container(
                     height: 2,
-                    
                     color: Colors.black,
                   ),
                   InkWell(
@@ -331,9 +330,9 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    '********',
+                                    '2016000042',
                                     style: TextStyle(
-                                        fontSize: 18, fontFamily: "Nunito"),
+                                        fontSize: 11, fontFamily: "Nunito"),
                                   ),
                                 ),
                               ),
@@ -355,9 +354,9 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    '********',
+                                    '2016000042',
                                     style: TextStyle(
-                                        fontSize: 18, fontFamily: "Nunito"),
+                                        fontSize: 11, fontFamily: "Nunito"),
                                   ),
                                 ),
                               ),
@@ -379,9 +378,9 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    '********',
+                                    '2016000042',
                                     style: TextStyle(
-                                        fontSize: 18, fontFamily: "Nunito"),
+                                        fontSize: 11, fontFamily: "Nunito"),
                                   ),
                                 ),
                               ),
@@ -431,9 +430,9 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    '********',
+                                    '708',
                                     style: TextStyle(
-                                        fontSize: 18, fontFamily: "Nunito"),
+                                        fontSize: 14, fontFamily: "Nunito"),
                                   ),
                                 ),
                               ),
@@ -455,9 +454,9 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    '********',
+                                    '708',
                                     style: TextStyle(
-                                        fontSize: 18, fontFamily: "Nunito"),
+                                        fontSize: 14, fontFamily: "Nunito"),
                                   ),
                                 ),
                               ),
@@ -479,9 +478,9 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    '********',
+                                    '708',
                                     style: TextStyle(
-                                        fontSize: 18, fontFamily: "Nunito"),
+                                        fontSize: 14, fontFamily: "Nunito"),
                                   ),
                                 ),
                               ),
@@ -504,7 +503,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    'Transaction\n Id',
+                                    'Transaction\n        Id',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontFamily: "Nunito",
@@ -531,9 +530,9 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    '********',
+                                    '2016000042',
                                     style: TextStyle(
-                                        fontSize: 18, fontFamily: "Nunito"),
+                                        fontSize: 13, fontFamily: "Nunito"),
                                   ),
                                 ),
                               ),
@@ -555,9 +554,9 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    '********',
+                                    '2016000042',
                                     style: TextStyle(
-                                        fontSize: 18, fontFamily: "Nunito"),
+                                        fontSize: 13, fontFamily: "Nunito"),
                                   ),
                                 ),
                               ),
@@ -579,9 +578,9 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    '********',
+                                    '2016000042',
                                     style: TextStyle(
-                                        fontSize: 18, fontFamily: "Nunito"),
+                                        fontSize: 13, fontFamily: "Nunito"),
                                   ),
                                 ),
                               ),
@@ -604,7 +603,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    'Transaction\n Date',
+                                    'Transaction\n      Date',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontFamily: "Nunito",
@@ -631,9 +630,9 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    '********',
+                                    '03/15/2022',
                                     style: TextStyle(
-                                        fontSize: 18, fontFamily: "Nunito"),
+                                        fontSize: 14, fontFamily: "Nunito"),
                                   ),
                                 ),
                               ),
@@ -655,9 +654,9 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    '********',
+                                    '03/15/2022',
                                     style: TextStyle(
-                                        fontSize: 18, fontFamily: "Nunito"),
+                                        fontSize: 14, fontFamily: "Nunito"),
                                   ),
                                 ),
                               ),
@@ -679,9 +678,9 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    '********',
+                                    '03/15/2022',
                                     style: TextStyle(
-                                        fontSize: 18, fontFamily: "Nunito"),
+                                        fontSize: 14, fontFamily: "Nunito"),
                                   ),
                                 ),
                               ),
@@ -765,7 +764,8 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: InkWell(
                                   onTap: () async {
-                                     await PdfApi.genaratePdf('hello ','sample');
+                                    await PdfApi.genaratePdf(
+                                        'hello ', 'sample');
                                   },
                                   child: Center(
                                     child: Padding(
@@ -780,7 +780,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               ),
                               InkWell(
                                 onTap: () async {
-                                  await PdfApi.genaratePdf('hello ','sample');
+                                  await PdfApi.genaratePdf('hello ', 'sample');
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(top: 0),
