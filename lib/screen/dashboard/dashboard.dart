@@ -5,6 +5,7 @@ import 'package:hslr/Widget/buttonwidget.dart';
 import 'package:hslr/screen/bottomdrawer/bottomdrawer.dart';
 import 'package:hslr/screen/dashboard/dashboard_controller.dart';
 import 'package:hslr/screen/home.dart/home.dart';
+import 'package:hslr/screen/login/login_controller.dart';
 
 ValueNotifier<int> indexChaingeNotifier = ValueNotifier(0);
 
@@ -16,6 +17,8 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  final screens = [Home()];
+  DashboardController dashboardController = Get.put(DashboardController());
   @override
   void initState() {
     // TODO: implement initState
@@ -23,8 +26,7 @@ class _DashboardState extends State<Dashboard> {
     indexChaingeNotifier = ValueNotifier(0);
   }
 
-  final screens = [Home()];
-  DashboardController dashboardController = Get.put(DashboardController());
+  // LoginController logCOntroller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -76,24 +78,24 @@ class _DashboardState extends State<Dashboard> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ElevatedButton(
-                            onPressed: () {
-                              exit(0);
-                            },
-                            child: Text(
-                              'Exit',
-                              style: TextStyle(
-                                fontFamily: "Nunito",
-                                color: Colors.black87,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          onPressed: () {
+                            exit(0);
+                          },
+                          child: Text(
+                            'Exit',
+                            style: TextStyle(
+                              fontFamily: "Nunito",
+                              color: Colors.black87,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
                             ),
-                            style: ElevatedButton.styleFrom(
+                          ),
+                          style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30),
                               )),
-                            ),
+                        ),
 
                         // child: ButtonWidget(
                         //     text: 'Exit',
@@ -112,7 +114,17 @@ class _DashboardState extends State<Dashboard> {
       child: GetBuilder<DashboardController>(
         builder: ((_) {
           //  var user_id = dashboardController.userid;
-          return Scaffold(
+          return
+              //  logCOntroller.getUserDetails == null ||
+              //         logCOntroller.getUserDetails.value == null
+              //     ?
+              //     Center(
+              //         child: CircularProgressIndicator(
+              //           color: Colors.black87,
+              //         ),
+              //       )
+              //     :
+              Scaffold(
             key: dashboardController.drawerKey,
             drawer: const BottomDrawer(),
             body: SafeArea(

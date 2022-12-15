@@ -342,8 +342,9 @@ class _LoginState extends State<Login> {
                           height: 35,
                           width: context.width * 0.25,
                           child: ElevatedButton(
-                              onPressed: () {
+                              onPressed: () async {
                                 if (formkey.currentState!.validate()) {
+                                  await logController.getUserData();
                                   logController.sessionlogin();
                                 } else {
                                   print("not valid");

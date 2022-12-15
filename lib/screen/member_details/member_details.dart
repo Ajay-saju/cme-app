@@ -5,6 +5,7 @@ import 'package:hslr/screen/member_details/member_controller.dart';
 
 import '../change_password/change_password_screen.dart';
 import '../change_profile_pick/change_profile_pick_screen.dart';
+import '../login/login_controller.dart';
 
 class Memberdetail extends StatefulWidget {
   const Memberdetail({Key? key}) : super(key: key);
@@ -15,8 +16,14 @@ class Memberdetail extends StatefulWidget {
 
 class _MemberdetailState extends State<Memberdetail> {
   MemberDetailsController mebController = Get.put(MemberDetailsController());
+  LoginController logController = Get.find();
+
   @override
   Widget build(BuildContext context) {
+    mebController.memName.text =
+        logController.getUserDetails.value.firstName.toString();
+    mebController.membmobile.text =
+        logController.getUserDetails.value.phoneNumber.toString();
     return GetBuilder<MemberDetailsController>(
       builder: ((_) {
         return GestureDetector(
@@ -87,11 +94,13 @@ class _MemberdetailState extends State<Memberdetail> {
                             20.0,
                           ),
                           child: TextFormField(
+                            cursorColor: Colors.black87,
                             inputFormatters: [
-                              LengthLimitingTextInputFormatter(10),
+                              LengthLimitingTextInputFormatter(20),
                             ],
                             keyboardType: TextInputType.text,
                             controller: mebController.memName,
+                            textCapitalization: TextCapitalization.words,
                             validator: (value) {
                               if (value!.isNotEmpty && value.length > 3) {
                                 return null;
@@ -143,6 +152,7 @@ class _MemberdetailState extends State<Memberdetail> {
                           padding: const EdgeInsets.only(
                               left: 20.0, top: 10, right: 20.0),
                           child: TextFormField(
+                            cursorColor: Colors.black87,
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(10),
                             ],
@@ -199,6 +209,7 @@ class _MemberdetailState extends State<Memberdetail> {
                           padding: const EdgeInsets.only(
                               left: 20.0, top: 25, right: 20.0),
                           child: TextFormField(
+                            cursorColor: Colors.black87,
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(10),
                             ],
@@ -253,6 +264,7 @@ class _MemberdetailState extends State<Memberdetail> {
                           padding: const EdgeInsets.only(
                               left: 20.0, top: 25, right: 20.0),
                           child: TextFormField(
+                            cursorColor: Colors.black87,
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(10),
                             ],
@@ -310,6 +322,7 @@ class _MemberdetailState extends State<Memberdetail> {
                           padding: const EdgeInsets.only(
                               left: 20.0, top: 25, right: 20.0),
                           child: TextFormField(
+                            cursorColor: Colors.black87,
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(10),
                             ],

@@ -3,14 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/cmeprogrm_points/cme_points.dart';
-import 'package:hslr/screen/creat_account/create_account.dart';
 import 'package:hslr/screen/dashboard/dashboard_controller.dart';
 import 'package:hslr/screen/login/login.dart';
+import 'package:hslr/screen/login/login_controller.dart';
 import 'package:hslr/screen/member_details/member_details.dart';
 import 'package:hslr/screen/online_cmeprog/online_cmeprogram.dart';
 import 'package:hslr/screen/paymentdetails/paymentdetails.dart';
-import 'package:hslr/screen/receipt/reciept_screen.dart';
-import 'package:hslr/screen/result_screen/result_screen.dart';
 import 'package:hslr/screen/test_screen/testscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,6 +22,7 @@ class BottomDrawer extends StatefulWidget {
 class _BottomDrawerState extends State<BottomDrawer> {
   ScrollController controller = ScrollController();
   DashboardController bdrawerController = Get.put(DashboardController());
+  LoginController loginController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +65,8 @@ class _BottomDrawerState extends State<BottomDrawer> {
                             ),
                             // Spacer(),
                             Text(
-                              "Dr Ram",
+                              loginController.getUserDetails.value.firstName
+                                  .toString(),
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -627,7 +627,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.only(
-                                              left: 25.0, top: 15,bottom: 10),
+                                              left: 25.0, top: 15, bottom: 10),
                                           child: InkWell(
                                             onTap: () {
                                               Get.to(PaymentDetails());
@@ -824,11 +824,10 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                                   child: Text(
                                                     "Test Receipts",
                                                     style: TextStyle(
-                                                     fontFamily: "Nunito",
+                                                      fontFamily: "Nunito",
                                                       fontSize: 19,
                                                       fontWeight:
                                                           FontWeight.w500,
-                                                      
                                                       color: Colors.white,
                                                     ),
                                                   ),
