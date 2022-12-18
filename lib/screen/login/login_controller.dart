@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/models/user_details.dart';
 import 'package:hslr/screen/dashboard/dashboard.dart';
+import 'package:hslr/services/last_login_service/last_login_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert' as convert;
 import 'dart:developer' as dp;
+import '../../services/user_profile_service/get_user_logid_service.dart';
 import '../../services/user_profile_service/get_user_profile_service.dart';
 
 class LoginController extends GetxController {
@@ -32,6 +34,8 @@ class LoginController extends GetxController {
   bool creatsize = false;
   var isLOading = true.obs;
   String? dropvalue;
+  var date = ''.obs;
+  var time = ''.obs;
 
   final dropitems = [
     'Medical',
@@ -45,7 +49,7 @@ class LoginController extends GetxController {
         child: Text(
           item,
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black87,
             fontWeight: FontWeight.w400,
             fontSize: 20,
             fontFamily: "Nunito",
@@ -92,11 +96,32 @@ class LoginController extends GetxController {
     return otp;
   }
 
-  Future<GetUserDetails?> getUserData() async {
+  Future getUserId(String mobileNo, String pin) async {
+    final userLogIdService = UserLogIdService();
+
+    try {
+      final response = await userLogIdService.getUserUid(mobileNo, pin);
+      var jsonFile = convert.jsonDecode(response.data);
+
+      if (response.statusCode == 200) {
+        final mid = jsonFile[0];
+
+        await getUserData(mid);
+        await getUserLastLogin(mid);
+      }
+    } catch (e) {
+      if (e is DioError) {
+        print(e.toString());
+      }
+      update();
+    }
+  }
+
+  Future<GetUserDetails?> getUserData(String mId) async {
     final getUserDetailsService = GetUserDetailsService();
     // var jsonFile;
     try {
-      final response = await getUserDetailsService.getUserProfile();
+      final response = await getUserDetailsService.getUserProfile(mId);
 
       var jsonFile = convert.jsonDecode(response.data);
       print(response.statusCode.toString());
@@ -116,5 +141,31 @@ class LoginController extends GetxController {
     }
     update();
     return null;
+  }
+
+  getUserLastLogin(mId) async {
+    final userLastLoginService = UserLastLoginService();
+
+    try {
+      final response = await userLastLoginService.getUserLastLoginData(mId);
+      // var jsonFile = jsonDecode(response.data);
+      if (response.statusCode == 200) {
+        dp.log(response.data);
+        // var jsonFile = convert.jsonDecode(response.data[0]);
+        final splitted = response.data.split('T');
+        print(splitted.toString());
+        print(splitted[0].toString());
+        print(splitted[1].toString());
+        date.value = splitted[0].toString();
+        time.value = splitted[1].toString();
+        print(date.value);
+        print(time.value);
+      }
+    } catch (e) {
+      if (e is DioError) {
+        print(e.toString());
+      }
+    }
+    update();
   }
 }

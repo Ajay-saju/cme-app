@@ -11,9 +11,11 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   LoginController logController = Get.put(LoginController());
+  // final LoginController logControll = Get.find();
 
   @override
   Widget build(BuildContext context) {
+    // final date  =
     int _selectedIndex = 0;
     return GetBuilder<LoginController>(
       builder: ((_) {
@@ -121,22 +123,24 @@ class _HomeState extends State<Home> {
                                       //           context.width > 410 ? 25 : 20,
                                       //       color: Colors.white),
                                       // ),
-                                      Text(
-                                        "7/15/2020",
-                                        style: TextStyle(
-                                            fontFamily: "Nunito",
-                                            fontSize:
-                                                context.width > 410 ? 20 : 18,
-                                            color: Colors.white),
-                                      ),
-                                      Text(
-                                        "1:56:32 PM",
-                                        style: TextStyle(
-                                            fontFamily: "Nunito",
-                                            fontSize:
-                                                context.width > 410 ? 20 : 18,
-                                            color: Colors.white),
-                                      ),
+                                      Obx(() => Text(
+                                            logController.date.value,
+                                            style: TextStyle(
+                                                fontFamily: "Nunito",
+                                                fontSize: context.width > 410
+                                                    ? 20
+                                                    : 18,
+                                                color: Colors.white),
+                                          )),
+                                      Obx(() => Text(
+                                            logController.time.value,
+                                            style: TextStyle(
+                                                fontFamily: "Nunito",
+                                                fontSize: context.width > 410
+                                                    ? 20
+                                                    : 18,
+                                                color: Colors.white),
+                                          )),
                                       SizedBox(
                                         height: 10,
                                       ),
@@ -227,7 +231,8 @@ class _HomeState extends State<Home> {
                             width: context.height * 0.35,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
-                              color: Color.fromARGB(255, 28,175,154), //,c1bc9b
+                              color:
+                                  Color.fromARGB(255, 28, 175, 154), //,c1bc9b
                               shape: BoxShape.rectangle,
                               boxShadow: [
                                 BoxShadow(

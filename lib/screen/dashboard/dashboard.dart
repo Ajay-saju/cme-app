@@ -1,11 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hslr/Widget/buttonwidget.dart';
 import 'package:hslr/screen/bottomdrawer/bottomdrawer.dart';
 import 'package:hslr/screen/dashboard/dashboard_controller.dart';
 import 'package:hslr/screen/home.dart/home.dart';
-import 'package:hslr/screen/login/login_controller.dart';
 
 ValueNotifier<int> indexChaingeNotifier = ValueNotifier(0);
 
@@ -19,6 +17,7 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   final screens = [Home()];
   DashboardController dashboardController = Get.put(DashboardController());
+
   @override
   void initState() {
     // TODO: implement initState

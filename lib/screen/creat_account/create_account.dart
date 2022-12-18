@@ -360,7 +360,7 @@ class _CreateAccountState extends State<CreateAccount> {
                           padding:
                               EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                           decoration: BoxDecoration(
-                              color: Color(0xffDC3638),
+                              // color: Color(0xffDC3638),
                               borderRadius: BorderRadius.circular(15.0),
                               border: Border.all(color: Colors.black)),
                           child: DropdownButtonHideUnderline(
@@ -369,7 +369,10 @@ class _CreateAccountState extends State<CreateAccount> {
                                 isExpanded: true,
                                 icon: Padding(
                                   padding: const EdgeInsets.only(left: 8.0),
-                                  child: Image.asset('assets/Dropdownb.png'),
+                                  child: Image.asset(
+                                    'assets/Dropdownb.png',
+                                    color: Color(0xffDC3638),
+                                  ),
                                 ),
                                 hint: Text(
                                   "Select Profession",

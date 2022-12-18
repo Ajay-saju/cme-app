@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 class MemberDetailsController extends GetxController {
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
-  TextEditingController memName = TextEditingController();
+  final memName = TextEditingController();
   TextEditingController councilName = TextEditingController();
   TextEditingController membmobile = TextEditingController();
   TextEditingController membstate = TextEditingController();

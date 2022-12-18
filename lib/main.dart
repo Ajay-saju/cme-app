@@ -4,10 +4,11 @@ import 'package:hslr/screen/dashboard/dashboard.dart';
 import 'package:hslr/screen/login/login.dart';
 import 'package:hslr/screen/splashscreen/splashscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 late SharedPreferences sessionlog;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-sessionlog = await SharedPreferences.getInstance();
+  sessionlog = await SharedPreferences.getInstance();
   runApp(const MyApp());
 }
 
@@ -32,10 +33,11 @@ class _MyAppState extends State<MyApp> {
   @override
   void sessionlogin() async {
     // SharedPreferences sessionlog = await SharedPreferences.getInstance();
-     user = sessionlog.getString('log_name');
+    // user = sessionlog.getString('log_name');
     // if (user == null) {
     //   Get.to(Login());
     // } else {
+    //   print(user.toString());
     //   Get.to(Dashboard());
     // }
   }
@@ -47,6 +49,6 @@ class _MyAppState extends State<MyApp> {
         title: 'shlr'.toUpperCase(),
         theme: ThemeData(primarySwatch: Colors.blue //#4e98f5
             ),
-        home: user == null? const Splashscreen():const Dashboard() );
+        home: user == null ? const Splashscreen() : const Dashboard());
   }
 }

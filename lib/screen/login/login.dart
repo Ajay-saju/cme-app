@@ -27,13 +27,14 @@ class _LoginState extends State<Login> {
 
   @override
   void sessionlogin() async {
-    SharedPreferences sessionlog = await SharedPreferences.getInstance();
-    var user = sessionlog.getString('log_name');
-    if (user == null) {
-      Get.to(Login());
-    } else {
-      Get.to(Dashboard());
-    }
+    // SharedPreferences sessionlog = await SharedPreferences.getInstance();
+    // var user = sessionlog.getString('log_name');
+    // if (user == null) {
+    //   print(user.toString());
+    //   Get.to(Login());
+    // } else {
+    //   Get.to(Dashboard());
+    // }
   }
 
   @override
@@ -96,7 +97,7 @@ class _LoginState extends State<Login> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 12, vertical: 4),
                               decoration: BoxDecoration(
-                                  color: Color(0xffDC3638),
+                                  // color: Color(0xffDC3638),
                                   borderRadius: BorderRadius.circular(10.0),
                                   border: Border.all(color: Colors.black)),
                               child: DropdownButtonHideUnderline(
@@ -105,14 +106,16 @@ class _LoginState extends State<Login> {
                                     isExpanded: true,
                                     icon: Padding(
                                       padding: const EdgeInsets.only(left: 8.0),
-                                      child:
-                                          Image.asset('assets/Dropdownb.png'),
+                                      child: Image.asset(
+                                        'assets/Dropdownb.png',
+                                        color: Color(0xffDC3638),
+                                      ),
                                     ),
                                     hint: Text(
                                       "  Select Profession",
                                       style: TextStyle(
                                           fontFamily: "Nunito",
-                                          color: Colors.white),
+                                          color: Colors.black87),
                                     ),
                                     items: logController.dropitems
                                         .map(logController.buildMenuItem)
@@ -344,7 +347,12 @@ class _LoginState extends State<Login> {
                           child: ElevatedButton(
                               onPressed: () async {
                                 if (formkey.currentState!.validate()) {
-                                  await logController.getUserData();
+                                  // await logController.getUserId(
+                                  //     logController.mobNumb.text,
+                                  //     logController.password.text);
+                                  // await logController.getUserLastLogin(
+                                  //     'M202203151314294521440074394');
+                                  // await logController.getUserLastLogin();
                                   logController.sessionlogin();
                                 } else {
                                   print("not valid");

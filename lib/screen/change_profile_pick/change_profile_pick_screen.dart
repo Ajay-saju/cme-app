@@ -104,6 +104,7 @@ class ChangeProfilePicture extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () async {
+                  // pickController.isCancelled.value = false;
                   Get.defaultDialog(
                       barrierDismissible: false,
                       title: 'Image from',
@@ -185,7 +186,11 @@ class ChangeProfilePicture extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.back();
+                      // pickController.isCancelled.value = true;
+                      profilePick();
+                    },
                     child: Text(
                       'Cancel',
                       style: TextStyle(

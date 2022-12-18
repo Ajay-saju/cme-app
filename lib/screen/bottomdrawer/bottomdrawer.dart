@@ -822,7 +822,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                                       const EdgeInsets.only(
                                                           top: 5.0),
                                                   child: Text(
-                                                    "Test Receipts",
+                                                    "Receipts",
                                                     style: TextStyle(
                                                       fontFamily: "Nunito",
                                                       fontSize: 19,

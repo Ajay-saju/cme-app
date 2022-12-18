@@ -1,17 +1,11 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
-import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:hslr/screen/test_screen/razor_credentials.dart';
-
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class TestScreenController extends GetxController {
-  bool isGoingtoTest=false;
+  bool isGoingtoTest = false;
   bool isLoading = true;
   bool isClicked = true;
   bool dropOne = false;
@@ -19,18 +13,16 @@ class TestScreenController extends GetxController {
 
   String? dropvalue;
   String? speciality;
+  String? topic;
 
-  final dropOneItems = [
+  var cetItems = [
     'PG NEET',
     'PG CET',
     'test1',
     'test2',
     'test3',
-    'test4',
-    'test5',
-    'test6',
   ];
-  final dropTwoItmes = ['dummy', 'dummy'];
+  var topicItmes = ['dummy', 'dummy'];
 
   String keyId = "rzp_test_9rG7ClR4bO47u9";
   String keySecret = "3wQnashnGoeS56aVWfpSYOZ7";
