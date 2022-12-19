@@ -17,6 +17,7 @@ class _QuestionState extends State<Question> {
 
   @override
   Widget build(BuildContext context) {
+    // if (qController.cameraController.value.isInitialized)
     return WillPopScope(
       onWillPop: () async {
         if (qController.tabIndex != 0) {
@@ -638,7 +639,7 @@ class _QuestionState extends State<Question> {
                                 print(qController.answers);
                                 qController.pageChange == 0
                                     ? qController
-                                        .completeTest(widget.isGoingtoTest)
+                                        .cancelTest(widget.isGoingtoTest)
                                     : qController.optionA = false;
                                 qController.optionB = false;
                                 qController.optionC = false;
@@ -725,6 +726,8 @@ class _QuestionState extends State<Question> {
         }),
       ),
     );
+    // else
+    //   return SizedBox();
   }
 
   completeTest() {
