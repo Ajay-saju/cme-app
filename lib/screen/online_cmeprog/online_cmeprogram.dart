@@ -6,6 +6,7 @@ import 'package:get/get_instance/get_instance.dart';
 import 'package:hslr/screen/dashboard/dashboard.dart';
 import 'package:hslr/screen/login/login_controller.dart';
 import 'package:hslr/screen/member_details/member_controller.dart';
+import 'package:hslr/screen/online_cmeprog/online_cmeprogram_controller.dart';
 import 'package:hslr/screen/quiz/question.dart';
 import 'package:hslr/screen/videoplayerwidget/videoplayerwidget.dart';
 import 'package:video_player/video_player.dart';
@@ -19,6 +20,7 @@ class Onlinecmeprogram extends StatefulWidget {
 
 class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
   MemberDetailsController mebController = Get.put(MemberDetailsController());
+  CmeProgramController cmeProgramController = Get.put(CmeProgramController());
 
   final asset = 'assets/1.mp4';
   final asset1 = 'assets/2.mp4';
@@ -670,7 +672,21 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                     ),
                                     Center(
                                       child: ElevatedButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            cmeProgramController.createOrder();
+                                            // cmeProgramController.isClicked
+                                            //     ? () {
+                                            //         print(cmeProgramController
+                                            //             .isClicked);
+                                            //         cmeProgramController
+                                            //             .isClicked = false;
+                                            //         print(cmeProgramController
+                                            //             .isClicked);
+                                            //         cmeProgramController
+                                            //             .createOrder();
+                                            //       }
+                                            //     : null;
+                                          },
                                           style: ElevatedButton.styleFrom(
                                               backgroundColor: Colors
                                                   .black87, //Color.fromARGB(255, 218, 206, 37),
@@ -869,7 +885,9 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                     ),
                                     Center(
                                       child: ElevatedButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            cmeProgramController.createOrder();
+                                          },
                                           style: ElevatedButton.styleFrom(
                                               backgroundColor: Colors
                                                   .black87, //Color.fromARGB(255, 218, 206, 37),

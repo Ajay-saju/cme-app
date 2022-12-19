@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/cashback_screen/cashback_screen.dart';
@@ -98,19 +96,17 @@ class _TestScreenState extends State<TestScreen> {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
-
                           child: DropdownButtonHideUnderline(
                             child: DropdownButton(
                               // Initial Value
-                              value: testScreenController.topic,
-
+                              value: testScreenController.cetItem,
                               hint: Text(
-                                'PG NEET/CET',
+                                "PG NEET/ CET",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontFamily: "Nunito",
                                     fontWeight: FontWeight.bold,
-                                    fontSize: context.width > 410 ? 16 : 15),
+                                    fontSize: context.width > 410 ? 15 : 13),
                               ),
 
                               // Down Arrow Icon
@@ -124,93 +120,26 @@ class _TestScreenState extends State<TestScreen> {
 
                               // Array list of items
                               items: testScreenController.cetItems
-                                  .map((String cetItem) {
+                                  .map((String items) {
                                 return DropdownMenuItem(
-                                  value: cetItem,
-                                  child: Text(cetItem,
+                                  value: items,
+                                  child: Text(items,
                                       style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.w600,
-                                          color: Color.fromARGB(0, 29, 27,
-                                              27)) //Color(0xff4169e1)),#
+                                          color: Color(
+                                              0xff2D2D2D)) //Color(0xff4169e1)),#
                                       ),
                                 );
                               }).toList(),
                               // After selecting the desired option,it will
                               // change button value to selected value
                               onChanged: (String? newValue) {
-                                // setState(() {
-
-                                //         });
-                                testScreenController.speciality = newValue;
+                                testScreenController.cetItem = newValue;
                                 testScreenController.update();
                               },
                             ),
                           ),
-                          // child: Row(
-                          //   children: [
-                          //     Text(
-                          //       'PG NEET/CET',
-                          //       style: TextStyle(
-                          //           fontFamily: "Nunito",
-                          //           fontSize: 18,
-                          //           fontWeight: FontWeight.bold,
-                          //           color: Colors.white),
-                          //     ),
-
-                          //     // DropdownButtonHideUnderline(
-                          //     //     child: DropdownButton<String>(
-                          //     //         value: testScreenController.dropvalue,
-                          //     //         isExpanded: true,
-                          //     //         icon: Padding(
-                          //     //           padding: const EdgeInsets.only(left: 8.0),
-                          //     //           child: Image.asset('assets/Dropdownb.png'),
-                          //     //         ),
-                          //     //         hint: Text(
-                          //     //           "  Select Profession",
-                          //     //           style: TextStyle(fontFamily: "Nunito"),
-                          //     //         ),
-                          //     //         items: testScreenController.dropOneItems
-                          //     //             .map(testScreenController.buildMenuItem)
-                          //     //             .toList(),
-                          //     //         onChanged: (value) {
-                          //     //           testScreenController.dropvalue = value;
-                          //     //           testScreenController.update();
-                          //     //         }),
-                          //     //   )
-                          //     // Spacer(),
-                          //     Padding(
-                          //       padding: const EdgeInsets.only(right: 10),
-                          //       child: DropdownButton<String>(
-                          //         items: <String>['A', 'b', 'd', 'D']
-                          //             .map((String value) {
-                          //           return DropdownMenuItem<String>(
-                          //             value: value,
-                          //             child: Text(value),
-                          //           );
-                          //         }).toList(),
-                          //         onChanged: (_) {},
-                          //       ),
-                          //     )
-                          //     // GetBuilder<TestScreenController>(
-                          //     //   builder: (controller) {
-                          //     //     return controller.dropOne
-                          //     //         ? Image.asset(
-                          //     //             'assets/ffe.png',
-                          //     //             height: 10,
-                          //     //             color: Colors.white,
-                          //     //           )
-                          //     //         : Image.asset(
-                          //     //             'assets/gg.png',
-                          //     //             height: 10,
-                          //     //             color: Colors.white,
-                          //     //           );
-                          //     //   },
-                          //     // ),
-                          //     // ExpandedSection()
-
-                          //   ],
-                          // ),
                         ),
                       ),
                     ),
@@ -232,18 +161,17 @@ class _TestScreenState extends State<TestScreen> {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
-
                           child: DropdownButtonHideUnderline(
                             child: DropdownButton(
                               // Initial Value
-                              value: testScreenController.speciality,
+                              value: testScreenController.topic,
                               hint: Text(
                                 "Select Topic",
                                 style: TextStyle(
-                                    color: Colors.white,
                                     fontWeight: FontWeight.bold,
+                                    color: Colors.white,
                                     fontFamily: "Nunito",
-                                    fontSize: context.width > 410 ? 16 : 15),
+                                    fontSize: context.width > 410 ? 15 : 13),
                               ),
 
                               // Down Arrow Icon
@@ -264,59 +192,19 @@ class _TestScreenState extends State<TestScreen> {
                                       style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.w600,
-                                          color: Colors.black87)),
+                                          color: Color(
+                                              0xff2D2D2D)) //Color(0xff4169e1)),#
+                                      ),
                                 );
                               }).toList(),
                               // After selecting the desired option,it will
                               // change button value to selected value
                               onChanged: (String? newValue) {
-                                setState(() {
-                                  testScreenController.topic = newValue;
-                                  testScreenController.update();
-                                });
+                                testScreenController.topic = newValue;
+                                testScreenController.update();
                               },
                             ),
                           ),
-
-                          // child: Row(
-                          //   children: [
-                          //     const Text(
-                          //       'Select Topic',
-                          //       style: TextStyle(
-                          //           fontFamily: "Nunito",
-                          //           fontSize: 18,
-                          //           fontWeight: FontWeight.bold,
-                          //           color: Colors.white),
-                          //     ),
-                          //     // Spacer(),
-
-                          //     DropdownButton<String>(
-                          //       items: <String>['A', 'b', 'd', 'D']
-                          //           .map((String value) {
-                          //         return DropdownMenuItem<String>(
-                          //           value: value,
-                          //           child: Text(value),
-                          //         );
-                          //       }).toList(),
-                          //       onChanged: (_) {},
-                          //     )
-                          //     // GetBuilder<TestScreenController>(
-                          //     //   builder: (controlls) {
-                          //     //     return controlls.dropTwo
-                          //     //         ? Image.asset(
-                          //     //             'assets/ffe.png',
-                          //     //             height: 10,
-                          //     //             color: Colors.white,
-                          //     //           )
-                          //     //         : Image.asset(
-                          //     //             'assets/gg.png',
-                          //     //             height: 10,
-                          //     //             color: Colors.white,
-                          //     //           );
-                          //     //   },
-                          //     // ),
-                          //   ],
-                          // ),
                         ),
                       ),
                     ),

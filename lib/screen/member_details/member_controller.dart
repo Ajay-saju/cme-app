@@ -35,9 +35,9 @@ class MemberDetailsController extends GetxController {
     'test5',
     'test6',
   ];
-  sizepass() {
-    sizechangepass = true;
-    update();
-    print("object:$sizechangepass");
-  }
+  // sizepass() {
+  //   sizechangepass = true;
+  //   update();
+  //   print("object:$sizechangepass");
+  // }
 }

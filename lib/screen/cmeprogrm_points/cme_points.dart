@@ -1112,7 +1112,7 @@ class _CmepointsState extends State<Cmepoints> {
                                   ),
                                 ),
                                 child: InkWell(
-                                  onTap: ()=>CertificatePdf.createPdf(),
+                                  onTap: () => CertificatePdf.createPdf(),
                                   child: Center(
                                     child: Padding(
                                       padding: const EdgeInsets.only(left: 8.0),
@@ -1167,6 +1167,34 @@ class _CmepointsState extends State<Cmepoints> {
                         // ),
                       ],
                     ),
+                  ),
+                  Spacer(),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 200,
+                      ),
+                      Container(
+                        height: 40,
+                        width: 20,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Center(
+                          child: Text(
+                            '1',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: "Nunito",
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
                   )
                 ],
               ),

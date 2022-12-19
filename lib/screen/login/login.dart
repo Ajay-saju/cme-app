@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/creat_account/create_account.dart';
-import 'package:hslr/screen/dashboard/dashboard.dart';
 import 'package:hslr/screen/forgotpassword/forgot_password.dart';
 import 'package:hslr/screen/login/login_controller.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);

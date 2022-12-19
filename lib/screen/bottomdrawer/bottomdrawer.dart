@@ -871,7 +871,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                 SharedPreferences sessionlog =
                                     await SharedPreferences.getInstance();
                                 sessionlog.remove("log_name");
-                                Get.to(Login());
+                                Get.off(Login());
                               },
                               leading: SizedBox(
                                 height: 25,

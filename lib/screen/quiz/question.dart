@@ -636,7 +636,10 @@ class _QuestionState extends State<Question> {
                           child: ElevatedButton(
                               onPressed: () {
                                 print(qController.answers);
-                                qController.optionA = false;
+                                qController.pageChange == 0
+                                    ? qController
+                                        .completeTest(widget.isGoingtoTest)
+                                    : qController.optionA = false;
                                 qController.optionB = false;
                                 qController.optionC = false;
                                 qController.optionD = false;
@@ -657,7 +660,9 @@ class _QuestionState extends State<Question> {
                                     borderRadius: BorderRadius.circular(30),
                                   )),
                               child: Text(
-                                "Previous",
+                                qController.pageChange == 0
+                                    ? "Cancel"
+                                    : "Previous",
                                 style: TextStyle(
                                   fontFamily: "Nunito",
                                 ),

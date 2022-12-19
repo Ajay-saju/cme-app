@@ -1,36 +1,15 @@
-import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-class TestScreenController extends GetxController {
-  bool isGoingtoTest = false;
-  bool isLoading = true;
-  bool isClicked = true;
-  bool dropOne = false;
-  bool dropTwo = false;
-
-  String? dropvalue;
-  String? cetItem;
-  String? topic;
-
-  var cetItems = [
-    'PG NEET',
-    'PG CET',
-    'test1',
-    'test2',
-    'test3',
-  ];
-  var topicItmes = ['dummy', 'dummy'];
-
+class CmeProgramController extends GetxController {
   String keyId = "rzp_test_9rG7ClR4bO47u9";
   String keySecret = "3wQnashnGoeS56aVWfpSYOZ7";
-
+  bool isLoading = true;
+  bool isClicked = true;
   final _razorpay = Razorpay();
-  // final dio = Dio(BaseOptions(
-  //     baseUrl: 'https://api.razorpay.com/v1/',
-  //     responseType: ResponseType.plain));
+
   @override
   void onInit() {
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
@@ -86,35 +65,7 @@ class TestScreenController extends GetxController {
     }
 
     print(res.body);
-
-    // try {
-    //   var response = await dio.post(
-    //     'orders',
-    //     data: jsonEncode(body),
-    //     queryParameters: <String, String>{
-    //       "Content-Type": "application/json",
-    //       'authorization': basicAuth,
-    //     },
-    //   );
-    // } catch (e) {
-
-    // }
-
-    //   var res = await dio.post(
-    //     'orders',
-    //     data: jsonEncode(body),
-    //     queryParameters: <String, String>{
-    //       "Content-Type": "application/json",
-    //       'authorization': basicAuth,
-    //     },
-    //   );
-    //   if (res.statusCode == 200) {
-    //     openGateway(jsonDecode(res.data)['id']);
-    //   }
-    //   print(res.data);
   }
-
-  void checkOut() {}
 
   void openGateway(String orderId) {
     print('working payment gateway');
@@ -135,16 +86,4 @@ class TestScreenController extends GetxController {
     _razorpay.clear();
     super.dispose();
   }
-
-  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
-        value: item,
-        child: Text(
-          item,
-          style: TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 20,
-            fontFamily: "Nunito",
-          ),
-        ),
-      );
 }

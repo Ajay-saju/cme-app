@@ -193,7 +193,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 10),
                                 height: 40,
-                                width: 65,
+                                width: 75,
                                 decoration: BoxDecoration(
                                   border: Border(
                                       bottom: BorderSide(
@@ -218,7 +218,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 65,
+                                width: 75,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     // bottom:
@@ -231,7 +231,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    'Shreyas',
+                                    'Progaram 1',
                                     style: TextStyle(
                                         fontSize: 14, fontFamily: "Nunito"),
                                   ),
@@ -240,7 +240,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 65,
+                                width: 75,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     top: BorderSide(
@@ -255,7 +255,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    'Pavan',
+                                    'Progaram 2',
                                     style: TextStyle(
                                         fontSize: 14, fontFamily: "Nunito"),
                                   ),
@@ -264,7 +264,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               Container(
                                 margin: EdgeInsets.only(top: 0),
                                 height: 50,
-                                width: 65,
+                                width: 75,
                                 decoration: BoxDecoration(
                                   border: Border(
                                     bottom: BorderSide(
@@ -279,7 +279,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    'Ramesh',
+                                    'Progaram 3',
                                     style: TextStyle(
                                         fontSize: 14, fontFamily: "Nunito"),
                                   ),
@@ -841,6 +841,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               ),
                         ),
                         Spacer(),
+
                         // Padding(
                         //   padding: const EdgeInsets.only(left: 8.0),
                         //   child: Image.asset(
@@ -850,6 +851,34 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                         // ),
                       ],
                     ),
+                  ),
+                  Spacer(),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 200,
+                      ),
+                      Container(
+                        height: 40,
+                        width: 20,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Center(
+                          child: Text(
+                            '1',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: "Nunito",
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
                   )
                 ],
               ),
