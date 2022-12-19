@@ -27,7 +27,7 @@ class _ForgotpasswordState extends State<Forgotpassword> {
           },
           child: Scaffold(
             backgroundColor: Colors.white,
-             //Color(0xff63c3fe),
+            //Color(0xff63c3fe),
             // appBar: AppBar(
             //   backgroundColor: Colors.white,
             //   title: Text(
@@ -161,7 +161,7 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                           padding: const EdgeInsets.all(20.0),
                           child: TextFormField(
                             inputFormatters: [
-                              LengthLimitingTextInputFormatter(4),
+                              LengthLimitingTextInputFormatter(10),
                             ],
                             keyboardType: TextInputType.text,
                             controller: logController.forregnumb,

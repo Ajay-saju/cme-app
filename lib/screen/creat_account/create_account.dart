@@ -361,7 +361,7 @@ class _CreateAccountState extends State<CreateAccount> {
                               EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                           decoration: BoxDecoration(
                               // color: Color(0xffDC3638),
-                              borderRadius: BorderRadius.circular(15.0),
+                              borderRadius: BorderRadius.circular(10.0),
                               border: Border.all(color: Colors.black)),
                           child: DropdownButtonHideUnderline(
                             child: DropdownButton<String>(
@@ -379,7 +379,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                   style: TextStyle(
                                       // fontWeight: FontWeight.bold,
                                       fontFamily: "Nunito",
-                                      color: Colors.white),
+                                      color: Colors.black87),
                                 ),
                                 items: logController.dropitems
                                     .map(logController.buildMenuItem)
@@ -401,8 +401,8 @@ class _CreateAccountState extends State<CreateAccount> {
                             onPressed: () async {
                               if (LoginController.regformkey.currentState!
                                   .validate()) {
-                                await Get.snackbar('Success',
-                                    'Password has been changed successfully',
+                                await Get.snackbar(
+                                    'Success', 'Account Create successfully',
                                     colorText: Colors.white,
                                     backgroundColor: Colors.black,
                                     duration: Duration(seconds: 3));

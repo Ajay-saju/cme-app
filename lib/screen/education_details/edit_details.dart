@@ -1,20 +1,22 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/education_details/education_controller.dart';
 import 'package:hslr/screen/education_details/education_screen.dart';
 
-class AddEducationDetails extends StatefulWidget {
-  const AddEducationDetails({Key? key}) : super(key: key);
+class EditEduDetails extends StatefulWidget {
+  const EditEduDetails({Key? key}) : super(key: key);
 
   @override
-  State<AddEducationDetails> createState() => _AddEducationDetailsState();
+  State<EditEduDetails> createState() => _EditEduDetailsState();
 }
 
-class _AddEducationDetailsState extends State<AddEducationDetails> {
+class _EditEduDetailsState extends State<EditEduDetails> {
   final eduController = Get.find<EducationController>();
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<EducationController>(builder: ((_) {
@@ -60,7 +62,7 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                                   width: 25,
                                 ),
                                 Text(
-                                  "Add Education Details",
+                                  "Edit Education Details",
                                   style: TextStyle(
                                       fontFamily: "Nunito",
                                       color: Colors.black,
@@ -323,7 +325,7 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                             ElevatedButton(
                                 onPressed: () async {
                                   await Get.snackbar(
-                                      'Success', 'Save Details successfully',
+                                      'Success', 'Edit Details successfully',
                                       colorText: Colors.white,
                                       backgroundColor: Colors.black,
                                       duration: Duration(seconds: 3));

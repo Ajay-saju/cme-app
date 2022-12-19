@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:hslr/screen/education_details/add_edu_details.dart';
+import 'package:hslr/screen/education_details/edit_details.dart';
 import 'package:hslr/screen/education_details/education_controller.dart';
 
 class EducationDetailsScreen extends StatefulWidget {
@@ -369,7 +370,172 @@ class _EducationDetailsScreenState extends State<EducationDetailsScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.defaultDialog(
+                                      title: 'Education Details',
+                                      middleText: '',
+                                      content: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 25,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Text(
+                                                '  Degree :',
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontFamily: "Nunito",
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              SizedBox(
+                                                width: 50,
+                                              ),
+                                              Text(
+                                                'DM (Cl.Heam)',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontFamily: "Nunito",
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Text(
+                                                'College :',
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontFamily: "Nunito",
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              SizedBox(
+                                                width: 50,
+                                              ),
+                                              Text(
+                                                'RCR U.K         ',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontFamily: "Nunito",
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'University :',
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontFamily: "Nunito",
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              SizedBox(
+                                                width: 50,
+                                              ),
+                                              Text(
+                                                'The Royal Collage\n of Radiology',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontFamily: "Nunito",
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Year of passing :',
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontFamily: "Nunito",
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text(
+                                                'Feb 2022',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontFamily: "Nunito",
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      )
+
+                                      //  Row(
+                                      //   children: [
+                                      //     Column(
+                                      //       mainAxisAlignment:
+                                      //           MainAxisAlignment.start,
+                                      //       children: [
+                                      //         Text('               Degree :'),
+                                      //         SizedBox(
+                                      //           height: 10,
+                                      //         ),
+                                      //
+                                      //         SizedBox(
+                                      //           height: 10,
+                                      //         ),
+                                      //         Text('          University :'),
+                                      //         SizedBox(
+                                      //           height: 10,
+                                      //         ),
+                                      //         Text('Year of passing :'),
+                                      //         SizedBox(
+                                      //           height: 10,
+                                      //         ),
+                                      //       ],
+                                      //     ),
+                                      //     Column(
+                                      //       mainAxisAlignment:
+                                      //           MainAxisAlignment.start,
+                                      //       children: [
+                                      //
+                                      //         SizedBox(
+                                      //           height: 20,
+                                      //         ),
+                                      //         Text('RCR U.K     '),
+                                      //         SizedBox(
+                                      //           height: 10,
+                                      //         ),
+                                      //         Text(
+                                      //             'The Royal Collage\n of Radiology'),
+                                      //         Text('Feb 2022')
+                                      //       ],
+                                      //     )
+                                      //   ],
+                                      // )
+                                      );
+                                },
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,
                                     shape: RoundedRectangleBorder(
@@ -380,7 +546,9 @@ class _EducationDetailsScreenState extends State<EducationDetailsScreen> {
                                   style: TextStyle(fontFamily: "Nunito"),
                                 )),
                             ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.to(EditEduDetails());
+                                },
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,
                                     shape: RoundedRectangleBorder(

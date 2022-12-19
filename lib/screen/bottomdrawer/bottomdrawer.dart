@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/cmeprogrm_points/cme_points.dart';
 import 'package:hslr/screen/dashboard/dashboard_controller.dart';
+import 'package:hslr/screen/education_details/education_screen.dart';
 import 'package:hslr/screen/login/login.dart';
 import 'package:hslr/screen/login/login_controller.dart';
 import 'package:hslr/screen/member_details/member_details.dart';
@@ -202,8 +203,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
 
                                 children: [
                                   Container(
-                                    margin:
-                                        EdgeInsets.only(top: 20.0, left: 60),
+                                    margin: EdgeInsets.only(left: 60),
                                     height: 110,
                                     width: 250,
                                     // color: Colors.amber,
@@ -256,7 +256,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                         ),
                                         InkWell(
                                           onTap: () {
-                                            Get.to(Memberdetail());
+                                            Get.to(EducationDetailsScreen());
                                           },
                                           child: Padding(
                                             padding: const EdgeInsets.only(
@@ -534,8 +534,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                 ),
                                 children: [
                                   Container(
-                                    margin:
-                                        EdgeInsets.only(top: 20.0, left: 60),
+                                    margin: EdgeInsets.only(left: 60),
                                     height: 150,
                                     width: 250,
                                     decoration: BoxDecoration(
@@ -703,8 +702,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                 ),
                                 children: [
                                   Container(
-                                    margin:
-                                        EdgeInsets.only(top: 20.0, left: 60),
+                                    margin: EdgeInsets.only(left: 60),
                                     height: 150,
                                     width: 250,
                                     // color: Colors.amber,

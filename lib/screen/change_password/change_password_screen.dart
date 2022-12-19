@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/change_password/change_password_controller.dart';
 import 'package:hslr/screen/login/login.dart';
-import 'package:hslr/screen/member_details/member_details.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
@@ -93,9 +92,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               if (value!.isNotEmpty && value.length > 3) {
                                 return null;
                               } else if (value.length < 3 && value.isNotEmpty) {
-                                return "Your Name Is Short";
+                                return "Password Is Short";
                               } else {
-                                return 'Required Name ';
+                                return 'Required Old Password ';
                               }
                             },
                             decoration: InputDecoration(
@@ -154,9 +153,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               if (value!.isNotEmpty && value.length > 3) {
                                 return null;
                               } else if (value.length < 3 && value.isNotEmpty) {
-                                return "Your Name Is Short";
+                                return "Password Is Short";
                               } else {
-                                return 'Required Name ';
+                                return 'Required New Password ';
                               }
                             },
                             decoration: InputDecoration(
@@ -215,9 +214,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               if (value!.isNotEmpty && value.length > 3) {
                                 return null;
                               } else if (value.length < 3 && value.isNotEmpty) {
-                                return "Your Name Is Short";
+                                return "Password Is Short";
                               } else {
-                                return 'Required Name ';
+                                return 'Required Confirm Password ';
                               }
                             },
                             decoration: InputDecoration(
@@ -246,7 +245,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                     color: Colors.black,
                                   ),
                                 ),
-                                hintText: "Conform Password",
+                                hintText: "Confirm Password",
                                 hintStyle: TextStyle(
                                   fontFamily: "Nunito",
                                 ),
@@ -282,18 +281,17 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       onPressed: () async {
                         if (passwordController.passformkey.currentState!
                             .validate()) {
-                          await await Get.snackbar('Success',
+                           await Get.snackbar('Success',
                               'Password has been changed successfully',
                               colorText: Colors.white,
                               backgroundColor: Colors.black,
                               duration: Duration(seconds: 3));
 
-                          Timer(Duration(seconds: 2), () async{
+                          Timer(Duration(seconds: 2), () async {
                             SharedPreferences sessionlog =
-                                    await SharedPreferences.getInstance();
-                                sessionlog.remove("log_name");
-                                Get.off(Login());
-                            
+                                await SharedPreferences.getInstance();
+                            sessionlog.remove("log_name");
+                            Get.off(Login());
                           });
                         } else {
                           print('not valid');

@@ -22,7 +22,7 @@ class TestScreenController extends GetxController {
     'test2',
     'test3',
   ];
-  var topicItmes = ['dummy', 'dummy'];
+  var topicItmes = ['dummy', 'dmmy'];
 
   String keyId = "rzp_test_9rG7ClR4bO47u9";
   String keySecret = "3wQnashnGoeS56aVWfpSYOZ7";
