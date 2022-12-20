@@ -162,9 +162,9 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                           padding: const EdgeInsets.all(20.0),
                           child: TextFormField(
                             cursorColor: Colors.black87,
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(10),
-                            ],
+                            // inputFormatters: [
+                            //   LengthLimitingTextInputFormatter(10),
+                            // ],
                             keyboardType: TextInputType.text,
                             controller: logController.forregnumb,
                             validator: (value) {

@@ -61,7 +61,6 @@ class QuestionController extends GetxController {
     if (timer != null) {
       timer!.cancel();
       cameraController.dispose();
-      // completeTest();
     }
     super.onClose();
   }
@@ -75,6 +74,7 @@ class QuestionController extends GetxController {
       }
 
       // var images = await prefs.setStringList('i', image!.path);
+      
       print(
           'kitttttttttttttttttttttttttttttttttttttttttttttttttttiiiiiiiiiiiiiiiiiii');
       Get.defaultDialog(content: Image.file(File(image!.path)));
@@ -89,8 +89,8 @@ class QuestionController extends GetxController {
     remainingSeconds = seconds;
     timer = Timer.periodic(duration, (timer) {
       if (remainingSeconds == 0) {
-        completeTest(false);
         timer.cancel();
+        completeTest(false);
       } else {
         minutes.value = remainingSeconds ~/ 60;
         int seconds = (remainingSeconds % 60);
@@ -242,6 +242,7 @@ class QuestionController extends GetxController {
                 borderRadius: BorderRadius.circular(30),
               )),
           onPressed: () {
+            timer!.cancel();
             isGoingtoTest == true
                 ? Get.offAll(TestScreen())
                 : Get.offAll(Onlinecmeprogram());
@@ -291,6 +292,7 @@ class QuestionController extends GetxController {
                 borderRadius: BorderRadius.circular(30),
               )),
           onPressed: () {
+            timer!.cancel();
             isGoingtoTest == true
                 ? Get.offAll(TestScreen())
                 : Get.offAll(Onlinecmeprogram());

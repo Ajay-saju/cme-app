@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/get_instance.dart';
 import 'package:hslr/screen/dashboard/dashboard.dart';
-import 'package:hslr/screen/login/login_controller.dart';
 import 'package:hslr/screen/member_details/member_controller.dart';
 import 'package:hslr/screen/online_cmeprog/online_cmeprogram_controller.dart';
 import 'package:hslr/screen/quiz/question.dart';
@@ -50,6 +46,7 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
       ..setLooping(true)
       ..initialize().then((_) => controller!.pause());
   }
+
 
   @override
   void dispose() {

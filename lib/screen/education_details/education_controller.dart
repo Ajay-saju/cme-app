@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class EducationController extends GetxController {
-  final GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  // final GlobalKey<FormState> addEduFormKey = GlobalKey<FormState>();
+  // final GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
   String? degree;
   String? college;
@@ -52,8 +53,6 @@ class EducationController extends GetxController {
     '2004',
   ];
 
-  
-
   DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
         value: item,
         child: Text(
@@ -61,7 +60,7 @@ class EducationController extends GetxController {
           style: TextStyle(
             color: Colors.black87,
             fontWeight: FontWeight.w400,
-            fontSize: 18,
+            fontSize: 16,
             fontFamily: "Nunito",
           ),
         ),

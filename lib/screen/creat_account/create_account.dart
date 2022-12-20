@@ -223,9 +223,9 @@ class _CreateAccountState extends State<CreateAccount> {
                           padding: const EdgeInsets.all(20),
                           child: TextFormField(
                             cursorColor: Colors.black,
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(10),
-                            ],
+                            // inputFormatters: [
+                            //   LengthLimitingTextInputFormatter(10),
+                            // ],
                             keyboardType: TextInputType.text,
                             controller: logController.regno,
                             validator: (value) {

@@ -1,9 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/education_details/education_controller.dart';
 import 'package:hslr/screen/education_details/education_screen.dart';
@@ -28,7 +25,7 @@ class _EditEduDetailsState extends State<EditEduDetails> {
             backgroundColor: Colors.white, //Color(0xff63c3fe),
             body: SafeArea(
               child: Form(
-                key: eduController.formkey,
+                // key: eduController.formkey,
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,6 +78,11 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                       SizedBox(
                         height: 20,
                       ),
+                      // costomeDropDown(
+                      //   item: eduController.degree!,
+                      //   items: eduController.degreeItem,
+                      // ),
+
                       Padding(
                         padding: const EdgeInsets.only(top: 20),
                         child: Center(
@@ -356,5 +358,55 @@ class _EditEduDetailsState extends State<EditEduDetails> {
             )),
       );
     }));
+  }
+
+  Padding costomeDropDown({required List<String> items, required String item}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
+      ),
+      child: Container(
+        child: DropdownButtonFormField(
+            itemHeight: null,
+            isExpanded: true,
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.symmetric(horizontal: 8),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: const BorderSide(color: Colors.black),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: const BorderSide(color: Colors.black),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: const BorderSide(color: Colors.black),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: BorderSide(color: Colors.black),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: const BorderSide(
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            style: TextStyle(
+                fontSize: 17, fontFamily: "Nunito", color: Colors.black87),
+            hint: Text(
+              "  Degree",
+              style: TextStyle(
+                  fontSize: 16, fontFamily: "Nunito", color: Colors.black87),
+            ),
+            items: items.map(eduController.buildMenuItem).toList(),
+            onChanged: (value) {
+              item = value.toString();
+              eduController.update();
+            }),
+      ),
+    );
   }
 }

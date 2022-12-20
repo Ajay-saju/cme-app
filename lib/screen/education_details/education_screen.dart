@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:hslr/screen/education_details/add_edu_details.dart';
 import 'package:hslr/screen/education_details/edit_details.dart';
 import 'package:hslr/screen/education_details/education_controller.dart';
+
+// EducationController educationController = Get.put(EducationController());
 
 class EducationDetailsScreen extends StatefulWidget {
   const EducationDetailsScreen({Key? key}) : super(key: key);
@@ -68,6 +68,30 @@ class _EducationDetailsScreenState extends State<EducationDetailsScreen> {
           SizedBox(
             height: 20,
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: ElevatedButton(
+                    onPressed: () {
+                      Get.to(AddEducationDetails());
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        )),
+                    child: Text(
+                      'Add',
+                      style: TextStyle(fontFamily: "Nunito"),
+                    )),
+              ),
+            ],
+          ),
+          // SizedBox(
+          //   height: 10,
+          // ),
           Padding(
             padding: const EdgeInsets.only(left: 10.0, right: 10.0),
             child: SingleChildScrollView(
@@ -582,21 +606,143 @@ class _EducationDetailsScreenState extends State<EducationDetailsScreen> {
           SizedBox(
             height: 50,
           ),
-          ElevatedButton(
-              onPressed: () {
-                Get.to(AddEducationDetails());
-              },
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  )),
-              child: Text(
-                'Add',
-                style: TextStyle(fontFamily: "Nunito"),
-              )),
+          // SizedBox(
+          //   height: 50,
+          // ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // SizedBox(
+              //   width: 180,
+              // ),
+              Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Center(
+                    child: Icon(
+                  Icons.keyboard_double_arrow_left_rounded,
+                  color: Colors.white,
+                )),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Center(
+                    child: Icon(
+                  Icons.keyboard_arrow_left_rounded,
+                  color: Colors.white,
+                )),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                  color: Color(0xffDC3638),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Center(
+                  child: Text(
+                    '1',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: "Nunito",
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Center(
+                  child: Text(
+                    '2',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: "Nunito",
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Center(
+                  child: Text(
+                    '3',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: "Nunito",
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Center(
+                    child: Icon(
+                  Icons.keyboard_arrow_right_rounded,
+                  color: Colors.white,
+                )),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Center(
+                    child: Icon(
+                  Icons.keyboard_double_arrow_right_rounded,
+                  color: Colors.white,
+                )),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+            ],
+          ),
           SizedBox(
-            height: 50,
+            width: 10,
           ),
           Padding(
             padding: const EdgeInsets.all(10.0),
@@ -604,7 +750,7 @@ class _EducationDetailsScreenState extends State<EducationDetailsScreen> {
               children: [
                 Text(
                   'Showing 1 of 1 Entries',
-                  style: TextStyle(fontSize: 18, fontFamily: "Nunito"
+                  style: TextStyle(fontSize: 14, fontFamily: "Nunito"
                       // color: Colors.blue.shade700,
                       ),
                 ),
@@ -620,34 +766,6 @@ class _EducationDetailsScreenState extends State<EducationDetailsScreen> {
               ],
             ),
           ),
-          Spacer(),
-          Row(
-            children: [
-              SizedBox(
-                width: 180,
-              ),
-              Container(
-                height: 40,
-                width: 20,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Center(
-                  child: Text(
-                    '1',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: "Nunito",
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 30,
-          )
         ],
       )),
     );
