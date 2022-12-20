@@ -105,6 +105,7 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                         child: Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: TextFormField(
+                            cursorColor: Colors.black87,
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(10),
                             ],
@@ -160,6 +161,7 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                         child: Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: TextFormField(
+                            cursorColor: Colors.black87,
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(10),
                             ],
