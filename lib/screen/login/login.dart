@@ -195,62 +195,6 @@ class _LoginState extends State<Login> {
                         SizedBox(
                           height: 20,
                         ),
-                        // Padding(
-                        //   padding: const EdgeInsets.symmetric(horizontal: 20),
-                        //   child: TextFormField(
-                        //     cursorColor: Colors.black,
-                        //     keyboardType: TextInputType.number,
-                        //     decoration: InputDecoration(
-                        //       suffix: IconButton(
-                        //             // iconSize: 15.0,
-                        //             color: Colors.grey,
-
-                        //             icon: Icon(logController.isObscure
-                        //                 ? Icons.visibility_off
-                        //                 : Icons.visibility),
-                        //                 onPressed: () {
-                        //               logController.isObscure =
-                        //                   !logController.isObscure;
-                        //               logController.update();
-                        //             },
-                        //             ),
-                        //       border: OutlineInputBorder(
-                        //         borderRadius: BorderRadius.circular(10.0),
-                        //         borderSide:
-                        //             const BorderSide(color: Colors.black),
-                        //       ),
-                        //       enabledBorder: OutlineInputBorder(
-                        //           borderRadius: BorderRadius.circular(10.0),
-                        //           borderSide:
-                        //               const BorderSide(color: Colors.black),
-                        //         ),
-                        //         errorBorder: OutlineInputBorder(
-                        //           borderRadius: BorderRadius.circular(10.0),
-                        //           borderSide:
-                        //               const BorderSide(color: Colors.black),
-                        //         ),
-                        //         focusedBorder: OutlineInputBorder(
-                        //           borderRadius: BorderRadius.circular(10.0),
-                        //           borderSide: BorderSide(color: Colors.black),
-                        //         ),
-                        //         focusedErrorBorder: OutlineInputBorder(
-                        //           borderRadius: BorderRadius.circular(10.0),
-                        //           borderSide: const BorderSide(
-                        //             color: Colors.black,
-                        //           ),
-                        //         ),
-                        //          hintStyle: TextStyle(
-                        //           fontFamily: "Nunito",
-                        //         ),
-                        //         hintText: "Pin",
-                        //         filled: true,
-                        //         fillColor: Colors.white,
-                        //         contentPadding: EdgeInsets.only(
-                        //           left: 20.0,
-                        //         )
-                        //     ),
-                        //   ),
-                        // ),
 
                         Padding(
                           padding: const EdgeInsets.only(
@@ -345,13 +289,17 @@ class _LoginState extends State<Login> {
                           child: ElevatedButton(
                               onPressed: () async {
                                 if (formkey.currentState!.validate()) {
+                                  await logController.userLogIn(
+                                    mobileNo: logController.mobNumb.text,
+                                    pin: logController.password.text,
+                                  );
                                   // await logController.getUserId(
                                   //     logController.mobNumb.text,
                                   //     logController.password.text);
                                   // await logController.getUserLastLogin(
                                   //     'M202203151314294521440074394');
                                   // await logController.getUserLastLogin();
-                                  logController.sessionlogin();
+                                  // logController.sessionlogin();
                                 } else {
                                   print("not valid");
                                 }
@@ -390,7 +338,7 @@ class _LoginState extends State<Login> {
                         ),
                         GestureDetector(
                             onTap: () {
-                              Get.to(CreateAccount());
+                              Get.offAll(CreateAccount());
                             },
                             child: Center(
                                 child: Text(

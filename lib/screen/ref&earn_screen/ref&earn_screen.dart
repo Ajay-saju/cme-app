@@ -7,7 +7,7 @@ class ReffEarnScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GlobalKey<FormState> formkey = GlobalKey<FormState>();
+    GlobalKey<FormState> refFormkey = GlobalKey<FormState>();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -97,12 +97,13 @@ class ReffEarnScreen extends StatelessWidget {
                       height: 50,
                     ),
                     Form(
-                      key: formkey,
+                      key: refFormkey,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Column(
                           children: [
                             TextFormField(
+                              cursorColor: Colors.black,
                               inputFormatters: [
                                 LengthLimitingTextInputFormatter(10),
                               ],
@@ -119,7 +120,8 @@ class ReffEarnScreen extends StatelessWidget {
                                 }
                               },
                               decoration: InputDecoration(
-                                  errorStyle: TextStyle(color: Colors.white),
+                                  errorStyle: TextStyle(
+                                      color: Color.fromARGB(255, 191, 36, 36)),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15.0),
                                     borderSide:
@@ -159,6 +161,7 @@ class ReffEarnScreen extends StatelessWidget {
                               height: 30,
                             ),
                             TextFormField(
+                              cursorColor: Colors.black,
                               inputFormatters: [
                                 LengthLimitingTextInputFormatter(10),
                               ],
@@ -175,8 +178,8 @@ class ReffEarnScreen extends StatelessWidget {
                                 }
                               },
                               decoration: InputDecoration(
-                                  errorStyle:
-                                      const TextStyle(color: Colors.white),
+                                  errorStyle: const TextStyle(
+                                      color: Color.fromARGB(255, 191, 36, 36)),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15.0),
                                     borderSide:
@@ -234,7 +237,7 @@ class ReffEarnScreen extends StatelessWidget {
                             ),
                             // ElevatedButton(onPressed: (){}, child: Text('Submit'),style: ElevatedButton.styleFrom({}),)
                             InkWell(
-                              onTap: () => formkey.currentState!.validate(),
+                              onTap: () => refFormkey.currentState!.validate(),
                               child: Container(
                                 height: 50,
                                 width: 150,

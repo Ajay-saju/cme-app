@@ -20,10 +20,15 @@ class _MemberdetailState extends State<Memberdetail> {
 
   @override
   Widget build(BuildContext context) {
-    mebController.memName.text =
-        logController.getUserDetails.value.firstName.toString();
+    mebController.memName.text = logController.getUserDetails.value.loginName!;
+    mebController.councilName.text =
+        logController.getUserDetails.value.councilName!;
     mebController.membmobile.text =
-        logController.getUserDetails.value.phoneNumber.toString();
+        logController.getUserDetails.value.mobileNumber!;
+    mebController.membstate.text =
+        logController.getUserDetails.value.stateDesc!;
+    mebController.membdistr.text =
+        logController.getUserDetails.value.districtName!;
     return GetBuilder<MemberDetailsController>(
       builder: ((_) {
         return GestureDetector(
@@ -152,6 +157,8 @@ class _MemberdetailState extends State<Memberdetail> {
                           padding: const EdgeInsets.only(
                               left: 20.0, top: 10, right: 20.0),
                           child: TextFormField(
+                            // initialValue:
+                            //     logController.getUserDetails.value.councilName,
                             cursorColor: Colors.black87,
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(10),
@@ -209,6 +216,8 @@ class _MemberdetailState extends State<Memberdetail> {
                           padding: const EdgeInsets.only(
                               left: 20.0, top: 25, right: 20.0),
                           child: TextFormField(
+                            // initialValue:
+                            //     logController.getUserDetails.value.mobileNumber,
                             cursorColor: Colors.black87,
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(10),
@@ -264,6 +273,8 @@ class _MemberdetailState extends State<Memberdetail> {
                           padding: const EdgeInsets.only(
                               left: 20.0, top: 25, right: 20.0),
                           child: TextFormField(
+                            // initialValue:
+                            //     logController.getUserDetails.value.stateDesc,
                             cursorColor: Colors.black87,
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(10),
@@ -322,6 +333,8 @@ class _MemberdetailState extends State<Memberdetail> {
                           padding: const EdgeInsets.only(
                               left: 20.0, top: 25, right: 20.0),
                           child: TextFormField(
+                            // initialValue:
+                            //     logController.getUserDetails.value.districtName,
                             cursorColor: Colors.black87,
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(10),

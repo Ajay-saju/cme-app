@@ -24,6 +24,7 @@ class OptScreenController extends GetxController {
   RxInt seconds = maxSeconds.obs;
   var isStopTimer = true.obs;
   var isVisible = false.obs;
+  var isTimerVisible=true.obs;
   void startTimer() {
     countdownTimer = Timer.periodic(Duration(seconds: 1), (_) {
       if (seconds > 0 && isStopTimer == true) {
@@ -31,6 +32,7 @@ class OptScreenController extends GetxController {
         isVisible.value = false;
         print(seconds);
       } else {
+        isStopTimer.value = false;
         isVisible.value = true;
         isStopTimer.value = false;
       }

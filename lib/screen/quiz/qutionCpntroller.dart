@@ -48,11 +48,13 @@ class QuestionController extends GetxController {
         }
       }
     });
+    // takePicture();
   }
 
   @override
   void dispose() {
     cameraController.dispose();
+    timer!.cancel();
     super.dispose();
   }
 
@@ -74,7 +76,7 @@ class QuestionController extends GetxController {
       }
 
       // var images = await prefs.setStringList('i', image!.path);
-      
+
       print(
           'kitttttttttttttttttttttttttttttttttttttttttttttttttttiiiiiiiiiiiiiiiiiii');
       Get.defaultDialog(content: Image.file(File(image!.path)));
@@ -139,9 +141,6 @@ class QuestionController extends GetxController {
   bool optionC = false;
   bool optionD = false;
   String selectedOption = '';
-// List<Ans> answers=[
-//   Ans(answer: '')
-// ];
 
   Map answers = {};
 
@@ -259,7 +258,7 @@ class QuestionController extends GetxController {
         fontWeight: FontWeight.bold,
         fontFamily: "Nunito",
       ),
-      middleText: 'Do you want to cancel the test',
+      middleText: 'Do you want to cancel the test ?',
       middleTextStyle: TextStyle(
         fontFamily: "Nunito",
       ),

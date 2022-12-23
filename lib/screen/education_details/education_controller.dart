@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class EducationController extends GetxController {
-  // final GlobalKey<FormState> addEduFormKey = GlobalKey<FormState>();
-  // final GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  final GlobalKey<FormState> addEduFormKey = GlobalKey<FormState>();
+  // final GlobalKey<FormState> editEduFormKey = GlobalKey<FormState>();
+
+
+var tabIndex = 0;
 
   String? degree;
   String? college;

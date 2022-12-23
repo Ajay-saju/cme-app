@@ -1145,40 +1145,52 @@ class _CmepointsState extends State<Cmepoints> {
                   SizedBox(
                     height: 50,
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Row(
-                      children: [
-                        Text(
-                          'Showing 3 of 3 Entries',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontFamily: "Nunito",
-                            // color: Colors.blue.shade700,
-                          ),
-                        ),
-                        Spacer(),
-                        // Padding(
-                        //   padding: const EdgeInsets.only(left: 8.0),
-                        //   child: Image.asset(
-                        //     'assets/hj.png',
-                        //     height: 25,
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  ),
-                  Spacer(),
+                  // SizedBox(
+                  //   height: 50,
+                  // ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      // SizedBox(
+                      //   width: 180,
+                      // ),
+                      Container(
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Center(
+                            child: Icon(
+                          Icons.keyboard_double_arrow_left_rounded,
+                          color: Colors.white,
+                        )),
+                      ),
                       SizedBox(
-                        width: 200,
+                        width: 10,
                       ),
                       Container(
                         height: 40,
-                        width: 20,
+                        width: 40,
                         decoration: BoxDecoration(
                           color: Colors.black,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Center(
+                            child: Icon(
+                          Icons.keyboard_arrow_left_rounded,
+                          color: Colors.white,
+                        )),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Container(
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(
+                          color: Color(0xffDC3638),
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: Center(
@@ -1191,11 +1203,108 @@ class _CmepointsState extends State<Cmepoints> {
                           ),
                         ),
                       ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Container(
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Center(
+                          child: Text(
+                            '2',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: "Nunito",
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Container(
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Center(
+                          child: Text(
+                            '3',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: "Nunito",
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Container(
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Center(
+                            child: Icon(
+                          Icons.keyboard_arrow_right_rounded,
+                          color: Colors.white,
+                        )),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Container(
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Center(
+                            child: Icon(
+                          Icons.keyboard_double_arrow_right_rounded,
+                          color: Colors.white,
+                        )),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
                     ],
                   ),
                   SizedBox(
-                    height: 30,
-                  )
+                    width: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Showing 1 of 1 Entries',
+                          style: TextStyle(fontSize: 14, fontFamily: "Nunito"
+                              // color: Colors.blue.shade700,
+                              ),
+                        ),
+                        Spacer(),
+
+                        // Padding(
+                        //   padding: const EdgeInsets.only(left: 8.0),
+                        //   child: Image.asset(
+                        //     'assets/hj.png',
+                        //     height: 25,
+                        //   ),
+                        // ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             )),

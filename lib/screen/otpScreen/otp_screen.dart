@@ -137,12 +137,14 @@ class _OtpScreenState extends State<OtpScreen> {
               SizedBox(
                 height: 15,
               ),
-              Obx(() => Text('Resend OTP in ${otpController.seconds} sec ',
+              Obx(() => otpController.isTimerVisible == true?
+              Text('Resend OTP in ${otpController.seconds} sec ',
                   style: TextStyle(
                       fontFamily: "Nunito",
                       color: Colors.grey,
                       fontWeight: FontWeight.w600,
-                      fontSize: 14))),
+                      fontSize: 14)):SizedBox()
+                      ),
               SizedBox(
                 height: 10,
               ),
@@ -154,7 +156,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         resendOtp = loginController.grnarateOtp().toString();
                       },
                       child: Text(
-                        'Resnd OTP',
+                        'Resend OTP',
                         style: TextStyle(
                           color: Colors.black45,
                           fontFamily: "Nunito",

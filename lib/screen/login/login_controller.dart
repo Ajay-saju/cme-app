@@ -2,21 +2,25 @@ import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hslr/main.dart';
 import 'package:hslr/models/user_details.dart';
 import 'package:hslr/screen/dashboard/dashboard.dart';
 import 'package:hslr/services/last_login_service/last_login_service.dart';
+import 'package:hslr/services/user_login_servise.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert' as convert;
 import 'dart:developer' as dp;
-import '../../services/user_profile_service/get_user_logid_service.dart';
+import '../../models/user_login_model.dart';
 import '../../services/user_profile_service/get_user_profile_service.dart';
+import '../../services/user_progile_pick_service.dart';
 
 class LoginController extends GetxController {
-  static final GlobalKey<FormState> regformkey = GlobalKey<FormState>();
+  final GlobalKey<FormState> regformkey = GlobalKey<FormState>();
 
-  Rx<GetUserDetails> getUserDetails = GetUserDetails().obs;
-
-  List<GetUserDetails> user = [];
+  Rx<UserDetails> getUserDetails = UserDetails().obs;
+  Rx<UserLogin> userLogin = UserLogin().obs;
+  var profileImage = ''.obs;
+  List<UserDetails> user = [];
 
   TextEditingController mobNumb = TextEditingController();
   TextEditingController password = TextEditingController();
@@ -28,6 +32,12 @@ class LoginController extends GetxController {
   TextEditingController regpass = TextEditingController();
 
   var username;
+  // var userId = ''.obs;
+  // var councilId = ''.obs;
+  // var stateId = ''.obs;
+  // var roleId = ''.obs;
+  // var categoryId = ''.obs;
+  // int? contryId;
 
   bool isObscure = true;
   bool sizetext = false;
@@ -96,30 +106,48 @@ class LoginController extends GetxController {
     return otp;
   }
 
-  Future getUserId(String mobileNo, String pin) async {
-    final userLogIdService = UserLogIdService();
+  Future<UserLogin?> userLogIn(
+      {required String mobileNo, required String pin}) async {
+    final userLoginService = UserLoginService();
+    final prefs = await SharedPreferences.getInstance();
 
     try {
-      final response = await userLogIdService.getUserUid(mobileNo, pin);
-      var jsonFile = convert.jsonDecode(response.data);
+      final response = await userLoginService.userLogin(mobileNo, pin);
+      print(response.toString());
+      dp.log(response.statusCode.toString());
+      // var jsonFile = convert.jsonDecode(response.data);
 
       if (response.statusCode == 200) {
-        final mid = jsonFile[0];
+        userLogin.value = UserLogin.fromJson(response.data);
+        print(userLogin.value.userId.toString());
 
-        await getUserData(mid);
-        await getUserLastLogin(mid);
+        await prefs.setString('userId', userLogin.value.userId.toString());
+        var mid = await prefs.getString('userId');
+        await getUserData(mid!);
+
+        await prefs.setString(
+            'councilId', userLogin.value.councilId.toString());
+        await prefs.setString('stateId', userLogin.value.stateId.toString());
+        await prefs.setString('roleId', userLogin.value.roleId.toString());
+        await prefs.setString('catId', userLogin.value.categoryId.toString());
+        await prefs.setInt('country', userLogin.value.countryId!);
+        // var conId = await prefs.getInt('country');
+        // var stateId = await prefs.getString('stateId');
+        // var counId = await prefs.getString('councilId');
       }
     } catch (e) {
       if (e is DioError) {
         print(e.toString());
       }
-      update();
+      return null;
     }
+    update();
+    return null;
   }
 
-  Future<GetUserDetails?> getUserData(String mId) async {
+  Future<UserDetails?> getUserData(String mId) async {
     final getUserDetailsService = GetUserDetailsService();
-    // var jsonFile;
+
     try {
       final response = await getUserDetailsService.getUserProfile(mId);
 
@@ -130,8 +158,17 @@ class LoginController extends GetxController {
 
       if (response.statusCode == 200) {
         print('json working');
-        getUserDetails.value = GetUserDetails.fromJson(jsonFile[0]);
-        print(getUserDetails.value.firstName.toString());
+        getUserDetails.value = UserDetails.fromJson(jsonFile);
+        print(getUserDetails.value.loginName);
+        username = sessionlog.getString('log_name');
+        sessionlog.setString('log_name', getUserDetails.value.loginName!);
+        await getUserProfilePick(
+            mid: userLogin.value.userId,
+            conId: userLogin.value.countryId,
+            stateId: userLogin.value.stateId,
+            counId: userLogin.value.councilId);
+
+        await Get.off(Dashboard());
       }
     } catch (e) {
       if (e is DioError) {
@@ -160,6 +197,24 @@ class LoginController extends GetxController {
         time.value = splitted[1].toString();
         print(date.value);
         print(time.value);
+      }
+    } catch (e) {
+      if (e is DioError) {
+        print(e.toString());
+      }
+    }
+    update();
+  }
+
+  getUserProfilePick(
+      {required mid, required conId, required counId, required stateId}) async {
+    final proPicService = UserPickService();
+    try {
+      final response = await proPicService.getProfilePick(
+          mid: mid, conId: conId, counId: counId, stateId: stateId);
+      if (response.statusCode == 200) {
+        await sessionlog.setString('proPick', response.data);
+        profileImage = response.data;
       }
     } catch (e) {
       if (e is DioError) {

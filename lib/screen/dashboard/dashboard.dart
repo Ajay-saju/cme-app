@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:hslr/screen/bottomdrawer/bottomdrawer.dart';
 import 'package:hslr/screen/dashboard/dashboard_controller.dart';
 import 'package:hslr/screen/home.dart/home.dart';
+import 'package:hslr/screen/login/login_controller.dart';
 
 ValueNotifier<int> indexChaingeNotifier = ValueNotifier(0);
 
@@ -17,6 +18,7 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   final screens = [Home()];
   DashboardController dashboardController = Get.put(DashboardController());
+  final logCOntroller = Get.find<LoginController>();
 
   @override
   void initState() {
@@ -29,6 +31,7 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+    print(logCOntroller.getUserDetails.value.loginName);
     return WillPopScope(
       onWillPop: () async {
         if (dashboardController.tabIndex != 0) {
@@ -113,72 +116,70 @@ class _DashboardState extends State<Dashboard> {
       child: GetBuilder<DashboardController>(
         builder: ((_) {
           //  var user_id = dashboardController.userid;
-          return
-              //  logCOntroller.getUserDetails == null ||
-              //         logCOntroller.getUserDetails.value == null
-              //     ?
-              //     Center(
-              //         child: CircularProgressIndicator(
-              //           color: Colors.black87,
-              //         ),
-              //       )
-              //     :
-              Scaffold(
-            key: dashboardController.drawerKey,
-            drawer: const BottomDrawer(),
-            body: SafeArea(
-              child: Stack(
-                // index: dashboardController.tabIndex,
-                children: [
-                  ValueListenableBuilder(
-                      valueListenable: indexChaingeNotifier,
-                      builder: (context, int index, _) {
-                        return screens[index];
-                      }),
+          return 
+                  logCOntroller.getUserDetails.value.loginName == null
+              ? Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.black87,
+                  ),
+                )
+              :
+               Scaffold(
+                  key: dashboardController.drawerKey,
+                  drawer: const BottomDrawer(),
+                  body: SafeArea(
+                    child: Stack(
+                      // index: dashboardController.tabIndex,
+                      children: [
+                        ValueListenableBuilder(
+                            valueListenable: indexChaingeNotifier,
+                            builder: (context, int index, _) {
+                              return screens[index];
+                            }),
 
-                  // Home(),
-                  // CmeProgram(),
-                  // MyProfile(),
-                ],
-              ),
-            ),
-            bottomNavigationBar: ValueListenableBuilder(
-                valueListenable: indexChaingeNotifier,
-                builder: (context, int newIndex, _) {
-                  return BottomNavigationBar(
-                      type: BottomNavigationBarType.fixed,
-                      // unselectedItemColor: Colors.black87, //Colors.blue.shade200,
-                      // selectedItemColor: Colors
-                      //     .black87, //Color(0xffC8C8C8), //Colors.blue.shade700,00000
-                      onTap: dashboardController.changeTabIndex,
-                      currentIndex: dashboardController.tabIndex,
-                      showSelectedLabels: false,
-                      showUnselectedLabels: false,
-                      items: const [
-                        BottomNavigationBarItem(
-                          icon: ImageIcon(
-                            AssetImage("assets/hm.png"),
-                            color: Colors.black87,
-                          ),
-                          label: "",
-                        ),
-                        // BottomNavigationBarItem(
-                        //   icon: ImageIcon(AssetImage("assets/V.png")),
-                        //   label: "",
-                        // ),
-                        // BottomNavigationBarItem(
-                        //   icon: ImageIcon(AssetImage("assets/p.png")),
-                        //   label: "",
-                        // ),
-                        BottomNavigationBarItem(
-                          icon: ImageIcon(AssetImage("assets/nd.png"),
-                              color: Colors.black87),
-                          label: "",
-                        ),
-                      ]);
-                }),
-            // ),
-          );
+                        // Home(),
+                        // CmeProgram(),
+                        // MyProfile(),
+                      ],
+                    ),
+                  ),
+                  bottomNavigationBar: ValueListenableBuilder(
+                      valueListenable: indexChaingeNotifier,
+                      builder: (context, int newIndex, _) {
+                        return BottomNavigationBar(
+                            type: BottomNavigationBarType.fixed,
+                            // unselectedItemColor: Colors.black87, //Colors.blue.shade200,
+                            // selectedItemColor: Colors
+                            //     .black87, //Color(0xffC8C8C8), //Colors.blue.shade700,00000
+                            onTap: dashboardController.changeTabIndex,
+                            currentIndex: dashboardController.tabIndex,
+                            showSelectedLabels: false,
+                            showUnselectedLabels: false,
+                            items: const [
+                              BottomNavigationBarItem(
+                                icon: ImageIcon(
+                                  AssetImage("assets/hm.png"),
+                                  color: Colors.black87,
+                                ),
+                                label: "",
+                              ),
+                              // BottomNavigationBarItem(
+                              //   icon: ImageIcon(AssetImage("assets/V.png")),
+                              //   label: "",
+                              // ),
+                              // BottomNavigationBarItem(
+                              //   icon: ImageIcon(AssetImage("assets/p.png")),
+                              //   label: "",
+                              // ),
+                              BottomNavigationBarItem(
+                                icon: ImageIcon(AssetImage("assets/nd.png"),
+                                    color: Colors.black87),
+                                label: "",
+                              ),
+                            ]);
+                      }),
+                  // ),
+                );
         }),
       ),
     );

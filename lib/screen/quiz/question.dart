@@ -15,6 +15,13 @@ class Question extends StatefulWidget {
 class _QuestionState extends State<Question> {
   QuestionController qController = Get.put(QuestionController());
 
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   qController.takePicture();
+  // }
+
   @override
   Widget build(BuildContext context) {
     // if (qController.cameraController.value.isInitialized)

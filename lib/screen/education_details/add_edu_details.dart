@@ -79,7 +79,7 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                       height: 20,
                     ),
                     Form(
-                        // key: addEduFormKey,
+                        key: eduController.addEduFormKey,
                         autovalidateMode: AutovalidateMode.always,
                         child: Column(
                           children: [
@@ -219,18 +219,20 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                               )),
                           ElevatedButton(
                               onPressed: () async {
-                                // if (addEduFormKey.currentState!.validate()) {
-                                //   addEduFormKey.currentState!.save();
-                                await Get.snackbar(
-                                    'Success', 'Save Details successfully',
-                                    colorText: Colors.white,
-                                    backgroundColor: Colors.black,
-                                    duration: Duration(seconds: 3));
+                                if (eduController.addEduFormKey.currentState!
+                                    .validate()) {
+                                  eduController.addEduFormKey.currentState!
+                                      .save();
+                                  await Get.snackbar(
+                                      'Success', 'Save Details successfully',
+                                      colorText: Colors.white,
+                                      backgroundColor: Colors.black,
+                                      duration: Duration(seconds: 3));
 
-                                Timer(Duration(seconds: 2), () async {
-                                  Get.off(EducationDetailsScreen());
-                                });
-                                // } else {}
+                                  Timer(Duration(seconds: 2), () async {
+                                    Get.off(EducationDetailsScreen());
+                                  });
+                                } else {}
                               },
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.black,

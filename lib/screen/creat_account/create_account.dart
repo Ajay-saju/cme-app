@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:hslr/screen/creat_account/create_acc_controller.dart';
 import 'package:hslr/screen/login/login_controller.dart';
 
 import '../login/login.dart';
@@ -15,10 +16,13 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
-  LoginController logController = Get.put(LoginController());
+  // LoginController logController = Get.put(LoginController());
+  // final logController = Get.find<LoginController>();
+  CreateAccountController accountController =
+      Get.put(CreateAccountController());
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<LoginController>(
+    return GetBuilder<CreateAccountController>(
       builder: ((_) {
         return GestureDetector(
           onTap: () {
@@ -39,7 +43,7 @@ class _CreateAccountState extends State<CreateAccount> {
 
             body: SafeArea(
               child: Form(
-                key: LoginController.regformkey,
+                key: accountController.accformkey,
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +58,7 @@ class _CreateAccountState extends State<CreateAccount> {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.back();
+                          Get.offAll(Login());
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -113,7 +117,7 @@ class _CreateAccountState extends State<CreateAccount> {
                               LengthLimitingTextInputFormatter(25),
                             ],
                             keyboardType: TextInputType.name,
-                            controller: logController.regName,
+                            controller: accountController.regName,
                             validator: (value) {
                               if (value!.isNotEmpty && value.length > 3) {
                                 return null;
@@ -171,7 +175,7 @@ class _CreateAccountState extends State<CreateAccount> {
                               LengthLimitingTextInputFormatter(10),
                             ],
                             keyboardType: TextInputType.number,
-                            controller: logController.regmobnum,
+                            controller: accountController.regmobnum,
                             validator: (value) {
                               if (value!.isNotEmpty && value.length > 9) {
                                 return null;
@@ -227,7 +231,7 @@ class _CreateAccountState extends State<CreateAccount> {
                             //   LengthLimitingTextInputFormatter(10),
                             // ],
                             keyboardType: TextInputType.text,
-                            controller: logController.regno,
+                            controller: accountController.regno,
                             validator: (value) {
                               if (value!.isNotEmpty && value.length > 9) {
                                 return null;
@@ -282,19 +286,19 @@ class _CreateAccountState extends State<CreateAccount> {
                         child: TextFormField(
                           cursorColor: Colors.black,
                           onTap: () {},
-                          obscureText: logController.isObscure,
+                          obscureText: accountController.isObscure,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(4),
                           ],
                           keyboardType: TextInputType.number,
-                          controller: logController.password,
+                          controller: accountController.password,
                           validator: (value) {
                             if (value!.isNotEmpty && value.length > 3) {
                               return null;
                             } else if (value.length < 3 && value.isNotEmpty) {
                               return "Your Password is Short";
                             } else {
-                              logController.creatsized();
+                              accountController.creatsized();
                               return 'Required Password';
                             }
                           },
@@ -303,12 +307,12 @@ class _CreateAccountState extends State<CreateAccount> {
                                   // iconSize: 15.0,
                                   color: Colors.grey,
                                   onPressed: () {
-                                    logController.isObscure =
-                                        !logController.isObscure;
-                                    logController.update();
+                                    accountController.isObscure =
+                                        !accountController.isObscure;
+                                    accountController.update();
                                   },
                                   icon: Icon(
-                                      logController.isObscure
+                                      accountController.isObscure
                                           ? Icons.visibility_off
                                           : Icons.visibility,
                                       color: Color(0xffDC3638))),
@@ -365,7 +369,7 @@ class _CreateAccountState extends State<CreateAccount> {
                               border: Border.all(color: Colors.black)),
                           child: DropdownButtonHideUnderline(
                             child: DropdownButton<String>(
-                                value: logController.dropvalue,
+                                value: accountController.dropvalue,
                                 isExpanded: true,
                                 icon: Padding(
                                   padding: const EdgeInsets.only(left: 8.0),
@@ -381,12 +385,12 @@ class _CreateAccountState extends State<CreateAccount> {
                                       fontFamily: "Nunito",
                                       color: Colors.black87),
                                 ),
-                                items: logController.dropitems
-                                    .map(logController.buildMenuItem)
+                                items: accountController.dropitems
+                                    .map(accountController.buildMenuItem)
                                     .toList(),
                                 onChanged: (value) {
-                                  logController.dropvalue = value;
-                                  logController.update();
+                                  accountController.dropvalue = value;
+                                  accountController.update();
                                 }),
                           ),
                         ),
@@ -399,7 +403,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         width: context.width * 0.3,
                         child: ElevatedButton(
                             onPressed: () async {
-                              if (LoginController.regformkey.currentState!
+                              if (accountController.accformkey.currentState!
                                   .validate()) {
                                 await Get.snackbar(
                                     'Success', 'Account Create successfully',
@@ -407,7 +411,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                     backgroundColor: Colors.black,
                                     duration: Duration(seconds: 3));
                                 Timer(Duration(seconds: 2), () {
-                                  Get.off(Login());
+                                  Get.offAll(Login());
                                 });
                               } else {
                                 print('not valid');

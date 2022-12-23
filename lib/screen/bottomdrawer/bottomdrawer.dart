@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hslr/main.dart';
 import 'package:hslr/screen/cmeprogrm_points/cme_points.dart';
 import 'package:hslr/screen/dashboard/dashboard_controller.dart';
 import 'package:hslr/screen/education_details/education_screen.dart';
@@ -23,6 +24,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
   ScrollController controller = ScrollController();
   DashboardController bdrawerController = Get.put(DashboardController());
   LoginController loginController = Get.find();
+  final pick = sessionlog.getString('proPick');
 
   @override
   Widget build(BuildContext context) {
@@ -51,12 +53,10 @@ class _BottomDrawerState extends State<BottomDrawer> {
                             left: 18.0, top: 25.0, right: 18.0),
                         child: Row(
                           children: [
-                            const CircleAvatar(
-                              backgroundImage: AssetImage(
-                                'assets/man.png',
-
-                                // fit: BoxFit.cover,
-                              ),
+                            CircleAvatar(
+                              backgroundImage: NetworkImage(pick!),
+                              // backgroundImage: NetworkImage(
+                              //     loginController.profileImage.value),
                               radius: 25.0,
                               backgroundColor: Colors.white,
                             ),
@@ -65,7 +65,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                             ),
                             // Spacer(),
                             Text(
-                              loginController.getUserDetails.value.firstName
+                              loginController.getUserDetails.value.loginName
                                   .toString(),
                               style: TextStyle(
                                 fontSize: 20,
@@ -117,47 +117,6 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                 Get.back();
                               },
                             ),
-
-                            // InkWell(
-                            //   onTap: () {
-                            //     // Get.to(DashboardController());
-                            //     bdrawerController.sidedrawer(0);
-                            //     bdrawerController.update();
-                            //     Get.back();
-                            //   },
-                            //   child: Padding(
-                            //     padding: const EdgeInsets.all(20.0),
-                            //     child: Row(
-                            //       children: [
-                            //         SizedBox(
-                            //           height: 22,
-                            //           width: 22,
-                            //           // padding: const EdgeInsets.all(0.0),
-                            //           child: Image.asset(
-                            //             'assets/hmwhite.png',
-                            //             fit: BoxFit.cover,
-                            //           ),
-                            //         ),
-                            //         SizedBox(
-                            //           width: 20,
-                            //         ),
-                            //         Padding(
-                            //           padding: const EdgeInsets.only(top: 5.0),
-                            //           child: Text(
-                            //             "Dashboard",
-                            //             style: TextStyle(
-                            //               fontSize: 18,
-                            //               fontFamily: "Nunito",
-                            //               fontWeight: FontWeight.bold,
-                            //               color: Colors.white,
-                            //             ),
-                            //           ),
-                            //         ),
-                            //       ],
-                            //     ),
-                            //   ),
-                            // ),
-
                             Theme(
                               data: Theme.of(context).copyWith(
                                 unselectedWidgetColor:
@@ -169,18 +128,6 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                     .transparent, // if you want to remove the border
                               ),
                               child: ExpansionTile(
-                                // onExpansionChanged: (value) {
-                                //   if(value == true){
-                                //      bdrawerController.visibledrop = false;
-                                //       bdrawerController.update();
-
-                                //   }else{
-                                //     bdrawerController.visibledrop = true;
-                                //      bdrawerController.update();
-                                //   }
-
-                                //   // bdrawerController.update();
-                                // },
                                 leading: SizedBox(
                                   height: 25,
                                   width: 22,
@@ -200,7 +147,6 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                     color: Colors.white,
                                   ),
                                 ),
-
                                 children: [
                                   Container(
                                     margin: EdgeInsets.only(left: 60),
@@ -300,77 +246,6 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                 ],
                               ),
                             ),
-
-                            // InkWell(
-                            //   onTap: () {
-                            //     // controller.animateTo(5,
-                            //     //     duration: Duration(seconds: 5),
-                            //     //     curve: Curves.slowMiddle);
-                            //     bdrawerController.visibledrop =
-                            //         !bdrawerController.visibledrop;
-                            //     bdrawerController.update();
-                            //   },
-                            //   child: Padding(
-                            //     padding:
-                            //         const EdgeInsets.only(left: 20.0, top: 10),
-                            //     child: Row(
-                            //       children: [
-                            //         SizedBox(
-                            //           height: 25,
-                            //           width: 22,
-                            //           // padding: const EdgeInsets.all(0.0),
-                            //           child: Image.asset(
-                            //             'assets/Untitled.png',
-                            //             // height: 15,
-                            //             fit: BoxFit.cover,
-                            //           ),
-                            //         ),
-                            //         SizedBox(
-                            //           width: 20,
-                            //         ),
-                            //         Padding(
-                            //           padding: const EdgeInsets.only(
-                            //               top: 5.0, left: 5),
-                            //           child: Text(
-                            //             "Profile",
-                            //             style: TextStyle(
-                            //               fontSize: 18,
-                            //               fontFamily: "Nunito",
-                            //               fontWeight: FontWeight.bold,
-                            //               color: Colors.white,
-                            //             ),
-                            //           ),
-                            //         ),
-                            //         // Spacer(),
-                            //         SizedBox(
-                            //           width: 100,
-                            //         ),
-                            //         Padding(
-                            //           padding: const EdgeInsets.only(
-                            //               left: 8.0, top: 0),
-                            //           child: GetBuilder<DashboardController>(
-                            //             builder: (contoll) {
-                            //               return bdrawerController.visibledrop
-                            //                   ? Image.asset(
-                            //                       'assets/ffe.png',
-                            //                       height: 10,
-                            //                       color: Colors.white,
-                            //                     )
-                            //                   : Image.asset(
-                            //                       'assets/gg.png',
-                            //                       height: 10,
-                            //                       color: Colors.white,
-                            //                       // height: 15,
-                            //                       // fit: BoxFit.cover,
-                            //                     );
-                            //             },
-                            //           ),
-                            //         ),
-                            //       ],
-                            //     ),
-                            //   ),
-                            // ),
-
                             Visibility(
                               visible: bdrawerController.visibledrop,
                               child: Container(
@@ -463,49 +338,6 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                 ),
                               ),
                             ),
-
-                            // InkWell(
-                            //   onTap: () {
-                            //     Get.to(PaymentDetails());
-                            //     // bdrawerController.sidedrawer(0);
-                            //     // bdrawerController.update();
-                            //     // Get.back();
-                            //   },
-                            //   child: Padding(
-                            //     padding:
-                            //         const EdgeInsets.only(left: 20.0, top: 30),
-                            //     child: Row(
-                            //       children: [
-                            //         SizedBox(
-                            //           height: 25,
-                            //           width: 22,
-                            //           // padding: const EdgeInsets.all(0.0),
-                            //           child: Image.asset(
-                            //             'assets/att.png',
-                            //             fit: BoxFit.cover,
-                            //           ),
-                            //         ),
-                            //         SizedBox(
-                            //           width: 20,
-                            //         ),
-                            //         Padding(
-                            //           padding: const EdgeInsets.only(
-                            //               top: 5.0, left: 5),
-                            //           child: Text(
-                            //             "Receipt List",
-                            //             style: TextStyle(
-                            //               fontFamily: "Nunito",
-                            //               fontSize: 18,
-                            //               fontWeight: FontWeight.bold,
-                            //               color: Colors.white,
-                            //             ),
-                            //           ),
-                            //         ),
-                            //       ],
-                            //     ),
-                            //   ),
-                            // ),
-
                             Theme(
                               data: Theme.of(context).copyWith(
                                 unselectedWidgetColor:
@@ -669,7 +501,6 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                 ],
                               ),
                             ),
-
                             Theme(
                               data: Theme.of(context).copyWith(
                                 unselectedWidgetColor:
@@ -839,36 +670,12 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                 ],
                               ),
                             ),
-
-                            // ListTile(
-                            //   leading: SizedBox(
-                            //     height: 25,
-                            //     width: 22,
-                            //     // padding: const EdgeInsets.all(0.0),
-                            //     child: Image.asset(
-                            //       'assets/att.png',
-                            //       fit: BoxFit.cover,
-                            //     ),
-                            //   ),
-                            //   title: Text(
-                            //     "Receipt List",
-                            //     style: TextStyle(
-                            //       fontFamily: "Nunito",
-                            //       fontSize: 18,
-                            //       fontWeight: FontWeight.bold,
-                            //       color: Colors.white,
-                            //     ),
-                            //   ),
-                            //   onTap: () {
-                            //     Get.to(PaymentDetails());
-                            //   },
-                            // ),
                             ListTile(
                               onTap: () async {
                                 SharedPreferences sessionlog =
                                     await SharedPreferences.getInstance();
                                 sessionlog.remove("log_name");
-                                Get.off(Login());
+                                Get.offAll(Login());
                               },
                               leading: SizedBox(
                                 height: 25,
@@ -888,145 +695,6 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
-
-                            // Visibility(
-                            //   visible: bdrawerController.visibleDropOne,
-                            //   child: Container(
-                            //     margin: EdgeInsets.only(top: 20.0, left: 60),
-                            //     height: 140,
-                            //     width: 250,
-                            //     // color: Colors.amber,
-                            //     decoration: BoxDecoration(
-                            //         borderRadius: BorderRadius.circular(10.0),
-                            //         border: Border.all(color: Colors.white)),
-                            //     child: Column(
-                            //       children: [
-                            //         InkWell(
-                            //           onTap: () {
-                            //             Get.to(const TestScreen());
-                            //           },
-                            //           child: Padding(
-                            //             padding: const EdgeInsets.only(
-                            //                 left: 20.0, top: 15),
-                            //             child: Row(
-                            //               children: [
-                            //                 SizedBox(
-                            //                   height: 22,
-                            //                   width: 22,
-                            //                   // padding: const EdgeInsets.all(0.0),
-                            //                   child: Image.asset(
-                            //                     'assets/ff.png',
-                            //                     fit: BoxFit.cover,
-                            //                   ),
-                            //                 ),
-                            //                 SizedBox(
-                            //                   width: 20,
-                            //                 ),
-                            //                 Padding(
-                            //                   padding: const EdgeInsets.only(
-                            //                       top: 5.0),
-                            //                   child: Text(
-                            //                     "TEST",
-                            //                     style: TextStyle(
-                            //                       fontFamily: "Nunito",
-                            //                       fontSize: 18,
-                            //                       fontWeight: FontWeight.w500,
-                            //                       color: Colors.white,
-                            //                     ),
-                            //                   ),
-                            //                 ),
-                            //               ],
-                            //             ),
-                            //           ),
-                            //         ),
-                            //         InkWell(
-                            //           onTap: () {
-                            //             Get.to(ResultScreen());
-                            //           },
-                            //           child: Padding(
-                            //             padding: const EdgeInsets.only(
-                            //                 left: 20.0, top: 15),
-                            //             child: Row(
-                            //               children: [
-                            //                 SizedBox(
-                            //                   height: 22,
-                            //                   width: 22,
-                            //                   // padding: const EdgeInsets.all(0.0),
-                            //                   child: Image.asset(
-                            //                     'assets/ed.png',
-                            //                     fit: BoxFit.cover,
-                            //                   ),
-                            //                 ),
-                            //                 SizedBox(
-                            //                   width: 20,
-                            //                 ),
-                            //                 Padding(
-                            //                   padding: const EdgeInsets.only(
-                            //                       top: 5.0),
-                            //                   child: Text(
-                            //                     "RESULT",
-                            //                     style: TextStyle(
-                            //                       fontFamily: "Nunito",
-                            //                       fontSize: 18,
-                            //                       fontWeight: FontWeight.w500,
-                            //                       color: Colors.white,
-                            //                     ),
-                            //                   ),
-                            //                 ),
-                            //               ],
-                            //             ),
-                            //           ),
-                            //         ),
-                            //         InkWell(
-                            //           onTap: () {
-                            //             Get.to(ReceiptScreen());
-                            //           },
-                            //           child: Padding(
-                            //             padding: const EdgeInsets.only(
-                            //                 left: 20.0, top: 15),
-                            //             child: Row(
-                            //               children: [
-                            //                 SizedBox(
-                            //                   height: 22,
-                            //                   width: 22,
-                            //                   // padding: const EdgeInsets.all(0.0),
-                            //                   child: Image.asset(
-                            //                     'assets/ed.png',
-                            //                     fit: BoxFit.cover,
-                            //                   ),
-                            //                 ),
-                            //                 SizedBox(
-                            //                   width: 20,
-                            //                 ),
-                            //                 Padding(
-                            //                   padding: const EdgeInsets.only(
-                            //                       top: 5.0),
-                            //                   child: Text(
-                            //                     "RECEIPTS",
-                            //                     style: TextStyle(
-                            //                       fontFamily: "Nunito",
-                            //                       fontSize: 18,
-                            //                       fontWeight: FontWeight.w500,
-                            //                       color: Colors.white,
-                            //                     ),
-                            //                   ),
-                            //                 ),
-                            //               ],
-                            //             ),
-                            //           ),
-                            //         ),
-                            //       ],
-                            //     ),
-                            //   ),
-                            // ),
-
-                            // bdrawerController.visibledrop == true &&
-                            //         bdrawerController.visibledrop == true
-                            //     ? const SizedBox(
-                            //         height: 170,
-                            //       )
-                            //     : SizedBox(),
-
                             context.width > 410
                                 ? SizedBox(
                                     height: bdrawerController.visibledrop
@@ -1038,71 +706,19 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                         ? context.height * 0.0
                                         : context.height * 0.0,
                                   ),
-                            //   context.width>410? SizedBox(
-                            //     height: bdrawerController.visibleDropOne
-                            //         ? context.height * 0.05
-                            //         : context.height * 0.2,
-                            //   )
-                            // : SizedBox(
-                            //     height: bdrawerController.visibleDropOne
-                            //         ? context.height * 0.0
-                            //         : context.height * 0.1,
-                            //   ),
                           ]),
                         ),
                       ),
-                      // Divider(
-                      //   thickness: 2,
-                      //   color: Colors.white,
-                      // ),
-                      // Padding(
-                      //   padding: const EdgeInsets.all(20.0),
-                      //   child: Row(
-                      //     children: [
-                      //       SizedBox(
-                      //         height: 25,
-                      //         width: 25,
-                      //         // padding: const EdgeInsets.all(0.0),
-                      //         child: Image.asset(
-                      //           'assets/lgot.png',
-                      //           fit: BoxFit.cover,
-                      //         ),
-                      //       ),
-                      //       SizedBox(
-                      //         width: 20,
-                      //       ),
-                      //       GestureDetector(
-                      //         onTap: () async {
-                      //           SharedPreferences sessionlog =
-                      //               await SharedPreferences.getInstance();
-                      //           sessionlog.remove("log_name");
-                      //           Get.to(Login());
-                      //         },
-                      //         child: Padding(
-                      //           padding: const EdgeInsets.only(top: 8.0),
-                      //           child: Text(
-                      //             "Logout",
-                      //             style: TextStyle(
-                      //                 fontFamily: "Nunito",
-                      //                 fontSize: 20,
-                      //                 color: Colors.white,
-                      //                 fontWeight: FontWeight.bold),
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
                       Center(
                           child: Text(
-                        "Copyright @ 2022",
+                        "Copyright @ 2022 All Right Received",
                         style: TextStyle(
                           fontFamily: "Nunito",
                         ),
                       )),
                       Center(
                           child: Text(
-                        "All Right Received",
+                        "V Works Software Pvt. Ltd.",
                         style: TextStyle(
                           fontFamily: "Nunito",
                         ),
