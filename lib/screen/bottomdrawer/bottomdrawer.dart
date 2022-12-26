@@ -12,6 +12,7 @@ import 'package:hslr/screen/online_cmeprog/online_cmeprogram.dart';
 import 'package:hslr/screen/paymentdetails/paymentdetails.dart';
 import 'package:hslr/screen/test_screen/testscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BottomDrawer extends StatefulWidget {
   const BottomDrawer({Key? key}) : super(key: key);
@@ -24,10 +25,13 @@ class _BottomDrawerState extends State<BottomDrawer> {
   ScrollController controller = ScrollController();
   DashboardController bdrawerController = Get.put(DashboardController());
   LoginController loginController = Get.find();
-  final pick = sessionlog.getString('proPick');
+  // final pick = sessionlog.getString('proPick');
+
+  final Uri _url = Uri.parse('http://www.vworks.co.in/');
 
   @override
   Widget build(BuildContext context) {
+    // print(pick!.replaceAll('"', ''));
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return GetBuilder<DashboardController>(
@@ -54,7 +58,8 @@ class _BottomDrawerState extends State<BottomDrawer> {
                         child: Row(
                           children: [
                             CircleAvatar(
-                              backgroundImage: NetworkImage(pick!),
+                              // backgroundImage:
+                              //     NetworkImage(pick!.replaceAll('"', '')),
                               // backgroundImage: NetworkImage(
                               //     loginController.profileImage.value),
                               radius: 25.0,
@@ -723,6 +728,27 @@ class _BottomDrawerState extends State<BottomDrawer> {
                           fontFamily: "Nunito",
                         ),
                       )),
+                      Center(
+                        child: InkWell(
+                          onTap: () async {
+                            // const url = 'http://www.vworks.co.in/';
+                            if (await launchUrl(_url,
+                                mode: LaunchMode.inAppWebView)) {
+                              await launchUrl(_url,
+                                  mode: LaunchMode.inAppWebView);
+                            } else {
+                              throw 'Could not launch $_url';
+                            }
+                          },
+                          child: Text(
+                            'www.vworks.co.in',
+                            style: TextStyle(
+                              fontFamily: "Nunito",
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -732,6 +758,12 @@ class _BottomDrawerState extends State<BottomDrawer> {
         );
       }),
     );
+  }
+
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(_url)) {
+      throw 'Could not launch $_url';
+    }
   }
 
   scrollToTop() {

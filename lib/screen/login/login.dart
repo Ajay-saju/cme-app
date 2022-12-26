@@ -292,6 +292,8 @@ class _LoginState extends State<Login> {
                                   await logController.userLogIn(
                                     mobileNo: logController.mobNumb.text,
                                     pin: logController.password.text,
+                                    categoryId: logController.selectCategoryId(
+                                        logController.dropvalue),
                                   );
                                   // await logController.getUserId(
                                   //     logController.mobNumb.text,

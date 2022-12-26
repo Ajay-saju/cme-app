@@ -8,10 +8,10 @@ class UserLoginService {
       receiveTimeout: 3000,
       baseUrl: orginalApi.baseUrl,
       responseType: ResponseType.json));
-  Future<Response> userLogin(uid, pass) async {
+  Future<Response> userLogin(uid, pass, catId) async {
     try {
-      Response response = await dio
-          .post('User_Log', queryParameters: {"Uid": uid, 'password': pass});
+      Response response = await dio.get('User_Log',
+          queryParameters: {"Uid": uid, 'password': pass, 'CategoryId': catId});
       return response;
     } on DioError catch (e) {
       print(e.message);

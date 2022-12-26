@@ -8,7 +8,7 @@ class UserPickService {
   Future<Response> getProfilePick(
       {required mid, required conId, required counId, required stateId}) async {
     try {
-      var response = await dio.post('getphoto', queryParameters: {
+      var response = await dio.get('getphoto', queryParameters: {
         'Mid1': mid,
         'CountryId': conId,
         'StateId': counId,

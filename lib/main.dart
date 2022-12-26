@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/dashboard/dashboard.dart';
 import 'package:hslr/screen/login/login.dart';
+import 'package:hslr/screen/paymentdetails/dummyPage.dart';
 import 'package:hslr/screen/splashscreen/splashscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -45,10 +46,12 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'shlr'.toUpperCase(),
-        theme: ThemeData(primarySwatch: Colors.blue //#4e98f5
-            ),
-        home: user == null ? const Splashscreen() : const Dashboard());
+      debugShowCheckedModeBanner: false,
+      title: 'shlr'.toUpperCase(),
+      theme: ThemeData(primarySwatch: Colors.blue //#4e98f5
+          ),
+      home: user == null ? const Splashscreen() : const Dashboard()
+      // home: Test(),
+    );
   }
 }

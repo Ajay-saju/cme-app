@@ -107,17 +107,20 @@ class LoginController extends GetxController {
   }
 
   Future<UserLogin?> userLogIn(
-      {required String mobileNo, required String pin}) async {
+      {required String mobileNo,
+      required String pin,
+      required int categoryId}) async {
     final userLoginService = UserLoginService();
     final prefs = await SharedPreferences.getInstance();
 
     try {
-      final response = await userLoginService.userLogin(mobileNo, pin);
+      final response =
+          await userLoginService.userLogin(mobileNo, pin, categoryId);
       print(response.toString());
       dp.log(response.statusCode.toString());
       // var jsonFile = convert.jsonDecode(response.data);
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 && response.data != "User Doesn't Exist") {
         userLogin.value = UserLogin.fromJson(response.data);
         print(userLogin.value.userId.toString());
 
@@ -134,10 +137,43 @@ class LoginController extends GetxController {
         // var conId = await prefs.getInt('country');
         // var stateId = await prefs.getString('stateId');
         // var counId = await prefs.getString('councilId');
+      } else if (response.data == "User Doesn't Exist") {
+        Get.defaultDialog(
+            title: 'Something is wrong',
+            middleText:
+                "User Doesn't Exist, Please enter valid phone number and pin number",
+            middleTextStyle: TextStyle(
+              fontFamily: "Nunito",
+              color: Colors.black87,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+            titleStyle: TextStyle(
+              fontFamily: "Nunito",
+              color: Colors.black87,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ));
       }
     } catch (e) {
       if (e is DioError) {
         print(e.toString());
+
+        Get.defaultDialog(
+            title: 'Something is wrong',
+            middleText: "Please try again",
+            middleTextStyle: TextStyle(
+              fontFamily: "Nunito",
+              color: Colors.black87,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+            titleStyle: TextStyle(
+              fontFamily: "Nunito",
+              color: Colors.black87,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ));
       }
       return null;
     }
@@ -168,7 +204,12 @@ class LoginController extends GetxController {
             stateId: userLogin.value.stateId,
             counId: userLogin.value.councilId);
 
+        // await getUserLastLogin(mId);
+
         await Get.off(Dashboard());
+      } else {
+        Get.defaultDialog(
+            title: 'Something is wrong', middleText: 'Please try again');
       }
     } catch (e) {
       if (e is DioError) {
@@ -214,7 +255,9 @@ class LoginController extends GetxController {
           mid: mid, conId: conId, counId: counId, stateId: stateId);
       if (response.statusCode == 200) {
         await sessionlog.setString('proPick', response.data);
-        profileImage = response.data;
+        print(response.data);
+        // profileImage = response.data;
+        // print(profileImage.replaceAll('.', ''));
       }
     } catch (e) {
       if (e is DioError) {
@@ -222,5 +265,23 @@ class LoginController extends GetxController {
       }
     }
     update();
+  }
+
+  int selectCategoryId(dropvalue) {
+    var choice = dropvalue;
+    int value = 0;
+
+    switch (choice) {
+      case 'Medical':
+        return value = 1;
+
+      case 'Nursing':
+        return value = 2;
+      case 'Dental':
+        return value = 3;
+      case 'Ayurvedic':
+        return value = 4;
+    }
+    return value;
   }
 }
