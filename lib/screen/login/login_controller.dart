@@ -254,8 +254,9 @@ class LoginController extends GetxController {
       final response = await proPicService.getProfilePick(
           mid: mid, conId: conId, counId: counId, stateId: stateId);
       if (response.statusCode == 200) {
-        await sessionlog.setString('proPick', response.data);
-        print(response.data);
+        await sessionlog.setString(
+            'proPick', response.data.replaceAll('\"', ""));
+        print(sessionlog.getString('proPick'));
         // profileImage = response.data;
         // print(profileImage.replaceAll('.', ''));
       }

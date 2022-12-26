@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/dashboard/dashboard.dart';
 import 'package:hslr/screen/login/login.dart';
-import 'package:hslr/screen/paymentdetails/dummyPage.dart';
 import 'package:hslr/screen/splashscreen/splashscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

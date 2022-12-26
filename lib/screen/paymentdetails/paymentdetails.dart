@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/member_details/member_controller.dart';
@@ -8,6 +9,9 @@ import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:open_file/open_file.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../dashboard/dashboard_controller.dart';
 
 class PaymentDetails extends StatefulWidget {
   const PaymentDetails({Key? key}) : super(key: key);
@@ -19,20 +23,15 @@ class PaymentDetails extends StatefulWidget {
 class _PaymentDetailsState extends State<PaymentDetails> {
   final pdf = pw.Document();
   MemberDetailsController mebController = Get.put(MemberDetailsController());
-  PaymentController paymentController = Get.put(PaymentController());
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    paymentController.getRecieptList();
-  }
+  // PaymentController paymentController = Get.put(PaymentController());
+  final paymentController = Get.find<DashboardController>();
 
   @override
   Widget build(BuildContext context) {
     var data = paymentController.getpaymentList.value.userData1;
-    
-    return GetBuilder<MemberDetailsController>(
+    print(data!.length.toString());
+
+    return GetBuilder<DashboardController>(
       builder: ((_) {
         return GestureDetector(
           onTap: () {
@@ -93,19 +92,12 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                     height: 20,
                   ),
 
-                  Container(
-                    height: context.height * 0.4,
-                    child: Expanded(
-                        child: ListView(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: _createDataTable(data),
-                        )
-                      ],
-                    )),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: _createDataTable(data),
+                    ),
                   )
                   // Expanded(
                   //   child: Padding(
@@ -1072,7 +1064,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   // ),
                   ,
                   SizedBox(
-                    height: 50,
+                    height: 20,
                   ),
                   // SizedBox(
                   //   height: 50,
@@ -1278,7 +1270,64 @@ class _PaymentDetailsState extends State<PaymentDetails> {
           fontFamily: "Nunito",
           fontSize: 14,
           color: Colors.black),
-      rows: _createRows(data),
+      rows: List<DataRow>.generate(
+          data.length,
+          (index) => DataRow(cells: [
+                DataCell(Text((index + 1).toString())),
+                DataCell(Text(data[index].videoName.toString())),
+                DataCell(Text(data[index].receiptNumber.toString())),
+                DataCell(Text(data[index].amount.toString())),
+                DataCell(Text(data[index].receiptNumber.toString())),
+                DataCell(Text(data[index].date.toString())),
+                DataCell(
+                  InkWell(
+                    onTap: () {
+                      Get.defaultDialog(
+                        title: 'Download PDF',
+                        middleText:
+                            'Do you want to download the payment details as PDF?',
+                        actions: [
+                          ElevatedButton(
+                              onPressed: () async {
+                                if (await canLaunchUrl(
+                                    Uri.parse(data[index].certificateLink))) {
+                                  await launchUrl(
+                                      Uri.parse(
+                                          'https://www.emed.co.in//Admin//Recp_PDFWriter.aspx?QRecpNo=2019000042000'),
+                                      mode: LaunchMode.inAppWebView);
+                                }
+                              },
+                              child: Text('Yes')),
+                          ElevatedButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              child: Text('Cancel'))
+                        ],
+                      );
+                    },
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Image.asset(
+                          'assets/hj.png',
+                          height: 25,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ])),
+      // data
+      //     .map((datas) => DataRow(cells: [
+      //           DataCell(Text('1')),
+      //           DataCell(Text(datas.videoName.toString())),
+      //           DataCell(Text(datas.receiptNumber.toString())),
+      //           DataCell(Text(datas.amount.toString())),
+      //           DataCell(Text(datas.receiptNumber.toString())),
+      //           DataCell(Text('print'))
+      //         ]))
+      //     .toList(),
       // decoration:
       //     BoxDecoration(border: Border.all(width: 1, color: Colors.black)),
     );
@@ -1387,54 +1436,19 @@ class _PaymentDetailsState extends State<PaymentDetails> {
     ];
   }
 
-  List<DataRow> _createRows(data) {
-    return data.map((datas)=>DataRow(cells: [
-      DataCell(Text(data.length + 1)),
-      DataCell(Text(data.videoName.toString())),
-      DataCell(Text(data.receiptNumber.toString())),
-      DataCell(Text(data.amount.toString())),
+  // List<DataRow> _createRows(datas) {
+  //   return datas
+  //       .map((data) => DataRow(cells: [
+  //             DataCell(Text(data.length + 1)),
+  //             DataCell(Text(data.videoName.toString())),
+  //             DataCell(Text(data.receiptNumber.toString())),
+  //             DataCell(Text(data.amount.toString())),
+  //             DataCell(Text(data.receiptNumber.toString())),
+  //             DataCell(Text('print'))
+  //           ]))
+  //       .toList();
 
-    ]));
-    
-    // return [
-    //   DataRow(cells: [
-    //     DataCell(Text('#100')),
-    //     DataCell(Text('Flutter Basics')),
-    //     DataCell(Text('David John')),
-    //     DataCell(Text('David John')),
-    //     DataCell(Text('David John')),
-    //     DataCell(Text('David John')),
-    //     DataCell(Text('David John')),
-    //   ]),
-    //   DataRow(cells: [
-    //     DataCell(Text('#101')),
-    //     DataCell(Text('Dart Internals')),
-    //     DataCell(Text('Alex Wick')),
-    //     DataCell(Text('David John')),
-    //     DataCell(Text('David John')),
-    //     DataCell(Text('David John')),
-    //     DataCell(Text('David John')),
-    //   ]),
-    //   DataRow(cells: [
-    //     DataCell(Text('#101')),
-    //     DataCell(Text('Dart Internals')),
-    //     DataCell(Text('Alex Wick')),
-    //     DataCell(Text('David John')),
-    //     DataCell(Text('David John')),
-    //     DataCell(Text('David John')),
-    //     DataCell(Text('David John')),
-    //   ]),
-    //   DataRow(cells: [
-    //     DataCell(Text('#101')),
-    //     DataCell(Text('Dart Internals')),
-    //     DataCell(Text('Alex Wick')),
-    //     DataCell(Text('David John')),
-    //     DataCell(Text('David John')),
-    //     DataCell(Text('David John')),
-    //     DataCell(Text('David John')),
-    //   ])
-    // ];
-  }
+  // }
 }
 
 // class reciptData extends DataTableSource {

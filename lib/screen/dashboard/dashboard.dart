@@ -25,6 +25,7 @@ class _DashboardState extends State<Dashboard> {
     // TODO: implement initState
     super.initState();
     indexChaingeNotifier = ValueNotifier(0);
+    dashboardController.getRecieptList();
   }
 
   // LoginController logCOntroller = Get.find();
@@ -116,15 +117,13 @@ class _DashboardState extends State<Dashboard> {
       child: GetBuilder<DashboardController>(
         builder: ((_) {
           //  var user_id = dashboardController.userid;
-          return 
-                  logCOntroller.getUserDetails.value.loginName == null
+          return logCOntroller.getUserDetails.value.loginName == null
               ? Center(
                   child: CircularProgressIndicator(
                     color: Colors.black87,
                   ),
                 )
-              :
-               Scaffold(
+              : Scaffold(
                   key: dashboardController.drawerKey,
                   drawer: const BottomDrawer(),
                   body: SafeArea(
