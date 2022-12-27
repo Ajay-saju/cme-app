@@ -1273,36 +1273,72 @@ class _PaymentDetailsState extends State<PaymentDetails> {
       rows: List<DataRow>.generate(
           data.length,
           (index) => DataRow(cells: [
-                DataCell(Text((index + 1).toString())),
-                DataCell(Text(data[index].videoName.toString())),
-                DataCell(Text(data[index].receiptNumber.toString())),
-                DataCell(Text(data[index].amount.toString())),
-                DataCell(Text(data[index].receiptNumber.toString())),
-                DataCell(Text(data[index].date.toString())),
+                DataCell(Text(
+                  (index + 1).toString(),
+                )),
+                DataCell(Center(child: Text(data[index].videoName.toString()))),
+                DataCell(Center(child: Text(data[index].receiptNumber.toString()))),
+                DataCell(Center(child: Text(data[index].amount.toString()))),
+                DataCell(Center(child: Text(data[index].receiptNumber.toString()))),
+                DataCell(Center(child: Text(data[index].date.toString()))),
                 DataCell(
                   InkWell(
                     onTap: () {
                       Get.defaultDialog(
+                        middleTextStyle: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Nunito",
+                            fontSize: 16,
+                            color: Colors.black),
+                        titleStyle: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Nunito",
+                            fontSize: 18,
+                            color: Colors.black),
                         title: 'Download PDF',
                         middleText:
                             'Do you want to download the payment details as PDF?',
                         actions: [
                           ElevatedButton(
-                              onPressed: () async {
-                                if (await canLaunchUrl(
-                                    Uri.parse(data[index].certificateLink))) {
-                                  await launchUrl(
-                                      Uri.parse(
-                                          'https://www.emed.co.in//Admin//Recp_PDFWriter.aspx?QRecpNo=2019000042000'),
-                                      mode: LaunchMode.inAppWebView);
-                                }
-                              },
-                              child: Text('Yes')),
+                            onPressed: () async {
+                              if (await canLaunchUrl(
+                                  Uri.parse(data[index].certificateLink))) {
+                                await launchUrl(
+                                    Uri.parse(
+                                        'https://www.emed.co.in//Admin//Recp_PDFWriter.aspx?QRecpNo=2019000042000'),
+                                    mode: LaunchMode.inAppWebView);
+                              }
+                            },
+                            child: Text(
+                              'Yes',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: "Nunito",
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.black,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                )),
+                          ),
                           ElevatedButton(
-                              onPressed: () {
-                                Get.back();
-                              },
-                              child: Text('Cancel'))
+                            onPressed: () {
+                              Get.back();
+                            },
+                            child: Text(
+                              'Cancel',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: "Nunito",
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.black,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                )),
+                          )
                         ],
                       );
                     },
@@ -1351,7 +1387,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
       DataColumn(
         label: Center(
           child: Text(
-            'Program\n  Name',
+            'Program Name',
             style: TextStyle(
               fontSize: 15,
               fontFamily: "Nunito",
@@ -1391,7 +1427,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
       DataColumn(
         label: Center(
           child: Text(
-            'Transaction\n        Id',
+            'Transaction Id',
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontFamily: "Nunito",
@@ -1405,7 +1441,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
       DataColumn(
         label: Center(
           child: Text(
-            'Transaction\n      Date',
+            'Transaction Date',
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontFamily: "Nunito",

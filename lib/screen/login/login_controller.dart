@@ -128,12 +128,14 @@ class LoginController extends GetxController {
         var mid = await prefs.getString('userId');
         await getUserData(mid!);
 
-        await prefs.setString(
+        await sessionlog.setString(
             'councilId', userLogin.value.councilId.toString());
-        await prefs.setString('stateId', userLogin.value.stateId.toString());
-        await prefs.setString('roleId', userLogin.value.roleId.toString());
-        await prefs.setString('catId', userLogin.value.categoryId.toString());
-        await prefs.setInt('country', userLogin.value.countryId!);
+        await sessionlog.setString(
+            'stateId', userLogin.value.stateId.toString());
+        await sessionlog.setString('roleId', userLogin.value.roleId.toString());
+        await sessionlog.setString(
+            'catId', userLogin.value.categoryId.toString());
+        await sessionlog.setInt('country', userLogin.value.countryId!);
         // var conId = await prefs.getInt('country');
         // var stateId = await prefs.getString('stateId');
         // var counId = await prefs.getString('councilId');
@@ -198,11 +200,11 @@ class LoginController extends GetxController {
         print(getUserDetails.value.loginName);
         username = sessionlog.getString('log_name');
         sessionlog.setString('log_name', getUserDetails.value.loginName!);
-        await getUserProfilePick(
-            mid: userLogin.value.userId,
-            conId: userLogin.value.countryId,
-            stateId: userLogin.value.stateId,
-            counId: userLogin.value.councilId);
+        // await getUserProfilePick(
+        //     mid: userLogin.value.userId,
+        //     conId: userLogin.value.countryId,
+        //     stateId: userLogin.value.stateId,
+        //     counId: userLogin.value.councilId);
 
         // await getUserLastLogin(mId);
 

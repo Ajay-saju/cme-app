@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:hslr/models/get_reciepts.dart';
 
 import '../../main.dart';
+import '../../models/get_cme_list_model.dart';
+import '../../services/cme_list_service.dart';
 import '../../services/user_payment_service.dart';
 
 class DashboardController extends GetxController {
@@ -27,6 +29,22 @@ class DashboardController extends GetxController {
       if (response.statusCode == 200) {
         getpaymentList.value = GetPayment.fromJson(jsonFile);
         print(getpaymentList.value.userData1![0].date);
+      }
+    } catch (e) {}
+  }
+
+  Rx<GetCmeList> cmeList = GetCmeList().obs;
+
+  Future<GetCmeList?> getCmeList() async {
+    final cmeListService = CmeListService();
+
+    try {
+      final response = await cmeListService.getCmeList();
+      log(response.statusCode.toString());
+      var jsonFile = jsonDecode(response.data);
+      if (response.statusCode == 200) {
+        cmeList.value = GetCmeList.fromJson(jsonFile);
+      
       }
     } catch (e) {}
   }
