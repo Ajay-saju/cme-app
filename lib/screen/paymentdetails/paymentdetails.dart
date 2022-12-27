@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -91,7 +93,6 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   SizedBox(
                     height: 20,
                   ),
-
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Padding(
@@ -1066,9 +1067,6 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   SizedBox(
                     height: 20,
                   ),
-                  // SizedBox(
-                  //   height: 50,
-                  // ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -1277,9 +1275,11 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   (index + 1).toString(),
                 )),
                 DataCell(Center(child: Text(data[index].videoName.toString()))),
-                DataCell(Center(child: Text(data[index].receiptNumber.toString()))),
+                DataCell(
+                    Center(child: Text(data[index].receiptNumber.toString()))),
                 DataCell(Center(child: Text(data[index].amount.toString()))),
-                DataCell(Center(child: Text(data[index].receiptNumber.toString()))),
+                DataCell(
+                    Center(child: Text(data[index].receiptNumber.toString()))),
                 DataCell(Center(child: Text(data[index].date.toString()))),
                 DataCell(
                   InkWell(
@@ -1301,13 +1301,11 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                         actions: [
                           ElevatedButton(
                             onPressed: () async {
-                              if (await canLaunchUrl(
-                                  Uri.parse(data[index].certificateLink))) {
-                                await launchUrl(
-                                    Uri.parse(
-                                        'https://www.emed.co.in//Admin//Recp_PDFWriter.aspx?QRecpNo=2019000042000'),
-                                    mode: LaunchMode.inAppWebView);
-                              }
+                             await openPdf(
+                                url:
+                                    'https://www.emed.co.in//Admin//Recp_PDFWriter.aspx?QRecpNo=2019000042000',
+                                fileName: 'exmp.pdf',
+                              );
                             },
                             child: Text(
                               'Yes',
@@ -1470,6 +1468,38 @@ class _PaymentDetailsState extends State<PaymentDetails> {
         ),
       )
     ];
+  }
+
+  Future openPdf({required String url, required String fileName}) async {
+    print(url.toString());
+    final file = await downloadPdf(url, fileName);
+    print(url.toString());
+
+    if (file == null) return null;
+    print('Path:${file.path}');
+    OpenFile.open(file.path);
+  }
+
+  Future<File?> downloadPdf(String url, String name) async {
+    final dio = Dio();
+    final appStorage = await getApplicationDocumentsDirectory();
+    final file = File('${appStorage.path}/$name');
+    print(file.toString());
+
+    try {
+      final response = await dio.get(url,
+          options: Options(
+              followRedirects: false, responseType: ResponseType.bytes));
+      print(response.data);
+
+      final ref = file.openSync(mode: FileMode.write);
+      ref.writeFromSync(response.data);
+      await ref.close;
+      return file;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
   }
 
   // List<DataRow> _createRows(datas) {
