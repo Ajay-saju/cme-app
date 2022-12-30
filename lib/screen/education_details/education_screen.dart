@@ -5,6 +5,8 @@ import 'package:hslr/screen/education_details/add_edu_details.dart';
 import 'package:hslr/screen/education_details/edit_details.dart';
 import 'package:hslr/screen/education_details/education_controller.dart';
 
+import '../dashboard/dashboard_controller.dart';
+
 // EducationController educationController = Get.put(EducationController());
 
 class EducationDetailsScreen extends StatefulWidget {
@@ -16,8 +18,10 @@ class EducationDetailsScreen extends StatefulWidget {
 
 class _EducationDetailsScreenState extends State<EducationDetailsScreen> {
   EducationController educationController = Get.put(EducationController());
+  final dashControll = Get.find<DashboardController>();
   @override
   Widget build(BuildContext context) {
+    var eduData = dashControll.eduList.value.result;
     return WillPopScope(
       onWillPop: () async {
         Get.off(Dashboard());
@@ -98,533 +102,17 @@ class _EducationDetailsScreenState extends State<EducationDetailsScreen> {
             // SizedBox(
             //   height: 10,
             // ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-              child: SingleChildScrollView(
+
+            SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    Column(
-                      // crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 10),
-                          height: 40,
-                          width: 50,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.black,
-                              width: 1,
-                            ),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Sl No',
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: "Nunito",
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(
-                                      0xffDC3638) // Colors.blue.shade700,//
-                                  ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 0),
-                          height: 60,
-                          width: 50,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(color: Colors.black, width: 1),
-                              top: BorderSide(color: Colors.black, width: 1),
-                              right: BorderSide(color: Colors.black, width: 1),
-                              left: BorderSide(color: Colors.black, width: 1),
-                              // left:
-                              //     BorderSide(color: Colors.black, width: 1)
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: _createDataTable(eduData),
+                )),
 
-                              // left:
-                              //     BorderSide(color: Colors.black, width: 1)
-                            ),
-                          ),
-                          child: Center(
-                            child: Text(
-                              '1',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: "Nunito",
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      // mainAxisAlignment: MainAxisAlignment.start,
-                      // crossAxisAlignment: cros,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 10),
-                          height: 40,
-                          width: 75,
-                          decoration: BoxDecoration(
-                            border: Border(
-                                bottom:
-                                    BorderSide(color: Colors.black, width: 1),
-                                right:
-                                    BorderSide(color: Colors.black, width: 1),
-                                top: BorderSide(color: Colors.black, width: 1)),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Degree',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontFamily: "Nunito",
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xffDC3638),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 0),
-                          height: 60,
-                          width: 75,
-                          decoration: BoxDecoration(
-                            // bottom:
-                            //     BorderSide(color: Colors.black, width: 1),
-                            border: Border(
-                              bottom: BorderSide(color: Colors.black, width: 1),
-                              top: BorderSide(color: Colors.black, width: 1),
-                              right: BorderSide(color: Colors.black, width: 1),
-                              // left:
-                              //     BorderSide(color: Colors.black, width: 1)
-
-                              // left:
-                              //     BorderSide(color: Colors.black, width: 1)
-                            ),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'DM (Cl.Haem.)',
-                              style:
-                                  TextStyle(fontSize: 14, fontFamily: "Nunito"),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 10),
-                          height: 40,
-                          width: 72,
-                          decoration: BoxDecoration(
-                            border: Border(
-                                bottom:
-                                    BorderSide(color: Colors.black, width: 1),
-                                right:
-                                    BorderSide(color: Colors.black, width: 1),
-                                top: BorderSide(color: Colors.black, width: 1)),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'College',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: "Nunito",
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xffDC3638),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 0),
-                          height: 60,
-                          width: 72,
-                          decoration: BoxDecoration(
-                            // bottom:
-                            //     BorderSide(color: Colors.black, width: 1),
-                            border: Border(
-                              bottom: BorderSide(color: Colors.black, width: 1),
-                              top: BorderSide(color: Colors.black, width: 1),
-                              right: BorderSide(color: Colors.black, width: 1),
-                              // left:
-                              //     BorderSide(color: Colors.black, width: 1)
-
-                              // left:
-                              //     BorderSide(color: Colors.black, width: 1)
-                            ),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'RCR U.K',
-                              style:
-                                  TextStyle(fontSize: 14, fontFamily: "Nunito"),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 10),
-                          height: 40,
-                          width: 90,
-                          decoration: BoxDecoration(
-                            border: Border(
-                                bottom:
-                                    BorderSide(color: Colors.black, width: 1),
-                                right:
-                                    BorderSide(color: Colors.black, width: 1),
-                                top: BorderSide(color: Colors.black, width: 1)),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'University',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                  fontFamily: "Nunito",
-                                  color: Color(
-                                    0xffDC3638,
-                                  )),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 0),
-                          height: 60,
-                          width: 90,
-                          decoration: BoxDecoration(
-                              border: Border(
-                            bottom: BorderSide(color: Colors.black, width: 1),
-                            top: BorderSide(color: Colors.black, width: 1),
-                            right: BorderSide(color: Colors.black, width: 1),
-                          )),
-                          child: Center(
-                            child: Text(
-                              'The Royal\n Collage of\n Radiologist',
-                              style:
-                                  TextStyle(fontSize: 14, fontFamily: "Nunito"),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 10),
-                          height: 40,
-                          width: 80,
-                          decoration: BoxDecoration(
-                            border: Border(
-                                bottom:
-                                    BorderSide(color: Colors.black, width: 1),
-                                right:
-                                    BorderSide(color: Colors.black, width: 1),
-                                top: BorderSide(color: Colors.black, width: 1)),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Year of\nPassing',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "Nunito",
-                                  fontSize: 14,
-                                  color: Color(
-                                    0xffDC3638,
-                                  )),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 0),
-                          height: 60,
-                          width: 80,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(color: Colors.black, width: 1),
-                              top: BorderSide(color: Colors.black, width: 1),
-                              right: BorderSide(color: Colors.black, width: 1),
-                              // left:
-                              //     BorderSide(color: Colors.black, width: 1)
-                            ),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'February \n2022',
-                              style:
-                                  TextStyle(fontSize: 13, fontFamily: "Nunito"),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 10),
-                          height: 40,
-                          width: 140,
-                          decoration: BoxDecoration(
-                            border: Border(
-                                bottom:
-                                    BorderSide(color: Colors.black, width: 1),
-                                right:
-                                    BorderSide(color: Colors.black, width: 1),
-                                top: BorderSide(color: Colors.black, width: 1)),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Action',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "Nunito",
-                                  fontSize: 14,
-                                  color: Color(
-                                    0xffDC3638,
-                                  )),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 0),
-                          height: 60,
-                          width: 140,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(color: Colors.black, width: 1),
-                              top: BorderSide(color: Colors.black, width: 1),
-                              right: BorderSide(color: Colors.black, width: 1),
-                              // left:
-                              //     BorderSide(color: Colors.black, width: 1)
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              ElevatedButton(
-                                  onPressed: () {
-                                    Get.defaultDialog(
-                                        title: 'Education Details',
-                                        middleText: '',
-                                        content: Column(
-                                          children: [
-                                            SizedBox(
-                                              height: 25,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                Text(
-                                                  '  Degree :',
-                                                  style: TextStyle(
-                                                      fontSize: 18,
-                                                      fontFamily: "Nunito",
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                SizedBox(
-                                                  width: 50,
-                                                ),
-                                                Text(
-                                                  'DM (Cl.Heam)',
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontFamily: "Nunito",
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                Text(
-                                                  'College :',
-                                                  style: TextStyle(
-                                                      fontSize: 18,
-                                                      fontFamily: "Nunito",
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                SizedBox(
-                                                  width: 50,
-                                                ),
-                                                Text(
-                                                  'RCR U.K         ',
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontFamily: "Nunito",
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'University :',
-                                                  style: TextStyle(
-                                                      fontSize: 18,
-                                                      fontFamily: "Nunito",
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                SizedBox(
-                                                  width: 50,
-                                                ),
-                                                Text(
-                                                  'The Royal Collage\n of Radiology',
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontFamily: "Nunito",
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Year of passing :',
-                                                  style: TextStyle(
-                                                      fontSize: 18,
-                                                      fontFamily: "Nunito",
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Text(
-                                                  'Feb 2022',
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontFamily: "Nunito",
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                )
-                                              ],
-                                            )
-                                          ],
-                                        )
-
-                                        //  Row(
-                                        //   children: [
-                                        //     Column(
-                                        //       mainAxisAlignment:
-                                        //           MainAxisAlignment.start,
-                                        //       children: [
-                                        //         Text('               Degree :'),
-                                        //         SizedBox(
-                                        //           height: 10,
-                                        //         ),
-                                        //
-                                        //         SizedBox(
-                                        //           height: 10,
-                                        //         ),
-                                        //         Text('          University :'),
-                                        //         SizedBox(
-                                        //           height: 10,
-                                        //         ),
-                                        //         Text('Year of passing :'),
-                                        //         SizedBox(
-                                        //           height: 10,
-                                        //         ),
-                                        //       ],
-                                        //     ),
-                                        //     Column(
-                                        //       mainAxisAlignment:
-                                        //           MainAxisAlignment.start,
-                                        //       children: [
-                                        //
-                                        //         SizedBox(
-                                        //           height: 20,
-                                        //         ),
-                                        //         Text('RCR U.K     '),
-                                        //         SizedBox(
-                                        //           height: 10,
-                                        //         ),
-                                        //         Text(
-                                        //             'The Royal Collage\n of Radiology'),
-                                        //         Text('Feb 2022')
-                                        //       ],
-                                        //     )
-                                        //   ],
-                                        // )
-                                        );
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.black,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      )),
-                                  child: Text(
-                                    'View',
-                                    style: TextStyle(fontFamily: "Nunito"),
-                                  )),
-                              ElevatedButton(
-                                  onPressed: () {
-                                    Get.to(EditEduDetails());
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.black,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      )),
-                                  child: Text(
-                                    'Edit',
-                                    style: TextStyle(fontFamily: "Nunito"),
-                                  ))
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-
-                  // textDirection: Axis.horizontal,
-
-                  // children: [
-                  //   buildRow([
-                  //     'Cell 1',
-                  //     'Cell 2',
-                  //     'Cell 3',
-                  //     'Cell 4',
-                  //     'Cell 5',
-                  //   ]),
-                  // ],
-                ),
-              ),
-            ),
             SizedBox(
-              height: 50,
+              height: 30,
             ),
-            // SizedBox(
-            //   height: 50,
-            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -786,5 +274,154 @@ class _EducationDetailsScreenState extends State<EducationDetailsScreen> {
         )),
       ),
     );
+  }
+
+  _createDataTable(eduData) {
+    return DataTable(
+      columns: _createColumns(),
+      rows: _createRows(eduData),
+      dataRowHeight: 50,
+      dataTextStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontFamily: "Nunito",
+          fontSize: 14,
+          color: Colors.black),
+      border: TableBorder(
+          right: BorderSide(
+            width: 1,
+            color: Colors.black87,
+          ),
+          horizontalInside: BorderSide(
+            width: 1,
+            color: Colors.black87,
+          ),
+          verticalInside: BorderSide(
+            width: 1,
+            color: Colors.black87,
+          ),
+          bottom: BorderSide(
+            width: 1,
+            color: Colors.black87,
+          ),
+          left: BorderSide(
+            width: 1,
+            color: Colors.black87,
+          ),
+          top: BorderSide(
+            width: 1,
+            color: Colors.black87,
+          )),
+    );
+  }
+
+  _createRows(eduData) {
+    return List<DataRow>.generate(
+        eduData.length,
+        (index) => DataRow(cells: [
+              DataCell(Center(child: Text((index + 1).toString()))),
+              DataCell(Center(child: Text(eduData[index].dEGREE.toString()))),
+              DataCell(Center(child: Text(eduData[index].cOLLEGE.toString()))),
+              DataCell(
+                  Center(child: Text(eduData[index].uNIVERSITY.toString()))),
+              DataCell(Center(child: Text(eduData[index].yEAROFPASSING))),
+              DataCell(Center(
+                child: ElevatedButton(
+                    onPressed: () {
+                      Get.to(EditEduDetails());
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        )),
+                    child: Text(
+                      'Edit',
+                      style: TextStyle(fontFamily: "Nunito"),
+                    )),
+              )),
+            ]));
+  }
+
+  List<DataColumn> _createColumns() {
+    return [
+      DataColumn(
+        label: Center(
+          child: Text(
+            'Sl No',
+            style: TextStyle(
+                fontSize: 15,
+                fontFamily: "Nunito",
+                fontWeight: FontWeight.bold,
+                color: Color(0xffDC3638) // Colors.blue.shade700,//
+                ),
+          ),
+        ),
+      ),
+      DataColumn(
+        label: Center(
+          child: Text(
+            'Degree',
+            style: TextStyle(
+                fontSize: 15,
+                fontFamily: "Nunito",
+                fontWeight: FontWeight.bold,
+                color: Color(0xffDC3638) // Colors.blue.shade700,//
+                ),
+          ),
+        ),
+      ),
+      DataColumn(
+        label: Center(
+          child: Text(
+            'College',
+            style: TextStyle(
+                fontSize: 15,
+                fontFamily: "Nunito",
+                fontWeight: FontWeight.bold,
+                color: Color(0xffDC3638) // Colors.blue.shade700,//
+                ),
+          ),
+        ),
+      ),
+      DataColumn(
+        label: Center(
+          child: Text(
+            'University',
+            style: TextStyle(
+                fontSize: 15,
+                fontFamily: "Nunito",
+                fontWeight: FontWeight.bold,
+                color: Color(0xffDC3638) // Colors.blue.shade700,//
+                ),
+          ),
+        ),
+      ),
+      DataColumn(
+        label: Center(
+          child: Text(
+            'Year of Passing',
+            style: TextStyle(
+                fontSize: 15,
+                fontFamily: "Nunito",
+                fontWeight: FontWeight.bold,
+                color: Color(0xffDC3638) // Colors.blue.shade700,//
+                ),
+          ),
+        ),
+      ),
+      DataColumn(
+        label: Center(
+          child: Text(
+            'Action',
+            style: TextStyle(
+                fontSize: 15,
+                fontFamily: "Nunito",
+                fontWeight: FontWeight.bold,
+                color: Color(0xffDC3638) // Colors.blue.shade700,//
+                ),
+          ),
+        ),
+      ),
+    ];
   }
 }

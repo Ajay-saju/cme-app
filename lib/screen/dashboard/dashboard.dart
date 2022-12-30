@@ -27,6 +27,7 @@ class _DashboardState extends State<Dashboard> {
     indexChaingeNotifier = ValueNotifier(0);
     dashboardController.getRecieptList();
     dashboardController.getCmeList();
+    dashboardController.getEduList();
   }
 
   // LoginController logCOntroller = Get.find();

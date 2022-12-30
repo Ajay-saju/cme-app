@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/creat_account/create_acc_controller.dart';
-import 'package:hslr/screen/login/login_controller.dart';
-
 import '../login/login.dart';
 
 class CreateAccount extends StatefulWidget {
@@ -403,16 +401,18 @@ class _CreateAccountState extends State<CreateAccount> {
                         width: context.width * 0.3,
                         child: ElevatedButton(
                             onPressed: () async {
+                              // accountController.createNewUser();
                               if (accountController.accformkey.currentState!
                                   .validate()) {
-                                await Get.snackbar(
-                                    'Success', 'Account Create successfully',
-                                    colorText: Colors.white,
-                                    backgroundColor: Colors.black,
-                                    duration: Duration(seconds: 3));
-                                Timer(Duration(seconds: 2), () {
-                                  Get.offAll(Login());
-                                });
+                                await accountController.createNewUser(
+                                    userName: accountController.regName.text,
+                                    number: accountController.regmobnum.text,
+                                    password: accountController.password.text,
+                                    regno: accountController.regno.text,
+                                    catId: accountController
+                                        .selectCategoryId(
+                                            accountController.dropvalue)
+                                        .toString());
                               } else {
                                 print('not valid');
                               }

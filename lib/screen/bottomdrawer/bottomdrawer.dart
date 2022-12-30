@@ -59,7 +59,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                           children: [
                             CircleAvatar(
                               backgroundImage: Image.network(
-                                      'https://www.emed.co.in//Upload//MemberPhotos//1//2//2//M20220315131429452144007439420221226150226.jpeg')
+                                      'http://www.emed.co.in//Upload//MemberPhotos//1//2//2//M20220315131429452144007439420221226150226.jpeg')
                                   .image,
                               // backgroundImage: NetworkImage(
                               //     loginController.profileImage.value),

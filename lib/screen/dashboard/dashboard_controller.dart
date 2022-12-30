@@ -7,7 +7,9 @@ import 'package:hslr/models/get_reciepts.dart';
 
 import '../../main.dart';
 import '../../models/get_cme_list_model.dart';
+import '../../models/get_edu_details_model.dart';
 import '../../services/cme_list_service.dart';
+import '../../services/education_details_service.dart';
 import '../../services/user_payment_service.dart';
 
 class DashboardController extends GetxController {
@@ -44,7 +46,6 @@ class DashboardController extends GetxController {
       var jsonFile = jsonDecode(response.data);
       if (response.statusCode == 200) {
         cmeList.value = GetCmeList.fromJson(jsonFile);
-      
       }
     } catch (e) {}
   }
@@ -87,4 +88,22 @@ class DashboardController extends GetxController {
   }
 
   void iconChange() {}
+
+  Rx<GetEduDEtails> eduList = GetEduDEtails().obs;
+
+  Future<GetEduDEtails?> getEduList() async {
+    final ediListService = EducationDetalsServ();
+
+    try {
+      final response = await ediListService.getEduDetails();
+      log(response.statusCode.toString());
+      var jsonFile = jsonDecode(response.data);
+      if (response.statusCode == 200) {
+        eduList.value = GetEduDEtails.fromJson(jsonFile);
+      }
+      
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 }

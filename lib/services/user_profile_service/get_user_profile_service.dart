@@ -8,8 +8,8 @@ class GetUserDetailsService {
   static OrginalApi orginalApi = OrginalApi();
 
   final dio = Dio(BaseOptions(
-      connectTimeout: 5000,
-      receiveTimeout: 3000,
+      connectTimeout: 58000000,
+      receiveTimeout: 6000,
       baseUrl: orginalApi.baseUrl,
       responseType: ResponseType.plain));
 

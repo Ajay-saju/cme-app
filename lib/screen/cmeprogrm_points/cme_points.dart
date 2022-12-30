@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
+import 'package:pdf/widgets.dart' as pw;
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -441,7 +443,8 @@ class _CmepointsState extends State<Cmepoints> {
                                 onPressed: () async {
                                   await openPdf(
                                       filename: 'example.pdf',
-                                      url: data[index].cmeCertLink);
+                                      url:
+                                          'https://www.clickdimensions.com/links/TestPDFfile.pdf');
                                 },
                                 child: Text(
                                   'Yes',
@@ -589,6 +592,13 @@ class _CmepointsState extends State<Cmepoints> {
     final file = await downloadPdf(url, filename);
 
     if (file == null) return null;
+    Uint8List fileBytes = file.readAsBytesSync();
+    String base64String = base64Encode(fileBytes);
+
+    
+  
+    
+
     print('Path:${file.path}');
     OpenFile.open(file.path);
   }
@@ -596,7 +606,7 @@ class _CmepointsState extends State<Cmepoints> {
   Future<File?> downloadPdf(String url, String filename) async {
     final dio = Dio();
     final appStore = await getApplicationDocumentsDirectory();
-    final file = File('&{appStore.path}/$filename');
+    final file = File('${appStore.path}/$filename');
 
     try {
       final response = await dio.get(url,
