@@ -18,6 +18,7 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
 
   @override
   Widget build(BuildContext context) {
+    // List<Strings> degreeItems = eduController.eduIdList.value!.courseList!;
     return GetBuilder<EducationController>(builder: ((_) {
       return GestureDetector(
         onTap: () {
@@ -83,21 +84,21 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                         autovalidateMode: AutovalidateMode.always,
                         child: Column(
                           children: [
-                            customeDropDownText(
-                                context: context,
-                                hintText: 'Select Degree',
-                                item: eduController.degree,
-                                items: eduController.degreeItem,
-                                text: 'Degree'),
+                            // customeDropDownText(
+                            //     context: context,
+                            //     hintText: 'Select Degree',
+                            //     item: eduController.degree,
+                            //     items: eduController.degreeItem,
+                            //     text: 'Degree'),
                             SizedBox(
                               height: 15,
                             ),
-                            customeDropDownText(
-                                context: context,
-                                hintText: 'Select month',
-                                item: eduController.month,
-                                items: eduController.months,
-                                text: 'Year Of\nPassing'),
+                            // customeDropDownText(
+                            //     context: context,
+                            //     hintText: 'Select month',
+                            //     item: eduController.month,
+                            //     items: eduController.months,
+                            //     text: 'Year Of\nPassing'),
                             SizedBox(
                               height: 15,
                             ),
@@ -162,9 +163,11 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                                               fontFamily: "Nunito",
                                               color: Colors.black87),
                                         ),
-                                        items: eduController.years
-                                            .map(eduController.buildMenuItem)
-                                            .toList(),
+                                        items: eduController.universityList!
+                                            .map((item) {
+                                          return eduController
+                                              .buildMenuItem(item);
+                                        }).toList(),
                                         onChanged: (value) {
                                           eduController.year = value.toString();
                                           eduController.update();
@@ -179,8 +182,9 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                             customeDropDownText(
                                 context: context,
                                 hintText: 'Select University',
-                                item: eduController.college,
-                                items: eduController.universityItem,
+                                item: eduController
+                                    .universityList![0].universitName,
+                                items: eduController.universityList!,
                                 text: 'University\nName'),
                             SizedBox(
                               height: 15,
@@ -188,8 +192,9 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                             customeDropDownText(
                                 context: context,
                                 hintText: 'Select University',
-                                item: eduController.university,
-                                items: eduController.universityItem,
+                                item: eduController
+                                    .universityList![0].universitName,
+                                items: eduController.universityList!,
                                 text: 'College'),
                           ],
                         )),
@@ -261,7 +266,7 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
       {required BuildContext context,
       required String text,
       required String? item,
-      required List<String> items,
+      required List<dynamic> items,
       required String hintText}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),

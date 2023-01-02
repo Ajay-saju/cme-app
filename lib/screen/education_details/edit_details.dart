@@ -91,7 +91,7 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                             context: context,
                             hintText: 'DM (Cl.Haem)',
                             item: eduController.degree,
-                            items: eduController.degreeItem,
+                            items: eduController.universityList!,
                             text: 'Degree',
                           ),
                           SizedBox(
@@ -166,9 +166,9 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                             fontFamily: "Nunito",
                                             color: Colors.black87),
                                       ),
-                                      items: eduController.years
-                                          .map(eduController.buildMenuItem)
-                                          .toList(),
+                                      items: eduController.universityList!.map((item) {
+                  return eduController.buildMenuItem(item);
+                }).toList(),
                                       onChanged: (value) {
                                         eduController.year = value.toString();
                                         eduController.update();
@@ -266,7 +266,7 @@ class _EditEduDetailsState extends State<EditEduDetails> {
       {required BuildContext context,
       required String text,
       required String? item,
-      required List<String> items,
+      required List<dynamic> items,
       required String hintText}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -318,7 +318,9 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                       fontFamily: "Nunito",
                       color: Colors.black87),
                 ),
-                items: items.map(eduController.buildMenuItem).toList(),
+                items: items.map((item) {
+                  return eduController.buildMenuItem(item);
+                }).toList(),
                 onChanged: (value) {
                   item = value.toString();
                   eduController.update();
