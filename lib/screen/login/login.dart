@@ -98,7 +98,8 @@ class _LoginState extends State<Login> {
                                   // color: Color(0xffDC3638),
                                   borderRadius: BorderRadius.circular(10.0),
                                   border: Border.all(color: Colors.black)),
-                              child: DropdownButtonHideUnderline(
+                              child: 
+                              DropdownButtonHideUnderline(
                                 child: DropdownButton<String>(
                                     value: logController.dropvalue,
                                     isExpanded: true,

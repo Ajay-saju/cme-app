@@ -25,8 +25,8 @@ class EducationController extends GetxController {
   String? month;
   String? year;
   List<UniversityList>? universityList = [];
-  var collegeList = [];
-  var courseList = [];
+  List<CollegeList>? collegeList = [];
+  List<CourseList>? courseList = [];
   final degreeItem = [
     'Degree 1',
     'Degree 2',
@@ -69,8 +69,22 @@ class EducationController extends GetxController {
     '2004',
   ];
 
-  DropdownMenuItem<String> buildMenuItem(var item) => DropdownMenuItem(
-        value: item.universitName,
+  DropdownMenuItem<String> buildMenuItemYear(String item) => DropdownMenuItem(
+        value: item,
+        child: Text(
+          item,
+          style: TextStyle(
+            color: Colors.black87,
+            fontWeight: FontWeight.w400,
+            fontSize: 16,
+            fontFamily: "Nunito",
+          ),
+        ),
+      );
+
+  DropdownMenuItem<UniversityList> buildMenuItem(var item) =>
+      DropdownMenuItem<UniversityList>(
+        value: item,
         child: Text(
           item.universitName,
           style: TextStyle(
@@ -82,6 +96,32 @@ class EducationController extends GetxController {
         ),
       );
 
+  DropdownMenuItem<CourseList> buildMenuItemCource(var item) =>
+      DropdownMenuItem<CourseList>(
+        value: item,
+        child: Text(
+          item.courseName,
+          style: TextStyle(
+            color: Colors.black87,
+            fontWeight: FontWeight.w400,
+            fontSize: 16,
+            fontFamily: "Nunito",
+          ),
+        ),
+      );
+  DropdownMenuItem<CollegeList> buildMenuItemCollege(var item) =>
+      DropdownMenuItem<CollegeList>(
+        value: item,
+        child: Text(
+          item.collegeName,
+          style: TextStyle(
+            color: Colors.black87,
+            fontWeight: FontWeight.w400,
+            fontSize: 16,
+            fontFamily: "Nunito",
+          ),
+        ),
+      );
   Rx<GetEducationIdList?> eduIdList = GetEducationIdList().obs;
   getEduIdList() async {
     final eduIdListServise = EduIdListServise();
@@ -97,7 +137,6 @@ class EducationController extends GetxController {
         universityList = eduIdList.value!.universityList!;
         collegeList = eduIdList.value!.collegeList!;
         courseList = eduIdList.value!.courseList!;
-        var lists = courseList.map((item) => item['Course_Name']);
       }
     } catch (e) {}
   }

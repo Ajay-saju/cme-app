@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hslr/models/get_eduid_list.model.dart';
 import 'package:hslr/screen/education_details/education_controller.dart';
 import 'package:hslr/screen/education_details/education_screen.dart';
 
@@ -84,6 +85,12 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                         autovalidateMode: AutovalidateMode.always,
                         child: Column(
                           children: [
+                            customeDropDownTextCource(
+                                context: context,
+                                hintText: 'Select Degree',
+                                item: eduController.courseList![0].courseName,
+                                text: 'Degree',
+                                items: eduController.courseList!),
                             // customeDropDownText(
                             //     context: context,
                             //     hintText: 'Select Degree',
@@ -93,12 +100,12 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                             SizedBox(
                               height: 15,
                             ),
-                            // customeDropDownText(
-                            //     context: context,
-                            //     hintText: 'Select month',
-                            //     item: eduController.month,
-                            //     items: eduController.months,
-                            //     text: 'Year Of\nPassing'),
+                            customeDropDownTextMonth(
+                                context: context,
+                                hintText: 'Select month',
+                                item: eduController.month,
+                                items: eduController.months,
+                                text: 'Year Of\nPassing'),
                             SizedBox(
                               height: 15,
                             ),
@@ -163,10 +170,9 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                                               fontFamily: "Nunito",
                                               color: Colors.black87),
                                         ),
-                                        items: eduController.universityList!
-                                            .map((item) {
+                                        items: eduController.years.map((item) {
                                           return eduController
-                                              .buildMenuItem(item);
+                                              .buildMenuItemYear(item);
                                         }).toList(),
                                         onChanged: (value) {
                                           eduController.year = value.toString();
@@ -185,17 +191,23 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                                 item: eduController
                                     .universityList![0].universitName,
                                 items: eduController.universityList!,
-                                text: 'University\nName'),
+                                text: 'University\nName',
+                                selectedBox: 'Select University'),
                             SizedBox(
                               height: 15,
                             ),
-                            customeDropDownText(
+                            customeDropDownTextCollege(
                                 context: context,
-                                hintText: 'Select University',
-                                item: eduController
-                                    .universityList![0].universitName,
-                                items: eduController.universityList!,
+                                hintText: 'Select College',
+                                item: eduController.collegeList![0].collegeName,
+                                items: eduController.collegeList!,
                                 text: 'College'),
+                            // customeDropDownText(
+                            //     context: context,
+                            //     hintText: 'Select University',
+                            //     item: eduController.collegeList![0].collegeName,
+                            //     items: eduController.collegeList!,
+                            //     text: 'College'),
                           ],
                         )),
                     SizedBox(
@@ -264,6 +276,223 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
 
   Padding customeDropDownText(
       {required BuildContext context,
+      required String selectedBox,
+      required String text,
+      required String? item,
+      required List<dynamic> items,
+      required String hintText}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        children: [
+          Text(
+            text,
+            style: TextStyle(
+                fontSize: 17, fontFamily: "Nunito", color: Colors.black87),
+          ),
+          Spacer(),
+          Container(
+            width: context.width * 0.55,
+            child: DropdownButtonFormField<UniversityList>(
+                validator: (value) => value == null ? 'field required' : null,
+                itemHeight: null,
+                isExpanded: true,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(horizontal: 7),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(color: Colors.black),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(color: Colors.black),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(color: Colors.black),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                style: TextStyle(
+                    fontSize: 17, fontFamily: "Nunito", color: Colors.black87),
+                hint: Text(
+                  hintText,
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: "Nunito",
+                      color: Colors.black87),
+                ),
+                items: items.map((item) {
+                  return eduController.buildMenuItem(item);
+                }).toList(),
+                onChanged: (value) {
+                  item = value.toString();
+                  var id = value!.universitCode;
+                  print(id.toString());
+                  print('==============================');
+                  eduController.update();
+                }),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Padding customeDropDownTextCource(
+      {required BuildContext context,
+      required String text,
+      required String? item,
+      required List<dynamic> items,
+      required String hintText}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        children: [
+          Text(
+            text,
+            style: TextStyle(
+                fontSize: 17, fontFamily: "Nunito", color: Colors.black87),
+          ),
+          Spacer(),
+          Container(
+            width: context.width * 0.55,
+            child: DropdownButtonFormField<CourseList>(
+                validator: (value) => value == null ? 'field required' : null,
+                itemHeight: null,
+                isExpanded: true,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(horizontal: 7),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(color: Colors.black),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(color: Colors.black),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(color: Colors.black),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                style: TextStyle(
+                    fontSize: 17, fontFamily: "Nunito", color: Colors.black87),
+                hint: Text(
+                  hintText,
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: "Nunito",
+                      color: Colors.black87),
+                ),
+                items: items.map((item) {
+                  return eduController.buildMenuItemCource(item);
+                }).toList(),
+                onChanged: (value) {
+                  item = value.toString();
+                  var id = value!.courseId;
+                  print(id.toString());
+                  print('==============================');
+                  eduController.update();
+                }),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Padding customeDropDownTextCollege(
+      {required BuildContext context,
+      required String text,
+      required String? item,
+      required List<dynamic> items,
+      required String hintText}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        children: [
+          Text(
+            text,
+            style: TextStyle(
+                fontSize: 17, fontFamily: "Nunito", color: Colors.black87),
+          ),
+          Spacer(),
+          Container(
+            width: context.width * 0.55,
+            child: DropdownButtonFormField<CollegeList>(
+                validator: (value) => value == null ? 'field required' : null,
+                itemHeight: null,
+                isExpanded: true,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(horizontal: 7),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(color: Colors.black),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(color: Colors.black),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(color: Colors.black),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                style: TextStyle(
+                    fontSize: 17, fontFamily: "Nunito", color: Colors.black87),
+                hint: Text(
+                  hintText,
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: "Nunito",
+                      color: Colors.black87),
+                ),
+                items: items.map((item) {
+                  return eduController.buildMenuItemCollege(item);
+                }).toList(),
+                onChanged: (value) {
+                  item = value.toString();
+                  var id = value!.collegeCode;
+                  print(id.toString());
+                  print('==============================');
+                  eduController.update();
+                }),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Padding customeDropDownTextMonth(
+      {required BuildContext context,
       required String text,
       required String? item,
       required List<dynamic> items,
@@ -312,15 +541,17 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                 style: TextStyle(
                     fontSize: 17, fontFamily: "Nunito", color: Colors.black87),
                 hint: Text(
-                  hintText,
+                  'Select Month',
                   style: TextStyle(
                       fontSize: 16,
                       fontFamily: "Nunito",
                       color: Colors.black87),
                 ),
-                items: items.map(eduController.buildMenuItem).toList(),
+                items: eduController.months.map((item) {
+                  return eduController.buildMenuItemYear(item);
+                }).toList(),
                 onChanged: (value) {
-                  item = value.toString();
+                  eduController.month = value.toString();
                   eduController.update();
                 }),
           ),
