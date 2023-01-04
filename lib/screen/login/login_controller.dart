@@ -20,6 +20,7 @@ class LoginController extends GetxController {
   Rx<UserDetails> getUserDetails = UserDetails().obs;
   Rx<UserLogin> userLogin = UserLogin().obs;
   var profileImage = ''.obs;
+  var isfade = true;
   List<UserDetails> user = [];
 
   TextEditingController mobNumb = TextEditingController();
@@ -137,6 +138,7 @@ class LoginController extends GetxController {
             'catId', userLogin.value.categoryId.toString());
         await sessionlog.setInt('country', userLogin.value.countryId!);
       } else if (response.data == "User Doesn't Exist") {
+        isfade = true;
         Get.defaultDialog(
             title: 'Something is wrong',
             middleText:
@@ -157,7 +159,7 @@ class LoginController extends GetxController {
     } catch (e) {
       if (e is DioError) {
         print(e.toString());
-
+        isfade = true;
         Get.defaultDialog(
             title: 'Something is wrong',
             middleText: "Please try again",
@@ -205,8 +207,9 @@ class LoginController extends GetxController {
 
         // await getUserLastLogin(mId);
 
-        await Get.off(Dashboard());
+        await Get.offAll(Dashboard());
       } else {
+        isfade = true;
         Get.defaultDialog(
             title: 'Something is wrong', middleText: 'Please try again');
       }

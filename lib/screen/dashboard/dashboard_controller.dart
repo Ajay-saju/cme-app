@@ -4,6 +4,8 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hslr/base_api/orginal_api.dart';
+import 'package:hslr/models/dashboard_data_models.dart';
 import 'package:hslr/models/get_eduid_list.model.dart';
 import 'package:hslr/models/get_reciepts.dart';
 import 'package:hslr/services/get_eduid_list_servise.dart';
@@ -22,6 +24,7 @@ class DashboardController extends GetxController {
 //    drawerKey.close();
 //     super.onClose();
 //   }
+  final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
 
   Rx<GetPayment> getpaymentList = GetPayment().obs;
   Future<GetPayment?> getRecieptList() async {
@@ -54,7 +57,6 @@ class DashboardController extends GetxController {
     } catch (e) {}
   }
 
-  GlobalKey<ScaffoldState> drawerKey = GlobalKey();
   bool iconOne = false;
   bool iconTwo = false;
   var tabIndex = 0;
@@ -135,6 +137,7 @@ class DashboardController extends GetxController {
     }
     update();
   }
+
   List<UniversityList>? universityList = [];
   List<CollegeList>? collegeList = [];
   List<CourseList>? courseList = [];
@@ -155,5 +158,45 @@ class DashboardController extends GetxController {
         courseList = eduIdList.value!.courseList!;
       }
     } catch (e) {}
+  }
+
+  UserCmeVideo? userCmeVideo;
+  UserCmeVideoPurchese? userCmeVideoPurchese;
+  UserCmeVideoLastTest? userCmeVideoLastTest;
+  getDashboardData() async {
+    OrginalApi orginalApi = OrginalApi();
+    final dio = Dio(BaseOptions(
+        baseUrl: orginalApi.baseUrl, responseType: ResponseType.plain));
+
+    try {
+      var responseUserCme_video = await dio.get('UserCme_video',
+          queryParameters: {
+            "CategoryId": sessionlog.getString('catId').toString()
+          });
+      var responseUserCme_video_PURCHES = await dio.get("UserCme_video_PURCHES",
+          queryParameters: {
+            'Mid11': sessionlog.getString('userId').toString()
+          });
+      var responseUserCme_Last_Test = await dio.get('UserCme_Last_Test',
+          queryParameters: {
+            'Mid12': sessionlog.getString('userId').toString()
+          });
+      if (responseUserCme_Last_Test.statusCode == 200 &&
+          responseUserCme_video_PURCHES.statusCode == 200 &&
+          responseUserCme_video.statusCode == 200) {
+        userCmeVideo =
+            UserCmeVideo.fromJson(jsonDecode(responseUserCme_video.data));
+        userCmeVideoPurchese = UserCmeVideoPurchese.fromJson(
+            jsonDecode(responseUserCme_video_PURCHES.data));
+        userCmeVideoLastTest = UserCmeVideoLastTest.fromJson(
+            jsonDecode(responseUserCme_Last_Test.data));
+        print(userCmeVideoLastTest!.latest.toString());
+      }
+    } on DioError catch (e) {
+      print(e.message);
+    } catch (e) {
+      print(e.toString());
+    }
+    update();
   }
 }

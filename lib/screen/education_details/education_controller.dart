@@ -145,7 +145,10 @@ class EducationController extends GetxController {
         collegeList = eduIdList.value!.collegeList!;
         courseList = eduIdList.value!.courseList!;
       }
-    } catch (e) {}
+    } catch (e) {
+      print(e.toString());
+    }
+    update();
   }
 
   Future addEducationDetails(

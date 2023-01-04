@@ -8,7 +8,7 @@ import 'package:hslr/screen/login/login.dart';
 import 'package:hslr/services/create_user.dart';
 
 class CreateAccountController extends GetxController {
-  final GlobalKey<FormState> accformkey = GlobalKey<FormState>();
+  final  GlobalKey<FormState> accformkey = GlobalKey<FormState>();
 
   TextEditingController mobNumb = TextEditingController();
   TextEditingController password = TextEditingController();

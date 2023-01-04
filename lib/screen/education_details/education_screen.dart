@@ -27,256 +27,270 @@ class _EducationDetailsScreenState extends State<EducationDetailsScreen> {
         Get.off(Dashboard());
         return true;
       },
-      child: educationController.eduIdList.value!.collegeList!.isEmpty
-          ? Center(
-              child: CircularProgressIndicator(color: Colors.black),
-            )
-          : Scaffold(
-              body: SafeArea(
-                  child: Column(
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    height: 2,
-                    color: Colors.black,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.off(Dashboard());
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        height: 40,
-                        child: Row(
+      child: Scaffold(
+        body: Obx(() {
+          return SafeArea(
+              child: educationController.eduIdList.value!.massege == null
+                  ? Center(
+                      child: CircularProgressIndicator(color: Colors.black),
+                    )
+                  : Column(
+                      children: [
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          height: 2,
+                          color: Colors.black,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Get.off(Dashboard());
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SizedBox(
+                              height: 40,
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    'assets/R.png',
+                                    height: 15,
+                                    width: 20,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  // Spacer(),
+                                  SizedBox(
+                                    width: 25,
+                                  ),
+                                  Text(
+                                    "Education Details",
+                                    style: TextStyle(
+                                        fontFamily: "Nunito",
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: 2,
+                          color: Colors.black,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Image.asset(
-                              'assets/R.png',
-                              height: 15,
-                              width: 20,
-                              fit: BoxFit.cover,
-                            ),
-                            // Spacer(),
-                            SizedBox(
-                              width: 25,
-                            ),
-                            Text(
-                              "Education Details",
-                              style: TextStyle(
-                                  fontFamily: "Nunito",
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: ElevatedButton(
+                                  onPressed: () {
+                                    Get.to(AddEducationDetails());
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.black,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      )),
+                                  child: Text(
+                                    'Add',
+                                    style: TextStyle(fontFamily: "Nunito"),
+                                  )),
                             ),
                           ],
                         ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 2,
-                    color: Colors.black,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: ElevatedButton(
-                            onPressed: () {
-                              Get.to(AddEducationDetails());
-                            },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.black,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                )),
-                            child: Text(
-                              'Add',
-                              style: TextStyle(fontFamily: "Nunito"),
-                            )),
-                      ),
-                    ],
-                  ),
-                  // SizedBox(
-                  //   height: 10,
-                  // ),
-
-                  SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: _createDataTable(eduData),
-                      )),
-
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // SizedBox(
-                      //   width: 180,
-                      // ),
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Center(
-                            child: Icon(
-                          Icons.keyboard_double_arrow_left_rounded,
-                          color: Colors.white,
-                        )),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Center(
-                            child: Icon(
-                          Icons.keyboard_arrow_left_rounded,
-                          color: Colors.white,
-                        )),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Color(0xffDC3638),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Center(
-                          child: Text(
-                            '1',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: "Nunito",
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Center(
-                          child: Text(
-                            '2',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: "Nunito",
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Center(
-                          child: Text(
-                            '3',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: "Nunito",
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Center(
-                            child: Icon(
-                          Icons.keyboard_arrow_right_rounded,
-                          color: Colors.white,
-                        )),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Center(
-                            child: Icon(
-                          Icons.keyboard_double_arrow_right_rounded,
-                          color: Colors.white,
-                        )),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      children: [
-                        Text(
-                          'Showing 1 of 1 Entries',
-                          style: TextStyle(fontSize: 14, fontFamily: "Nunito"
-                              // color: Colors.blue.shade700,
-                              ),
-                        ),
-                        Spacer(),
-
-                        // Padding(
-                        //   padding: const EdgeInsets.only(left: 8.0),
-                        //   child: Image.asset(
-                        //     'assets/hj.png',
-                        //     height: 25,
-                        //   ),
+                        // SizedBox(
+                        //   height: 10,
                         // ),
+
+                        eduData == null
+                            ? Center(
+                                child: Text(
+                                  'No Data Available',
+                                  style: TextStyle(
+                                    fontFamily: "Nunito",
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              )
+                            : SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: _createDataTable(eduData),
+                                )),
+
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            // SizedBox(
+                            //   width: 180,
+                            // ),
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Center(
+                                  child: Icon(
+                                Icons.keyboard_double_arrow_left_rounded,
+                                color: Colors.white,
+                              )),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Center(
+                                  child: Icon(
+                                Icons.keyboard_arrow_left_rounded,
+                                color: Colors.white,
+                              )),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: Color(0xffDC3638),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  '1',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "Nunito",
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  '2',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "Nunito",
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  '3',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "Nunito",
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Center(
+                                  child: Icon(
+                                Icons.keyboard_arrow_right_rounded,
+                                color: Colors.white,
+                              )),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Center(
+                                  child: Icon(
+                                Icons.keyboard_double_arrow_right_rounded,
+                                color: Colors.white,
+                              )),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Showing 1 of 1 Entries',
+                                style:
+                                    TextStyle(fontSize: 14, fontFamily: "Nunito"
+                                        // color: Colors.blue.shade700,
+                                        ),
+                              ),
+                              Spacer(),
+
+                              // Padding(
+                              //   padding: const EdgeInsets.only(left: 8.0),
+                              //   child: Image.asset(
+                              //     'assets/hj.png',
+                              //     height: 25,
+                              //   ),
+                              // ),
+                            ],
+                          ),
+                        ),
                       ],
-                    ),
-                  ),
-                ],
-              )),
-            ),
+                    ));
+        }),
+      ),
     );
   }
 

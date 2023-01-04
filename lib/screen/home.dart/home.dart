@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hslr/screen/dashboard/dashboard_controller.dart';
 import 'package:hslr/screen/login/login_controller.dart';
 
 class Home extends StatefulWidget {
@@ -11,6 +12,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   LoginController logController = Get.put(LoginController());
+  DashboardController dashController = Get.find();
   // final LoginController logControll = Get.find();
 
   @override
@@ -26,7 +28,15 @@ class _HomeState extends State<Home> {
           child: Scaffold(
             backgroundColor: Colors.white, //Color(0xff63c3fe),
             body: SafeArea(
-              child: Column(
+              child:
+                  //  dashController.userCmeVideoLastTest == null
+                  //     ? Center(
+                  //         child: CircularProgressIndicator(
+                  //           color: Colors.black87,
+                  //         ),
+                  //       )
+                  //     :
+                  Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
@@ -201,18 +211,12 @@ class _HomeState extends State<Home> {
                                             color: Colors.white),
                                       ),
                                       SizedBox(
-                                        height: 0,
+                                        height: 10,
                                       ),
                                       Text(
-                                        "7/15/2020",
-                                        style: TextStyle(
-                                            fontFamily: "Nunito",
-                                            fontSize:
-                                                context.width > 410 ? 20 : 18,
-                                            color: Colors.white),
-                                      ),
-                                      Text(
-                                        "1:56:32 PM",
+                                        dashController
+                                            .userCmeVideoLastTest!.latest
+                                            .toString(),
                                         style: TextStyle(
                                             fontFamily: "Nunito",
                                             fontSize:
@@ -275,6 +279,18 @@ class _HomeState extends State<Home> {
                                                 context.width > 410 ? 25 : 20,
                                             color: Colors.white),
                                       ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        dashController.userCmeVideo!.latest
+                                            .toString(),
+                                        style: TextStyle(
+                                            fontFamily: "Nunito",
+                                            fontSize:
+                                                context.width > 410 ? 25 : 20,
+                                            color: Colors.white),
+                                      )
                                     ],
                                   ),
                                 ),
@@ -325,6 +341,19 @@ class _HomeState extends State<Home> {
                                     children: [
                                       Text(
                                         "Last Video Purchased",
+                                        style: TextStyle(
+                                            fontFamily: "Nunito",
+                                            fontSize:
+                                                context.width > 410 ? 25 : 20,
+                                            color: Colors.white),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        dashController
+                                            .userCmeVideoPurchese!.latest
+                                            .toString(),
                                         style: TextStyle(
                                             fontFamily: "Nunito",
                                             fontSize:

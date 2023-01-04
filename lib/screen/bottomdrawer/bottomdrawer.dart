@@ -25,6 +25,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
   ScrollController controller = ScrollController();
   DashboardController bdrawerController = Get.put(DashboardController());
   LoginController loginController = Get.find();
+ 
   final pick = sessionlog.getString('proPick');
 
   final Uri _url = Uri.parse('http://www.vworks.co.in/');
@@ -58,10 +59,10 @@ class _BottomDrawerState extends State<BottomDrawer> {
                         child: Row(
                           children: [
                             CircleAvatar(
-                              // backgroundImage: Image.network(
-                              //         "http:\\www.emed.co.in\\Upload\\MemberPhotos\\1\\2\\2\\M20220315131429452144007439420221227130958.jpeg")
-                              //     .image,
-                              backgroundImage: Image.network(pick!).image,
+                              backgroundImage: Image.network(
+                                      "http://www.emed.co.in//Upload//MemberPhotos//1//2//2//M20220315131429452144007439420221227130958.jpeg")
+                                  .image,
+                              // backgroundImage: Image.network(pick!).image,
                               radius: 25.0,
                               backgroundColor: Colors.white,
                             ),

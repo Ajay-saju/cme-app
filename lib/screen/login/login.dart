@@ -20,6 +20,7 @@ class _LoginState extends State<Login> {
   void initState() {
     // TODO: implement initState
     sessionlogin();
+    // logController.getDashboa/rdData();
     super.initState();
   }
 
@@ -98,8 +99,7 @@ class _LoginState extends State<Login> {
                                   // color: Color(0xffDC3638),
                                   borderRadius: BorderRadius.circular(10.0),
                                   border: Border.all(color: Colors.black)),
-                              child: 
-                              DropdownButtonHideUnderline(
+                              child: DropdownButtonHideUnderline(
                                 child: DropdownButton<String>(
                                     value: logController.dropvalue,
                                     isExpanded: true,
@@ -285,41 +285,38 @@ class _LoginState extends State<Login> {
                         ),
                         Center(
                             child: SizedBox(
-                          height: 35,
-                          width: context.width * 0.25,
-                          child: ElevatedButton(
-                              onPressed: () async {
-                                if (formkey.currentState!.validate()) {
-                                  await logController.userLogIn(
-                                    mobileNo: logController.mobNumb.text,
-                                    pin: logController.password.text,
-                                    categoryId: logController.selectCategoryId(
-                                        logController.dropvalue),
-                                  );
-                                  // await logController.getUserId(
-                                  //     logController.mobNumb.text,
-                                  //     logController.password.text);
-                                  // await logController.getUserLastLogin(
-                                  //     'M202203151314294521440074394');
-                                  // await logController.getUserLastLogin();
-                                  // logController.sessionlogin();
-                                } else {
-                                  print("not valid");
-                                }
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.black,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                  )),
-                              child: Text(
-                                "Login",
-                                style: TextStyle(
-                                    fontFamily: "Nunito",
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              )),
-                        )),
+                                height: 35,
+                                width: context.width * 0.25,
+                                child: ElevatedButton(
+                                    onPressed: () async {
+                                      logController.isfade = false;
+                                      if (formkey.currentState!.validate()) {
+                                        await logController.userLogIn(
+                                          mobileNo: logController.mobNumb.text,
+                                          pin: logController.password.text,
+                                          categoryId:
+                                              logController.selectCategoryId(
+                                                  logController.dropvalue),
+                                        );
+                                      } else {
+                                        print("not valid");
+                                      }
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.black,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                        )),
+                                    child: Text(
+                                      logController.isfade != true
+                                          ? "Login"
+                                          : 'Wait',
+                                      style: TextStyle(
+                                          fontFamily: "Nunito",
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    )))),
                         SizedBox(
                           height: 15,
                         ),
