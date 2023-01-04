@@ -125,7 +125,7 @@ class LoginController extends GetxController {
         print(userLogin.value.userId.toString());
 
         await prefs.setString('userId', userLogin.value.userId.toString());
-        var mid = await prefs.getString('userId');
+        var mid = await sessionlog.getString('userId');
         await getUserData(mid!);
 
         await sessionlog.setString(
@@ -136,9 +136,6 @@ class LoginController extends GetxController {
         await sessionlog.setString(
             'catId', userLogin.value.categoryId.toString());
         await sessionlog.setInt('country', userLogin.value.countryId!);
-        // var conId = await prefs.getInt('country');
-        // var stateId = await prefs.getString('stateId');
-        // var counId = await prefs.getString('councilId');
       } else if (response.data == "User Doesn't Exist") {
         Get.defaultDialog(
             title: 'Something is wrong',
@@ -240,27 +237,6 @@ class LoginController extends GetxController {
         time.value = splitted[1].toString();
         print(date.value);
         print(time.value);
-      }
-    } catch (e) {
-      if (e is DioError) {
-        print(e.toString());
-      }
-    }
-    update();
-  }
-
-  getUserProfilePick(
-      {required mid, required conId, required counId, required stateId}) async {
-    final proPicService = UserPickService();
-    try {
-      final response = await proPicService.getProfilePick(
-          mid: mid, conId: conId, counId: counId, stateId: stateId);
-      if (response.statusCode == 200) {
-        await sessionlog.setString(
-            'proPick', response.data.replaceAll('\"', ""));
-        print(sessionlog.getString('proPick'));
-        // profileImage = response.data;
-        // print(profileImage.replaceAll('.', ''));
       }
     } catch (e) {
       if (e is DioError) {

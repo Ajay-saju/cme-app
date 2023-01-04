@@ -31,7 +31,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    // print(pick!.replaceAll('"', ''));
+    print(pick!);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return GetBuilder<DashboardController>(
@@ -58,11 +58,10 @@ class _BottomDrawerState extends State<BottomDrawer> {
                         child: Row(
                           children: [
                             CircleAvatar(
-                              backgroundImage: Image.network(
-                                      'http://www.emed.co.in//Upload//MemberPhotos//1//2//2//M20220315131429452144007439420221226150226.jpeg')
-                                  .image,
-                              // backgroundImage: NetworkImage(
-                              //     loginController.profileImage.value),
+                              // backgroundImage: Image.network(
+                              //         "http:\\www.emed.co.in\\Upload\\MemberPhotos\\1\\2\\2\\M20220315131429452144007439420221227130958.jpeg")
+                              //     .image,
+                              backgroundImage: Image.network(pick!).image,
                               radius: 25.0,
                               backgroundColor: Colors.white,
                             ),

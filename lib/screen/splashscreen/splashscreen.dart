@@ -2,6 +2,9 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hslr/screen/login/login.dart';
+
+import '../../main.dart';
+import '../dashboard/dashboard.dart';
 // import 'package:planie_service/constants/planiecolors.dart';
 // import 'package:planie_service/screens/login_otp/mobileotp.dart';
 // import 'package:planie_service/screens/login_otp/otp.dart';
@@ -22,7 +25,10 @@ class Splashscreen extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        nextScreen: Login(),
+        nextScreen:
+            // sessionlog.getString('log_name') == null ?
+            Login(),
+        //  : Dashboard(),
         splashTransition: SplashTransition.fadeTransition,
         backgroundColor: Colors.white);
   }

@@ -28,7 +28,13 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
         child: Scaffold(
             backgroundColor: Colors.white, //Color(0xff63c3fe),
             body: SafeArea(
-              child: SingleChildScrollView(
+              child:
+                  // eduController.eduIdList.value == null
+                  // ? Center(
+                  //     child: CircularProgressIndicator(color: Colors.black87),
+                  //   )
+                  // :
+                  SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -240,15 +246,12 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                                     .validate()) {
                                   eduController.addEduFormKey.currentState!
                                       .save();
-                                  await Get.snackbar(
-                                      'Success', 'Save Details successfully',
-                                      colorText: Colors.white,
-                                      backgroundColor: Colors.black,
-                                      duration: Duration(seconds: 3));
-
-                                  Timer(Duration(seconds: 2), () async {
-                                    Get.off(EducationDetailsScreen());
-                                  });
+                                  eduController.addEducationDetails(
+                                      month: eduController.month.toString(),
+                                      year: eduController.year.toString(),
+                                      college: eduController.collegeCode,
+                                      course: eduController.corseCode,
+                                      university: eduController.universityCode);
                                 } else {}
                               },
                               style: ElevatedButton.styleFrom(
@@ -336,9 +339,8 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                 }).toList(),
                 onChanged: (value) {
                   item = value.toString();
-                  var id = value!.universitCode;
-                  print(id.toString());
-                  print('==============================');
+                  eduController.universityCode =
+                      value!.universitCode.toString();
                   eduController.update();
                 }),
           ),
@@ -408,9 +410,8 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                 }).toList(),
                 onChanged: (value) {
                   item = value.toString();
-                  var id = value!.courseId;
-                  print(id.toString());
-                  print('==============================');
+                  eduController.corseCode = value!.courseId.toString();
+
                   eduController.update();
                 }),
           ),
@@ -480,9 +481,7 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                 }).toList(),
                 onChanged: (value) {
                   item = value.toString();
-                  var id = value!.collegeCode;
-                  print(id.toString());
-                  print('==============================');
+                  eduController.collegeCode = value!.collegeCode.toString();
                   eduController.update();
                 }),
           ),

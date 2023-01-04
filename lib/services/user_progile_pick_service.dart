@@ -6,13 +6,13 @@ class UserPickService {
   final dio = Dio(BaseOptions(
       baseUrl: orginalApi.baseUrl, responseType: ResponseType.plain));
   Future<Response> getProfilePick(
-      {required mid, required conId, required counId, required stateId}) async {
+      {required mid, required contryId, required councilId, required stateId}) async {
     try {
       var response = await dio.get('getphoto', queryParameters: {
         'Mid1': mid,
-        'CountryId': conId,
-        'StateId': counId,
-        'CouncilId': stateId
+        'CountryId': contryId,
+        'StateId': stateId,
+        'CouncilId': councilId
       });
       return response;
     } on DioError catch (e) {

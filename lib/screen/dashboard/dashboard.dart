@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hslr/main.dart';
 import 'package:hslr/screen/bottomdrawer/bottomdrawer.dart';
 import 'package:hslr/screen/dashboard/dashboard_controller.dart';
 import 'package:hslr/screen/home.dart/home.dart';
@@ -28,13 +29,18 @@ class _DashboardState extends State<Dashboard> {
     dashboardController.getRecieptList();
     dashboardController.getCmeList();
     dashboardController.getEduList();
+    dashboardController.getUserProfilePick(
+        contryId: sessionlog.getInt('country'),
+        councilId: sessionlog.getString('councilId'),
+        mid: sessionlog.getString('userId'),
+        stateId: sessionlog.getString('stateId'));
+    // dashboardController.getEduIdList();
   }
 
   // LoginController logCOntroller = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    print(logCOntroller.getUserDetails.value.loginName);
     return WillPopScope(
       onWillPop: () async {
         if (dashboardController.tabIndex != 0) {
@@ -119,7 +125,7 @@ class _DashboardState extends State<Dashboard> {
       child: GetBuilder<DashboardController>(
         builder: ((_) {
           //  var user_id = dashboardController.userid;
-          return logCOntroller.getUserDetails.value.loginName == null
+          return dashboardController.eduList.value.isBlank!
               ? Center(
                   child: CircularProgressIndicator(
                     color: Colors.black87,

@@ -1,8 +1,13 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hslr/base_api/orginal_api.dart';
+import 'package:hslr/main.dart';
+import 'package:hslr/screen/education_details/education_screen.dart';
 
 import '../../models/get_eduid_list.model.dart';
 import '../../services/get_eduid_list_servise.dart';
@@ -18,7 +23,9 @@ class EducationController extends GetxController {
   }
 
   var tabIndex = 0;
-
+  var collegeCode = '';
+  var corseCode = '';
+  var universityCode = '';
   String? degree;
   String? college;
   String? university;
@@ -139,5 +146,45 @@ class EducationController extends GetxController {
         courseList = eduIdList.value!.courseList!;
       }
     } catch (e) {}
+  }
+
+  Future addEducationDetails(
+      {required String course,
+      required String month,
+      required String year,
+      required String university,
+      required String college}) async {
+    OrginalApi orginalApi = OrginalApi();
+    final dio = Dio(BaseOptions(
+        baseUrl: orginalApi.baseUrl, responseType: ResponseType.plain));
+    var eduData = {
+      'Memberid': sessionlog.getString('userId').toString(),
+      'yearofPassing': year,
+      'CourseCode': course,
+      'monthofPassing': month,
+      'universitycode': university,
+      'collegecode': college,
+      'UserName': sessionlog.getString('log_name').toString()
+    };
+    print(eduData);
+
+    try {
+      var response = await dio.post('SaveAddUpdateEduinfoNew', data: eduData);
+      if (response.statusCode == 200) {
+        await Get.snackbar('Success', 'Save Details successfully',
+            colorText: Colors.white,
+            backgroundColor: Colors.black,
+            duration: Duration(seconds: 3));
+
+        Timer(Duration(seconds: 2), () async {
+          Get.off(EducationDetailsScreen());
+        });
+      }
+    } on DioError catch (e) {
+      print(e.message);
+      rethrow;
+    } catch (e) {
+      rethrow;
+    }
   }
 }
