@@ -163,7 +163,7 @@ class EducationController extends GetxController {
     var eduData = {
       'Memberid': sessionlog.getString('userId').toString(),
       'yearofPassing': year,
-      'CourseCode': course,
+      'CourseCode': "130",
       'monthofPassing': month,
       'universitycode': university,
       'collegecode': college,

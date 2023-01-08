@@ -25,6 +25,15 @@ class _LoginState extends State<Login> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    logController.mobNumb.clear();
+    logController.password.clear();
+    logController.dropvalue = null;
+  }
+
+  @override
   void sessionlogin() async {
     // SharedPreferences sessionlog = await SharedPreferences.getInstance();
     // var user = sessionlog.getString('log_name');
@@ -309,9 +318,10 @@ class _LoginState extends State<Login> {
                                               BorderRadius.circular(30),
                                         )),
                                     child: Text(
-                                      logController.isfade != true
-                                          ? "Login"
-                                          : 'Wait',
+                                      // logController.isfade != true
+                                      //     ? "Wait"
+                                      //     :
+                                      'Login',
                                       style: TextStyle(
                                           fontFamily: "Nunito",
                                           fontSize: 20,

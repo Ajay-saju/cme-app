@@ -34,6 +34,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
   @override
   Widget build(BuildContext context) {
     var data = paymentController.getpaymentList.value.userData1;
+    // var link= paymentController.getpaymentList.value.userData1.
     print(data!.length.toString());
 
     return GetBuilder<DashboardController>(
@@ -102,8 +103,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       padding: const EdgeInsets.all(20.0),
                       child: _createDataTable(data),
                     ),
-                  )
-                  ,
+                  ),
                   SizedBox(
                     height: 20,
                   ),
@@ -274,7 +274,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
   }
 
   DataTable _createDataTable(data) {
-   return DataTable(
+    return DataTable(
       border: TableBorder(
           right: BorderSide(
             width: 1,
@@ -341,13 +341,14 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                         actions: [
                           ElevatedButton(
                             onPressed: () async {
+                              var link = data[index]
+                                  .certificateLink
+                                  .replaceAll('https', 'http');
                               await openPdf(
-                                url:
-                                    'http://www.emed.co.in//Admin//Recp_PDFWriter.aspx?QRecpNo=2019000042',
-                                // url:
-                                //     'https://api.bigwave.in/files/Recp_PDFWriter.pdf',
+                                url: link.replaceAll('"', ''),
                                 fileName: 'exmp.pdf',
                               );
+                              Get.back();
                             },
                             child: Text(
                               'Yes',
@@ -525,6 +526,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
         filePath: file.path,
       ));
     }
+    // Get.back();
   }
 
   Future<File?> downloadPdf(String url, String name) async {

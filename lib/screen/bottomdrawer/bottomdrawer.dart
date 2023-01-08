@@ -25,14 +25,14 @@ class _BottomDrawerState extends State<BottomDrawer> {
   ScrollController controller = ScrollController();
   DashboardController bdrawerController = Get.put(DashboardController());
   LoginController loginController = Get.find();
- 
-  final pick = sessionlog.getString('proPick');
+
+  final pick = sessionlog.getString('proPick')!.replaceAll("https", 'http');
 
   final Uri _url = Uri.parse('http://www.vworks.co.in/');
 
   @override
   Widget build(BuildContext context) {
-    print(pick!);
+    // print(bdrawerController.profilePick.replaceAll('"', ''));
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return GetBuilder<DashboardController>(
@@ -60,9 +60,11 @@ class _BottomDrawerState extends State<BottomDrawer> {
                           children: [
                             CircleAvatar(
                               backgroundImage: Image.network(
-                                      "http://www.emed.co.in//Upload//MemberPhotos//1//2//2//M20220315131429452144007439420221227130958.jpeg")
+                                      bdrawerController.profilePick == null
+                                          ? pick.replaceAll('"', '')
+                                          : bdrawerController.profilePick
+                                              .replaceAll('"', ''))
                                   .image,
-                              // backgroundImage: Image.network(pick!).image,
                               radius: 25.0,
                               backgroundColor: Colors.white,
                             ),
@@ -71,7 +73,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                             ),
                             // Spacer(),
                             Text(
-                              loginController.getUserDetails.value.loginName
+                              bdrawerController.getUserDetails.value.loginName
                                   .toString(),
                               style: TextStyle(
                                 fontSize: 20,
@@ -678,9 +680,12 @@ class _BottomDrawerState extends State<BottomDrawer> {
                             ),
                             ListTile(
                               onTap: () async {
-                                SharedPreferences sessionlog =
-                                    await SharedPreferences.getInstance();
+                                // SharedPreferences sessionlog =
+                                //     await SharedPreferences.getInstance();
                                 sessionlog.remove("log_name");
+                                sessionlog.remove('userId');
+                                sessionlog.remove('proPick');
+
                                 Get.offAll(Login());
                               },
                               leading: SizedBox(

@@ -17,29 +17,28 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  final screens = [Home()];
+  final screens = [
+    Home(),
+  ];
   DashboardController dashboardController = Get.put(DashboardController());
-  final logCOntroller = Get.find<LoginController>();
+  // final logCOntroller = Get.find<LoginController>();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     indexChaingeNotifier = ValueNotifier(0);
+    dashboardController.getUserData(sessionlog.getString('userId').toString());
+
     dashboardController.getDashboardData();
+    dashboardController.getUserCmeVideo();
+    dashboardController.getUserCmeVideoPurchese();
+    dashboardController.getUserProfilePick();
     dashboardController.getRecieptList();
     dashboardController.getCmeList();
     dashboardController.getEduList();
-    // dashboardController.getUserProfilePick(
-    //     contryId: sessionlog.getInt('country'),
-    //     councilId: sessionlog.getString('councilId'),
-    //     mid: sessionlog.getString('userId'),
-    //     stateId: sessionlog.getString('stateId'));
-
     dashboardController.getEduIdList();
   }
-
-  // LoginController logCOntroller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -130,13 +129,17 @@ class _DashboardState extends State<Dashboard> {
           return
               //
               Scaffold(
-            key: dashboardController.drawerKey,
+            key: DashboardController.drawerKey,
             drawer: const BottomDrawer(),
             body: SafeArea(
-              child: dashboardController.userCmeVideo == null
+              child: dashboardController.userCmeVideoPurchese == null &&
+                      dashboardController.userCmeVideo == null &&
+                      dashboardController.userCmeVideoLastTest == null &&
+                      dashboardController.profilePick == null
                   ? Center(
                       child: CircularProgressIndicator(
                         color: Colors.black87,
+                        strokeWidth: 2,
                       ),
                     )
                   : Stack(
@@ -146,11 +149,7 @@ class _DashboardState extends State<Dashboard> {
                             valueListenable: indexChaingeNotifier,
                             builder: (context, int index, _) {
                               return screens[index];
-                            }),
-
-                        // Home(),
-                        // CmeProgram(),
-                        // MyProfile(),
+                            })
                       ],
                     ),
             ),
@@ -174,14 +173,6 @@ class _DashboardState extends State<Dashboard> {
                           ),
                           label: "",
                         ),
-                        // BottomNavigationBarItem(
-                        //   icon: ImageIcon(AssetImage("assets/V.png")),
-                        //   label: "",
-                        // ),
-                        // BottomNavigationBarItem(
-                        //   icon: ImageIcon(AssetImage("assets/p.png")),
-                        //   label: "",
-                        // ),
                         BottomNavigationBarItem(
                           icon: ImageIcon(AssetImage("assets/nd.png"),
                               color: Colors.black87),

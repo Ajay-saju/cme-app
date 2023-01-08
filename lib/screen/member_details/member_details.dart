@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:hslr/screen/dashboard/dashboard_controller.dart';
 import 'package:hslr/screen/member_details/member_controller.dart';
 
 import '../change_password/change_password_screen.dart';
@@ -16,7 +17,7 @@ class Memberdetail extends StatefulWidget {
 
 class _MemberdetailState extends State<Memberdetail> {
   MemberDetailsController mebController = Get.put(MemberDetailsController());
-  LoginController logController = Get.find();
+  DashboardController logController = Get.find();
 
   @override
   Widget build(BuildContext context) {

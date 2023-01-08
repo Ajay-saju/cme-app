@@ -24,6 +24,13 @@ class _EditEduDetailsState extends State<EditEduDetails> {
   final eduController = Get.find<EducationController>();
   final dashControll = Get.find<DashboardController>();
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GetBuilder<EducationController>(builder: ((_) {
       return GestureDetector(

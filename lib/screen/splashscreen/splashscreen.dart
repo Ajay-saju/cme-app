@@ -26,9 +26,9 @@ class Splashscreen extends StatelessWidget {
           ),
         ),
         nextScreen:
-            // sessionlog.getString('log_name') == null ?
-            Login(),
-        //  : Dashboard(),
+            sessionlog.getString('userId') == null ?
+            Login()
+         : Dashboard(),
         splashTransition: SplashTransition.fadeTransition,
         backgroundColor: Colors.white);
   }

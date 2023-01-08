@@ -5,7 +5,7 @@ class UserLoginService {
   static OrginalApi orginalApi = OrginalApi();
   final dio = Dio(BaseOptions(
       connectTimeout: 58000000,
-      receiveTimeout: 6000,
+      receiveTimeout: 6000000,
       baseUrl: orginalApi.baseUrl,
       responseType: ResponseType.json));
   Future<Response> userLogin(uid, pass, catId) async {

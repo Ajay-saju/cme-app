@@ -20,6 +20,13 @@ class _EducationDetailsScreenState extends State<EducationDetailsScreen> {
   EducationController educationController = Get.put(EducationController());
   final dashControll = Get.find<DashboardController>();
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // dashControll.getEduList();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var eduData = dashControll.eduList.value.result;
     return WillPopScope(

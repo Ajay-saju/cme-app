@@ -17,7 +17,7 @@ import '../../services/user_progile_pick_service.dart';
 class LoginController extends GetxController {
   final GlobalKey<FormState> regformkey = GlobalKey<FormState>();
 
-  Rx<UserDetails> getUserDetails = UserDetails().obs;
+  // Rx<UserDetails> getUserDetails = UserDetails().obs;
   Rx<UserLogin> userLogin = UserLogin().obs;
   var profileImage = ''.obs;
   var isfade = true;
@@ -44,7 +44,7 @@ class LoginController extends GetxController {
   bool sizetext = false;
   bool creatsize = false;
   var isLOading = true.obs;
-  String? dropvalue;
+  String? dropvalue ;
   var date = ''.obs;
   var time = ''.obs;
 
@@ -112,7 +112,6 @@ class LoginController extends GetxController {
       required String pin,
       required int categoryId}) async {
     final userLoginService = UserLoginService();
-    final prefs = await SharedPreferences.getInstance();
 
     try {
       final response =
@@ -125,9 +124,9 @@ class LoginController extends GetxController {
         userLogin.value = UserLogin.fromJson(response.data);
         print(userLogin.value.userId.toString());
 
-        await prefs.setString('userId', userLogin.value.userId.toString());
+        await sessionlog.setString('userId', userLogin.value.userId.toString());
         var mid = await sessionlog.getString('userId');
-        await getUserData(mid!);
+        // await getUserData(mid!);
 
         await sessionlog.setString(
             'councilId', userLogin.value.councilId.toString());
@@ -137,6 +136,9 @@ class LoginController extends GetxController {
         await sessionlog.setString(
             'catId', userLogin.value.categoryId.toString());
         await sessionlog.setInt('country', userLogin.value.countryId!);
+        if(mid !=null){
+           await Get.offAll(Dashboard());
+        }
       } else if (response.data == "User Doesn't Exist") {
         isfade = true;
         Get.defaultDialog(
@@ -182,46 +184,46 @@ class LoginController extends GetxController {
     return null;
   }
 
-  Future<UserDetails?> getUserData(String mId) async {
-    final getUserDetailsService = GetUserDetailsService();
+  // Future<UserDetails?> getUserData(String mId) async {
+  //   final getUserDetailsService = GetUserDetailsService();
 
-    try {
-      final response = await getUserDetailsService.getUserProfile(mId);
+  //   try {
+  //     final response = await getUserDetailsService.getUserProfile(mId);
 
-      var jsonFile = convert.jsonDecode(response.data);
-      print(response.statusCode.toString());
+  //     var jsonFile = convert.jsonDecode(response.data);
+  //     print(response.statusCode.toString());
 
-      dp.log(response.data);
+  //     dp.log(response.data);
 
-      if (response.statusCode == 200) {
-        print('json working');
-        getUserDetails.value = UserDetails.fromJson(jsonFile);
-        print(getUserDetails.value.loginName);
-        username = sessionlog.getString('log_name');
-        sessionlog.setString('log_name', getUserDetails.value.loginName!);
-        // await getUserProfilePick(
-        //     mid: userLogin.value.userId,
-        //     conId: userLogin.value.countryId,
-        //     stateId: userLogin.value.stateId,
-        //     counId: userLogin.value.councilId);
+  //     if (response.statusCode == 200) {
+  //       print('json working');
+  //       getUserDetails.value = UserDetails.fromJson(jsonFile);
+  //       print(getUserDetails.value.loginName);
+  //       username = sessionlog.getString('log_name');
+  //       sessionlog.setString('log_name', getUserDetails.value.loginName!);
+  //       // await getUserProfilePick(
+  //       //     mid: userLogin.value.userId,
+  //       //     conId: userLogin.value.countryId,
+  //       //     stateId: userLogin.value.stateId,
+  //       //     counId: userLogin.value.councilId);
 
-        // await getUserLastLogin(mId);
+  //       // await getUserLastLogin(mId);
 
-        await Get.offAll(Dashboard());
-      } else {
-        isfade = true;
-        Get.defaultDialog(
-            title: 'Something is wrong', middleText: 'Please try again');
-      }
-    } catch (e) {
-      if (e is DioError) {
-        print(e.toString());
-      }
-      return null;
-    }
-    update();
-    return null;
-  }
+  //       await Get.offAll(Dashboard());
+  //     } else {
+  //       isfade = true;
+  //       Get.defaultDialog(
+  //           title: 'Something is wrong', middleText: 'Please try again');
+  //     }
+  //   } catch (e) {
+  //     if (e is DioError) {
+  //       print(e.toString());
+  //     }
+  //     return null;
+  //   }
+  //   update();
+  //   return null;
+  // }
 
   getUserLastLogin(mId) async {
     final userLastLoginService = UserLastLoginService();

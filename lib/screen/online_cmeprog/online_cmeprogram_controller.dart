@@ -1,7 +1,10 @@
 import 'package:get/get.dart';
+import 'package:hslr/services/all_cme_video_service.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import '../../models/all_cme_video_model.dart';
 
 class CmeProgramController extends GetxController {
   String keyId = "rzp_test_9rG7ClR4bO47u9";
@@ -12,11 +15,13 @@ class CmeProgramController extends GetxController {
 
   @override
   void onInit() {
+     super.onInit();
+    getAllVideos();
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
 
-    super.onInit();
+   
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
@@ -85,5 +90,18 @@ class CmeProgramController extends GetxController {
   void dispose() {
     _razorpay.clear();
     super.dispose();
+  }
+
+  Rx<AllCmeVideos?> allCmeVideos = AllCmeVideos().obs;
+  Future getAllVideos() async {
+    final allCmeVideoService = AllCmeVideoService();
+
+    try {
+      var response = await allCmeVideoService.getAllVideo();
+      if (response.statusCode == 200) {
+        allCmeVideos.value = AllCmeVideos.fromJson(jsonDecode(response.data));
+        print(allCmeVideos.value!.videoList![0].speakerName);
+      }
+    } catch (e) {}
   }
 }

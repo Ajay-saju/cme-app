@@ -5,10 +5,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/base_api/orginal_api.dart';
+import 'package:hslr/models/all_cme_video_model.dart';
 import 'package:hslr/models/dashboard_data_models.dart';
 import 'package:hslr/models/get_eduid_list.model.dart';
 import 'package:hslr/models/get_reciepts.dart';
+import 'package:hslr/models/user_details.dart';
+import 'package:hslr/services/all_cme_video_service.dart';
 import 'package:hslr/services/get_eduid_list_servise.dart';
+import 'package:hslr/services/user_profile_service/get_user_profile_service.dart';
 import 'package:hslr/services/user_progile_pick_service.dart';
 
 import '../../main.dart';
@@ -24,7 +28,7 @@ class DashboardController extends GetxController {
 //    drawerKey.close();
 //     super.onClose();
 //   }
-  final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
+  static GlobalKey<ScaffoldState> drawerKey = GlobalKey();
 
   Rx<GetPayment> getpaymentList = GetPayment().obs;
   Future<GetPayment?> getRecieptList() async {
@@ -98,6 +102,7 @@ class DashboardController extends GetxController {
   Rx<GetEduDEtails> eduList = GetEduDEtails().obs;
 
   Future<GetEduDEtails?> getEduList() async {
+    print('working education list...');
     final ediListService = EducationDetalsServ();
 
     try {
@@ -112,23 +117,27 @@ class DashboardController extends GetxController {
     }
   }
 
-  getUserProfilePick(
-      {required mid,
-      required contryId,
-      required councilId,
-      required stateId}) async {
+  var profilePick;
+  Future getUserProfilePick() async {
     final proPicService = UserPickService();
     try {
       final response = await proPicService.getProfilePick(
-          mid: mid, stateId: stateId, contryId: contryId, councilId: councilId);
+          mid: sessionlog.getString('userId').toString(),
+          stateId: sessionlog.getString('stateId'),
+          contryId: sessionlog.getInt('country'),
+          councilId: sessionlog.getString('councilId'));
       if (response.statusCode == 200) {
         // var temp = response.data.replaceAll('https', "http");
         // var ok = temp.replaceAll(" \", " /");
-        await sessionlog.setString(
-            'proPick', response.data.replaceAll('https', "http"));
-        print(sessionlog.getString('proPick'));
+        profilePick = response.data.replaceAll('https', "http");
+        print(profilePick);
+        print('=================================');
+
+        await sessionlog.setString('proPick', response.data);
+        // print(sessionlog.getString('proPick'));
         // profileImage = response.data;
         // print(profileImage.replaceAll('.', ''));
+
       }
     } catch (e) {
       if (e is DioError) {
@@ -166,37 +175,177 @@ class DashboardController extends GetxController {
   getDashboardData() async {
     OrginalApi orginalApi = OrginalApi();
     final dio = Dio(BaseOptions(
-        baseUrl: orginalApi.baseUrl, responseType: ResponseType.plain));
+        //
+        baseUrl: orginalApi.baseUrl,
+        responseType: ResponseType.plain));
 
     try {
-      var responseUserCme_video = await dio.get('UserCme_video',
-          queryParameters: {
-            "CategoryId": sessionlog.getString('catId').toString()
-          });
-      var responseUserCme_video_PURCHES = await dio.get("UserCme_video_PURCHES",
-          queryParameters: {
-            'Mid11': sessionlog.getString('userId').toString()
-          });
       var responseUserCme_Last_Test = await dio.get('UserCme_Last_Test',
           queryParameters: {
             'Mid12': sessionlog.getString('userId').toString()
           });
-      if (responseUserCme_Last_Test.statusCode == 200 &&
-          responseUserCme_video_PURCHES.statusCode == 200 &&
-          responseUserCme_video.statusCode == 200) {
-        userCmeVideo =
-            UserCmeVideo.fromJson(jsonDecode(responseUserCme_video.data));
-        userCmeVideoPurchese = UserCmeVideoPurchese.fromJson(
-            jsonDecode(responseUserCme_video_PURCHES.data));
+      //
+      //
+
+      if (responseUserCme_Last_Test.statusCode == 200
+          // &&
+          // responseUserCme_video_PURCHES.statusCode == 200 &&
+          //
+          ) {
         userCmeVideoLastTest = UserCmeVideoLastTest.fromJson(
             jsonDecode(responseUserCme_Last_Test.data));
         print(userCmeVideoLastTest!.latest.toString());
       }
     } on DioError catch (e) {
       print(e.message);
+      Get.defaultDialog(
+          title: 'Something is wrong',
+          middleText: "Please try again",
+          middleTextStyle: TextStyle(
+            fontFamily: "Nunito",
+            color: Colors.black87,
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+          titleStyle: TextStyle(
+            fontFamily: "Nunito",
+            color: Colors.black87,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ));
     } catch (e) {
       print(e.toString());
     }
     update();
   }
+
+  getUserCmeVideo() async {
+    OrginalApi orginalApi = OrginalApi();
+    final dio = Dio(BaseOptions(
+        //
+        baseUrl: orginalApi.baseUrl,
+        responseType: ResponseType.plain));
+    try {
+      var responseUserCme_video = await dio.get('UserCme_video',
+          queryParameters: {
+            "CategoryId": sessionlog.getString('catId').toString()
+          });
+      if (responseUserCme_video.statusCode == 200) {
+        userCmeVideo =
+            UserCmeVideo.fromJson(jsonDecode(responseUserCme_video.data));
+      }
+    } on DioError catch (e) {
+      print(e.message);
+      Get.defaultDialog(
+          title: 'Something is wrong',
+          middleText: "Please try again",
+          middleTextStyle: TextStyle(
+            fontFamily: "Nunito",
+            color: Colors.black87,
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+          titleStyle: TextStyle(
+            fontFamily: "Nunito",
+            color: Colors.black87,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ));
+    } catch (e) {
+      print(e.toString());
+    }
+    update();
+  }
+
+  getUserCmeVideoPurchese() async {
+    OrginalApi orginalApi = OrginalApi();
+    final dio = Dio(BaseOptions(
+        //
+        baseUrl: orginalApi.baseUrl,
+        responseType: ResponseType.plain));
+    try {
+      var responseUserCme_video_PURCHES = await dio.get("UserCme_video_PURCHES",
+          queryParameters: {
+            'Mid11': sessionlog.getString('userId').toString()
+          });
+      if (responseUserCme_video_PURCHES.statusCode == 200) {
+        userCmeVideoPurchese = UserCmeVideoPurchese.fromJson(
+            jsonDecode(responseUserCme_video_PURCHES.data));
+      }
+    } on DioError catch (e) {
+      print(e.message);
+      Get.defaultDialog(
+          title: 'Something is wrong',
+          middleText: "Please try again",
+          middleTextStyle: TextStyle(
+            fontFamily: "Nunito",
+            color: Colors.black87,
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+          titleStyle: TextStyle(
+            fontFamily: "Nunito",
+            color: Colors.black87,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ));
+    } catch (e) {
+      print(e.toString());
+    }
+    update();
+  }
+
+  Rx<UserDetails> getUserDetails = UserDetails().obs;
+  Future<UserDetails?> getUserData(String mId) async {
+    final getUserDetailsService = GetUserDetailsService();
+
+    try {
+      final response = await getUserDetailsService.getUserProfile(mId);
+
+      var jsonFile = jsonDecode(response.data);
+      print(response.statusCode.toString());
+
+      log(response.data);
+
+      if (response.statusCode == 200) {
+        print('json working');
+        getUserDetails.value = UserDetails.fromJson(jsonFile);
+        print(getUserDetails.value.loginName);
+        // username = sessionlog.getString('log_name');
+        sessionlog.setString('log_name', getUserDetails.value.loginName!);
+        // await getUserProfilePick(
+        //     mid: userLogin.value.userId,
+        //     conId: userLogin.value.countryId,
+        //     stateId: userLogin.value.stateId,
+        //     counId: userLogin.value.councilId);
+
+        // await getUserLastLogin(mId);
+
+      } else {
+        // isfade = true;
+        Get.defaultDialog(
+            title: 'Something is wrong', middleText: 'Please try again');
+      }
+    } catch (e) {
+      if (e is DioError) {
+        print(e.toString());
+      }
+      return null;
+    }
+    update();
+    return null;
+  }
+
+  // Rx<AllCmeVideos?> allCmeVideos = AllCmeVideos().obs;
+  // Future getAllVideos() async {
+  //   final allCmeVideoService = AllCmeVideoService();
+
+  //   try {
+  //     var response = await allCmeVideoService.getAllVideo();
+  //     if (response.statusCode == 200) {
+  //       allCmeVideos.value = AllCmeVideos.fromJson(jsonDecode(response.data));
+  //       print(allCmeVideos.value!.videoList![0].speakerName);
+  //     }
+  //   } catch (e) {}
+  // }
 }
