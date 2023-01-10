@@ -151,7 +151,7 @@ class DashboardController extends GetxController {
 
   List<UniversityList>? universityList = [];
   List<CollegeList>? collegeList = [];
-  List<CourseList>? courseList = [];
+  List<SpecialtyList>? courseList = [];
   Rx<GetEducationIdList?> eduIdList = GetEducationIdList().obs;
   getEduIdList() async {
     final eduIdListServise = EduIdListServise();
@@ -166,7 +166,7 @@ class DashboardController extends GetxController {
 
         universityList = eduIdList.value!.universityList!;
         collegeList = eduIdList.value!.collegeList!;
-        courseList = eduIdList.value!.courseList!;
+        courseList = eduIdList.value!.specialtyList!;
       }
     } catch (e) {}
   }

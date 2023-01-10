@@ -33,7 +33,7 @@ class EducationController extends GetxController {
   String? year;
   List<UniversityList>? universityList = [];
   List<CollegeList>? collegeList = [];
-  List<CourseList>? courseList = [];
+  List<SpecialtyList>? specialtyList = [];
   final degreeItem = [
     'Degree 1',
     'Degree 2',
@@ -103,11 +103,11 @@ class EducationController extends GetxController {
         ),
       );
 
-  DropdownMenuItem<CourseList> buildMenuItemCource(var item) =>
-      DropdownMenuItem<CourseList>(
+  DropdownMenuItem<SpecialtyList> buildMenuItemCource(var item) =>
+      DropdownMenuItem<SpecialtyList>(
         value: item,
         child: Text(
-          item.courseName,
+          item.specialtyName,
           style: TextStyle(
             color: Colors.black87,
             fontWeight: FontWeight.w400,
@@ -143,7 +143,7 @@ class EducationController extends GetxController {
 
         universityList = eduIdList.value!.universityList!;
         collegeList = eduIdList.value!.collegeList!;
-        courseList = eduIdList.value!.courseList!;
+        specialtyList = eduIdList.value!.specialtyList!;
       }
     } catch (e) {
       print(e.toString());

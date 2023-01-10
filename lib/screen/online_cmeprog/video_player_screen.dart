@@ -30,6 +30,8 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
     super.dispose();
   }
 
+  var a = Duration(seconds: 5);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,12 +82,13 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                               child: SizedBox(
                                 // width: context.width,
                                 child: ProgressBar(
-                                  onSeek: (value) =>
-                                      videoController.seekTo(value),
+                                  onSeek: (a) => videoController.seekTo(a),
                                   baseBarColor: Colors.white60,
+                                  thumbRadius: 7,
                                   progress: videoController.value.position,
                                   total: videoController.value.duration,
                                   bufferedBarColor: Colors.white,
+                                  barHeight: 2,
                                   thumbColor: Colors.white38,
                                   thumbGlowColor: Colors.white,
                                   timeLabelTextStyle: TextStyle(
@@ -107,7 +110,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                                         ? Icons.pause
                                         : Icons.play_arrow_rounded,
                                     color: Colors.white,
-                                    size: 25,
+                                    size: 35,
                                   )),
                             )
                           ],

@@ -31,7 +31,7 @@ class _EditEduDetailsState extends State<EditEduDetails> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<EducationController>(builder: ((_) {
+    return  GetBuilder<EducationController>(builder: ((_) {
       return GestureDetector(
         onTap: () {
           FocusScope.of(context).unfocus();
@@ -102,14 +102,14 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                           // key: eduController.editEduFormKey,
                           child: Column(
                         children: [
-                          // customeDropDownTextCource(
-                          //     context: context,
-                          //     hintText: dashControll
-                          //         .eduList.value.result![widget.index].dEGREE
-                          //         .toString(),
-                          //     item: eduController.courseList![0].courseName,
-                          //     text: 'Degree',
-                          //     items: eduController.courseList!),
+                          customeDropDownTextCource(
+                              context: context,
+                              hintText: dashControll
+                                  .eduList.value.result![widget.index].dEGREE
+                                  .toString(),
+                              item: eduController.specialtyList![0].specialtyName,
+                              text: 'Degree',
+                              items: eduController.specialtyList!),
                           // customeDropDownText(
                           //   context: context,
                           //   hintText: dashControll.eduList.value.result![widget.index].dEGREE.toString(),
@@ -226,7 +226,7 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                   .universityList![0].universitName,
                               items: eduController.universityList!,
                               text: 'University\nName',
-                              selectedBox: 'Select University'),
+                              ),
                           // customeDropDownText(
                           //     context: context,
                           //     hintText: dashControll.eduList.value
@@ -321,7 +321,7 @@ class _EditEduDetailsState extends State<EditEduDetails> {
 
   Padding customeDropDownText(
       {required BuildContext context,
-      required String selectedBox,
+      // required String selectedBox,
       required String text,
       required String? item,
       required List<dynamic> items,
@@ -410,7 +410,7 @@ class _EditEduDetailsState extends State<EditEduDetails> {
           Spacer(),
           Container(
             width: context.width * 0.55,
-            child: DropdownButtonFormField<CourseList>(
+            child: DropdownButtonFormField<SpecialtyList>(
                 validator: (value) => value == null ? 'field required' : null,
                 itemHeight: null,
                 isExpanded: true,
@@ -453,7 +453,7 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                 }).toList(),
                 onChanged: (value) {
                   item = value.toString();
-                  var id = value!.courseId;
+                  var id = value!.specialtyId;
                   print(id.toString());
                   print('==============================');
                   eduController.update();

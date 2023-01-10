@@ -2,10 +2,13 @@ class GetEducationIdList {
   String? massege;
   List<UniversityList>? universityList;
   List<CollegeList>? collegeList;
-  List<CourseList>? courseList;
+  List<SpecialtyList>? specialtyList;
 
   GetEducationIdList(
-      {this.massege, this.universityList, this.collegeList, this.courseList});
+      {this.massege,
+      this.universityList,
+      this.collegeList,
+      this.specialtyList});
 
   GetEducationIdList.fromJson(Map<String, dynamic> json) {
     massege = json['massege'];
@@ -21,10 +24,10 @@ class GetEducationIdList {
         collegeList!.add(new CollegeList.fromJson(v));
       });
     }
-    if (json['Course_List'] != null) {
-      courseList = <CourseList>[];
-      json['Course_List'].forEach((v) {
-        courseList!.add(new CourseList.fromJson(v));
+    if (json['Specialty_List'] != null) {
+      specialtyList = <SpecialtyList>[];
+      json['Specialty_List'].forEach((v) {
+        specialtyList!.add(new SpecialtyList.fromJson(v));
       });
     }
   }
@@ -39,8 +42,9 @@ class GetEducationIdList {
     if (this.collegeList != null) {
       data['College_List'] = this.collegeList!.map((v) => v.toJson()).toList();
     }
-    if (this.courseList != null) {
-      data['Course_List'] = this.courseList!.map((v) => v.toJson()).toList();
+    if (this.specialtyList != null) {
+      data['Specialty_List'] =
+          this.specialtyList!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -84,21 +88,21 @@ class CollegeList {
   }
 }
 
-class CourseList {
-  String? courseId;
-  String? courseName;
+class SpecialtyList {
+  int? specialtyId;
+  String? specialtyName;
 
-  CourseList({this.courseId, this.courseName});
+  SpecialtyList({this.specialtyId, this.specialtyName});
 
-  CourseList.fromJson(Map<String, dynamic> json) {
-    courseId = json['Course_Id'];
-    courseName = json['Course_Name'];
+  SpecialtyList.fromJson(Map<String, dynamic> json) {
+    specialtyId = json['Specialty_Id'];
+    specialtyName = json['Specialty_Name'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['Course_Id'] = this.courseId;
-    data['Course_Name'] = this.courseName;
+    data['Specialty_Id'] = this.specialtyId;
+    data['Specialty_Name'] = this.specialtyName;
     return data;
   }
 }

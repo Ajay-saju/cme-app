@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/models/get_eduid_list.model.dart';
@@ -94,9 +92,9 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                             customeDropDownTextCource(
                                 context: context,
                                 hintText: 'Select Degree',
-                                item: eduController.courseList![0].courseName,
+                                item: eduController.specialtyList![0].specialtyName,
                                 text: 'Degree',
-                                items: eduController.courseList!),
+                                items: eduController.specialtyList!),
                             // customeDropDownText(
                             //     context: context,
                             //     hintText: 'Select Degree',
@@ -367,7 +365,7 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
           Spacer(),
           Container(
             width: context.width * 0.55,
-            child: DropdownButtonFormField<CourseList>(
+            child: DropdownButtonFormField<SpecialtyList>(
                 validator: (value) => value == null ? 'field required' : null,
                 itemHeight: null,
                 isExpanded: true,
@@ -410,7 +408,7 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                 }).toList(),
                 onChanged: (value) {
                   item = value.toString();
-                  eduController.corseCode = value!.courseId.toString();
+                  eduController.corseCode = value!.specialtyId.toString();
 
                   eduController.update();
                 }),
