@@ -34,6 +34,7 @@ class VideoList {
   String? creditPoint;
   String? videoName;
   String? speakerName;
+  String? videothambnails;
 
   VideoList(
       {this.message,
@@ -44,7 +45,8 @@ class VideoList {
       this.speakerSpecialty,
       this.creditPoint,
       this.videoName,
-      this.speakerName});
+      this.speakerName,
+      this.videothambnails});
 
   VideoList.fromJson(Map<String, dynamic> json) {
     message = json['message'];
@@ -56,6 +58,7 @@ class VideoList {
     creditPoint = json['CreditPoint'];
     videoName = json['VideoName'];
     speakerName = json['SpeakerName'];
+    videothambnails = json['Videothambnails'];
   }
 
   Map<String, dynamic> toJson() {
@@ -69,6 +72,7 @@ class VideoList {
     data['CreditPoint'] = this.creditPoint;
     data['VideoName'] = this.videoName;
     data['SpeakerName'] = this.speakerName;
+    data['Videothambnails'] = this.videothambnails;
     return data;
   }
 }

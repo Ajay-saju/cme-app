@@ -22,13 +22,15 @@ import '../../services/cme_list_service.dart';
 import '../../services/education_details_service.dart';
 import '../../services/user_payment_service.dart';
 
+final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
+
 class DashboardController extends GetxController {
 //  @override
 //   void onClose() {
 //    drawerKey.close();
 //     super.onClose();
 //   }
-  static GlobalKey<ScaffoldState> drawerKey = GlobalKey();
+  static final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
 
   Rx<GetPayment> getpaymentList = GetPayment().obs;
   Future<GetPayment?> getRecieptList() async {

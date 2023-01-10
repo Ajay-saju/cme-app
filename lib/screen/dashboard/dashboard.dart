@@ -22,6 +22,7 @@ class _DashboardState extends State<Dashboard> {
   ];
   DashboardController dashboardController = Get.put(DashboardController());
   // final logCOntroller = Get.find<LoginController>();
+  static final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 
   @override
   void initState() {
@@ -129,7 +130,7 @@ class _DashboardState extends State<Dashboard> {
           return
               //
               Scaffold(
-            key: DashboardController.drawerKey,
+            key:DashboardController.drawerKey,
             drawer: const BottomDrawer(),
             body: SafeArea(
               child: dashboardController.userCmeVideoPurchese == null &&
@@ -139,7 +140,7 @@ class _DashboardState extends State<Dashboard> {
                   ? Center(
                       child: CircularProgressIndicator(
                         color: Colors.black87,
-                        strokeWidth: 2,
+                        strokeWidth: 1.5,
                       ),
                     )
                   : Stack(

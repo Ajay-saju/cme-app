@@ -440,10 +440,14 @@ class _CmepointsState extends State<Cmepoints> {
                             actions: [
                               ElevatedButton(
                                 onPressed: () async {
+                                  var link = data[index]
+                                      .cmeCertLink
+                                      .replaceAll('https', 'http');
                                   await openPdf(
-                                      filename: 'example.pdf',
-                                      url:
-                                          'https://www.clickdimensions.com/links/TestPDFfile.pdf');
+                                    filename: 'example.pdf',
+                                    url: link.replaceAll('"', ''),
+                                  );
+                                  Get.back();
                                 },
                                 child: Text(
                                   'Yes',
@@ -593,10 +597,6 @@ class _CmepointsState extends State<Cmepoints> {
     if (file == null) return null;
     Uint8List fileBytes = file.readAsBytesSync();
     String base64String = base64Encode(fileBytes);
-
-    
-  
-    
 
     print('Path:${file.path}');
     OpenFile.open(file.path);

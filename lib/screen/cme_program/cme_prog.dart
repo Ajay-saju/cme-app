@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/get_instance.dart';
 import 'package:hslr/screen/cmeprogrm_points/cme_points.dart';
-import 'package:hslr/screen/creat_account/create_account.dart';
-import 'package:hslr/screen/forgotpassword/forgot_password.dart';
 import 'package:hslr/screen/login/login_controller.dart';
 import 'package:hslr/screen/online_cmeprog/online_cmeprogram.dart';
 

@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hslr/models/questions_ans_model.dart';
 import 'package:hslr/screen/test_screen/testscreen.dart';
+import 'package:hslr/services/questions_ans_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../online_cmeprog/online_cmeprogram.dart';
 
@@ -313,6 +316,17 @@ class QuestionController extends GetxController {
         fontFamily: "Nunito",
       ),
     );
+    
+    Rx<QuestionsAnsList> mcqData = QuestionsAnsList().obs;
+    Future<QuestionsAnsList?> getAllMCQdata(String videoId) async {
+      final mcqDataService = QuestionAnsService();
+      try {
+        final response = await mcqDataService.getMCQData(videoId);
+        if (response.statusCode == 200) {
+          mcqData.value = QuestionsAnsList.fromJson(jsonDecode(response.data));
+        }
+      } catch (e) {}
+    }
   }
 
   // void startTimer() {

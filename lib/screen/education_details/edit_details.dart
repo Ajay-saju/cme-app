@@ -27,7 +27,6 @@ class _EditEduDetailsState extends State<EditEduDetails> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    
   }
 
   @override
@@ -103,14 +102,14 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                           // key: eduController.editEduFormKey,
                           child: Column(
                         children: [
-                          customeDropDownTextCource(
-                              context: context,
-                              hintText: dashControll
-                                  .eduList.value.result![widget.index].dEGREE
-                                  .toString(),
-                              item: eduController.courseList![0].courseName,
-                              text: 'Degree',
-                              items: eduController.courseList!),
+                          // customeDropDownTextCource(
+                          //     context: context,
+                          //     hintText: dashControll
+                          //         .eduList.value.result![widget.index].dEGREE
+                          //         .toString(),
+                          //     item: eduController.courseList![0].courseName,
+                          //     text: 'Degree',
+                          //     items: eduController.courseList!),
                           // customeDropDownText(
                           //   context: context,
                           //   hintText: dashControll.eduList.value.result![widget.index].dEGREE.toString(),

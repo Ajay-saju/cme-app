@@ -39,7 +39,10 @@ class _EducationDetailsScreenState extends State<EducationDetailsScreen> {
           return SafeArea(
               child: educationController.eduIdList.value!.massege == null
                   ? Center(
-                      child: CircularProgressIndicator(color: Colors.black),
+                      child: CircularProgressIndicator(
+                        color: Colors.black,
+                        strokeWidth: 1.5,
+                      ),
                     )
                   : Column(
                       children: [

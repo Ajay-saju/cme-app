@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/services/all_cme_video_service.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -15,13 +16,17 @@ class CmeProgramController extends GetxController {
 
   @override
   void onInit() {
-     super.onInit();
+    super.onInit();
     getAllVideos();
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+  }
 
-   
+  @override
+  void dispose() {
+    _razorpay.clear();
+    super.dispose();
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
@@ -86,12 +91,6 @@ class CmeProgramController extends GetxController {
     _razorpay.open(options);
   }
 
-  @override
-  void dispose() {
-    _razorpay.clear();
-    super.dispose();
-  }
-
   Rx<AllCmeVideos?> allCmeVideos = AllCmeVideos().obs;
   Future getAllVideos() async {
     final allCmeVideoService = AllCmeVideoService();
@@ -103,5 +102,38 @@ class CmeProgramController extends GetxController {
         print(allCmeVideos.value!.videoList![0].speakerName);
       }
     } catch (e) {}
+    update();
   }
+
+  final memName = TextEditingController();
+  TextEditingController councilName = TextEditingController();
+  TextEditingController membmobile = TextEditingController();
+  TextEditingController membstate = TextEditingController();
+  TextEditingController membdistr = TextEditingController();
+  TextEditingController changepass = TextEditingController();
+  TextEditingController regno = TextEditingController();
+  TextEditingController regpass = TextEditingController();
+
+  bool isObscure = true;
+  bool sizechangepass = false;
+  String? speciality;
+  String? program;
+
+  var specialitylist = [
+    'test1',
+    'test2',
+    'test3',
+    'test4',
+    'test5',
+    'test6',
+  ];
+
+  var programlist = [
+    'test1',
+    'test2',
+    'test3',
+    'test4',
+    'test5',
+    'test6',
+  ];
 }
