@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/models/add_user_model.dart';
@@ -8,7 +7,7 @@ import 'package:hslr/screen/login/login.dart';
 import 'package:hslr/services/create_user.dart';
 
 class CreateAccountController extends GetxController {
-  final  GlobalKey<FormState> accformkey = GlobalKey<FormState>();
+  final GlobalKey<FormState> accformkey = GlobalKey<FormState>();
 
   TextEditingController mobNumb = TextEditingController();
   TextEditingController password = TextEditingController();
@@ -74,7 +73,24 @@ class CreateAccountController extends GetxController {
           Get.offAll(Login());
         });
       }
-    } catch (e) {}
+    } catch (e) {
+      print(e.toString());
+      Get.defaultDialog(
+          title: 'Something is wrong',
+          middleText: "Please try again",
+          middleTextStyle: TextStyle(
+            fontFamily: "Nunito",
+            color: Colors.black87,
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+          titleStyle: TextStyle(
+            fontFamily: "Nunito",
+            color: Colors.black87,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ));
+    }
   }
 
   int selectCategoryId(dropvalue) {

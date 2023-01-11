@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/dashboard/dashboard.dart';
 import 'package:hslr/screen/online_cmeprog/online_cmeprogram_controller.dart';
 import 'package:hslr/screen/online_cmeprog/video_player_screen.dart';
+import 'package:hslr/screen/quiz/question.dart';
 import 'package:hslr/screen/videoplayerwidget/videoplayerwidget.dart';
 import 'package:video_player/video_player.dart';
 
@@ -324,7 +327,7 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                             index: index,
                                           )),
                                           child: Container(
-                                            height: context.height * .15,
+                                            height: context.height * .17,
                                             // width: context.width * .15,
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.all(
@@ -375,7 +378,7 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                               left: 8,
                                                               right: 8),
                                                       child: Text(
-                                                        "${cmeProgramController.allCmeVideos.value!.videoList![index].videoTimingHour} m",
+                                                        "${cmeProgramController.allCmeVideos.value!.videoList![index].videoTimingHour} h",
                                                         style: TextStyle(
                                                           // fontSize: 18,
                                                           fontWeight:
@@ -422,17 +425,12 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                         ),
                                                       ),
                                                       Text(
-                                                        cmeProgramController
-                                                            .allCmeVideos
-                                                            .value!
-                                                            .videoList![index]
-                                                            .speakerSpecialty
-                                                            .toString(),
+                                                        'For all ${cmeProgramController.allCmeVideos.value!.videoList![index].speakerSpecialty} students',
                                                         overflow:
                                                             TextOverflow.fade,
                                                         maxLines: 1,
                                                         style: TextStyle(
-                                                          fontSize: 14,
+                                                          fontSize: 16,
                                                           fontFamily: "Nunito",
                                                         ),
                                                       ),
@@ -441,10 +439,10 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                       // ),
                                                       Spacer(),
                                                       Text(
-                                                        "Created by ${cmeProgramController.allCmeVideos.value!.videoList![index].speakerName}"
+                                                        "Speaker : ${cmeProgramController.allCmeVideos.value!.videoList![index].speakerName}"
                                                             .toString(),
                                                         style: TextStyle(
-                                                          fontSize: 12,
+                                                          fontSize: 15,
                                                           // fontWeight:
                                                           //     FontWeight.bold,
                                                           fontFamily: "Nunito",
@@ -471,50 +469,77 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                       SizedBox(
                                                         height: 30,
                                                       ),
-                                                      Container(
-                                                        decoration: BoxDecoration(
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        98,
-                                                                        84,
-                                                                        84),
-                                                                blurRadius:
-                                                                    15.0, // soften the shadow
-                                                                spreadRadius:
-                                                                    5.0, //extend the shadow
-                                                                offset: Offset(
-                                                                  5.0, // Move to right 5  horizontally
-                                                                  5.0, // Move to bottom 5 Vertically
-                                                                ),
-                                                              )
-                                                            ],
-                                                            color: Colors.black,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            5)),
-                                                            shape: BoxShape
-                                                                .rectangle),
-                                                        height: 50,
-                                                        width: context.width *
-                                                            0.15,
-                                                        child: Center(
-                                                          child: Text(
-                                                            "Rs${cmeProgramController.allCmeVideos.value!.videoList![index].videoAmount}"
-                                                                .substring(
-                                                                    0, 5),
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500,
-                                                                fontFamily:
-                                                                    "Nunito",
-                                                                color: Colors
-                                                                    .white),
+                                                      InkWell(
+                                                        onTap: () async {
+                                                          var finalQues = cmeProgramController
+                                                              .getAllQuestionsData(
+                                                                  cmeProgramController
+                                                                      .allCmeVideos
+                                                                      .value!
+                                                                      .videoList![
+                                                                          index]
+                                                                      .videoId);
+                                                          // print(finalQues
+                                                          //     .toString());
+
+                                                          Timer.periodic(
+                                                              Duration(
+                                                                  seconds: 30),
+                                                              (timer) {
+                                                            Get.to(Question(
+                                                              quesList:
+                                                                  cmeProgramController
+                                                                      .finalQuesAns,
+                                                              isGoingtoTest:
+                                                                  false,
+                                                            ));
+                                                          });
+                                                        },
+                                                        child: Container(
+                                                          decoration: BoxDecoration(
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          98,
+                                                                          84,
+                                                                          84),
+                                                                  blurRadius:
+                                                                      15.0, // soften the shadow
+                                                                  spreadRadius:
+                                                                      5.0, //extend the shadow
+                                                                  offset:
+                                                                      Offset(
+                                                                    5.0, // Move to right 5  horizontally
+                                                                    5.0, // Move to bottom 5 Vertically
+                                                                  ),
+                                                                )
+                                                              ],
+                                                              color:
+                                                                  Colors.black,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .all(Radius
+                                                                          .circular(
+                                                                              5)),
+                                                              shape: BoxShape
+                                                                  .rectangle),
+                                                          height: 50,
+                                                          width: context.width *
+                                                              0.15,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Take\nTest",
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontFamily:
+                                                                      "Nunito",
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
                                                           ),
                                                         ),
                                                       ),

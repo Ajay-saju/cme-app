@@ -127,9 +127,11 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  Get.offAll(Question(
-                    isGoingtoTest: false,
-                  ));
+                  // Get.offAll(Question(
+                  //   isGoingtoTest: false,
+                  //   videoId: cmeController
+                  //       .allCmeVideos.value!.videoList![widget.index].videoId,
+                  // ));
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black87,

@@ -349,6 +349,7 @@ class _TestScreenState extends State<TestScreen> {
                   testScreenController.isGoingtoTest = true;
                   Get.off(Question(
                     isGoingtoTest: testScreenController.isGoingtoTest,
+                  
                   ));
                 },
                 child: Text(

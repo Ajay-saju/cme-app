@@ -28,9 +28,10 @@ class QuestionController extends GetxController {
 
   @override
   void onInit() async {
-    _startTimer(600);
-    startPhotoTimer(600);
-    _cameras = await availableCameras();
+    // _startTimer(600);
+    // startPhotoTimer(600);
+    // _cameras = await availableCameras();
+
     super.onInit();
 
     cameraController = CameraController(_cameras[1], ResolutionPreset.max);
@@ -316,7 +317,7 @@ class QuestionController extends GetxController {
         fontFamily: "Nunito",
       ),
     );
-    
+
     Rx<QuestionsAnsList> mcqData = QuestionsAnsList().obs;
     Future<QuestionsAnsList?> getAllMCQdata(String videoId) async {
       final mcqDataService = QuestionAnsService();

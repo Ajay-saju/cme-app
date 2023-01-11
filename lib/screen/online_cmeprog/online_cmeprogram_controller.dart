@@ -1,10 +1,14 @@
+import 'dart:developer';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hslr/models/questions_ans_model.dart';
 import 'package:hslr/services/all_cme_video_service.dart';
+import 'package:hslr/services/questions_ans_service.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import '../../models/all_cme_video_model.dart';
 
 class CmeProgramController extends GetxController {
@@ -136,4 +140,43 @@ class CmeProgramController extends GetxController {
     'test5',
     'test6',
   ];
+
+  Rx<QuestionsAnsList?> questions = QuestionsAnsList().obs;
+  var que = [];
+
+  Future<List> getAllQuestionsData(videoId) async {
+    QuestionAnsService questionAnsService = QuestionAnsService();
+    var selectedQus;
+    try {
+      var response = await questionAnsService.getMCQData(videoId);
+      if (response.statusCode == 200) {
+        questions.value = QuestionsAnsList.fromJson(response.data);
+        selectedQus = selectedQues(quesList: questions.value!.qAList!.toList());
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+    update();
+    return selectedQus;
+  }
+
+  List selectedQues({required List quesList}) {
+    List tempp = [];
+    final _random = new Random();
+    var temp = quesList.shuffle(_random);
+    for (int i = 0; i < 15; i++) {
+      tempp.add(quesList[i]);
+    }
+    return createQuesData(quesList: tempp);
+  }
+
+  var finalQuesAns;
+  createQuesData({required List quesList}) {
+    var temp = [];
+    for (var i = 0; i < quesList.length; i++) {
+      temp.add(quesList[i].qN.split('\r'));
+    }
+    // print(temp[0].message.toString());
+   finalQuesAns= temp;
+  }
 }
