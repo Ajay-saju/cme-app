@@ -10,6 +10,7 @@ import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../../models/all_cme_video_model.dart';
+import '../quiz/question.dart';
 
 class CmeProgramController extends GetxController {
   String keyId = "rzp_test_9rG7ClR4bO47u9";
@@ -144,7 +145,7 @@ class CmeProgramController extends GetxController {
   Rx<QuestionsAnsList?> questions = QuestionsAnsList().obs;
   var que = [];
 
-  Future<List> getAllQuestionsData(videoId) async {
+  Future getAllQuestionsData(videoId) async {
     QuestionAnsService questionAnsService = QuestionAnsService();
     var selectedQus;
     try {
@@ -152,12 +153,18 @@ class CmeProgramController extends GetxController {
       if (response.statusCode == 200) {
         questions.value = QuestionsAnsList.fromJson(response.data);
         selectedQus = selectedQues(quesList: questions.value!.qAList!.toList());
+        // if (selectedQus != null) {
+        //   Get.to(Question(
+        //     correctAnswer: correctAnswer,
+        //     quesList: finalQuesAns,
+        //     isGoingtoTest: false,
+        //   ));
+        // }
       }
     } catch (e) {
       print(e.toString());
     }
     update();
-    return selectedQus;
   }
 
   List selectedQues({required List quesList}) {
@@ -167,7 +174,16 @@ class CmeProgramController extends GetxController {
     for (int i = 0; i < 15; i++) {
       tempp.add(quesList[i]);
     }
+    correctAnswers(quesList: tempp);
     return createQuesData(quesList: tempp);
+  }
+
+  Map correctAnswer = {};
+  correctAnswers({required List quesList}) {
+    for (int i = 0; i < quesList.length; i++) {
+      correctAnswer[i + 1] = quesList[i].aNS;
+    }
+    print(correctAnswer);
   }
 
   var finalQuesAns;
@@ -176,7 +192,12 @@ class CmeProgramController extends GetxController {
     for (var i = 0; i < quesList.length; i++) {
       temp.add(quesList[i].qN.split('\r'));
     }
-    // print(temp[0].message.toString());
-   finalQuesAns= temp;
+
+    finalQuesAns = temp;
+    Get.to(Question(
+      correctAnswer: correctAnswer,
+      quesList: finalQuesAns,
+      isGoingtoTest: false,
+    ));
   }
 }

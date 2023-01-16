@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,9 +27,9 @@ class QuestionController extends GetxController {
 
   @override
   void onInit() async {
-    // _startTimer(600);
-    // startPhotoTimer(600);
-    // _cameras = await availableCameras();
+    _startTimer(600);
+    startPhotoTimer(600);
+    _cameras = await availableCameras();
 
     super.onInit();
 
@@ -83,10 +82,10 @@ class QuestionController extends GetxController {
 
       print(
           'kitttttttttttttttttttttttttttttttttttttttttttttttttttiiiiiiiiiiiiiiiiiii');
-      Get.defaultDialog(content: Image.file(File(image!.path)));
+      // Get.defaultDialog(content: Image.file(File(image!.path)));
 
-      imageList.add(image!.path);
-      print(imageList.toList());
+      // imageList.add(image!.path);
+      // print(imageList.toList());
     }
   }
 
@@ -96,7 +95,7 @@ class QuestionController extends GetxController {
     timer = Timer.periodic(duration, (timer) {
       if (remainingSeconds == 0) {
         timer.cancel();
-        completeTest(false);
+        completeTest(isGoingtoTest: false);
       } else {
         minutes.value = remainingSeconds ~/ 60;
         int seconds = (remainingSeconds % 60);
@@ -104,6 +103,7 @@ class QuestionController extends GetxController {
             ":" +
             seconds.toString().padLeft(2, "0");
         remainingSeconds--;
+        // print(seconds);
       }
     });
   }
@@ -140,13 +140,14 @@ class QuestionController extends GetxController {
   // final prefs =  SharedPreferences.getInstance();
   PageController pageController = PageController(initialPage: 0);
   int pageChange = 0;
-  bool optionA = false;
-  bool optionB = false;
-  bool optionC = false;
-  bool optionD = false;
-  String selectedOption = '';
+  var optionA = false.obs;
+  var optionB = false.obs;
+  var optionC = false.obs;
+  var optionD = false.obs;
+  var selectedOption = ''.obs;
 
   Map answers = {};
+  Map correctAnswer = {};
 
   void pagechange() {
     if (pageChange > 0) {
@@ -157,68 +158,6 @@ class QuestionController extends GetxController {
     }
   }
 
-  List<Question> questionlist = [
-    Question(
-        question: "Coracobrachialis is pierced by which never?",
-        optionA: "Axillary",
-        optionB: "Median",
-        optionC: "Musculocutaneous",
-        optionD: "Ulnar"),
-    Question(
-        question: "Another Question 2?",
-        optionA: "optionA",
-        optionB: "optionB",
-        optionC: "optionC",
-        optionD: "optionD"),
-    Question(
-        question: "Another Question3 ?",
-        optionA: "optionA",
-        optionB: "optionB",
-        optionC: "optionC",
-        optionD: "optionD"),
-    Question(
-        question: "Another Question4 ?",
-        optionA: "optionA",
-        optionB: "optionB",
-        optionC: "optionC",
-        optionD: "optionD"),
-    Question(
-        question: "Another Question5 ?",
-        optionA: "optionA",
-        optionB: "optionB",
-        optionC: "optionC",
-        optionD: "optionD"),
-    Question(
-        question: "Another Question6 ?",
-        optionA: "optionA",
-        optionB: "optionB",
-        optionC: "optionC",
-        optionD: "optionD"),
-    Question(
-        question: "Another Question7 ?",
-        optionA: "optionA",
-        optionB: "optionB",
-        optionC: "optionC",
-        optionD: "optionD"),
-    Question(
-        question: "Another Question8 ?",
-        optionA: "optionA",
-        optionB: "optionB",
-        optionC: "optionC",
-        optionD: "optionD"),
-    Question(
-        question: "Another Question9 ?",
-        optionA: "optionA",
-        optionB: "optionB",
-        optionC: "optionC",
-        optionD: "optionD"),
-    Question(
-        question: "Another Question10 ?",
-        optionA: "optionA",
-        optionB: "optionB",
-        optionC: "optionC",
-        optionD: "optionD")
-  ];
   cancelTest(bool isGoingtoTest) {
     Get.defaultDialog(
       barrierDismissible: false,
@@ -245,7 +184,10 @@ class QuestionController extends GetxController {
                 borderRadius: BorderRadius.circular(30),
               )),
           onPressed: () {
-            timer!.cancel();
+            if (timer != null) {
+              timer!.cancel();
+            }
+
             isGoingtoTest == true
                 ? Get.offAll(TestScreen())
                 : Get.offAll(Onlinecmeprogram());
@@ -269,7 +211,9 @@ class QuestionController extends GetxController {
     );
   }
 
-  completeTest(bool isGoingtoTest) {
+  completeTest({bool? isGoingtoTest, input, correctAns, selectedOptio}) {
+    answers[pageChange + 1] = selectedOptio;
+    print(answers);
     Get.defaultDialog(
       barrierDismissible: false,
       cancel: ElevatedButton(
@@ -295,10 +239,11 @@ class QuestionController extends GetxController {
                 borderRadius: BorderRadius.circular(30),
               )),
           onPressed: () {
-            timer!.cancel();
+            if (timer != null) timer!.cancel();
             isGoingtoTest == true
                 ? Get.offAll(TestScreen())
                 : Get.offAll(Onlinecmeprogram());
+            testResult(correctAns: correctAns, input: input);
           },
           child: Text(
             'OK',
@@ -306,13 +251,13 @@ class QuestionController extends GetxController {
               fontFamily: "Nunito",
             ),
           )),
-      title: 'Complete',
+      title: 'Are you sure',
       titleStyle: TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.bold,
         fontFamily: "Nunito",
       ),
-      middleText: 'Test Completed Successfully',
+      middleText: 'Do you want to submit the test paper',
       middleTextStyle: TextStyle(
         fontFamily: "Nunito",
       ),
@@ -327,6 +272,32 @@ class QuestionController extends GetxController {
           mcqData.value = QuestionsAnsList.fromJson(jsonDecode(response.data));
         }
       } catch (e) {}
+    }
+  }
+
+  void testResult({input, correctAns}) {
+    var count = 0;
+    print(input);
+    print(correctAns);
+    for (int i = 0; i < correctAns.length; i++) {
+      if (input[i] == correctAns[i]) {
+        count = count + 1;
+      }
+    }
+    if (count >= 10) {
+      Get.snackbar(
+        "Test Pass",
+        "Well done you are pass your test",
+        colorText: Colors.white,
+        backgroundColor: Colors.black,
+      );
+    } else {
+      Get.snackbar(
+        "Test Faild",
+        "Take your test ones more",
+        colorText: Colors.white,
+        backgroundColor: Colors.black,
+      );
     }
   }
 

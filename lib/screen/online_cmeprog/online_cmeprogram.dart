@@ -52,8 +52,9 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
   @override
   void dispose() {
     // TODO: implement dispose
-    controller!.dispose();
+
     super.dispose();
+    controller!.dispose();
   }
 
   @override
@@ -327,8 +328,7 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                             index: index,
                                           )),
                                           child: Container(
-                                            height: context.height * .17,
-                                            // width: context.width * .15,
+                                            height: context.height * .23,
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(10.0)),
@@ -337,107 +337,236 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                 width: 1,
                                               ),
                                             ),
-                                            child: Row(
+                                            child: Stack(
                                               children: [
-                                                Column(
+                                                Row(
                                                   children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                                // color:
-                                                                // Colors.black,
+                                                    Column(
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child: Container(
+                                                            decoration: BoxDecoration(
                                                                 borderRadius: BorderRadius
                                                                     .all(Radius
                                                                         .circular(
                                                                             5))),
-                                                        width:
-                                                            context.width * .2,
-                                                        height: context.height *
-                                                            0.1,
-                                                        child: Image.network(
-                                                            // 'http://www.emed.co.in/Upload/ChnlPart_HdrFtr/Thumbnails/V201501190947507412111197010.jpeg'
-                                                            cmeProgramController
-                                                                .allCmeVideos
-                                                                .value!
-                                                                .videoList![
-                                                                    index]
-                                                                .videothambnails
-                                                                .toString()
-                                                                .replaceAll(
-                                                                    'https',
-                                                                    'http')),
-                                                      ),
+                                                            width:
+                                                                context.width *
+                                                                    .2,
+                                                            height:
+                                                                context.height *
+                                                                    0.1,
+                                                            child:
+                                                                Image.network(
+                                                                    // 'http://www.emed.co.in/Upload/ChnlPart_HdrFtr/Thumbnails/V201501190947507412111197010.jpeg'
+                                                                    cmeProgramController
+                                                                        .allCmeVideos
+                                                                        .value!
+                                                                        .videoList![
+                                                                            index]
+                                                                        .videothambnails
+                                                                        .toString()
+                                                                        .replaceAll(
+                                                                            'https',
+                                                                            'http')),
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 8,
+                                                                  right: 8),
+                                                          child: Text(
+                                                            "${cmeProgramController.allCmeVideos.value!.videoList![index].videoTimingHour} h",
+                                                            style: TextStyle(
+                                                              // fontSize: 18,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontFamily:
+                                                                  "Nunito",
+                                                              // color: Colors.blue.shade700,
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      width: 5,
                                                     ),
                                                     Padding(
                                                       padding:
                                                           const EdgeInsets.only(
-                                                              left: 8,
-                                                              right: 8),
-                                                      child: Text(
-                                                        "${cmeProgramController.allCmeVideos.value!.videoList![index].videoTimingHour} h",
-                                                        style: TextStyle(
-                                                          // fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontFamily: "Nunito",
-                                                          // color: Colors.blue.shade700,
-                                                        ),
+                                                              top: 15),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Container(
+                                                            width:
+                                                                context.width *
+                                                                    0.49,
+                                                            child: Text(
+                                                              cmeProgramController
+                                                                  .allCmeVideos
+                                                                  .value!
+                                                                  .videoList![
+                                                                      index]
+                                                                  .videoName
+                                                                  .toString(),
+                                                              maxLines: 2,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .fade,
+                                                              style: TextStyle(
+                                                                fontSize: 18,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontFamily:
+                                                                    "Nunito",
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            'For all ${cmeProgramController.allCmeVideos.value!.videoList![index].speakerSpecialty} Practitioner',
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .fade,
+                                                            maxLines: 1,
+                                                            style: TextStyle(
+                                                              fontSize: 16,
+                                                              fontFamily:
+                                                                  "Nunito",
+                                                            ),
+                                                          ),
+                                                          // SizedBox(
+                                                          //   height: 5,
+                                                          // ),
+                                                          Spacer(),
+                                                        ],
                                                       ),
-                                                    )
+                                                    ),
+                                                    Spacer(),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 10,
+                                                              top: 8),
+                                                      child: Column(
+                                                        children: [
+                                                          Text(
+                                                            "${cmeProgramController.allCmeVideos.value!.videoList![index].creditPoint} Credit\n Point",
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontFamily:
+                                                                  "Nunito",
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 30,
+                                                          ),
+                                                          InkWell(
+                                                            onTap: () async {
+                                                              cmeProgramController.getAllQuestionsData(
+                                                                  cmeProgramController
+                                                                      .allCmeVideos
+                                                                      .value!
+                                                                      .videoList![
+                                                                          index]
+                                                                      .videoId);
+                                                              // if (cmeProgramController
+                                                              //     .finalQuesAns
+                                                              //     .isNotEmpty) {
+                                                              //   Get.to(Question(
+                                                              //     correctAnswer:
+                                                              //         cmeProgramController
+                                                              //             .correctAnswer,
+                                                              //     quesList:
+                                                              //         cmeProgramController
+                                                              //             .finalQuesAns,
+                                                              //     isGoingtoTest:
+                                                              //         false,
+                                                              //   ));
+                                                              // }
+                                                            },
+                                                            child: Container(
+                                                              decoration: BoxDecoration(
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: Color.fromARGB(
+                                                                          255,
+                                                                          98,
+                                                                          84,
+                                                                          84),
+                                                                      blurRadius:
+                                                                          15.0, // soften the shadow
+                                                                      spreadRadius:
+                                                                          5.0, //extend the shadow
+                                                                      offset:
+                                                                          Offset(
+                                                                        5.0, // Move to right 5  horizontally
+                                                                        5.0, // Move to bottom 5 Vertically
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                  color: Colors
+                                                                      .black,
+                                                                  borderRadius:
+                                                                      BorderRadius.all(
+                                                                          Radius.circular(
+                                                                              5)),
+                                                                  shape: BoxShape
+                                                                      .rectangle),
+                                                              height: 50,
+                                                              width: context
+                                                                      .width *
+                                                                  0.15,
+                                                              child: Center(
+                                                                child: Text(
+                                                                  "Take\nTest",
+                                                                  style: TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      fontFamily:
+                                                                          "Nunito",
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    // Text(
+                                                    //     'Approved by : Karnataka Medical council')
                                                   ],
                                                 ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 15),
+                                                Positioned(
+                                                  bottom: 3,
+                                                  left: 10,
                                                   child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
                                                     children: [
-                                                      Container(
-                                                        width: context.width *
-                                                            0.49,
-                                                        child: Text(
-                                                          cmeProgramController
-                                                              .allCmeVideos
-                                                              .value!
-                                                              .videoList![index]
-                                                              .videoName
-                                                              .toString(),
-                                                          maxLines: 2,
-                                                          overflow:
-                                                              TextOverflow.fade,
-                                                          style: TextStyle(
-                                                            fontSize: 18,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontFamily:
-                                                                "Nunito",
-                                                          ),
-                                                        ),
-                                                      ),
                                                       Text(
-                                                        'For all ${cmeProgramController.allCmeVideos.value!.videoList![index].speakerSpecialty} students',
-                                                        overflow:
-                                                            TextOverflow.fade,
-                                                        maxLines: 1,
+                                                        "Approved by : Karnataka Medical Council",
                                                         style: TextStyle(
-                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w500,
                                                           fontFamily: "Nunito",
                                                         ),
                                                       ),
-                                                      // SizedBox(
-                                                      //   height: 5,
-                                                      // ),
-                                                      Spacer(),
+                                                      SizedBox(
+                                                        height: 1.5,
+                                                      ),
                                                       Text(
                                                         "Speaker : ${cmeProgramController.allCmeVideos.value!.videoList![index].speakerName}"
                                                             .toString(),
@@ -451,101 +580,6 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                     ],
                                                   ),
                                                 ),
-                                                Spacer(),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 10, top: 8),
-                                                  child: Column(
-                                                    children: [
-                                                      Text(
-                                                        "${cmeProgramController.allCmeVideos.value!.videoList![index].creditPoint} Point",
-                                                        style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontFamily: "Nunito",
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 30,
-                                                      ),
-                                                      InkWell(
-                                                        onTap: () async {
-                                                          var finalQues = cmeProgramController
-                                                              .getAllQuestionsData(
-                                                                  cmeProgramController
-                                                                      .allCmeVideos
-                                                                      .value!
-                                                                      .videoList![
-                                                                          index]
-                                                                      .videoId);
-                                                          // print(finalQues
-                                                          //     .toString());
-
-                                                          Timer.periodic(
-                                                              Duration(
-                                                                  seconds: 30),
-                                                              (timer) {
-                                                            Get.to(Question(
-                                                              quesList:
-                                                                  cmeProgramController
-                                                                      .finalQuesAns,
-                                                              isGoingtoTest:
-                                                                  false,
-                                                            ));
-                                                          });
-                                                        },
-                                                        child: Container(
-                                                          decoration: BoxDecoration(
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          98,
-                                                                          84,
-                                                                          84),
-                                                                  blurRadius:
-                                                                      15.0, // soften the shadow
-                                                                  spreadRadius:
-                                                                      5.0, //extend the shadow
-                                                                  offset:
-                                                                      Offset(
-                                                                    5.0, // Move to right 5  horizontally
-                                                                    5.0, // Move to bottom 5 Vertically
-                                                                  ),
-                                                                )
-                                                              ],
-                                                              color:
-                                                                  Colors.black,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .all(Radius
-                                                                          .circular(
-                                                                              5)),
-                                                              shape: BoxShape
-                                                                  .rectangle),
-                                                          height: 50,
-                                                          width: context.width *
-                                                              0.15,
-                                                          child: Center(
-                                                            child: Text(
-                                                              "Take\nTest",
-                                                              style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  fontFamily:
-                                                                      "Nunito",
-                                                                  color: Colors
-                                                                      .white),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                )
                                               ],
                                             ),
                                           ),

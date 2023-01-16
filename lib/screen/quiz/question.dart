@@ -7,12 +7,13 @@ import '../online_cmeprog/online_cmeprogram.dart';
 
 class Question extends StatefulWidget {
   final bool isGoingtoTest;
-
+  final correctAnswer;
   final quesList;
   Question({
     Key? key,
     required this.isGoingtoTest,
     this.quesList,
+    this.correctAnswer,
   }) : super(key: key);
 
   @override
@@ -25,19 +26,22 @@ class _QuestionState extends State<Question> {
 
   var finalQuesList;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    // qController.takePicture();
-    // cmeProgramControll.getAllQuestionsData(widget.videoId);
-    finalQuesList = widget.quesList;
-  }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   // qController.takePicture();
+  //   // cmeProgramControll.getAllQuestionsData(widget.videoId);
+
+  //   // storeCorrectAns();
+  // }
 
   @override
   Widget build(BuildContext context) {
+    finalQuesList = widget.quesList;
     // if (qController.cameraController.value.isInitialized)
     print(finalQuesList);
+    print(widget.correctAnswer);
     print('============================================================');
 
     return WillPopScope(
@@ -49,7 +53,6 @@ class _QuestionState extends State<Question> {
         } else {
           Get.defaultDialog(
             title: 'Are you sure',
-
             confirm: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
@@ -68,7 +71,6 @@ class _QuestionState extends State<Question> {
                     fontFamily: "Nunito",
                   ),
                 )),
-
             cancel: ElevatedButton(
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
@@ -85,38 +87,10 @@ class _QuestionState extends State<Question> {
                 ),
               ),
             ),
-
             middleText: "Your answers will be countable",
             middleTextStyle: TextStyle(
               fontFamily: "Nunito",
             ),
-            //  Column(
-            //   children: [
-            //     const Text('Are you Sure!'),
-            //     Row(
-            //       children: [
-            //         Padding(
-            //           padding: const EdgeInsets.all(8.0),
-            //           child: ButtonWidget(
-            //               text: 'Back',
-            //               onClicked: () {
-            //                 Get.back();
-            //               }),
-            //         ),
-            //         Spacer(),
-            //         Padding(
-            //           padding: const EdgeInsets.all(8.0),
-            //           child: ButtonWidget(
-            //               text: 'Exit',
-            //               onClicked: () {
-            //                 // Future.value(true);
-
-            //               }),
-            //         ),
-            //       ],
-            //     )
-            //   ],
-            // )
           );
         }
         return Future.value(false);
@@ -132,15 +106,6 @@ class _QuestionState extends State<Question> {
               appBar: AppBar(
                 automaticallyImplyLeading: true,
                 actions: [
-                  // Obx(() => Padding(
-                  //       padding: const EdgeInsets.only(right: 10, top: 15),
-                  //       child: Text("${qController.min.toString()}",
-                  //           style: TextStyle(
-                  //               fontFamily: "Nunito",
-                  //               color: Colors.black87,
-                  //               fontWeight: FontWeight.w600,
-                  //               fontSize: 16)),
-                  //     )),
                   Obx(() => Padding(
                         padding: const EdgeInsets.only(right: 15, top: 18),
                         child: Text(qController.time.value,
@@ -197,7 +162,7 @@ class _QuestionState extends State<Question> {
                                   : context.height * 0.6,
                               child: PageView.builder(
                                 // scrollDirection: Axis.vertical,
-                                // physics: NeverScrollableScrollPhysics(),
+                                physics: NeverScrollableScrollPhysics(),
                                 controller: qController.pageController,
 
                                 onPageChanged: (index) {
@@ -207,465 +172,455 @@ class _QuestionState extends State<Question> {
                                 },
                                 itemCount: finalQuesList.length,
                                 itemBuilder: (context, index) {
-                                  return Container(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(18.0),
-                                          child: Text(
-                                            finalQuesList[index][0]
-                                                .toString()
-                                                .replaceAll(
-                                                    new RegExp(r'[<p></p>]+'),
-                                                    ''),
-                                            maxLines: 2,
-                                            style: TextStyle(
-                                                fontSize: 20.0,
-                                                fontFamily: "Nunito",
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            qController.optionA = true;
-                                            qController.optionB = false;
-                                            qController.optionC = false;
-                                            qController.optionD = false;
-                                            qController.selectedOption = 'A';
-                                            qController.update();
-                                          },
-                                          child: Row(
-                                            children: [
-                                              Container(
-                                                margin:
-                                                    EdgeInsets.only(left: 18.0),
-                                                height: 80,
-                                                width: 40,
-                                                decoration: BoxDecoration(
-                                                    color: qController.answers[
-                                                                    qController
-                                                                            .pageChange +
-                                                                        1] ==
-                                                                'A' ||
-                                                            qController.optionA
-                                                        ? Color(0xff32D774)
-                                                        : Colors.white,
-                                                    border: Border.all(
-                                                      // width: ,
-                                                      color: Colors.grey,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      topLeft:
-                                                          Radius.circular(10),
-                                                      bottomLeft:
-                                                          Radius.circular(10),
-                                                    )),
-                                                child: Center(
-                                                    child: Text(
-                                                  "A",
-                                                  style: TextStyle(
-                                                    fontSize: 20,
+                                  return Obx(() => Container(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(18.0),
+                                              child: Text(
+                                                finalQuesList[index][0]
+                                                    .toString()
+                                                    .replaceAll(
+                                                        new RegExp(
+                                                            r'[<p></p>]+'),
+                                                        ''),
+                                                maxLines: 2,
+                                                style: TextStyle(
+                                                    fontSize: 20.0,
                                                     fontFamily: "Nunito",
-                                                  ),
-                                                )),
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                              Container(
-                                                margin: EdgeInsets.all(0.0),
-                                                height: 80,
-                                                width: context.width * 0.8,
-                                                decoration: BoxDecoration(
-                                                    // color: Colors.orange,
-                                                    border: Border.all(
-                                                      // width: ,
-                                                      color: Colors.grey,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      topRight:
-                                                          Radius.circular(5),
-                                                      bottomRight:
-                                                          Radius.circular(5),
-                                                    )),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                    left: 10.0,
-                                                    // top: 10.0
-                                                  ),
-                                                  child: Text(
-                                                    finalQuesList[index][1]
-                                                        .toString()
-                                                        .replaceAll(
-                                                            new RegExp(
-                                                                r'[<p></p>]+'),
-                                                            ''),
-                                                    maxLines: 3,
-                                                    style: TextStyle(
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                qController.optionA.value =
+                                                    true;
+                                                qController.optionB.value =
+                                                    false;
+                                                qController.optionC.value =
+                                                    false;
+                                                qController.optionD.value =
+                                                    false;
+                                                qController
+                                                    .selectedOption.value = 'a';
+                                                qController.update();
+                                              },
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        left: 18.0),
+                                                    height: 80,
+                                                    width: 40,
+                                                    decoration: BoxDecoration(
+                                                        color: qController.answers[
+                                                                        qController.pageChange +
+                                                                            1] ==
+                                                                    'a' ||
+                                                                qController
+                                                                    .optionA
+                                                                    .value
+                                                            ? Colors.redAccent
+                                                            : Colors.white,
+                                                        border: Border.all(
+                                                          // width: ,
+                                                          color: Colors.grey,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  10),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  10),
+                                                        )),
+                                                    child: Center(
+                                                        child: Text(
+                                                      "A",
+                                                      style: TextStyle(
+                                                        fontSize: 20,
                                                         fontFamily: "Nunito",
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            qController.optionA = false;
-                                            qController.optionB = true;
-                                            qController.optionC = false;
-                                            qController.optionD = false;
-                                            // qController.selectedOption = true;
-                                            qController.selectedOption = 'B';
-                                            qController.update();
-                                          },
-                                          child: Row(
-                                            children: [
-                                              Container(
-                                                margin:
-                                                    EdgeInsets.only(left: 18.0),
-                                                height: 80,
-                                                width: 40,
-                                                decoration: BoxDecoration(
-                                                    color: qController.answers[
-                                                                    qController
-                                                                            .pageChange +
-                                                                        1] ==
-                                                                'B' ||
-                                                            qController.optionB
-                                                        // &&  qController.selectedOption == true
-                                                        ? Color(0xff32D774)
-                                                        : Colors.white,
-                                                    border: Border.all(
-                                                      // width: ,
-                                                      color: Colors.grey,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      topLeft:
-                                                          Radius.circular(10),
-                                                      bottomLeft:
-                                                          Radius.circular(10),
+                                                      ),
                                                     )),
-                                                child: Center(
-                                                    child: Text(
-                                                  "B",
-                                                  style: TextStyle(
-                                                    fontSize: 20,
-                                                    fontFamily: "Nunito",
                                                   ),
-                                                )),
-                                              ),
-                                              Container(
-                                                margin: EdgeInsets.all(0.0),
-                                                height: 80,
-                                                width: context.width * 0.8,
-                                                decoration: BoxDecoration(
-                                                    // color: Colors.orange,
-                                                    border: Border.all(
-                                                      // width: ,
-                                                      color: Colors.grey,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      topRight:
-                                                          Radius.circular(5),
-                                                      bottomRight:
-                                                          Radius.circular(5),
-                                                    )),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                    left: 10.0,
-                                                  ),
-                                                  child: Text(
-                                                    finalQuesList[index][2]
-                                                        .toString()
-                                                        .replaceAll(
-                                                            new RegExp(
-                                                                r'[<p></p>]+'),
-                                                            ''),
-                                                    maxLines: 3,
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily: "Nunito",
-                                                        fontSize: 16),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            qController.optionA = false;
-                                            qController.optionB = false;
-                                            qController.optionC = true;
-                                            qController.optionD = false;
-                                            // qController.selectedOption = true;
-                                            qController.selectedOption = 'C';
-                                            qController.update();
-                                          },
-                                          child: Row(
-                                            children: [
-                                              Container(
-                                                margin:
-                                                    EdgeInsets.only(left: 18.0),
-                                                height: 80,
-                                                width: 40,
-                                                decoration: BoxDecoration(
-                                                    color: qController.answers[
-                                                                    qController
-                                                                            .pageChange +
-                                                                        1] ==
-                                                                'C' ||
-                                                            qController.optionC
-                                                        //  ||  qController.selectedOption == true
-                                                        ? Color(0xff32D774)
-                                                        : Colors.white,
-                                                    border: Border.all(
-                                                      // width: ,
-                                                      color: Colors.grey,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      topLeft:
-                                                          Radius.circular(10),
-                                                      bottomLeft:
-                                                          Radius.circular(10),
-                                                    )),
-                                                child: Center(
-                                                    child: Text(
-                                                  "C",
-                                                  style: TextStyle(
-                                                    fontSize: 20,
-                                                    fontFamily: "Nunito",
-                                                  ),
-                                                )),
-                                              ),
-                                              Container(
-                                                margin: EdgeInsets.all(0.0),
-                                                height: 80,
-                                                width: context.width * 0.8,
-                                                decoration: BoxDecoration(
-                                                    // color: Colors.orange,
-                                                    border: Border.all(
-                                                      // width: ,
-                                                      color: Colors.grey,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      topRight:
-                                                          Radius.circular(5),
-                                                      bottomRight:
-                                                          Radius.circular(5),
-                                                    )),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                    left: 10.0,
-                                                  ),
-                                                  child: Text(
-                                                    finalQuesList[index][3]
-                                                        .toString()
-                                                        .replaceAll(
-                                                            new RegExp(
-                                                                r'[<p></p>]+'),
-                                                            ''),
-                                                    maxLines: 3,
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily: "Nunito",
-                                                        fontSize: 16),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            qController.optionA = false;
-                                            qController.optionB = false;
-                                            qController.optionC = false;
-                                            qController.optionD = true;
-                                            qController.selectedOption = 'D';
-                                            // qController.selectedOption = true;
-                                            qController.update();
-                                          },
-                                          child: Row(
-                                            children: [
-                                              Container(
-                                                margin:
-                                                    EdgeInsets.only(left: 18.0),
-                                                height: 80,
-                                                width: 40,
-                                                decoration: BoxDecoration(
-                                                    color: qController.answers[
-                                                                    qController
-                                                                            .pageChange +
-                                                                        1] ==
-                                                                'D' ||
-                                                            qController.optionD
-                                                        ? Color(0xff32D774)
-                                                        : Colors.white,
-                                                    border: Border.all(
-                                                      color: Colors.grey,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      topLeft:
-                                                          Radius.circular(10),
-                                                      bottomLeft:
-                                                          Radius.circular(10),
-                                                    )),
-                                                child: Center(
-                                                    child: Text(
-                                                  "D",
-                                                  style: TextStyle(
-                                                    fontSize: 20,
-                                                    color: Colors.black,
-                                                    fontFamily: "Nunito",
-                                                  ),
-                                                )),
-                                              ),
-                                              Container(
-                                                margin: EdgeInsets.all(0.0),
-                                                height: 80,
-                                                width: context.width * 0.8,
-                                                decoration: BoxDecoration(
-                                                    // color: Colors.orange,
-                                                    border: Border.all(
-                                                      // width: ,
-                                                      color: Colors.grey,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      topRight:
-                                                          Radius.circular(5),
-                                                      bottomRight:
-                                                          Radius.circular(5),
-                                                    )),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Padding(
+                                                  Container(
+                                                    margin: EdgeInsets.all(0.0),
+                                                    height: 80,
+                                                    width: context.width * 0.8,
+                                                    decoration: BoxDecoration(
+                                                        // color: Colors.orange,
+                                                        border: Border.all(
+                                                          // width: ,
+                                                          color: Colors.grey,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  5),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  5),
+                                                        )),
+                                                    child: Padding(
                                                       padding:
                                                           const EdgeInsets.only(
-                                                              left: 10.0),
-                                                      child: Text(
-                                                        finalQuesList[index][4]
-                                                            .toString()
-                                                            .replaceAll(
-                                                                new RegExp(
-                                                                    r'[<p></p>]+'),
-                                                                ''),
-                                                        maxLines: 3,
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontFamily:
-                                                                "Nunito",
-                                                            fontSize: 16),
+                                                        left: 10.0,
+                                                      ),
+                                                      child: Center(
+                                                        child: Text(
+                                                          finalQuesList[index]
+                                                                  [1]
+                                                              .toString()
+                                                              .replaceAll(
+                                                                  new RegExp(
+                                                                      r'[<p></p>]+'),
+                                                                  '')
+                                                              .substring(3),
+                                                          maxLines: 3,
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontFamily:
+                                                                  "Nunito",
+                                                              fontSize: 16),
+                                                        ),
                                                       ),
                                                     ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                qController.optionA.value =
+                                                    false;
+                                                qController.optionB.value =
+                                                    true;
+                                                qController.optionC.value =
+                                                    false;
+                                                qController.optionD.value =
+                                                    false;
+                                                // qController.selectedOption = true;
+                                                qController
+                                                    .selectedOption.value = 'b';
+                                                qController.update();
+                                              },
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        left: 18.0),
+                                                    height: 80,
+                                                    width: 40,
+                                                    decoration: BoxDecoration(
+                                                        color: qController.answers[
+                                                                        qController.pageChange +
+                                                                            1] ==
+                                                                    'b' ||
+                                                                qController
+                                                                    .optionB
+                                                                    .value
+                                                            // &&  qController.selectedOption == true
+                                                            ? Colors.redAccent
+                                                            : Colors.white,
+                                                        border: Border.all(
+                                                          // width: ,
+                                                          color: Colors.grey,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  10),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  10),
+                                                        )),
+                                                    child: Center(
+                                                        child: Text(
+                                                      "B",
+                                                      style: TextStyle(
+                                                        fontSize: 20,
+                                                        fontFamily: "Nunito",
+                                                      ),
+                                                    )),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.all(0.0),
+                                                    height: 80,
+                                                    width: context.width * 0.8,
+                                                    decoration: BoxDecoration(
+                                                        // color: Colors.orange,
+                                                        border: Border.all(
+                                                          // width: ,
+                                                          color: Colors.grey,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  5),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  5),
+                                                        )),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                        left: 10.0,
+                                                      ),
+                                                      child: Center(
+                                                        child: Text(
+                                                          finalQuesList[index]
+                                                                  [2]
+                                                              .toString()
+                                                              .replaceAll(
+                                                                  new RegExp(
+                                                                      r'[<p></p>]+'),
+                                                                  '')
+                                                              .substring(3),
+                                                          maxLines: 3,
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontFamily:
+                                                                  "Nunito",
+                                                              fontSize: 16),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                qController.optionA.value =
+                                                    false;
+                                                qController.optionB.value =
+                                                    false;
+                                                qController.optionC.value =
+                                                    true;
+                                                qController.optionD.value =
+                                                    false;
+                                                // qController.selectedOption = true;
+                                                qController
+                                                    .selectedOption.value = 'c';
+                                                qController.update();
+                                              },
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        left: 18.0),
+                                                    height: 80,
+                                                    width: 40,
+                                                    decoration: BoxDecoration(
+                                                        color: qController.answers[
+                                                                        qController.pageChange +
+                                                                            1] ==
+                                                                    'c' ||
+                                                                qController
+                                                                    .optionC
+                                                                    .value
+                                                            //  ||  qController.selectedOption == true
+                                                            ? Colors.redAccent
+                                                            : Colors.white,
+                                                        border: Border.all(
+                                                          // width: ,
+                                                          color: Colors.grey,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  10),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  10),
+                                                        )),
+                                                    child: Center(
+                                                        child: Text(
+                                                      "C",
+                                                      style: TextStyle(
+                                                        fontSize: 20,
+                                                        fontFamily: "Nunito",
+                                                      ),
+                                                    )),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.all(0.0),
+                                                    height: 80,
+                                                    width: context.width * 0.8,
+                                                    decoration: BoxDecoration(
+                                                        // color: Colors.orange,
+                                                        border: Border.all(
+                                                          // width: ,
+                                                          color: Colors.grey,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  5),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  5),
+                                                        )),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                        left: 10.0,
+                                                      ),
+                                                      child: Center(
+                                                        child: Text(
+                                                          finalQuesList[index]
+                                                                  [3]
+                                                              .toString()
+                                                              .replaceAll(
+                                                                  new RegExp(
+                                                                      r'[<p></p>]+'),
+                                                                  '')
+                                                              .substring(3),
+                                                          maxLines: 3,
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontFamily:
+                                                                  "Nunito",
+                                                              fontSize: 16),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                qController.optionA.value =
+                                                    false;
+                                                qController.optionB.value =
+                                                    false;
+                                                qController.optionC.value =
+                                                    false;
+                                                qController.optionD.value =
+                                                    true;
+                                                qController
+                                                    .selectedOption.value = 'd';
+                                                // qController.selectedOption = true;
+                                                qController.update();
+                                              },
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        left: 18.0),
+                                                    height: 80,
+                                                    width: 40,
+                                                    decoration: BoxDecoration(
+                                                        color: qController.answers[
+                                                                        qController.pageChange +
+                                                                            1] ==
+                                                                    'd' ||
+                                                                qController
+                                                                    .optionD
+                                                                    .value
+                                                            ? Colors.redAccent
+                                                            : Colors.white,
+                                                        border: Border.all(
+                                                          color: Colors.grey,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  10),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  10),
+                                                        )),
+                                                    child: Center(
+                                                        child: Text(
+                                                      "D",
+                                                      style: TextStyle(
+                                                        fontSize: 20,
+                                                        color: Colors.black,
+                                                        fontFamily: "Nunito",
+                                                      ),
+                                                    )),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.all(0.0),
+                                                    height: 80,
+                                                    width: context.width * 0.8,
+                                                    decoration: BoxDecoration(
+                                                        // color: Colors.orange,
+                                                        border: Border.all(
+                                                          // width: ,
+                                                          color: Colors.grey,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  5),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  5),
+                                                        )),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                        left: 10.0,
+                                                      ),
+                                                      child: Center(
+                                                        child: Text(
+                                                          finalQuesList[index]
+                                                                  [4]
+                                                              .toString()
+                                                              .replaceAll(
+                                                                  new RegExp(
+                                                                      r'[<p></p>]+'),
+                                                                  '')
+                                                              .substring(3),
+                                                          maxLines: 3,
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontFamily:
+                                                                  "Nunito",
+                                                              fontSize: 16),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  );
+                                      ));
                                 },
-
-                                // children: [
-                                //   Container(
-                                //     color: Colors.green,
-                                //   ),
-                                //   Container(
-                                //     color: Colors.blue,
-                                //   ),
-                                //   Container(
-                                //     color: Colors.orange,
-                                //   ),
-                                // ],
-                                // scrollDirection: Axis.horizontal,
-                                // // physics: NeverScrollableScrollPhysics(),
-                                // itemCount: qController.questionlist.length,
-                                // itemBuilder: (context, index) {
-                                //   return SizedBox(
-                                //     height: 400,
-                                //     width: context.width,
-                                //     child: Column(
-                                //       children: [
-                                //         Text(
-                                //             "Question ${qController.questionlist[index].question}"),
-                                //         SizedBox(
-                                //           width: context.width * 0.3,
-                                //           child: ElevatedButton(
-                                //               onPressed: () {
-                                //                 qController.questionlist[index--];
-                                //                 qController.update();
-                                //               },
-                                //               style: ElevatedButton.styleFrom(
-                                //                   primary: Colors.blue.shade700,
-                                //                   shape: RoundedRectangleBorder(
-                                //                     borderRadius:
-                                //                         BorderRadius.circular(30),
-                                //                   )),
-                                //               child: Text("Previous")),
-                                //         ),
-                                //         SizedBox(
-                                //           width: context.width * 0.3,
-                                //           child: GetBuilder<QuestionController>(
-                                //             builder: (_) {
-                                //               return ElevatedButton(
-                                //                   onPressed: () {
-                                //                     if (qController
-                                //                             .questionlist[index] !=
-                                //                         qController
-                                //                                 .questionlist.length -
-                                //                             1) {
-                                //                       qController.questionlist[index++];
-                                //                       print(
-                                //                           "nextbutton:${qController.questionlist[index].optionA}");
-                                //                       qController.update();
-                                //                     }
-                                //                   },
-                                //                   style: ElevatedButton.styleFrom(
-                                //                       primary: Colors.blue.shade700,
-                                //                       shape: RoundedRectangleBorder(
-                                //                         borderRadius:
-                                //                             BorderRadius.circular(30),
-                                //                       )),
-                                //                   child: Text("Next"));
-                                //             }
-                                //           ),
-                                //         ),
-                                //       ],
-                                //     ),
-                                //   );
-
-                                // }
                               )),
                           SizedBox(
                             height: 50,
@@ -686,10 +641,10 @@ class _QuestionState extends State<Question> {
                                       qController.pageChange == 0
                                           ? qController
                                               .cancelTest(widget.isGoingtoTest)
-                                          : qController.optionA = false;
-                                      qController.optionB = false;
-                                      qController.optionC = false;
-                                      qController.optionD = false;
+                                          : qController.optionA.value = false;
+                                      qController.optionB.value = false;
+                                      qController.optionC.value = false;
+                                      qController.optionD.value = false;
                                       qController.pageController.animateToPage(
                                           qController.pageChange > 0
                                               ? --qController.pageChange
@@ -725,19 +680,28 @@ class _QuestionState extends State<Question> {
                                 width: context.width * 0.25,
                                 child: ElevatedButton(
                                     onPressed: () async {
-                                      qController.pageChange == 14
-                                          ? qController.completeTest(
-                                              widget.isGoingtoTest)
-                                          : qController.answers[
+                                      qController.pageChange != 14
+                                          ? qController.answers[
                                                   qController.pageChange + 1] =
                                               qController.selectedOption
-                                                  .toString();
+                                                  .toString()
+                                                  .toLowerCase()
+                                          : qController.completeTest(
+                                              selectedOptio: qController
+                                                  .selectedOption
+                                                  .toString()
+                                                  .toLowerCase(),
+                                              isGoingtoTest:
+                                                  widget.isGoingtoTest,
+                                              correctAns: widget.correctAnswer,
+                                              input: qController.answers);
+
                                       print(qController.answers);
 
-                                      qController.optionA = false;
-                                      qController.optionB = false;
-                                      qController.optionC = false;
-                                      qController.optionD = false;
+                                      qController.optionA.value = false;
+                                      qController.optionB.value = false;
+                                      qController.optionC.value = false;
+                                      qController.optionD.value = false;
                                       qController.pageController.nextPage(
                                           duration: Duration(microseconds: 50),
                                           curve: Curves.bounceInOut);
@@ -781,53 +745,58 @@ class _QuestionState extends State<Question> {
     //   return SizedBox();
   }
 
-  completeTest() {
-    Get.defaultDialog(
-      barrierDismissible: false,
-      cancel: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.black,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30),
-            )),
-        onPressed: () {
-          Get.back();
-        },
-        child: Text(
-          'Cancel',
-          style: TextStyle(
-            fontFamily: "Nunito",
-          ),
-        ),
-      ),
-      confirm: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.black,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              )),
-          onPressed: () {
-            qController.timer!.cancel();
-            widget.isGoingtoTest == true
-                ? Get.offAll(TestScreen())
-                : Get.offAll(Onlinecmeprogram());
-          },
-          child: Text(
-            'OK',
-            style: TextStyle(
-              fontFamily: "Nunito",
-            ),
-          )),
-      title: 'Complete',
-      titleStyle: TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-        fontFamily: "Nunito",
-      ),
-      middleText: 'Test Completed Successfully',
-      middleTextStyle: TextStyle(
-        fontFamily: "Nunito",
-      ),
-    );
-  }
+  // competeTest() {
+  //   Get.defaultDialog(
+  //     barrierDismissible: false,
+  //     cancel: ElevatedButton(
+  //       style: ElevatedButton.styleFrom(
+  //           backgroundColor: Colors.black,
+  //           shape: RoundedRectangleBorder(
+  //             borderRadius: BorderRadius.circular(30),
+  //           )),
+  //       onPressed: () {
+  //         Get.back();
+  //       },
+  //       child: Text(
+  //         'Cancel',
+  //         style: TextStyle(
+  //           fontFamily: "Nunito",
+  //         ),
+  //       ),
+  //     ),
+  //     confirm: ElevatedButton(
+  //         style: ElevatedButton.styleFrom(
+  //             backgroundColor: Colors.black,
+  //             shape: RoundedRectangleBorder(
+  //               borderRadius: BorderRadius.circular(30),
+  //             )),
+  //         onPressed: () {
+  //           qController.timer!.cancel();
+  //           widget.isGoingtoTest == true
+  //               ? Get.offAll(TestScreen())
+  //               : Get.offAll(Onlinecmeprogram());
+  //         },
+  //         child: Text(
+  //           'OK',
+  //           style: TextStyle(
+  //             fontFamily: "Nunito",
+  //           ),
+  //         )),
+  //     title: 'Complete',
+  //     titleStyle: TextStyle(
+  //       fontSize: 20,
+  //       fontWeight: FontWeight.bold,
+  //       fontFamily: "Nunito",
+  //     ),
+  //     middleText: 'Test Completed Successfully',
+  //     middleTextStyle: TextStyle(
+  //       fontFamily: "Nunito",
+  //     ),
+  //   );
+  // }
+
+  // void storeCorrectAns() {
+  //   for (int i = 0; i < widget.quesList.length; i++) {
+  //     // qController.correctAnswer[i+1] = widget.quesList[i].
+
 }
