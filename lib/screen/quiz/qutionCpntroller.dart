@@ -136,7 +136,7 @@ class QuestionController extends GetxController {
     return timerColors.value;
   }
 
-  var tabIndex = 0;
+  var tabIndex = 0.obs;
   // final prefs =  SharedPreferences.getInstance();
   PageController pageController = PageController(initialPage: 0);
   int pageChange = 0;
@@ -145,6 +145,7 @@ class QuestionController extends GetxController {
   var optionC = false.obs;
   var optionD = false.obs;
   var selectedOption = ''.obs;
+  var isSelected = false.obs;
 
   Map answers = {};
   Map correctAnswer = {};
@@ -239,11 +240,12 @@ class QuestionController extends GetxController {
                 borderRadius: BorderRadius.circular(30),
               )),
           onPressed: () {
+            testResult(
+                correctAns: correctAns, input: input, isGOingto: isGoingtoTest);
             if (timer != null) timer!.cancel();
-            isGoingtoTest == true
-                ? Get.offAll(TestScreen())
-                : Get.offAll(Onlinecmeprogram());
-            testResult(correctAns: correctAns, input: input);
+            // isGoingtoTest == true
+            //     ? Get.offAll(TestScreen())
+            //     : Get.offAll(Onlinecmeprogram());
           },
           child: Text(
             'OK',
@@ -275,7 +277,7 @@ class QuestionController extends GetxController {
     }
   }
 
-  void testResult({input, correctAns}) {
+  void testResult({input, correctAns, isGOingto}) {
     var count = 0;
     print(input);
     print(correctAns);
@@ -285,18 +287,61 @@ class QuestionController extends GetxController {
       }
     }
     if (count >= 10) {
-      Get.snackbar(
-        "Test Pass",
-        "Well done you are pass your test",
-        colorText: Colors.white,
-        backgroundColor: Colors.black,
+      Get.defaultDialog(
+        titleStyle: TextStyle(
+          fontFamily: "Nunito",
+        ),
+        middleTextStyle: TextStyle(
+          fontFamily: "Nunito",
+        ),
+        title: 'Congratulations',
+        middleText:
+            'Test pass Successfully\n you are get credit point 1\n you scored $count marks',
+        confirm: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                )),
+            onPressed: () {
+              if (timer != null) timer!.cancel();
+              isGOingto == true
+                  ? Get.offAll(TestScreen())
+                  : Get.offAll(Onlinecmeprogram());
+            },
+            child: Text(
+              'OK',
+              style: TextStyle(
+                fontFamily: "Nunito",
+              ),
+            )),
       );
     } else {
-      Get.snackbar(
-        "Test Faild",
-        "Take your test ones more",
-        colorText: Colors.white,
-        backgroundColor: Colors.black,
+      Get.defaultDialog(
+        title: "Test Faild",
+        middleText: "Take your test ones more\n you scored $count marks",
+
+        confirm: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                )),
+            onPressed: () {
+              if (timer != null) timer!.cancel();
+              isGOingto == true
+                  ? Get.offAll(TestScreen())
+                  : Get.offAll(Onlinecmeprogram());
+            },
+            child: Text(
+              'OK',
+              style: TextStyle(
+                fontFamily: "Nunito",
+              ),
+            )),
+
+        // colorText: Colors.white,
+        // backgroundColor: Colors.black,
       );
     }
   }

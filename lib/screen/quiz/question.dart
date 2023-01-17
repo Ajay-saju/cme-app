@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hslr/screen/online_cmeprog/online_cmeprogram_controller.dart';
 import 'package:hslr/screen/quiz/qutionCpntroller.dart';
 import 'package:hslr/screen/test_screen/testscreen.dart';
+import 'package:image/image.dart';
 import '../online_cmeprog/online_cmeprogram.dart';
 
 class Question extends StatefulWidget {
@@ -47,7 +48,7 @@ class _QuestionState extends State<Question> {
     return WillPopScope(
       onWillPop: () async {
         if (qController.tabIndex != 0) {
-          qController.tabIndex = 0;
+          qController.tabIndex.value = 0;
           qController.update();
           return Future.value(false);
         } else {
@@ -197,6 +198,7 @@ class _QuestionState extends State<Question> {
                                             ),
                                             InkWell(
                                               onTap: () {
+                                                print(qController.answers);
                                                 qController.optionA.value =
                                                     true;
                                                 qController.optionB.value =
@@ -207,6 +209,13 @@ class _QuestionState extends State<Question> {
                                                     false;
                                                 qController
                                                     .selectedOption.value = 'a';
+
+                                                qController.answers[
+                                                    qController.pageChange +
+                                                        1] = qController
+                                                    .selectedOption
+                                                    .toString()
+                                                    .toLowerCase();
                                                 qController.update();
                                               },
                                               child: Row(
@@ -224,7 +233,7 @@ class _QuestionState extends State<Question> {
                                                                 qController
                                                                     .optionA
                                                                     .value
-                                                            ? Colors.redAccent
+                                                            ? Colors.black87
                                                             : Colors.white,
                                                         border: Border.all(
                                                           // width: ,
@@ -243,9 +252,18 @@ class _QuestionState extends State<Question> {
                                                         child: Text(
                                                       "A",
                                                       style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontFamily: "Nunito",
-                                                      ),
+                                                          fontSize: 20,
+                                                          fontFamily: "Nunito",
+                                                          color: qController
+                                                                          .answers[qController
+                                                                              .pageChange +
+                                                                          1] ==
+                                                                      'a' ||
+                                                                  qController
+                                                                      .optionA
+                                                                      .value
+                                                              ? Colors.white
+                                                              : Colors.black),
                                                     )),
                                                   ),
                                                   Container(
@@ -313,6 +331,13 @@ class _QuestionState extends State<Question> {
                                                 // qController.selectedOption = true;
                                                 qController
                                                     .selectedOption.value = 'b';
+
+                                                qController.answers[
+                                                    qController.pageChange +
+                                                        1] = qController
+                                                    .selectedOption
+                                                    .toString()
+                                                    .toLowerCase();
                                                 qController.update();
                                               },
                                               child: Row(
@@ -331,7 +356,7 @@ class _QuestionState extends State<Question> {
                                                                     .optionB
                                                                     .value
                                                             // &&  qController.selectedOption == true
-                                                            ? Colors.redAccent
+                                                            ? Colors.black87
                                                             : Colors.white,
                                                         border: Border.all(
                                                           // width: ,
@@ -352,6 +377,16 @@ class _QuestionState extends State<Question> {
                                                       style: TextStyle(
                                                         fontSize: 20,
                                                         fontFamily: "Nunito",
+                                                        color: qController.answers[
+                                                                        qController.pageChange +
+                                                                            1] ==
+                                                                    'b' ||
+                                                                qController
+                                                                    .optionB
+                                                                    .value
+                                                            // &&  qController.selectedOption == true
+                                                            ? Colors.white
+                                                            : Colors.black87,
                                                       ),
                                                     )),
                                                   ),
@@ -420,6 +455,13 @@ class _QuestionState extends State<Question> {
                                                 // qController.selectedOption = true;
                                                 qController
                                                     .selectedOption.value = 'c';
+
+                                                qController.answers[
+                                                    qController.pageChange +
+                                                        1] = qController
+                                                    .selectedOption
+                                                    .toString()
+                                                    .toLowerCase();
                                                 qController.update();
                                               },
                                               child: Row(
@@ -438,7 +480,7 @@ class _QuestionState extends State<Question> {
                                                                     .optionC
                                                                     .value
                                                             //  ||  qController.selectedOption == true
-                                                            ? Colors.redAccent
+                                                            ? Colors.black87
                                                             : Colors.white,
                                                         border: Border.all(
                                                           // width: ,
@@ -459,6 +501,16 @@ class _QuestionState extends State<Question> {
                                                       style: TextStyle(
                                                         fontSize: 20,
                                                         fontFamily: "Nunito",
+                                                        color: qController.answers[
+                                                                        qController.pageChange +
+                                                                            1] ==
+                                                                    'c' ||
+                                                                qController
+                                                                    .optionC
+                                                                    .value
+                                                            //  ||  qController.selectedOption == true
+                                                            ? Colors.white
+                                                            : Colors.black87,
                                                       ),
                                                     )),
                                                   ),
@@ -526,6 +578,13 @@ class _QuestionState extends State<Question> {
                                                     true;
                                                 qController
                                                     .selectedOption.value = 'd';
+
+                                                qController.answers[
+                                                    qController.pageChange +
+                                                        1] = qController
+                                                    .selectedOption
+                                                    .toString()
+                                                    .toLowerCase();
                                                 // qController.selectedOption = true;
                                                 qController.update();
                                               },
@@ -544,7 +603,7 @@ class _QuestionState extends State<Question> {
                                                                 qController
                                                                     .optionD
                                                                     .value
-                                                            ? Colors.redAccent
+                                                            ? Colors.black87
                                                             : Colors.white,
                                                         border: Border.all(
                                                           color: Colors.grey,
@@ -563,8 +622,16 @@ class _QuestionState extends State<Question> {
                                                       "D",
                                                       style: TextStyle(
                                                         fontSize: 20,
-                                                        color: Colors.black,
                                                         fontFamily: "Nunito",
+                                                        color: qController.answers[
+                                                                        qController.pageChange +
+                                                                            1] ==
+                                                                    'd' ||
+                                                                qController
+                                                                    .optionD
+                                                                    .value
+                                                            ? Colors.white
+                                                            : Colors.black87,
                                                       ),
                                                     )),
                                                   ),
@@ -681,11 +748,12 @@ class _QuestionState extends State<Question> {
                                 child: ElevatedButton(
                                     onPressed: () async {
                                       qController.pageChange != 14
-                                          ? qController.answers[
-                                                  qController.pageChange + 1] =
-                                              qController.selectedOption
-                                                  .toString()
-                                                  .toLowerCase()
+                                          ? null
+                                          //  qController.answers[
+                                          //         qController.pageChange + 1] =
+                                          //     qController.selectedOption
+                                          //         .toString()
+                                          //         .toLowerCase()
                                           : qController.completeTest(
                                               selectedOptio: qController
                                                   .selectedOption
