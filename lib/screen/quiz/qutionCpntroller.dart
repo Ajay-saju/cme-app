@@ -1,11 +1,8 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hslr/models/questions_ans_model.dart';
 import 'package:hslr/screen/test_screen/testscreen.dart';
-import 'package:hslr/services/questions_ans_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../online_cmeprog/online_cmeprogram.dart';
 
@@ -16,10 +13,9 @@ class QuestionController extends GetxController {
   // final firstCamera = _cameras[1];
 
   var isStopTimer = true.obs;
-
   Timer? timer;
   XFile? image;
-  int remainingSeconds = 1;
+
   final time = '00.00'.obs;
   final minutes = 1.obs;
   final timerColors = Colors.black.obs;
@@ -56,18 +52,20 @@ class QuestionController extends GetxController {
 
   @override
   void dispose() {
-    cameraController.dispose();
-    timer!.cancel();
     super.dispose();
-  }
-
-  @override
-  void onClose() {
     if (timer != null) {
       timer!.cancel();
       cameraController.dispose();
     }
+  }
+
+  @override
+  void onClose() {
     super.onClose();
+    if (timer != null) {
+      timer!.cancel();
+      cameraController.dispose();
+    }
   }
 
   takePicture() async {
@@ -89,26 +87,31 @@ class QuestionController extends GetxController {
     }
   }
 
+  int remainingSecond = 1;
+  var isCancelTest = false;
   void _startTimer(int seconds) {
     const duration = Duration(seconds: 1);
-    remainingSeconds = seconds;
+    remainingSecond = seconds;
     timer = Timer.periodic(duration, (timer) {
-      if (remainingSeconds == 0) {
+      if (remainingSecond == 0) {
         timer.cancel();
-        completeTest(isGoingtoTest: false);
+        if (isCancelTest == false) {
+          completeTest(isGoingtoTest: false);
+        }
       } else {
-        minutes.value = remainingSeconds ~/ 60;
-        int seconds = (remainingSeconds % 60);
+        minutes.value = remainingSecond ~/ 60;
+        int seconds = (remainingSecond % 60);
         time.value = minutes.toString().padLeft(2, '0') +
             ":" +
             seconds.toString().padLeft(2, "0");
-        remainingSeconds--;
-        // print(seconds);
+        remainingSecond--;
+        print(seconds);
       }
     });
   }
 
   void startPhotoTimer(int min) {
+    int remainingSeconds = 1;
     const duration = Duration(minutes: 1);
     remainingSeconds = min;
     timer = Timer.periodic(duration, (timer) {
@@ -185,13 +188,22 @@ class QuestionController extends GetxController {
                 borderRadius: BorderRadius.circular(30),
               )),
           onPressed: () {
-            if (timer != null) {
-              timer!.cancel();
-            }
+            remainingSecond = 0;
+            isCancelTest = true;
 
-            isGoingtoTest == true
-                ? Get.offAll(TestScreen())
-                : Get.offAll(Onlinecmeprogram());
+            // if (timer != null) {
+            //   remainingSecond = 0;
+            //   timer!.cancel();
+            //   if (timer!.isActive) {
+            //     print('timer is active');
+            //   }
+            //   print(timer!.isActive);
+            //   cameraController.dispose();
+            // }
+
+            isGoingtoTest == isGoingtoTest
+                ? Get.offAll(Onlinecmeprogram())
+                : Get.offAll(TestScreen());
           },
           child: Text(
             'Yes',
@@ -199,7 +211,7 @@ class QuestionController extends GetxController {
               fontFamily: "Nunito",
             ),
           )),
-      title: 'Alert',
+      title: 'Are you sure ?',
       titleStyle: TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.bold,
@@ -212,8 +224,8 @@ class QuestionController extends GetxController {
     );
   }
 
-  completeTest({bool? isGoingtoTest, input, correctAns, selectedOptio}) {
-    answers[pageChange + 1] = selectedOptio;
+  completeTest({bool? isGoingtoTest, input, correctAns, selectedOption}) {
+    answers[pageChange + 1] = selectedOption;
     print(answers);
     Get.defaultDialog(
       barrierDismissible: false,
@@ -242,7 +254,14 @@ class QuestionController extends GetxController {
           onPressed: () {
             testResult(
                 correctAns: correctAns, input: input, isGOingto: isGoingtoTest);
-            if (timer != null) timer!.cancel();
+            timer!.cancel();
+            remainingSecond = 0;
+            isCancelTest = true;
+            // cameraController.stopImageStream();
+            // cameraController.dispose();
+            // if (timer != null){
+
+            // } timer!.cancel();
             // isGoingtoTest == true
             //     ? Get.offAll(TestScreen())
             //     : Get.offAll(Onlinecmeprogram());
@@ -264,28 +283,33 @@ class QuestionController extends GetxController {
         fontFamily: "Nunito",
       ),
     );
-
-    Rx<QuestionsAnsList> mcqData = QuestionsAnsList().obs;
-    Future<QuestionsAnsList?> getAllMCQdata(String videoId) async {
-      final mcqDataService = QuestionAnsService();
-      try {
-        final response = await mcqDataService.getMCQData(videoId);
-        if (response.statusCode == 200) {
-          mcqData.value = QuestionsAnsList.fromJson(jsonDecode(response.data));
-        }
-      } catch (e) {}
-    }
   }
+
+  // Rx<QuestionsAnsList> mcqData = QuestionsAnsList().obs;
+  //   Future<QuestionsAnsList?> getAllMCQdata(String videoId) async {
+  //     final mcqDataService = QuestionAnsService();
+  //     try {
+  //       final response = await mcqDataService.getMCQData(videoId);
+  //       if (response.statusCode == 200) {
+  //         mcqData.value = QuestionsAnsList.fromJson(jsonDecode(response.data));
+  //       }
+  //     } catch (e) {}
+  //   }
 
   void testResult({input, correctAns, isGOingto}) {
     var count = 0;
     print(input);
     print(correctAns);
-    for (int i = 0; i < correctAns.length; i++) {
-      if (input[i] == correctAns[i]) {
-        count = count + 1;
+    if (correctAns == null) {
+      return;
+    } else {
+      for (int i = 0; i < correctAns.length; i++) {
+        if (input[i] == correctAns[i]) {
+          count = count + 1;
+        }
       }
     }
+
     if (count >= 10) {
       Get.defaultDialog(
         titleStyle: TextStyle(
@@ -304,7 +328,9 @@ class QuestionController extends GetxController {
                   borderRadius: BorderRadius.circular(30),
                 )),
             onPressed: () {
-              if (timer != null) timer!.cancel();
+              // if (timer != null) {
+              //   timer!.cancel();
+              // }
               isGOingto == true
                   ? Get.offAll(TestScreen())
                   : Get.offAll(Onlinecmeprogram());

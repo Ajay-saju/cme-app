@@ -1,11 +1,9 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/dashboard/dashboard.dart';
 import 'package:hslr/screen/online_cmeprog/online_cmeprogram_controller.dart';
 import 'package:hslr/screen/online_cmeprog/video_player_screen.dart';
-import 'package:hslr/screen/quiz/question.dart';
 import 'package:hslr/screen/videoplayerwidget/videoplayerwidget.dart';
 import 'package:video_player/video_player.dart';
 
@@ -49,13 +47,13 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
     //   ..initialize().then((_) => controller!.pause());
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
 
-    super.dispose();
-    controller!.dispose();
-  }
+  //   super.dispose();
+  //   controller!.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {

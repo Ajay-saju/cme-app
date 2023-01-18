@@ -20,8 +20,7 @@ class GetUserDetailsService {
           await dio.get('getpersonaldetails', queryParameters: {"Mid": mid});
       return response;
     } on DioError catch (e) {
-      print(e.
-      message);
+      print(e.message);
       Get.defaultDialog(
           title: 'Something is wrong',
           middleText: "Please try again",

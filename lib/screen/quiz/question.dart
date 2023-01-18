@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/online_cmeprog/online_cmeprogram_controller.dart';
 import 'package:hslr/screen/quiz/qutionCpntroller.dart';
-import 'package:hslr/screen/test_screen/testscreen.dart';
-import 'package:image/image.dart';
-import '../online_cmeprog/online_cmeprogram.dart';
 
 class Question extends StatefulWidget {
   final bool isGoingtoTest;
@@ -52,47 +49,52 @@ class _QuestionState extends State<Question> {
           qController.update();
           return Future.value(false);
         } else {
-          Get.defaultDialog(
-            title: 'Are you sure',
-            confirm: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    )),
-                onPressed: () {
-                  qController.timer!.cancel();
-                  widget.isGoingtoTest == true
-                      ? Get.offAll(TestScreen())
-                      : Get.offAll(Onlinecmeprogram());
-                },
-                child: Text(
-                  'Ok',
-                  style: TextStyle(
-                    fontFamily: "Nunito",
-                  ),
-                )),
-            cancel: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  )),
-              onPressed: () {
-                Get.back();
-              },
-              child: Text(
-                'Cancel',
-                style: TextStyle(
-                  fontFamily: "Nunito",
-                ),
-              ),
-            ),
-            middleText: "Your answers will be countable",
-            middleTextStyle: TextStyle(
-              fontFamily: "Nunito",
-            ),
-          );
+          qController.cancelTest(widget.isGoingtoTest);
+          // Get.defaultDialog(
+          //   title: 'Are you sure',
+          //   confirm: ElevatedButton(
+          //       style: ElevatedButton.styleFrom(
+          //           backgroundColor: Colors.black,
+          //           shape: RoundedRectangleBorder(
+          //             borderRadius: BorderRadius.circular(30),
+          //           )),
+          //       onPressed: () {
+          //         qController.cancelTest(true);
+          //         // if (qController.timer != null) {
+          //         //   // qController.cameraController.stopImageStream();
+          //         // }
+
+          //         // widget.isGoingtoTest == true
+          //         //     ? Get.offAll(TestScreen())
+          //         //     : Get.offAll(Onlinecmeprogram());
+          //       },
+          //       child: Text(
+          //         'Ok',
+          //         style: TextStyle(
+          //           fontFamily: "Nunito",
+          //         ),
+          //       )),
+          //   cancel: ElevatedButton(
+          //     style: ElevatedButton.styleFrom(
+          //         backgroundColor: Colors.black,
+          //         shape: RoundedRectangleBorder(
+          //           borderRadius: BorderRadius.circular(30),
+          //         )),
+          //     onPressed: () {
+          //       Get.back();
+          //     },
+          //     child: Text(
+          //       'Cancel',
+          //       style: TextStyle(
+          //         fontFamily: "Nunito",
+          //       ),
+          //     ),
+          //   ),
+          //   middleText: "Your answers will be countable",
+          //   middleTextStyle: TextStyle(
+          //     fontFamily: "Nunito",
+          //   ),
+          // );
         }
         return Future.value(false);
       },
@@ -755,7 +757,7 @@ class _QuestionState extends State<Question> {
                                           //         .toString()
                                           //         .toLowerCase()
                                           : qController.completeTest(
-                                              selectedOptio: qController
+                                              selectedOption: qController
                                                   .selectedOption
                                                   .toString()
                                                   .toLowerCase(),
