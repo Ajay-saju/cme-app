@@ -133,7 +133,8 @@ class _DashboardState extends State<Dashboard> {
             key:DashboardController.drawerKey,
             drawer: const BottomDrawer(),
             body: SafeArea(
-              child: dashboardController.userCmeVideoPurchese == null &&
+              child:
+               dashboardController.userCmeVideoPurchese == null &&
                       dashboardController.userCmeVideo == null &&
                       dashboardController.userCmeVideoLastTest == null &&
                       dashboardController.profilePick == null

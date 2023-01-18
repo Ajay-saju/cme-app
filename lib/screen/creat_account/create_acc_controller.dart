@@ -72,6 +72,25 @@ class CreateAccountController extends GetxController {
         Timer(Duration(seconds: 2), () {
           Get.offAll(Login());
         });
+
+        if (response.data.massage == 'failed') {
+          Get.defaultDialog(
+              title: 'Failed',
+              middleText:
+                  "Mobile Number Already Exists Use Your Login Credentials to Login",
+              middleTextStyle: TextStyle(
+                fontFamily: "Nunito",
+                color: Colors.black87,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+              titleStyle: TextStyle(
+                fontFamily: "Nunito",
+                color: Colors.black87,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ));
+        }
       }
     } catch (e) {
       print(e.toString());

@@ -11,6 +11,10 @@ class QuestionController extends GetxController {
   late CameraController cameraController;
   final prefs = SharedPreferences.getInstance();
   // final firstCamera = _cameras[1];
+  var isSelectedOptionA = 0.obs;
+  var isSelectedOptionB = 0.obs;
+  var isSelectedOptionC = 0.obs;
+  var isSelectedOptionD = 0.obs;
 
   var isStopTimer = true.obs;
   Timer? timer;
@@ -68,6 +72,14 @@ class QuestionController extends GetxController {
     }
   }
 
+  changeSelectedOPtion(isSelectedOption) {
+    if (isSelectedOption == 0) {
+      isSelectedOption.value = 1;
+    } else {
+      isSelectedOption.value = 0;
+    }
+  }
+
   takePicture() async {
     if (cameraController.value.isInitialized) {
       try {
@@ -105,7 +117,7 @@ class QuestionController extends GetxController {
             ":" +
             seconds.toString().padLeft(2, "0");
         remainingSecond--;
-        print(seconds);
+        // print(seconds);
       }
     });
   }

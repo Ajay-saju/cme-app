@@ -270,7 +270,7 @@ class _CreateAccountState extends State<CreateAccount> {
                             keyboardType: TextInputType.text,
                             controller: accountController.regno,
                             validator: (value) {
-                              if (value!.isNotEmpty && value.length > 9) {
+                              if (value!.isNotEmpty && value.length > 1) {
                                 return null;
                               } else if (value.length < 1 && value.isNotEmpty) {
                                 return "Your Reg No Is Short";
