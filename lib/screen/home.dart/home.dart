@@ -126,37 +126,38 @@ class _HomeState extends State<Home> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(
-                                            top: 50.0, left: 20.0),
+                                            top: 20.0, left: 20.0),
                                         child: Column(
                                           children: [
-                                            // Text(
-                                            //   "Last Logged in",
-                                            //   style: TextStyle(
-                                            //       fontFamily: "Nunito",
-                                            //       fontSize:
-                                            //           context.width > 410 ? 25 : 20,
-                                            //       color: Colors.white),
-                                            // ),
-                                            Obx(() => Text(
-                                                  logController.date.value,
-                                                  style: TextStyle(
-                                                      fontFamily: "Nunito",
-                                                      fontSize:
-                                                          context.width > 410
-                                                              ? 20
-                                                              : 18,
-                                                      color: Colors.white),
-                                                )),
-                                            Obx(() => Text(
-                                                  logController.time.value,
-                                                  style: TextStyle(
-                                                      fontFamily: "Nunito",
-                                                      fontSize:
-                                                          context.width > 410
-                                                              ? 20
-                                                              : 18,
-                                                      color: Colors.white),
-                                                )),
+                                            Text(
+                                              "Last Logged in",
+                                              style: TextStyle(
+                                                  fontFamily: "Nunito",
+                                                  fontSize: context.width > 410
+                                                      ? 25
+                                                      : 20,
+                                                  color: Colors.white),
+                                            ),
+                                            // Obx(() => Text(
+                                            //       logController.date.value,
+                                            //       style: TextStyle(
+                                            //           fontFamily: "Nunito",
+                                            //           fontSize:
+                                            //               context.width > 410
+                                            //                   ? 20
+                                            //                   : 18,
+                                            //           color: Colors.white),
+                                            //     )),
+                                            // Obx(() => Text(
+                                            //       logController.time.value,
+                                            //       style: TextStyle(
+                                            //           fontFamily: "Nunito",
+                                            //           fontSize:
+                                            //               context.width > 410
+                                            //                   ? 20
+                                            //                   : 18,
+                                            //           color: Colors.white),
+                                            //     )),
                                             SizedBox(
                                               height: 10,
                                             ),
@@ -223,7 +224,8 @@ class _HomeState extends State<Home> {
                                             ),
                                             Text(
                                               dashController
-                                                          .userCmeVideoLastTest ==
+                                                          .userCmeVideoLastTest!
+                                                          .latest ==
                                                       null
                                                   ? " "
                                                   : dashController
@@ -299,7 +301,8 @@ class _HomeState extends State<Home> {
                                               height: 10,
                                             ),
                                             Text(
-                                              dashController.userCmeVideo ==
+                                              dashController.userCmeVideo!
+                                                          .latest ==
                                                       null
                                                   ? ""
                                                   : dashController
@@ -375,7 +378,8 @@ class _HomeState extends State<Home> {
                                             ),
                                             Text(
                                               dashController
-                                                          .userCmeVideoPurchese ==
+                                                          .userCmeVideoPurchese!
+                                                          .latest ==
                                                       null
                                                   ? " "
                                                   : dashController

@@ -11,7 +11,6 @@ import 'package:hslr/screen/member_details/member_details.dart';
 import 'package:hslr/screen/online_cmeprog/online_cmeprogram.dart';
 import 'package:hslr/screen/paymentdetails/paymentdetails.dart';
 import 'package:hslr/screen/test_screen/testscreen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BottomDrawer extends StatefulWidget {

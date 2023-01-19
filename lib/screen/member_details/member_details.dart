@@ -174,15 +174,13 @@ class _MemberdetailState extends State<Memberdetail> {
                             // initialValue:
                             //     logController.getUserDetails.value.councilName,
                             cursorColor: Colors.black87,
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(10),
-                            ],
+
                             keyboardType: TextInputType.text,
                             controller: mebController.councilName,
                             validator: (value) {
-                              if (value!.isNotEmpty && value.length > 9) {
+                              if (value!.isNotEmpty && value.length > 3) {
                                 return null;
-                              } else if (value.length < 9 && value.isNotEmpty) {
+                              } else if (value.length < 3 && value.isNotEmpty) {
                                 return "Your Councile Name Is Short";
                               } else {
                                 return 'Required Councile Name ';
@@ -239,10 +237,9 @@ class _MemberdetailState extends State<Memberdetail> {
                             keyboardType: TextInputType.number,
                             controller: mebController.membmobile,
                             validator: (value) {
-                              if (value!.isNotEmpty && value.length > 10) {
+                              if (value!.isNotEmpty && value.length > 9) {
                                 return null;
-                              } else if (value.length < 10 &&
-                                  value.isNotEmpty) {
+                              } else if (value.length < 9 && value.isNotEmpty) {
                                 return "Your Mobile No Short";
                               } else {
                                 return 'Required Mobile Number ';
@@ -290,16 +287,13 @@ class _MemberdetailState extends State<Memberdetail> {
                             // initialValue:
                             //     logController.getUserDetails.value.stateDesc,
                             cursorColor: Colors.black87,
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(10),
-                            ],
+
                             keyboardType: TextInputType.text,
                             controller: mebController.membstate,
                             validator: (value) {
-                              if (value!.isNotEmpty && value.length > 10) {
+                              if (value!.isNotEmpty && value.length > 1) {
                                 return null;
-                              } else if (value.length < 10 &&
-                                  value.isNotEmpty) {
+                              } else if (value.length < 1 && value.isNotEmpty) {
                                 return "Your State Name is Short";
                               } else {
                                 return 'Required State Name ';
@@ -350,16 +344,13 @@ class _MemberdetailState extends State<Memberdetail> {
                             // initialValue:
                             //     logController.getUserDetails.value.districtName,
                             cursorColor: Colors.black87,
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(10),
-                            ],
+
                             keyboardType: TextInputType.text,
                             controller: mebController.membdistr,
                             validator: (value) {
-                              if (value!.isNotEmpty && value.length > 10) {
+                              if (value!.isNotEmpty && value.length > 3) {
                                 return null;
-                              } else if (value.length < 10 &&
-                                  value.isNotEmpty) {
+                              } else if (value.length < 3 && value.isNotEmpty) {
                                 return "Your Distict Name is Short";
                               } else {
                                 return 'Required Distict Name';
@@ -405,83 +396,7 @@ class _MemberdetailState extends State<Memberdetail> {
                       SizedBox(
                         height: 25.0,
                       ),
-                      // SizedBox(
-                      //   height: mebController.sizechangepass
-                      //       ? context.height * 0.1
-                      //       : context.height * 0.06,
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.only(left: 20.0, right: 20),
-                      //     child: TextFormField(
-                      //       onTap: () {},
-                      //       obscureText: mebController.isObscure,
-                      //       inputFormatters: [
-                      //         LengthLimitingTextInputFormatter(6),
-                      //       ],
-                      //       keyboardType: TextInputType.text,
-                      //       controller: mebController.changepass,
-                      //       validator: (value) {
-                      //         if (value!.isNotEmpty && value.length > 5) {
-                      //           return null;
-                      //         } else if (value.length < 5 && value.isNotEmpty) {
-                      //           return "Your Password is Short";
-                      //         } else {
-                      //           mebController.sizepass();
-                      //           return 'Required Password';
-                      //         }
-                      //       },
-                      //       decoration: InputDecoration(
-                      //           suffix: Container(
-                      //             transform:
-                      //                 Matrix4.translationValues(-10, 8, 0),
-                      //             child: IconButton(
-                      //                 // iconSize: 15.0,
-                      //                 color: Colors.grey,
-                      //                 onPressed: () {
-                      //                   mebController.isObscure =
-                      //                       !mebController.isObscure;
-                      //                   mebController.update();
-                      //                 },
-                      //                 icon: Icon(mebController.isObscure
-                      //                     ? Icons.visibility_off
-                      //                     : Icons.visibility)),
-                      //           ),
-                      //           border: OutlineInputBorder(
-                      //             borderRadius: BorderRadius.circular(15.0),
-                      //             borderSide:
-                      //                 const BorderSide(color: Colors.black),
-                      //           ),
-                      //           enabledBorder: OutlineInputBorder(
-                      //             borderRadius: BorderRadius.circular(15.0),
-                      //             borderSide:
-                      //                 const BorderSide(color: Colors.black),
-                      //           ),
-                      //           errorBorder: OutlineInputBorder(
-                      //             borderRadius: BorderRadius.circular(15.0),
-                      //             borderSide:
-                      //                 const BorderSide(color: Colors.grey),
-                      //           ),
-                      //           focusedBorder: OutlineInputBorder(
-                      //             borderRadius: BorderRadius.circular(15.0),
-                      //             borderSide: BorderSide(color: Colors.black),
-                      //           ),
-                      //           focusedErrorBorder: OutlineInputBorder(
-                      //             borderRadius: BorderRadius.circular(15.0),
-                      //             borderSide: BorderSide(
-                      //               color: Colors.black,
-                      //             ),
-                      //           ),
-                      //           // hintStyle: TextStyle(color: Colors.white),
-                      //           hintText: "Password",
-                      //           hintStyle: TextStyle(
-                      //             fontFamily: "Nunito",
-                      //           ),
-                      //           filled: true,
-                      //           fillColor: Colors.white,
-                      //           contentPadding:
-                      //               EdgeInsets.only(left: 20.0, bottom: 30)),
-                      //     ),
-                      //   ),
-                      // ),
+
                       SizedBox(
                         height: 30,
                       ),
@@ -528,7 +443,7 @@ class _MemberdetailState extends State<Memberdetail> {
                               mebController.formkey.currentState!.validate();
                             },
                             style: ElevatedButton.styleFrom(
-                                primary: Colors.black,
+                                backgroundColor: Colors.black,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30),
                                 )),
