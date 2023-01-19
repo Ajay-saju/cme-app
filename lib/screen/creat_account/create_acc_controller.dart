@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -59,21 +60,12 @@ class CreateAccountController extends GetxController {
           userName, number, regno, catId, password);
 
       log(response.statusCode.toString());
-
+      // print(response.data.massage.toString());
       if (response.statusCode == 200) {
-        getUserDetails.value = AddUserModel.fromJson(response.data);
-        print('Successfully created');
+        getUserDetails.value = AddUserModel.fromJson(jsonDecode(response.data));
+        print(getUserDetails.value.message.toString());
         log(response.data);
-        print(response.data.message.toString());
-        await Get.snackbar('Success', 'Account Create successfully',
-            colorText: Colors.white,
-            backgroundColor: Colors.black,
-            duration: Duration(seconds: 3));
-        Timer(Duration(seconds: 2), () {
-          Get.offAll(Login());
-        });
-
-        if (response.data.massage == 'failed') {
+        if (getUserDetails.value.message == 'failed') {
           Get.defaultDialog(
               title: 'Failed',
               middleText:
@@ -90,7 +82,19 @@ class CreateAccountController extends GetxController {
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ));
+        } else {
+          await Get.snackbar('Success', 'Account Create successfully',
+              colorText: Colors.white,
+              backgroundColor: Colors.black,
+              duration: Duration(seconds: 3));
+          Timer(Duration(seconds: 2), () {
+            Get.offAll(Login());
+          });
         }
+
+        // if (getUserDetails.value.message == 'failed') {
+
+        // }
       }
     } catch (e) {
       print(e.toString());

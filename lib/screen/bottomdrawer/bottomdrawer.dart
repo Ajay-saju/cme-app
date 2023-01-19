@@ -73,8 +73,12 @@ class _BottomDrawerState extends State<BottomDrawer> {
                             ),
                             // Spacer(),
                             Text(
-                              bdrawerController.getUserDetails.value.loginName
-                                  .toString(),
+                              bdrawerController
+                                      .getUserDetails.value.loginName == null
+                                  ? " "
+                                  : bdrawerController
+                                      .getUserDetails.value.loginName
+                                      .toString(),
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,

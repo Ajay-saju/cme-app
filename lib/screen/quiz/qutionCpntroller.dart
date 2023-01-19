@@ -332,7 +332,7 @@ class QuestionController extends GetxController {
         ),
         title: 'Congratulations',
         middleText:
-            'Test pass Successfully\n you are get credit point 1\n you scored $count marks',
+            'Test pass Successfully\n Your profile  is credited  1 Credit poin \n you scored $count marks',
         confirm: ElevatedButton(
             style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
@@ -357,7 +357,14 @@ class QuestionController extends GetxController {
     } else {
       Get.defaultDialog(
         title: "Test Faild",
-        middleText: "Take your test ones more\n you scored $count marks",
+        middleTextStyle: TextStyle(
+          fontFamily: "Nunito",
+        ),
+        middleText:
+            "You Have scored below cutt of marks please try to take test one more time\n you scored $count marks",
+        titleStyle: TextStyle(
+          fontFamily: "Nunito",
+        ),
 
         confirm: ElevatedButton(
             style: ElevatedButton.styleFrom(

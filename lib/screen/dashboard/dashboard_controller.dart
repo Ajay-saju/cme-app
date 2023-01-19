@@ -25,11 +25,6 @@ import '../../services/user_payment_service.dart';
 final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
 
 class DashboardController extends GetxController {
-//  @override
-//   void onClose() {
-//    drawerKey.close();
-//     super.onClose();
-//   }
   static final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
 
   Rx<GetPayment> getpaymentList = GetPayment().obs;

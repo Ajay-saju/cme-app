@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hslr/screen/login/login_controller.dart';
+
 
 class MemberDetailsController extends GetxController {
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();

@@ -21,15 +21,28 @@ class _MemberdetailState extends State<Memberdetail> {
 
   @override
   Widget build(BuildContext context) {
-    mebController.memName.text = logController.getUserDetails.value.loginName!;
-    mebController.councilName.text =
-        logController.getUserDetails.value.councilName!;
-    mebController.membmobile.text =
-        logController.getUserDetails.value.mobileNumber!;
-    mebController.membstate.text =
-        logController.getUserDetails.value.stateDesc!;
-    mebController.membdistr.text =
-        logController.getUserDetails.value.districtName!;
+    logController.getUserDetails.value.loginName == null
+        ? ""
+        : mebController.memName.text =
+            logController.getUserDetails.value.loginName!;
+
+    logController.getUserDetails.value.councilName == null
+        ? ""
+        : mebController.councilName.text =
+            logController.getUserDetails.value.councilName!;
+
+    logController.getUserDetails.value.mobileNumber == null
+        ? ""
+        : mebController.membmobile.text =
+            logController.getUserDetails.value.mobileNumber!;
+    logController.getUserDetails.value.stateDesc == null
+        ? ""
+        : mebController.membstate.text =
+            logController.getUserDetails.value.stateDesc!;
+    logController.getUserDetails.value.districtName == null
+        ? ""
+        : mebController.membdistr.text =
+            logController.getUserDetails.value.districtName!;
     return GetBuilder<MemberDetailsController>(
       builder: ((_) {
         return GestureDetector(
