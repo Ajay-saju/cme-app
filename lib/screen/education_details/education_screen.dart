@@ -129,12 +129,38 @@ class _EducationDetailsScreenState extends State<EducationDetailsScreen> {
                                   ),
                                 ),
                               )
-                            : SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: _createDataTable(eduData),
-                                )),
+                            : Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Expanded(
+                                      child: ListView.separated(
+                                          itemBuilder: (context, index) =>
+                                              Container(
+                                                height:
+                                                    context.height * .65 / 2,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              10.0)),
+                                                  border: Border.all(
+                                                    color: Colors.black,
+                                                    width: 1,
+                                                  ),
+                                                ),
+                                              ),
+                                          separatorBuilder: (context, index) =>
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                          itemCount: eduData.length),
+                                    ),
+
+                                    //  _createDataTable(eduData),
+                                  ),
+                                ],
+                              ),
 
                         SizedBox(
                           height: 30,
@@ -285,7 +311,6 @@ class _EducationDetailsScreenState extends State<EducationDetailsScreen> {
                                         // color: Colors.blue.shade700,
                                         ),
                               ),
-                              Spacer(),
 
                               // Padding(
                               //   padding: const EdgeInsets.only(left: 8.0),
@@ -297,6 +322,9 @@ class _EducationDetailsScreenState extends State<EducationDetailsScreen> {
                             ],
                           ),
                         ),
+                        SizedBox(
+                          height: 50,
+                        )
                       ],
                     ));
         }),

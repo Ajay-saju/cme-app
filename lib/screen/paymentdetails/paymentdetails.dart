@@ -1,19 +1,11 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/member_details/member_controller.dart';
-import 'package:hslr/screen/paymentdetails/payment_controller.dart';
-import 'package:hslr/screen/paymentdetails/pdf_api.dart';
 import 'package:hslr/screen/paymentdetails/pdfviewer.dart';
-import 'package:http/http.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:open_file/open_file.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../dashboard/dashboard_controller.dart';
 
