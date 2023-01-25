@@ -15,6 +15,9 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
   // final GlobalKey<FormState> addEduFormKey = GlobalKey<FormState>();
   final eduController = Get.find<EducationController>();
 
+  String? _selectedItem;
+  List<String> _items = ['value1', 'value2', 'value3', 'value4'];
+
   @override
   Widget build(BuildContext context) {
     // List<Strings> degreeItems = eduController.eduIdList.value!.courseList!;
@@ -89,10 +92,63 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                         autovalidateMode: AutovalidateMode.always,
                         child: Column(
                           children: [
+                            // Padding(
+                            //   padding:
+                            //       const EdgeInsets.symmetric(horizontal: 20),
+                            //   child: Row(
+                            //     children: [
+                            //       Text(
+                            //         'Degree',
+                            //         style: TextStyle(
+                            //             fontSize: 17,
+                            //             fontFamily: "Nunito",
+                            //             color: Colors.black87),
+                            //       ),
+                            //       Spacer(),
+                            //       Container(
+                            //         width: context.width * 0.55,
+                            //         child: FormField<String>(
+                            //           builder: (FormFieldState<String> state) {
+                            //             return InputDecorator(
+                            //               decoration: InputDecoration(
+                            //                 hintText: 'Select a item',
+                            //                 prefixIcon: Icon(Icons.search),
+                            //                 errorText: state.hasError
+                            //                     ? state.errorText
+                            //                     : null,
+                            //               ),
+                            //               // isEmpty: _selectedItem == '',
+                            //               child: DropdownButtonHideUnderline(
+                            //                 child: DropdownButton<String>(
+                            //                   value: _items[0],
+                            //                   isDense: true,
+                            //                   onChanged: (newValue) {
+                            //                     setState(() {
+                            //                       _selectedItem = newValue!;
+                            //                       state.didChange(newValue);
+                            //                     });
+                            //                   },
+                            //                   items: _items.map((String value) {
+                            //                     return DropdownMenuItem<String>(
+                            //                       value: value,
+                            //                       child: Text(value),
+                            //                     );
+                            //                   }).toList(),
+                            //                 ),
+                            //               ),
+                            //             );
+                            //           },
+                            //         ),
+                            //       )
+                            //     ],
+                            //   ),
+                            // ),
+
                             customeDropDownTextCource(
                                 context: context,
                                 hintText: 'Select Degree',
-                                item: eduController.specialtyList![0].specialtyName,
+                                item: eduController
+                                    .specialtyList![0].specialtyName,
                                 text: 'Degree',
                                 items: eduController.specialtyList!),
                             // customeDropDownText(
@@ -365,53 +421,75 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
           Spacer(),
           Container(
             width: context.width * 0.55,
-            child: DropdownButtonFormField<SpecialtyList>(
-                validator: (value) => value == null ? 'field required' : null,
-                itemHeight: null,
-                isExpanded: true,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 7),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(color: Colors.black),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(color: Colors.black),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(color: Colors.black),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                style: TextStyle(
-                    fontSize: 17, fontFamily: "Nunito", color: Colors.black87),
-                hint: Text(
-                  hintText,
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: "Nunito",
-                      color: Colors.black87),
-                ),
-                items: items.map((item) {
-                  return eduController.buildMenuItemCource(item);
-                }).toList(),
-                onChanged: (value) {
-                  item = value.toString();
-                  eduController.corseCode = value!.specialtyId.toString();
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.black87)),
+            child: TextField(
+              onChanged: (value) {
+                eduController.searchItem.value = value;
+                eduController.searchItemMethod();
+              },
+              controller: eduController.degreeController,
+              cursorHeight: 20,
+              cursorColor: Colors.black87,
+              decoration: new InputDecoration(
+                  border: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  errorBorder: InputBorder.none,
+                  disabledBorder: InputBorder.none,
+                  contentPadding:
+                      EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+                  hintText: "Select Degree"),
+            ),
 
-                  eduController.update();
-                }),
+            //  DropdownButtonFormField<SpecialtyList>(
+            //     validator: (value) => value == null ? 'field required' : null,
+            //     itemHeight: null,
+            //     isExpanded: true,
+            //     decoration: InputDecoration(
+            //       contentPadding: EdgeInsets.symmetric(horizontal: 7),
+            //       border: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(10.0),
+            //         borderSide: const BorderSide(color: Colors.black),
+            //       ),
+            //       enabledBorder: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(10.0),
+            //         borderSide: const BorderSide(color: Colors.black),
+            //       ),
+            //       errorBorder: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(10.0),
+            //         borderSide: const BorderSide(color: Colors.black),
+            //       ),
+            //       focusedBorder: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(10.0),
+            //         borderSide: BorderSide(color: Colors.black),
+            //       ),
+            //       focusedErrorBorder: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(10.0),
+            //         borderSide: const BorderSide(
+            //           color: Colors.black,
+            //         ),
+            //       ),
+            //     ),
+            //     style: TextStyle(
+            //         fontSize: 17, fontFamily: "Nunito", color: Colors.black87),
+            //     hint: Text(
+            //       hintText,
+            //       style: TextStyle(
+            //           fontSize: 16,
+            //           fontFamily: "Nunito",
+            //           color: Colors.black87),
+            //     ),
+            //     items: items.map((item) {
+            //       return eduController.buildMenuItemCource(item);
+            //     }).toList(),
+            //     onChanged: (value) {
+            //       item = value.toString();
+            //       eduController.corseCode = value!.specialtyId.toString();
+
+            //       eduController.update();
+            //     }),
           ),
         ],
       ),

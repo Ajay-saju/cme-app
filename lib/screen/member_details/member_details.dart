@@ -279,120 +279,120 @@ class _MemberdetailState extends State<Memberdetail> {
                           ),
                         ),
                       ),
-                      Center(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 20.0, top: 25, right: 20.0),
-                          child: TextFormField(
-                            // initialValue:
-                            //     logController.getUserDetails.value.stateDesc,
-                            cursorColor: Colors.black87,
+                      // Center(
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.only(
+                      //         left: 20.0, top: 25, right: 20.0),
+                      //     child: TextFormField(
+                      //       // initialValue:
+                      //       //     logController.getUserDetails.value.stateDesc,
+                      //       cursorColor: Colors.black87,
 
-                            keyboardType: TextInputType.text,
-                            controller: mebController.membstate,
-                            validator: (value) {
-                              if (value!.isNotEmpty && value.length > 1) {
-                                return null;
-                              } else if (value.length < 1 && value.isNotEmpty) {
-                                return "Your State Name is Short";
-                              } else {
-                                return 'Required State Name ';
-                              }
-                            },
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  borderSide:
-                                      const BorderSide(color: Colors.black),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  borderSide:
-                                      const BorderSide(color: Colors.black),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  borderSide:
-                                      const BorderSide(color: Colors.grey),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  borderSide: BorderSide(color: Colors.black),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  borderSide: BorderSide(
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                hintText: "State Name",
-                                hintStyle: TextStyle(
-                                  fontFamily: "Nunito",
-                                ),
-                                filled: true,
-                                fillColor: Colors.white,
-                                contentPadding:
-                                    const EdgeInsets.only(left: 20.0)),
-                          ),
-                        ),
-                      ),
-                      Center(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 20.0, top: 25, right: 20.0),
-                          child: TextFormField(
-                            // initialValue:
-                            //     logController.getUserDetails.value.districtName,
-                            cursorColor: Colors.black87,
+                      //       keyboardType: TextInputType.text,
+                      //       controller: mebController.membstate,
+                      //       validator: (value) {
+                      //         if (value!.isNotEmpty && value.length > 1) {
+                      //           return null;
+                      //         } else if (value.length < 1 && value.isNotEmpty) {
+                      //           return "Your State Name is Short";
+                      //         } else {
+                      //           return 'Required State Name ';
+                      //         }
+                      //       },
+                      //       decoration: InputDecoration(
+                      //           border: OutlineInputBorder(
+                      //             borderRadius: BorderRadius.circular(15.0),
+                      //             borderSide:
+                      //                 const BorderSide(color: Colors.black),
+                      //           ),
+                      //           enabledBorder: OutlineInputBorder(
+                      //             borderRadius: BorderRadius.circular(15.0),
+                      //             borderSide:
+                      //                 const BorderSide(color: Colors.black),
+                      //           ),
+                      //           errorBorder: OutlineInputBorder(
+                      //             borderRadius: BorderRadius.circular(15.0),
+                      //             borderSide:
+                      //                 const BorderSide(color: Colors.grey),
+                      //           ),
+                      //           focusedBorder: OutlineInputBorder(
+                      //             borderRadius: BorderRadius.circular(15.0),
+                      //             borderSide: BorderSide(color: Colors.black),
+                      //           ),
+                      //           focusedErrorBorder: OutlineInputBorder(
+                      //             borderRadius: BorderRadius.circular(15.0),
+                      //             borderSide: BorderSide(
+                      //               color: Colors.black,
+                      //             ),
+                      //           ),
+                      //           hintText: "State Name",
+                      //           hintStyle: TextStyle(
+                      //             fontFamily: "Nunito",
+                      //           ),
+                      //           filled: true,
+                      //           fillColor: Colors.white,
+                      //           contentPadding:
+                      //               const EdgeInsets.only(left: 20.0)),
+                      //     ),
+                      //   ),
+                      // ),
+                      // Center(
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.only(
+                      //         left: 20.0, top: 25, right: 20.0),
+                      //     child: TextFormField(
+                      //       // initialValue:
+                      //       //     logController.getUserDetails.value.districtName,
+                      //       cursorColor: Colors.black87,
 
-                            keyboardType: TextInputType.text,
-                            controller: mebController.membdistr,
-                            validator: (value) {
-                              if (value!.isNotEmpty && value.length > 3) {
-                                return null;
-                              } else if (value.length < 3 && value.isNotEmpty) {
-                                return "Your Distict Name is Short";
-                              } else {
-                                return 'Required Distict Name';
-                              }
-                            },
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  borderSide:
-                                      const BorderSide(color: Colors.black),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  borderSide:
-                                      const BorderSide(color: Colors.black),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  borderSide:
-                                      const BorderSide(color: Colors.grey),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  borderSide: BorderSide(color: Colors.black),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  borderSide: BorderSide(
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                hintText: "Distict Name",
-                                hintStyle: TextStyle(
-                                  fontFamily: "Nunito",
-                                ),
-                                filled: true,
-                                fillColor: Colors.white,
-                                contentPadding:
-                                    const EdgeInsets.only(left: 20.0)),
-                          ),
-                        ),
-                      ),
+                      //       keyboardType: TextInputType.text,
+                      //       controller: mebController.membdistr,
+                      //       validator: (value) {
+                      //         if (value!.isNotEmpty && value.length > 3) {
+                      //           return null;
+                      //         } else if (value.length < 3 && value.isNotEmpty) {
+                      //           return "Your Distict Name is Short";
+                      //         } else {
+                      //           return 'Required Distict Name';
+                      //         }
+                      //       },
+                      //       decoration: InputDecoration(
+                      //           border: OutlineInputBorder(
+                      //             borderRadius: BorderRadius.circular(15.0),
+                      //             borderSide:
+                      //                 const BorderSide(color: Colors.black),
+                      //           ),
+                      //           enabledBorder: OutlineInputBorder(
+                      //             borderRadius: BorderRadius.circular(15.0),
+                      //             borderSide:
+                      //                 const BorderSide(color: Colors.black),
+                      //           ),
+                      //           errorBorder: OutlineInputBorder(
+                      //             borderRadius: BorderRadius.circular(15.0),
+                      //             borderSide:
+                      //                 const BorderSide(color: Colors.grey),
+                      //           ),
+                      //           focusedBorder: OutlineInputBorder(
+                      //             borderRadius: BorderRadius.circular(15.0),
+                      //             borderSide: BorderSide(color: Colors.black),
+                      //           ),
+                      //           focusedErrorBorder: OutlineInputBorder(
+                      //             borderRadius: BorderRadius.circular(15.0),
+                      //             borderSide: BorderSide(
+                      //               color: Colors.black,
+                      //             ),
+                      //           ),
+                      //           hintText: "Distict Name",
+                      //           hintStyle: TextStyle(
+                      //             fontFamily: "Nunito",
+                      //           ),
+                      //           filled: true,
+                      //           fillColor: Colors.white,
+                      //           contentPadding:
+                      //               const EdgeInsets.only(left: 20.0)),
+                      //     ),
+                      //   ),
+                      // ),
                       SizedBox(
                         height: 25.0,
                       ),

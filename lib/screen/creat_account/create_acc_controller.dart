@@ -67,6 +67,16 @@ class CreateAccountController extends GetxController {
         log(response.data);
         if (getUserDetails.value.message == 'failed') {
           Get.defaultDialog(
+              barrierDismissible: true,
+              confirm: ElevatedButton(
+                  onPressed: Get.back,
+                  //  () => Get.offAll(Login()),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      )),
+                  child: Text('Ok')),
               title: 'Failed',
               middleText:
                   "Mobile Number Already Exists Use Your Login Credentials to Login",
@@ -99,6 +109,9 @@ class CreateAccountController extends GetxController {
     } catch (e) {
       print(e.toString());
       Get.defaultDialog(
+          barrierDismissible: true,
+          confirm:
+              ElevatedButton(onPressed: () => Get.back(), child: Text('Ok')),
           title: 'Something is wrong',
           middleText: "Please try again",
           middleTextStyle: TextStyle(

@@ -14,7 +14,13 @@ import '../../services/get_eduid_list_servise.dart';
 
 class EducationController extends GetxController {
   final GlobalKey<FormState> addEduFormKey = GlobalKey<FormState>();
+  final TextEditingController degreeController = TextEditingController();
   // final GlobalKey<FormState> editEduFormKey = GlobalKey<FormState>();
+
+  var userData = [].obs;
+  var userNames = [].obs;
+  var searchedItems = [].obs;
+  var searchItem = ''.obs;
 
   @override
   void onInit() {
@@ -144,6 +150,9 @@ class EducationController extends GetxController {
         universityList = eduIdList.value!.universityList!;
         collegeList = eduIdList.value!.collegeList!;
         specialtyList = eduIdList.value!.specialtyList!;
+        for (var i = 0; i < specialtyList!.length; i++) {
+          userNames.add(specialtyList![i].specialtyName);
+        }
       }
     } catch (e) {
       print(e.toString());
@@ -189,5 +198,14 @@ class EducationController extends GetxController {
     } catch (e) {
       rethrow;
     }
+  }
+
+  searchItemMethod() {
+    print(userData.toString());
+    searchedItems.value = userNames
+        .where((element) =>
+            element.toLowerCase().contains(searchItem.toLowerCase()))
+        .toList();
+    update();
   }
 }

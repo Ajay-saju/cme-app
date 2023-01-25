@@ -129,37 +129,154 @@ class _EducationDetailsScreenState extends State<EducationDetailsScreen> {
                                   ),
                                 ),
                               )
-                            : Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: Expanded(
-                                      child: ListView.separated(
-                                          itemBuilder: (context, index) =>
-                                              Container(
-                                                height:
-                                                    context.height * .65 / 2,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(
-                                                              10.0)),
-                                                  border: Border.all(
-                                                    color: Colors.black,
-                                                    width: 1,
+                            : Expanded(
+                                child: ListView.separated(
+                                    itemBuilder: (context, index) => Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Container(
+                                            height: context.height * .55 / 2,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10.0)),
+                                              border: Border.all(
+                                                color: Colors.black,
+                                                width: 1,
+                                              ),
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10, right: 10, top: 20),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  // Column(
+                                                  //   crossAxisAlignment:
+                                                  //       CrossAxisAlignment
+                                                  //           .start,
+                                                  //   children: [
+                                                  //     Text(
+                                                  //       'Degree :',
+                                                  //       style: TextStyle(
+                                                  //           fontWeight:
+                                                  //               FontWeight.bold,
+                                                  //           fontFamily:
+                                                  //               "Nunito",
+                                                  //           fontSize: 16,
+                                                  //           color:
+                                                  //               Colors.black),
+                                                  //     ),
+                                                  //     SizedBox(
+                                                  //       width: 15,
+                                                  //     ),
+                                                  //     Text(
+                                                  //       'University :',
+                                                  //       style: TextStyle(
+                                                  //           fontWeight:
+                                                  //               FontWeight.bold,
+                                                  //           fontFamily:
+                                                  //               "Nunito",
+                                                  //           fontSize: 16,
+                                                  //           color:
+                                                  //               Colors.black),
+                                                  //     ),
+                                                  //     Text(
+                                                  //       'Collage :',
+                                                  //       style: TextStyle(
+                                                  //           fontWeight:
+                                                  //               FontWeight.bold,
+                                                  //           fontFamily:
+                                                  //               "Nunito",
+                                                  //           fontSize: 16,
+                                                  //           color:
+                                                  //               Colors.black),
+                                                  //     ),
+                                                  //     Text(
+                                                  //       'Speciality :',
+                                                  //       style: TextStyle(
+                                                  //           fontWeight:
+                                                  //               FontWeight.bold,
+                                                  //           fontFamily:
+                                                  //               "Nunito",
+                                                  //           fontSize: 16,
+                                                  //           color:
+                                                  //               Colors.black),
+                                                  //     ),
+                                                  //   ],
+                                                  // ),
+                                                  SizedBox(
+                                                    width: 15,
                                                   ),
-                                                ),
-                                              ),
-                                          separatorBuilder: (context, index) =>
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                          itemCount: eduData.length),
-                                    ),
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        eduData[index]
+                                                            .dEGREE
+                                                            .toString(),
+                                                        maxLines: 3,
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Nunito",
+                                                            fontSize: 16,
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                      Text(
+                                                        eduData[index]
+                                                            .uNIVERSITY
+                                                            .toString(),
+                                                        // overflow: TextOverflow
+                                                        //     .ellipsis,
+                                                        // maxLines: 2,
+                                                        // textAlign:
+                                                        //     TextAlign.left,
 
-                                    //  _createDataTable(eduData),
-                                  ),
-                                ],
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Nunito",
+                                                            fontSize: 16,
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                      // Text(
+                                                      //   eduData[index]
+                                                      //       .cOLLEGE
+                                                      //       .toString(),
+                                                      //   style: TextStyle(
+                                                      //       fontFamily:
+                                                      //           "Nunito",
+                                                      //       fontSize: 16,
+                                                      //       color:
+                                                      //           Colors.black),
+                                                      // ),
+                                                      // Text(
+                                                      //   eduData[index]
+                                                      //       .yEAROFPASSING
+                                                      //       .toString(),
+                                                      //   maxLines: 3,
+                                                      //   style: TextStyle(
+                                                      //       fontFamily:
+                                                      //           "Nunito",
+                                                      //       fontSize: 16,
+                                                      //       color:
+                                                      //           Colors.black),
+                                                      // )
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                    separatorBuilder: (context, index) =>
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                    itemCount: eduData.length),
                               ),
 
                         SizedBox(
