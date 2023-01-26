@@ -39,7 +39,7 @@ class EducationController extends GetxController {
   String? year;
   List<UniversityList>? universityList = [];
   List<CollegeList>? collegeList = [];
-  List<SpecialtyList>? specialtyList = [];
+  List<SpecialtyList> specialtyList = [];
   final degreeItem = [
     'Degree 1',
     'Degree 2',
@@ -150,8 +150,8 @@ class EducationController extends GetxController {
         universityList = eduIdList.value!.universityList!;
         collegeList = eduIdList.value!.collegeList!;
         specialtyList = eduIdList.value!.specialtyList!;
-        for (var i = 0; i < specialtyList!.length; i++) {
-          userNames.add(specialtyList![i].specialtyName);
+        for (var i = 0; i < specialtyList.length; i++) {
+          userNames.add(specialtyList[i].specialtyName);
         }
       }
     } catch (e) {

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hslr/models/get_eduid_list.model.dart';
 import 'package:hslr/screen/education_details/education_controller.dart';
 import 'package:hslr/screen/education_details/education_screen.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class AddEducationDetails extends StatefulWidget {
   const AddEducationDetails({Key? key}) : super(key: key);
@@ -92,65 +93,39 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                         autovalidateMode: AutovalidateMode.always,
                         child: Column(
                           children: [
-                            // Padding(
-                            //   padding:
-                            //       const EdgeInsets.symmetric(horizontal: 20),
-                            //   child: Row(
-                            //     children: [
-                            //       Text(
-                            //         'Degree',
-                            //         style: TextStyle(
-                            //             fontSize: 17,
-                            //             fontFamily: "Nunito",
-                            //             color: Colors.black87),
-                            //       ),
-                            //       Spacer(),
-                            //       Container(
-                            //         width: context.width * 0.55,
-                            //         child: FormField<String>(
-                            //           builder: (FormFieldState<String> state) {
-                            //             return InputDecorator(
-                            //               decoration: InputDecoration(
-                            //                 hintText: 'Select a item',
-                            //                 prefixIcon: Icon(Icons.search),
-                            //                 errorText: state.hasError
-                            //                     ? state.errorText
-                            //                     : null,
-                            //               ),
-                            //               // isEmpty: _selectedItem == '',
-                            //               child: DropdownButtonHideUnderline(
-                            //                 child: DropdownButton<String>(
-                            //                   value: _items[0],
-                            //                   isDense: true,
-                            //                   onChanged: (newValue) {
-                            //                     setState(() {
-                            //                       _selectedItem = newValue!;
-                            //                       state.didChange(newValue);
-                            //                     });
-                            //                   },
-                            //                   items: _items.map((String value) {
-                            //                     return DropdownMenuItem<String>(
-                            //                       value: value,
-                            //                       child: Text(value),
-                            //                     );
-                            //                   }).toList(),
-                            //                 ),
-                            //               ),
-                            //             );
-                            //           },
-                            //         ),
-                            //       )
-                            //     ],
-                            //   ),
-                            // ),
-
-                            customeDropDownTextCource(
-                                context: context,
-                                hintText: 'Select Degree',
-                                item: eduController
-                                    .specialtyList![0].specialtyName,
-                                text: 'Degree',
-                                items: eduController.specialtyList!),
+                            Container(
+                              width: context.width * 0.55,
+                              child: TypeAheadField(
+                                  textFieldConfiguration:
+                                      TextFieldConfiguration(
+                                          controller:
+                                              eduController.degreeController),
+                                  suggestionsCallback: (pattern) {
+                                    return eduController.specialtyList.where(
+                                        (element) => element.specialtyName!
+                                            .toLowerCase()
+                                            .contains(pattern.toLowerCase()));
+                                  },
+                                  itemBuilder:
+                                      (context, SpecialtyList suggestion) {
+                                    return Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(suggestion.specialtyName!),
+                                    );
+                                  },
+                                  onSuggestionSelected:
+                                      (SpecialtyList suggestion) {
+                                    eduController.degreeController.text =
+                                        suggestion.specialtyName!;
+                                  }),
+                            ),
+                            // customeDropDownTextCource(
+                            //     context: context,
+                            //     hintText: 'Select Degree',
+                            //     item: eduController
+                            //         .specialtyList![0].specialtyName,
+                            //     text: 'Degree',
+                            //     items: eduController.specialtyList!),
                             // customeDropDownText(
                             //     context: context,
                             //     hintText: 'Select Degree',
