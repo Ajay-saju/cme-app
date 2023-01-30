@@ -598,9 +598,25 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                   ),
                                                   ElevatedButton(
                                                     onPressed: () {
-                                                      downloadVideo(index);
+                                                      cmeProgramController
+                                                                  .allCmeVideos
+                                                                  .value!
+                                                                  .videoList![
+                                                                      index]
+                                                                  .isDownloading ??
+                                                              false
+                                                          ? cancelDownload(
+                                                              index)
+                                                          : downloadVideo(
+                                                              index);
                                                     },
-                                                    child: downloading == true
+                                                    child: cmeProgramController
+                                                                .allCmeVideos
+                                                                .value!
+                                                                .videoList![
+                                                                    index]
+                                                                .isDownloading ??
+                                                            false
                                                         ? Center(
                                                             child: Text(
                                                                 progressString)
@@ -837,7 +853,17 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
     // );
   }
 
+  CancelToken cancelToken = CancelToken();
+  cancelDownload(index) {
+    cmeProgramController.allCmeVideos.value!.videoList![index].isDownloading =
+        false;
+    cancelToken.cancel();
+  }
+
   Future downloadVideo(index) async {
+    cmeProgramController.allCmeVideos.value!.videoList![index].isDownloading =
+        true;
+
     var url = cmeProgramController
         .allCmeVideos.value!.videoList![index].videoPath
         .toString()
@@ -847,9 +873,11 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
     try {
       var dir = await getApplicationDocumentsDirectory();
       print("path ${dir.path}");
+      var path = "${dir.path}/$url.mp4";
       await dio.download(
         url,
-        "${dir.path}/demo.mp4",
+        path,
+        cancelToken: cancelToken,
         onReceiveProgress: (rec, total) {
           print("Rec: $rec , Total: $total");
           setState(() {
@@ -859,11 +887,16 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
         },
       );
     } catch (e) {
+      cmeProgramController.allCmeVideos.value!.videoList![index].isDownloading =
+          false;
       print(e);
     }
     setState(() {
       downloading = false;
       progressString = "Completed";
+      cmeProgramController.allCmeVideos.value!.videoList![index].isDownloading =
+          false;
+          
     });
     print("Download completed");
   }
