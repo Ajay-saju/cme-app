@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/dashboard/dashboard.dart';
@@ -320,34 +321,33 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                   itemBuilder: (context, index) => Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 10),
-                                        child: InkWell(
-                                          onTap: () => Get.to(VideoPlayerPage(
-                                            index: index,
-                                          )),
-                                          child: Container(
-                                            height: context.height * .65 / 2,
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10.0)),
-                                              border: Border.all(
-                                                color: Colors.black,
-                                                width: 1,
-                                              ),
+                                        child: Container(
+                                          height: context.height * .65 / 2,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10.0)),
+                                            border: Border.all(
+                                              color: Colors.black,
+                                              width: 1,
                                             ),
-                                            child: Column(
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 10, left: 10),
-                                                  child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    // mainAxisAlignment:
-                                                    // MainAxisAlignment.start,
-                                                    children: [
-                                                      Container(
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 10, left: 10),
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  // mainAxisAlignment:
+                                                  // MainAxisAlignment.start,
+                                                  children: [
+                                                    InkWell(
+                                                      onTap: () => Get.to(
+                                                          VideoPlayerPage(
+                                                        index: index,
+                                                      )),
+                                                      child: Container(
                                                         decoration: BoxDecoration(
                                                             borderRadius:
                                                                 BorderRadius
@@ -371,119 +371,90 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                                     'https',
                                                                     'http')),
                                                       ),
-                                                      SizedBox(
-                                                        width: 10,
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(top: 20),
-                                                        child: Column(
-                                                          children: [
-                                                            Text(
-                                                              cmeProgramController
-                                                                  .allCmeVideos
-                                                                  .value!
-                                                                  .videoList![
-                                                                      index]
-                                                                  .videoName
-                                                                  .toString(),
-                                                              maxLines: 2,
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .fade,
-                                                              style: TextStyle(
-                                                                fontSize: 18,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontFamily:
-                                                                    "Nunito",
-                                                              ),
-                                                            ),
-                                                            // SizedBox(
-                                                            //   height: 8,
-                                                            // ),
-                                                            Text(
-                                                              'For all ${cmeProgramController.allCmeVideos.value!.videoList![index].speakerSpecialty} Practitioner',
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .fade,
-                                                              maxLines: 1,
-                                                              style: TextStyle(
-                                                                fontSize: 16,
-                                                                fontFamily:
-                                                                    "Nunito",
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 16,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          'Duration :',
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontSize: 15,
-                                                            fontFamily:
-                                                                "Nunito",
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          'Credit Point :',
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontSize: 15,
-                                                            fontFamily:
-                                                                "Nunito",
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          'Speaker :',
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontSize: 15,
-                                                            fontFamily:
-                                                                "Nunito",
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          'Approved by :',
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontSize: 15,
-                                                            fontFamily:
-                                                                "Nunito",
-                                                          ),
-                                                        )
-                                                      ],
                                                     ),
                                                     SizedBox(
                                                       width: 10,
                                                     ),
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 20),
+                                                      child: Column(
+                                                        children: [
+                                                          Text(
+                                                            cmeProgramController
+                                                                .allCmeVideos
+                                                                .value!
+                                                                .videoList![
+                                                                    index]
+                                                                .videoName
+                                                                .toString(),
+                                                            maxLines: 2,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .fade,
+                                                            style: TextStyle(
+                                                              fontSize: 18,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontFamily:
+                                                                  "Nunito",
+                                                            ),
+                                                          ),
+                                                          // SizedBox(
+                                                          //   height: 8,
+                                                          // ),
+                                                          Text(
+                                                            'For all ${cmeProgramController.allCmeVideos.value!.videoList![index].speakerSpecialty} Practitioner',
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .fade,
+                                                            maxLines: 1,
+                                                            style: TextStyle(
+                                                              fontSize: 16,
+                                                              fontFamily:
+                                                                  "Nunito",
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 16,
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 15),
+                                                child: Center(
+                                                  child: Table(
+                                                    columnWidths: {
+                                                      0: FlexColumnWidth(0.5),
+                                                      1: FlexColumnWidth(0.1),
+                                                      3: FlexColumnWidth(2)
+                                                    },
+                                                    children: [
+                                                      TableRow(children: [
+                                                        Text(
+                                                          'Duration',
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize: 15,
+                                                            fontFamily:
+                                                                "Nunito",
+                                                          ),
+                                                        ),
+                                                        Text(':',
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Nunito",
+                                                                color: Colors
+                                                                    .black87)),
                                                         Text(
                                                           "${cmeProgramController.allCmeVideos.value!.videoList![index].videoTimingHour} h",
                                                           style: TextStyle(
@@ -495,6 +466,24 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                             // color: Colors.blue.shade700,
                                                           ),
                                                         ),
+                                                      ]),
+                                                      TableRow(children: [
+                                                        Text(
+                                                          'Credit Point ',
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize: 15,
+                                                            fontFamily:
+                                                                "Nunito",
+                                                          ),
+                                                        ),
+                                                        Text(':',
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Nunito",
+                                                                color: Colors
+                                                                    .black87)),
                                                         Text(
                                                           "${cmeProgramController.allCmeVideos.value!.videoList![index].creditPoint} Credit Point",
                                                           style: TextStyle(
@@ -504,6 +493,24 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                                 "Nunito",
                                                           ),
                                                         ),
+                                                      ]),
+                                                      TableRow(children: [
+                                                        Text(
+                                                          'Speaker ',
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize: 15,
+                                                            fontFamily:
+                                                                "Nunito",
+                                                          ),
+                                                        ),
+                                                        Text(':',
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Nunito",
+                                                                color: Colors
+                                                                    .black87)),
                                                         Text(
                                                           cmeProgramController
                                                               .allCmeVideos
@@ -519,6 +526,24 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                                 "Nunito",
                                                           ),
                                                         ),
+                                                      ]),
+                                                      TableRow(children: [
+                                                        Text(
+                                                          'Approved by ',
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize: 15,
+                                                            fontFamily:
+                                                                "Nunito",
+                                                          ),
+                                                        ),
+                                                        Text(':',
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Nunito",
+                                                                color: Colors
+                                                                    .black87)),
                                                         Text(
                                                           "Karnataka Medical Council",
                                                           style: TextStyle(
@@ -528,210 +553,78 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                                 "Nunito",
                                                           ),
                                                         ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                                Spacer(),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    ElevatedButton(
-                                                      onPressed: () async {
-                                                        cmeProgramController
-                                                            .getAllQuestionsData(
-                                                                cmeProgramController
-                                                                    .allCmeVideos
-                                                                    .value!
-                                                                    .videoList![
-                                                                        index]
-                                                                    .videoId);
-                                                      },
-                                                      child: Text('Take Test'),
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                              backgroundColor:
-                                                                  Colors
-                                                                      .black87,
-                                                              // Colors.orange,//// Color.fromARGB(255, 218, 206, 37),
-                                                              shape:
-                                                                  RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            15),
-                                                              )),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    ElevatedButton(
-                                                      onPressed: () {},
-                                                      child:
-                                                          Text('    Buy    '),
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                              backgroundColor:
-                                                                  Colors
-                                                                      .black87,
-                                                              // Colors.orange,//// Color.fromARGB(255, 218, 206, 37),
-                                                              shape:
-                                                                  RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            15),
-                                                              )),
-                                                    )
-                                                  ],
-                                                ),
-
-                                                // Row(
-                                                //   children: [
-                                                //     Column(
-                                                //       children: [
-                                                //         // Padding(
-                                                //         //   padding:
-                                                //         //       const EdgeInsets
-                                                //         //               .only(
-                                                //         //           left: 8,
-                                                //         //           right: 8),
-                                                //         //   child: Text(
-                                                //         //     "${cmeProgramController.allCmeVideos.value!.videoList![index].videoTimingHour} h",
-                                                //         //     style: TextStyle(
-                                                //         //       // fontSize: 18,
-                                                //         //       fontWeight:
-                                                //         //           FontWeight
-                                                //         //               .bold,
-                                                //         //       fontFamily:
-                                                //         //           "Nunito",
-                                                //         //       // color: Colors.blue.shade700,
-                                                //         //     ),
-                                                //         //   ),
-                                                //         // ),
-                                                //         SizedBox(
-                                                //           height: 8,
-                                                //         ),
-                                                //         // Text(
-                                                //         //   "${cmeProgramController.allCmeVideos.value!.videoList![index].creditPoint} Credit\n Point",
-                                                //         //   style: TextStyle(
-                                                //         //     fontWeight:
-                                                //         //         FontWeight.w500,
-                                                //         //     fontFamily:
-                                                //         //         "Nunito",
-                                                //         //   ),
-                                                //         // ),
-                                                //       ],
-                                                //     ),
-                                                //     SizedBox(
-                                                //       width: 5,
-                                                //     ),
-                                                //     Padding(
-                                                //       padding:
-                                                //           const EdgeInsets.only(
-                                                //               top: 15),
-                                                //       child: Column(
-                                                //         crossAxisAlignment:
-                                                //             CrossAxisAlignment
-                                                //                 .start,
-                                                //         children: [
-                                                //           // Container(
-                                                //           //   width:
-                                                //           //       context.width *
-                                                //           //           0.49,
-                                                //           //   child: Text(
-                                                //           //     cmeProgramController
-                                                //           //         .allCmeVideos
-                                                //           //         .value!
-                                                //           //         .videoList![
-                                                //           //             index]
-                                                //           //         .videoName
-                                                //           //         .toString(),
-                                                //           //     maxLines: 2,
-                                                //           //     overflow:
-                                                //           //         TextOverflow
-                                                //           //             .fade,
-                                                //           //     style: TextStyle(
-                                                //           //       fontSize: 18,
-                                                //           //       fontWeight:
-                                                //           //           FontWeight
-                                                //           //               .bold,
-                                                //           //       fontFamily:
-                                                //           //           "Nunito",
-                                                //           //     ),
-                                                //           //   ),
-                                                //           // ),
-                                                //           SizedBox(
-                                                //             height: 8,
-                                                //           ),
-                                                //           Text(
-                                                //             'For all ${cmeProgramController.allCmeVideos.value!.videoList![index].speakerSpecialty} Practitioner',
-                                                //             overflow:
-                                                //                 TextOverflow
-                                                //                     .fade,
-                                                //             maxLines: 1,
-                                                //             style: TextStyle(
-                                                //               fontSize: 16,
-                                                //               fontFamily:
-                                                //                   "Nunito",
-                                                //             ),
-                                                //           ),
-                                                //           SizedBox(
-                                                //             height: 8,
-                                                //           ),
-                                                //           Text(
-                                                //             "Speaker : ${cmeProgramController.allCmeVideos.value!.videoList![index].speakerName}"
-                                                //                 .toString(),
-                                                //             style: TextStyle(
-                                                //               fontSize: 15,
-                                                //               // fontWeight:
-                                                //               //     FontWeight.bold,
-                                                //               fontFamily:
-                                                //                   "Nunito",
-                                                //             ),
-                                                //           ),
-                                                //           SizedBox(
-                                                //             height: 8,
-                                                //           ),
-
-                                                //           SizedBox(
-                                                //             height: 8,
-                                                //           ),
-                                                //           Text(
-                                                //             "Approved by : Karnataka Medical Council",
-                                                //             style: TextStyle(
-                                                //               fontWeight:
-                                                //                   FontWeight
-                                                //                       .w500,
-                                                //               fontFamily:
-                                                //                   "Nunito",
-                                                //             ),
-                                                //           ),
-
-                                                //           // SizedBox(
-                                                //           //   height: 5,
-                                                //           // ),
-
-                                                //         ],
-                                                //       ),
-                                                //     ),
-                                                //     Spacer(),
-                                                //   ],
-                                                // ),
-                                                Positioned(
-                                                  bottom: 3,
-                                                  left: 10,
-                                                  child: Column(
-                                                    children: [
-                                                      SizedBox(
-                                                        height: 1.5,
-                                                      ),
+                                                      ])
                                                     ],
                                                   ),
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                              Spacer(),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  ElevatedButton(
+                                                    onPressed: () async {
+                                                      cmeProgramController
+                                                          .getAllQuestionsData(
+                                                              cmeProgramController
+                                                                  .allCmeVideos
+                                                                  .value!
+                                                                  .videoList![
+                                                                      index]
+                                                                  .videoId);
+                                                    },
+                                                    child: Text(
+                                                        '    Take Test    '),
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                            backgroundColor:
+                                                                Colors.black87,
+                                                            // Colors.orange,//// Color.fromARGB(255, 218, 206, 37),
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          15),
+                                                            )),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  ElevatedButton(
+                                                    onPressed: () {
+                                                      downloadCmeVideo(index);
+                                                    },
+                                                    child:
+                                                        Text('Download Video'),
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                            backgroundColor:
+                                                                Colors.black87,
+                                                            // Colors.orange,//// Color.fromARGB(255, 218, 206, 37),
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          15),
+                                                            )),
+                                                  )
+                                                ],
+                                              ),
+                                              Positioned(
+                                                bottom: 3,
+                                                left: 10,
+                                                child: Column(
+                                                  children: [
+                                                    SizedBox(
+                                                      height: 1.5,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),
@@ -744,829 +637,170 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                             ),
                           ),
 
-                          // Container(
-                          //   // color: Colors.amber,
-                          //   height: context.width > 410
-                          //       ? context.height * 0.62
-                          //       : context.height * 0.59,
-                          //   child: SingleChildScrollView(
-                          //     scrollDirection: Axis.vertical,
-                          //     physics: BouncingScrollPhysics(),
-                          //     child: Column(
-                          //       children: [
-                          //         Center(
-                          //           child: Container(
-                          //             height: context.width > 410
-                          //                 ? context.height * 0.45
-                          //                 : context.height * 0.502,
-                          //             width: context.width * 0.8,
-                          //             decoration: BoxDecoration(
-                          //               borderRadius:
-                          //                   BorderRadius.all(Radius.circular(10.0)),
-                          //               border: Border.all(
-                          //                 color: Colors.black,
-                          //                 width: 1,
-                          //               ),
-                          //             ),
-                          //             margin: EdgeInsets.only(
-                          //               left: 0.0,
-                          //             ),
-                          //             child: Column(
-                          //               crossAxisAlignment: CrossAxisAlignment.start,
-                          //               children: [
-                          //                 GestureDetector(
-                          //                   onTap: () {
-                          //                     Get.to(AssetPlayerWidget());
-                          //                   },
-                          //                   child: Container(
-                          //                     // margin: EdgeInsets.all(2.0),
-                          //                     height: context.height * 0.19,
-                          //                     // width: context.width * 0.794,
-                          //                     // decoration: BoxDecoration,
-                          //                     // color: Colors.amber,
-                          //                     child: Stack(children: [
-                          //                       ClipRRect(
-                          //                           borderRadius: BorderRadius.only(
-                          //                             topLeft: Radius.circular(10.0),
-                          //                             topRight: Radius.circular(10.0),
-                          //                           ),
-                          //                           child: VideoPlayer(controller!)),
-                          //                       Center(
-                          //                         child: Padding(
-                          //                           padding:
-                          //                               const EdgeInsets.only(top: 0.0),
-                          //                           child: Image.asset(
-                          //                             'assets/cme logo 1.png',
-                          //                             // color: Colors.black,
-                          //                             height: 60,
-                          //                             fit: BoxFit.cover,
-                          //                           ),
-                          //                         ),
-                          //                       ),
-                          //                     ]),
-                          //                   ),
-                          //                 ),
-                          //                 Container(
-                          //                   height: 1,
-                          //                   color: Colors.black,
-                          //                 ),
-                          //                 Padding(
-                          //                   padding: const EdgeInsets.only(
-                          //                       left: 5.0, top: 5),
-                          //                   child: Text(
-                          //                     'Evidence Based Medicines',
-                          //                     style: TextStyle(
-                          //                       fontSize: 18,
-                          //                       fontWeight: FontWeight.bold,
-                          //                       // color: Colors.blue.shade700,
-                          //                     ),
-                          //                   ),
-                          //                 ),
-                          //                 Padding(
-                          //                   padding: const EdgeInsets.only(left: 5.0),
-                          //                   child: Row(
-                          //                     children: [
-                          //                       Text(
-                          //                         'Credit Points:',
-                          //                         style: TextStyle(
-                          //                           fontSize: 15,
-                          //                           fontWeight: FontWeight.bold,
-                          //                           // color: Colors.blue.shade700,
-                          //                         ),
-                          //                       ),
-                          //                       Text(
-                          //                         '1 Duration:0.45 hrs',
-                          //                         style: TextStyle(
-                          //                           fontSize: 15,
-                          //                           // color: Colors.blue.shade700, 1 Duration:0.45 hrs
-                          //                         ),
-                          //                       ),
-                          //                     ],
-                          //                   ),
-                          //                 ),
-                          //                 Padding(
-                          //                   padding: const EdgeInsets.only(left: 5.0),
-                          //                   child: Row(
-                          //                     children: [
-                          //                       Text(
-                          //                         'Speaker Name:',
-                          //                         style: TextStyle(
-                          //                           fontSize: 15,
-                          //                           fontWeight: FontWeight.bold,
-                          //                           // color: Colors.blue.shade700,
-                          //                         ),
-                          //                       ),
-                          //                       Text(
-                          //                         'Dr Lakshman',
-                          //                         style: TextStyle(
-                          //                           fontSize: 15,
-                          //                           // color: Colors.blue.shade700,
-                          //                         ),
-                          //                       ),
-                          //                     ],
-                          //                   ),
-                          //                 ),
-                          //                 SizedBox(
-                          //                   height: 5,
-                          //                 ),
-                          //                 Padding(
-                          //                   padding: const EdgeInsets.only(left: 5.0),
-                          //                   child: Text(
-                          //                     'Approved by Karnataka Medical',
-                          //                     style: TextStyle(
-                          //                       fontSize: 15,
-                          //                       fontWeight: FontWeight.bold,
-                          //                       // color: Colors.blue.shade700,
-                          //                     ),
-                          //                   ),
-                          //                 ),
-                          //                 Padding(
-                          //                   padding: const EdgeInsets.only(left: 5.0),
-                          //                   child: Text(
-                          //                     'Council',
-                          //                     style: TextStyle(
-                          //                       fontSize: 15,
-                          //                       fontWeight: FontWeight.bold,
-                          //                       // color: Colors.blue.shade700,
-                          //                     ),
-                          //                   ),
-                          //                 ),
-                          //                 SizedBox(
-                          //                   height: 5,
-                          //                 ),
-                          //                 Padding(
-                          //                   padding: const EdgeInsets.only(left: 5.0),
-                          //                   child: Text(
-                          //                     'Buy Videos @ 600 + 18% GST/-',
-                          //                     style: TextStyle(
-                          //                       fontSize: 15,
-                          //                       fontWeight: FontWeight.bold,
-                          //                       // color: Colors.blue.shade700,
-                          //                     ),
-                          //                   ),
-                          //                 ),
-                          //                 Padding(
-                          //                   padding: const EdgeInsets.only(left: 5.0),
-                          //                   child: Text(
-                          //                     'Score Point',
-                          //                     style: TextStyle(
-                          //                       fontSize: 15,
-                          //                       fontWeight: FontWeight.bold,
-                          //                       // color: Colors.blue.shade700,
-                          //                     ),
-                          //                   ),
-                          //                 ),
-                          //                 SizedBox(
-                          //                   height: 10,
-                          //                 ),
-                          //                 Center(
-                          //                   child: ElevatedButton(
-                          //                       onPressed: () {
-                          //                         Get.offAll(Question(
-                          //                           isGoingtoTest: false,
-                          //                         ));
-                          //                       },
-                          //                       style: ElevatedButton.styleFrom(
-                          //                           backgroundColor: Colors.black87,
-                          //                           // Colors.orange,//// Color.fromARGB(255, 218, 206, 37),
-                          //                           shape: RoundedRectangleBorder(
-                          //                             borderRadius:
-                          //                                 BorderRadius.circular(15),
-                          //                           )),
-                          //                       child: Text(
-                          //                         "Take Test",
-                          //                         style: TextStyle(
-                          //                           fontFamily: "Nunito",
-                          //                           fontWeight: FontWeight.bold,
-                          //                         ),
-                          //                       )),
-                          //                 ),
-                          //                 // ElevatedButton(
-                          //                 //     onPressed: () {
-                          //                 //       Get.to(Question());
-                          //                 //     },
-                          //                 //     style: ElevatedButton.styleFrom(
-                          //                 //         primary: Color.fromARGB(255, 218, 206, 37),
-                          //                 //         shape: RoundedRectangleBorder(
-                          //                 //           borderRadius: BorderRadius.circular(15),
-                          //                 //         )),
-                          //                 //     child: Text("Take Test")),
-                          //               ],
-                          //             ),
-                          //           ),
-                          //         ),
-                          //         SizedBox(
-                          //           height: 20,
-                          //         ),
-                          //         Center(
-                          //           child: Opacity(
-                          //             opacity: 0.6,
-                          //             child: Container(
-                          //               height: context.width > 410
-                          //                   ? context.height * 0.45
-                          //                   : context.height * 0.502,
-                          //               width: context.width * 0.8,
-                          //               decoration: BoxDecoration(
-                          //                 borderRadius:
-                          //                     BorderRadius.all(Radius.circular(10.0)),
-                          //                 // color: Colors.amber.withOpacity(1.5),
-                          //                 border: Border.all(
-                          //                   color: Colors.black,
-                          //                   width: 1,
-                          //                 ),
-                          //               ),
-                          //               margin: EdgeInsets.only(left: 0.0),
-                          //               child: Column(
-                          //                 crossAxisAlignment: CrossAxisAlignment.start,
-                          //                 children: [
-                          //                   GestureDetector(
-                          //                     onTap: () {
-                          //                       Get.to(AssetPlayerWidget1());
-                          //                     },
-                          //                     child: Container(
-                          //                       height: context.height * 0.19,
-                          //                       width: context.width * 0.794,
-                          //                       // color: Colors.amber,
-                          //                       child: Stack(children: [
-                          //                         ClipRRect(
-                          //                             borderRadius: BorderRadius.only(
-                          //                               topLeft: Radius.circular(10.0),
-                          //                               topRight: Radius.circular(10.0),
-                          //                             ),
-                          //                             child: VideoPlayer(controller1!)),
-                          //                         Center(
-                          //                           child: Padding(
-                          //                             padding: const EdgeInsets.only(
-                          //                                 top: 0.0),
-                          //                             child: Image.asset(
-                          //                               'assets/cme logo 1.png',
-                          //                               // color: Colors.black,
-                          //                               height: 60,
-                          //                               fit: BoxFit.cover,
-                          //                             ),
-                          //                           ),
-                          //                         ),
-                          //                       ]),
-                          //                     ),
-                          //                   ),
-                          //                   Container(
-                          //                     height: 1,
-                          //                     color: Colors.black,
-                          //                   ),
-                          //                   Padding(
-                          //                     padding: const EdgeInsets.only(
-                          //                         left: 5.0, top: 5),
-                          //                     child: Text(
-                          //                       'Evidence Based Medicines',
-                          //                       style: TextStyle(
-                          //                         fontSize: 18,
-                          //                         fontWeight: FontWeight.bold,
-                          //                         // color: Colors.blue.shade700,
-                          //                       ),
-                          //                     ),
-                          //                   ),
-                          //                   Padding(
-                          //                     padding: const EdgeInsets.only(left: 5.0),
-                          //                     child: Row(
-                          //                       children: [
-                          //                         Text(
-                          //                           'Credit Points:',
-                          //                           style: TextStyle(
-                          //                             fontSize: 15,
-                          //                             fontWeight: FontWeight.bold,
-                          //                             // color: Colors.blue.shade700,
-                          //                           ),
-                          //                         ),
-                          //                         Text(
-                          //                           '1 Duration:0.45 hrs',
-                          //                           style: TextStyle(
-                          //                             fontSize: 15,
-                          //                             // color: Colors.blue.shade700, 1 Duration:0.45 hrs
-                          //                           ),
-                          //                         ),
-                          //                       ],
-                          //                     ),
-                          //                   ),
-                          //                   Padding(
-                          //                     padding: const EdgeInsets.only(left: 5.0),
-                          //                     child: Row(
-                          //                       children: [
-                          //                         Text(
-                          //                           'Speaker Name:',
-                          //                           style: TextStyle(
-                          //                             fontSize: 15,
-                          //                             fontWeight: FontWeight.bold,
-                          //                             // color: Colors.blue.shade700,
-                          //                           ),
-                          //                         ),
-                          //                         Text(
-                          //                           'Dr Lakshman',
-                          //                           style: TextStyle(
-                          //                             fontSize: 15,
-                          //                             // color: Colors.blue.shade700,
-                          //                           ),
-                          //                         ),
-                          //                       ],
-                          //                     ),
-                          //                   ),
-                          //                   SizedBox(
-                          //                     height: 5,
-                          //                   ),
-                          //                   Padding(
-                          //                     padding: const EdgeInsets.only(left: 5.0),
-                          //                     child: Text(
-                          //                       'Approved by Karnataka Medical',
-                          //                       style: TextStyle(
-                          //                         fontSize: 15,
-                          //                         fontWeight: FontWeight.bold,
-                          //                         // color: Colors.blue.shade700,
-                          //                       ),
-                          //                     ),
-                          //                   ),
-                          //                   Padding(
-                          //                     padding: const EdgeInsets.only(left: 5.0),
-                          //                     child: Text(
-                          //                       'Council',
-                          //                       style: TextStyle(
-                          //                         fontSize: 15,
-                          //                         fontWeight: FontWeight.bold,
-                          //                         // color: Colors.blue.shade700,
-                          //                       ),
-                          //                     ),
-                          //                   ),
-                          //                   SizedBox(
-                          //                     height: 5,
-                          //                   ),
-                          //                   Padding(
-                          //                     padding: const EdgeInsets.only(left: 5.0),
-                          //                     child: Text(
-                          //                       'Buy Videos @ 600 + 18% GST/-',
-                          //                       style: TextStyle(
-                          //                         fontSize: 15,
-                          //                         fontWeight: FontWeight.bold,
-                          //                         // color: Colors.blue.shade700,
-                          //                       ),
-                          //                     ),
-                          //                   ),
-                          //                   Padding(
-                          //                     padding: const EdgeInsets.only(left: 5.0),
-                          //                     child: Text(
-                          //                       'Score Point',
-                          //                       style: TextStyle(
-                          //                         fontSize: 15,
-                          //                         fontWeight: FontWeight.bold,
-                          //                         // color: Colors.blue.shade700,
-                          //                       ),
-                          //                     ),
-                          //                   ),
-                          //                   SizedBox(
-                          //                     height: 10,
-                          //                   ),
-                          //                   Center(
-                          //                     child: ElevatedButton(
-                          //                         onPressed: () {
-                          //                           cmeProgramController.createOrder();
-                          //                           // cmeProgramController.isClicked
-                          //                           //     ? () {
-                          //                           //         print(cmeProgramController
-                          //                           //             .isClicked);
-                          //                           //         cmeProgramController
-                          //                           //             .isClicked = false;
-                          //                           //         print(cmeProgramController
-                          //                           //             .isClicked);
-                          //                           //         cmeProgramController
-                          //                           //             .createOrder();
-                          //                           //       }
-                          //                           //     : null;
-                          //                         },
-                          //                         style: ElevatedButton.styleFrom(
-                          //                             backgroundColor: Colors
-                          //                                 .black87, //Color.fromARGB(255, 218, 206, 37),
-                          //                             shape: RoundedRectangleBorder(
-                          //                               borderRadius:
-                          //                                   BorderRadius.circular(15),
-                          //                             )),
-                          //                         child: Text(
-                          //                           "Buy Now",
-                          //                           style: TextStyle(
-                          //                             fontFamily: "Nunito",
-                          //                             fontWeight: FontWeight.bold,
-                          //                           ),
-                          //                         )),
-                          //                   ),
-                          //                   // ElevatedButton(
-                          //                   //     onPressed: () {
-                          //                   //       Get.to(Question());
-                          //                   //     },
-                          //                   //     style: ElevatedButton.styleFrom(
-                          //                   //         primary: Color.fromARGB(255, 218, 206, 37),
-                          //                   //         shape: RoundedRectangleBorder(
-                          //                   //           borderRadius: BorderRadius.circular(15),
-                          //                   //         )),
-                          //                   //     child: Text("Take Test")),
-                          //                 ],
-                          //               ),
-                          //             ),
-                          //           ),
-                          //         ),
-                          //         SizedBox(
-                          //           height: 20,
-                          //         ),
-                          //         Center(
-                          //           child: Opacity(
-                          //             opacity: 0.6,
-                          //             child: Container(
-                          //               height: context.width > 410
-                          //                   ? context.height * 0.45
-                          //                   : context.height * 0.502,
-                          //               width: context.width * 0.8,
-                          //               decoration: BoxDecoration(
-                          //                 borderRadius:
-                          //                     BorderRadius.all(Radius.circular(10.0)),
-                          //                 border: Border.all(
-                          //                   color: Colors.black,
-                          //                   width: 1,
-                          //                 ),
-                          //               ),
-                          //               margin: EdgeInsets.only(left: 0.0, right: 0.0),
-                          //               child: Column(
-                          //                 crossAxisAlignment: CrossAxisAlignment.start,
-                          //                 children: [
-                          //                   GestureDetector(
-                          //                     onTap: () {
-                          //                       Get.to(AssetPlayerWidget2());
-                          //                     },
-                          //                     child: Container(
-                          //                       height: context.height * 0.19,
-                          //                       width: context.width * 0.794,
-                          //                       // color: Colors.amber,
-                          //                       child: Stack(children: [
-                          //                         ClipRRect(
-                          //                             borderRadius: BorderRadius.only(
-                          //                               topLeft: Radius.circular(10.0),
-                          //                               topRight: Radius.circular(10.0),
-                          //                             ),
-                          //                             child: VideoPlayer(controller2!)),
-                          //                         Center(
-                          //                           child: Padding(
-                          //                             padding: const EdgeInsets.only(
-                          //                                 top: 0.0),
-                          //                             child: Image.asset(
-                          //                               'assets/cme logo 1.png',
-                          //                               // color: Colors.black,
-                          //                               height: 60,
-                          //                               fit: BoxFit.cover,
-                          //                             ),
-                          //                           ),
-                          //                         ),
-                          //                       ]),
-                          //                     ),
-                          //                   ),
-                          //                   Container(
-                          //                     height: 1,
-                          //                     color: Colors.black,
-                          //                   ),
-                          //                   Padding(
-                          //                     padding: const EdgeInsets.only(
-                          //                         left: 5.0, top: 5),
-                          //                     child: Text(
-                          //                       'Evidence Based Medicines',
-                          //                       style: TextStyle(
-                          //                         fontSize: 18,
-                          //                         fontWeight: FontWeight.bold,
-                          //                         // color: Colors.blue.shade700,
-                          //                       ),
-                          //                     ),
-                          //                   ),
-                          //                   Padding(
-                          //                     padding: const EdgeInsets.only(left: 5.0),
-                          //                     child: Row(
-                          //                       children: [
-                          //                         Text(
-                          //                           'Credit Points:',
-                          //                           style: TextStyle(
-                          //                             fontSize: 15,
-                          //                             fontWeight: FontWeight.bold,
-                          //                             // color: Colors.blue.shade700,
-                          //                           ),
-                          //                         ),
-                          //                         Text(
-                          //                           '1 Duration:0.45 hrs',
-                          //                           style: TextStyle(
-                          //                             fontSize: 15,
-                          //                             // color: Colors.blue.shade700, 1 Duration:0.45 hrs
-                          //                           ),
-                          //                         ),
-                          //                       ],
-                          //                     ),
-                          //                   ),
-                          //                   Padding(
-                          //                     padding: const EdgeInsets.only(left: 5.0),
-                          //                     child: Row(
-                          //                       children: [
-                          //                         Text(
-                          //                           'Speaker Name:',
-                          //                           style: TextStyle(
-                          //                             fontSize: 15,
-                          //                             fontWeight: FontWeight.bold,
-                          //                             // color: Colors.blue.shade700,
-                          //                           ),
-                          //                         ),
-                          //                         Text(
-                          //                           'Dr Lakshman',
-                          //                           style: TextStyle(
-                          //                             fontSize: 15,
-                          //                             // color: Colors.blue.shade700,
-                          //                           ),
-                          //                         ),
-                          //                       ],
-                          //                     ),
-                          //                   ),
-                          //                   SizedBox(
-                          //                     height: 5,
-                          //                   ),
-                          //                   Padding(
-                          //                     padding: const EdgeInsets.only(left: 5.0),
-                          //                     child: Text(
-                          //                       'Approved by Karnataka Medical',
-                          //                       style: TextStyle(
-                          //                         fontSize: 15,
-                          //                         fontWeight: FontWeight.bold,
-                          //                         // color: Colors.blue.shade700,
-                          //                       ),
-                          //                     ),
-                          //                   ),
-                          //                   Padding(
-                          //                     padding: const EdgeInsets.only(left: 5.0),
-                          //                     child: Text(
-                          //                       'Council',
-                          //                       style: TextStyle(
-                          //                         fontSize: 15,
-                          //                         fontWeight: FontWeight.bold,
-                          //                         // color: Colors.blue.shade700,
-                          //                       ),
-                          //                     ),
-                          //                   ),
-                          //                   SizedBox(
-                          //                     height: 5,
-                          //                   ),
-                          //                   Padding(
-                          //                     padding: const EdgeInsets.only(left: 5.0),
-                          //                     child: Text(
-                          //                       'Buy Videos @ 600 + 18% GST/-',
-                          //                       style: TextStyle(
-                          //                         fontSize: 15,
-                          //                         fontWeight: FontWeight.bold,
-                          //                         // color: Colors.blue.shade700,
-                          //                       ),
-                          //                     ),
-                          //                   ),
-                          //                   Padding(
-                          //                     padding: const EdgeInsets.only(left: 5.0),
-                          //                     child: Text(
-                          //                       'Score Point',
-                          //                       style: TextStyle(
-                          //                         fontSize: 15,
-                          //                         fontWeight: FontWeight.bold,
-                          //                         // color: Colors.blue.shade700,
-                          //                       ),
-                          //                     ),
-                          //                   ),
-                          //                   SizedBox(
-                          //                     height: 10,
-                          //                   ),
-                          //                   Center(
-                          //                     child: ElevatedButton(
-                          //                         onPressed: () {
-                          //                           cmeProgramController.createOrder();
-                          //                         },
-                          //                         style: ElevatedButton.styleFrom(
-                          //                             backgroundColor: Colors
-                          //                                 .black87, //Color.fromARGB(255, 218, 206, 37),
-                          //                             shape: RoundedRectangleBorder(
-                          //                               borderRadius:
-                          //                                   BorderRadius.circular(15),
-                          //                             )),
-                          //                         child: Text(
-                          //                           "Buy Now",
-                          //                           style: TextStyle(
-                          //                             fontFamily: "Nunito",
-                          //                             fontWeight: FontWeight.bold,
-                          //                           ),
-                          //                         )),
-                          //                   ),
-                          //                 ],
-                          //               ),
-                          //             ),
-                          //           ),
-                          //         ),
-                          //         SizedBox(
-                          //           height: 20,
-                          //         ),
-                          //         Center(
-                          //           child: Container(
-                          //             height: context.width > 410
-                          //                 ? context.height * 0.45
-                          //                 : context.height * 0.502,
-                          //             width: context.width * 0.8,
-                          //             decoration: BoxDecoration(
-                          //               borderRadius:
-                          //                   BorderRadius.all(Radius.circular(10.0)),
-                          //               border: Border.all(
-                          //                 color: Colors.black,
-                          //                 width: 1,
-                          //               ),
-                          //             ),
-                          //             margin: EdgeInsets.only(left: 0.0),
-                          //             child: Column(
-                          //               crossAxisAlignment: CrossAxisAlignment.start,
-                          //               children: [
-                          //                 GestureDetector(
-                          //                   onTap: () {
-                          //                     Get.to(AssetPlayerWidget());
-                          //                   },
-                          //                   child: Container(
-                          //                     height: context.height * 0.19,
-                          //                     width: context.width * 0.794,
-                          //                     // color: Colors.amber,
-                          //                     child: Stack(children: [
-                          //                       ClipRRect(
-                          //                           borderRadius: BorderRadius.only(
-                          //                             topLeft: Radius.circular(10.0),
-                          //                             topRight: Radius.circular(10.0),
-                          //                           ),
-                          //                           child: VideoPlayer(controller!)),
-                          //                       Center(
-                          //                         child: Padding(
-                          //                           padding:
-                          //                               const EdgeInsets.only(top: 0.0),
-                          //                           child: Image.asset(
-                          //                             'assets/cme logo 1.png',
-                          //                             // color: Colors.black,
-                          //                             height: 60,
-                          //                             fit: BoxFit.cover,
-                          //                           ),
-                          //                         ),
-                          //                       ),
-                          //                     ]),
-                          //                   ),
-                          //                 ),
-                          //                 Container(
-                          //                   height: 1,
-                          //                   color: Colors.black,
-                          //                 ),
-                          //                 Padding(
-                          //                   padding: const EdgeInsets.only(
-                          //                       left: 5.0, top: 5),
-                          //                   child: Text(
-                          //                     'Evidence Based Medicines',
-                          //                     style: TextStyle(
-                          //                       fontSize: 18,
-                          //                       fontWeight: FontWeight.bold,
-                          //                       // color: Colors.blue.shade700,
-                          //                     ),
-                          //                   ),
-                          //                 ),
-                          //                 Padding(
-                          //                   padding: const EdgeInsets.only(left: 5.0),
-                          //                   child: Row(
-                          //                     children: [
-                          //                       Text(
-                          //                         'Credit Points:',
-                          //                         style: TextStyle(
-                          //                           fontSize: 15,
-                          //                           fontWeight: FontWeight.bold,
-                          //                           // color: Colors.blue.shade700,
-                          //                         ),
-                          //                       ),
-                          //                       Text(
-                          //                         '1 Duration:0.45 hrs',
-                          //                         style: TextStyle(
-                          //                           fontSize: 15,
-                          //                           // color: Colors.blue.shade700, 1 Duration:0.45 hrs
-                          //                         ),
-                          //                       ),
-                          //                     ],
-                          //                   ),
-                          //                 ),
-                          //                 Padding(
-                          //                   padding: const EdgeInsets.only(left: 5.0),
-                          //                   child: Row(
-                          //                     children: [
-                          //                       Text(
-                          //                         'Speaker Name:',
-                          //                         style: TextStyle(
-                          //                           fontSize: 15,
-                          //                           fontWeight: FontWeight.bold,
-                          //                           // color: Colors.blue.shade700,
-                          //                         ),
-                          //                       ),
-                          //                       Text(
-                          //                         'Dr Lakshman',
-                          //                         style: TextStyle(
-                          //                           fontSize: 15,
-                          //                           // color: Colors.blue.shade700,
-                          //                         ),
-                          //                       ),
-                          //                     ],
-                          //                   ),
-                          //                 ),
-                          //                 SizedBox(
-                          //                   height: 5,
-                          //                 ),
-                          //                 Padding(
-                          //                   padding: const EdgeInsets.only(left: 5.0),
-                          //                   child: Text(
-                          //                     'Approved by Karnataka Medical',
-                          //                     style: TextStyle(
-                          //                       fontSize: 15,
-                          //                       fontWeight: FontWeight.bold,
-                          //                       // color: Colors.blue.shade700,
-                          //                     ),
-                          //                   ),
-                          //                 ),
-                          //                 Padding(
-                          //                   padding: const EdgeInsets.only(left: 5.0),
-                          //                   child: Text(
-                          //                     'Council',
-                          //                     style: TextStyle(
-                          //                       fontSize: 15,
-                          //                       fontWeight: FontWeight.bold,
-                          //                       // color: Colors.blue.shade700,
-                          //                     ),
-                          //                   ),
-                          //                 ),
-                          //                 SizedBox(
-                          //                   height: 5,
-                          //                 ),
-                          //                 Padding(
-                          //                   padding: const EdgeInsets.only(left: 5.0),
-                          //                   child: Text(
-                          //                     'Buy Videos @ 600 + 18% GST/-',
-                          //                     style: TextStyle(
-                          //                       fontSize: 15,
-                          //                       fontWeight: FontWeight.bold,
-                          //                       // color: Colors.blue.shade700,
-                          //                     ),
-                          //                   ),
-                          //                 ),
-                          //                 Padding(
-                          //                   padding: const EdgeInsets.only(left: 5.0),
-                          //                   child: Text(
-                          //                     'Score Point',
-                          //                     style: TextStyle(
-                          //                       fontSize: 15,
-                          //                       fontWeight: FontWeight.bold,
-                          //                       // color: Colors.blue.shade700,
-                          //                     ),
-                          //                   ),
-                          //                 ),
-                          //                 SizedBox(
-                          //                   height: 10,
-                          //                 ),
-
-                          //                 Center(
-                          //                   child: ElevatedButton(
-                          //                       onPressed: () {
-                          //                         Get.to(Question(
-                          //                           isGoingtoTest: false,
-                          //                         ));
-                          //                       },
-                          //                       style: ElevatedButton.styleFrom(
-                          //                           backgroundColor: Colors
-                          //                               .black87, // Colors.orange,//// Color.fromARGB(255, 218, 206, 37),
-                          //                           shape: RoundedRectangleBorder(
-                          //                             borderRadius:
-                          //                                 BorderRadius.circular(15),
-                          //                           )),
-                          //                       child: Text(
-                          //                         "Take Test",
-                          //                         style: TextStyle(
-                          //                           fontFamily: "Nunito",
-                          //                           fontWeight: FontWeight.bold,
-                          //                         ),
-                          //                       )),
-                          //                 ),
-                          //                 // ElevatedButton(
-                          //                 //     onPressed: () {
-                          //                 //       Get.to(Question());
-                          //                 //     },
-                          //                 //     style: ElevatedButton.styleFrom(
-                          //                 //         primary: Color.fromARGB(255, 218, 206, 37),
-                          //                 //         shape: RoundedRectangleBorder(
-                          //                 //           borderRadius: BorderRadius.circular(15),
-                          //                 //         )),
-                          //                 //     child: Text("Take Test")),
-                          //               ],
-                          //             ),
-                          //           ),
-                          //         ),
-                          //       ],
-                          //     ),
-                          //   ),
-                          // ),
                           SizedBox(
                             height: 0,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              // SizedBox(
+                              //   width: 180,
+                              // ),
+                              Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Center(
+                                    child: Icon(
+                                  Icons.keyboard_double_arrow_left_rounded,
+                                  color: Colors.white,
+                                )),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Center(
+                                    child: Icon(
+                                  Icons.keyboard_arrow_left_rounded,
+                                  color: Colors.white,
+                                )),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  color: Color(0xffDC3638),
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '1',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "Nunito",
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '2',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "Nunito",
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '3',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "Nunito",
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Center(
+                                    child: Icon(
+                                  Icons.keyboard_arrow_right_rounded,
+                                  color: Colors.white,
+                                )),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Center(
+                                    child: Icon(
+                                  Icons.keyboard_double_arrow_right_rounded,
+                                  color: Colors.white,
+                                )),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Showing 1 of 1 Entries',
+                                  style: TextStyle(
+                                      fontSize: 14, fontFamily: "Nunito"
+                                      // color: Colors.blue.shade700,
+                                      ),
+                                ),
+                                Spacer(),
+
+                                // Padding(
+                                //   padding: const EdgeInsets.only(left: 8.0),
+                                //   child: Image.asset(
+                                //     'assets/hj.png',
+                                //     height: 25,
+                                //   ),
+                                // ),
+                              ],
+                            ),
                           ),
                           // Padding(
                           //   padding: const EdgeInsets.all(10.0),
@@ -1587,6 +821,13 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
     );
     //   }),
     // );
+  }
+
+  void downloadCmeVideo(int index) {
+    String video_url = cmeProgramController
+        .allCmeVideos.value!.videoList![index].videoPath
+        .toString();
+    final dio = Dio();
   }
 }
 

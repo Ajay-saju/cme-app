@@ -222,23 +222,23 @@ class _HomeState extends State<Home> {
                                             SizedBox(
                                               height: 10,
                                             ),
-                                            Text(
-                                              dashController
-                                                          .userCmeVideoLastTest!
-                                                          .latest ==
-                                                      null
-                                                  ? " "
-                                                  : dashController
-                                                      .userCmeVideoLastTest!
-                                                      .latest
-                                                      .toString(),
-                                              style: TextStyle(
-                                                  fontFamily: "Nunito",
-                                                  fontSize: context.width > 410
-                                                      ? 20
-                                                      : 18,
-                                                  color: Colors.white),
-                                            ),
+                                            // Text(
+                                            //   dashController
+                                            //               .userCmeVideoLastTest!
+                                            //               .latest ==
+                                            //           null
+                                            //       ? " "
+                                            //       : dashController
+                                            //           .userCmeVideoLastTest!
+                                            //           .latest
+                                            //           .toString(),
+                                            //   style: TextStyle(
+                                            //       fontFamily: "Nunito",
+                                            //       fontSize: context.width > 410
+                                            //           ? 20
+                                            //           : 18,
+                                            //       color: Colors.white),
+                                            // ),
                                           ],
                                         ),
                                       ),
@@ -300,21 +300,21 @@ class _HomeState extends State<Home> {
                                             SizedBox(
                                               height: 10,
                                             ),
-                                            Text(
-                                              dashController.userCmeVideo!
-                                                          .latest ==
-                                                      null
-                                                  ? ""
-                                                  : dashController
-                                                      .userCmeVideo!.latest
-                                                      .toString(),
-                                              style: TextStyle(
-                                                  fontFamily: "Nunito",
-                                                  fontSize: context.width > 410
-                                                      ? 25
-                                                      : 20,
-                                                  color: Colors.white),
-                                            )
+                                            // Text(
+                                            //   dashController.userCmeVideo!
+                                            //               .latest ==
+                                            //           null
+                                            //       ? ""
+                                            //       : dashController
+                                            //           .userCmeVideo!.latest
+                                            //           .toString(),
+                                            //   style: TextStyle(
+                                            //       fontFamily: "Nunito",
+                                            //       fontSize: context.width > 410
+                                            //           ? 25
+                                            //           : 20,
+                                            //       color: Colors.white),
+                                            // )
                                           ],
                                         ),
                                       ),
@@ -376,23 +376,23 @@ class _HomeState extends State<Home> {
                                             SizedBox(
                                               height: 10,
                                             ),
-                                            Text(
-                                              dashController
-                                                          .userCmeVideoPurchese!
-                                                          .latest ==
-                                                      null
-                                                  ? " "
-                                                  : dashController
-                                                      .userCmeVideoPurchese!
-                                                      .latest
-                                                      .toString(),
-                                              style: TextStyle(
-                                                  fontFamily: "Nunito",
-                                                  fontSize: context.width > 410
-                                                      ? 25
-                                                      : 20,
-                                                  color: Colors.white),
-                                            ),
+                                            // Text(
+                                            //   dashController
+                                            //               .userCmeVideoPurchese!
+                                            //               .latest ==
+                                            //           null
+                                            //       ? " "
+                                            //       : dashController
+                                            //           .userCmeVideoPurchese!
+                                            //           .latest
+                                            //           .toString(),
+                                            //   style: TextStyle(
+                                            //       fontFamily: "Nunito",
+                                            //       fontSize: context.width > 410
+                                            //           ? 25
+                                            //           : 20,
+                                            //       color: Colors.white),
+                                            // ),
                                           ],
                                         ),
                                       ),

@@ -93,13 +93,40 @@ class CreateAccountController extends GetxController {
                 fontWeight: FontWeight.bold,
               ));
         } else {
-          await Get.snackbar('Success', 'Account Create successfully',
-              colorText: Colors.white,
-              backgroundColor: Colors.black,
-              duration: Duration(seconds: 3));
-          Timer(Duration(seconds: 2), () {
-            Get.offAll(Login());
-          });
+          await Get.defaultDialog(
+            title: 'Success',
+            middleText: 'Account Create successfully',
+            titleStyle: TextStyle(
+              fontFamily: "Nunito",
+              color: Colors.black87,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+            middleTextStyle: TextStyle(
+              fontFamily: "Nunito",
+              color: Colors.black87,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+            confirm: ElevatedButton(
+              onPressed: () {
+                Get.offAll(Login());
+              },
+              child: Text('ok'),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  )),
+            ),
+          );
+          // Get.snackbar('Success', 'Account Create successfully',
+          //     colorText: Colors.white,
+          //     backgroundColor: Colors.black,
+          //     duration: Duration(seconds: 3));
+          // Timer(Duration(seconds: 2), () {
+          //   Get.offAll(Login());
+          // });
         }
 
         // if (getUserDetails.value.message == 'failed') {

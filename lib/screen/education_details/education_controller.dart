@@ -15,6 +15,8 @@ import '../../services/get_eduid_list_servise.dart';
 class EducationController extends GetxController {
   final GlobalKey<FormState> addEduFormKey = GlobalKey<FormState>();
   final TextEditingController degreeController = TextEditingController();
+  final TextEditingController universityController = TextEditingController();
+  final TextEditingController collegeController = TextEditingController();
   // final GlobalKey<FormState> editEduFormKey = GlobalKey<FormState>();
 
   var userData = [].obs;
@@ -37,7 +39,7 @@ class EducationController extends GetxController {
   String? university;
   String? month;
   String? year;
-  List<UniversityList>? universityList = [];
+  List<UniversityList> universityList = [];
   List<CollegeList>? collegeList = [];
   List<SpecialtyList> specialtyList = [];
   final degreeItem = [
@@ -172,7 +174,7 @@ class EducationController extends GetxController {
     var eduData = {
       'Memberid': sessionlog.getString('userId').toString(),
       'yearofPassing': year,
-      'CourseCode': "130",
+      'CourseCode': course,
       'monthofPassing': month,
       'universitycode': university,
       'collegecode': college,
@@ -183,10 +185,17 @@ class EducationController extends GetxController {
     try {
       var response = await dio.post('SaveAddUpdateEduinfoNew', data: eduData);
       if (response.statusCode == 200) {
-        await Get.snackbar('Success', 'Save Details successfully',
-            colorText: Colors.white,
-            backgroundColor: Colors.black,
-            duration: Duration(seconds: 3));
+        await
+            //  Get.defaultDialog(
+            //     title: "Success",
+            //     middleText: 'Save Details successfully',
+            //     onConfirm: () {
+            //       Get.off(EducationDetailsScreen());
+            //     });
+            Get.snackbar('Success', 'Save Details successfully',
+                colorText: Colors.white,
+                backgroundColor: Colors.black,
+                duration: Duration(seconds: 3));
 
         Timer(Duration(seconds: 2), () async {
           Get.off(EducationDetailsScreen());

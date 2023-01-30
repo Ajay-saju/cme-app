@@ -156,9 +156,9 @@ class _CreateAccountState extends State<CreateAccount> {
                             keyboardType: TextInputType.name,
                             controller: accountController.regName,
                             validator: (value) {
-                              if (value!.isNotEmpty && value.length > 3) {
+                              if (value!.isNotEmpty && value.length > 2) {
                                 return null;
-                              } else if (value.length < 3 && value.isNotEmpty) {
+                              } else if (value.length < 2 && value.isNotEmpty) {
                                 return "Your Name is Short";
                               } else {
                                 return 'Required Name ';
@@ -352,7 +352,8 @@ class _CreateAccountState extends State<CreateAccount> {
                                       accountController.isObscure
                                           ? Icons.visibility_off
                                           : Icons.visibility,
-                                      color: Color(0xffDC3638))),
+                                      color:
+                                          Color.fromARGB(255, 249, 104, 106))),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                                 borderSide:

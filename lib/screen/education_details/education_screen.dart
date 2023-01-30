@@ -118,7 +118,7 @@ class _EducationDetailsScreenState extends State<EducationDetailsScreen> {
                         //   height: 10,
                         // ),
 
-                        eduData == null
+                        eduData == null || eduData == []
                             ? Center(
                                 child: Text(
                                   'No Data Available',
@@ -133,144 +133,198 @@ class _EducationDetailsScreenState extends State<EducationDetailsScreen> {
                                 child: ListView.separated(
                                     itemBuilder: (context, index) => Padding(
                                           padding: const EdgeInsets.all(10),
-                                          child: Container(
-                                            height: context.height * .55 / 2,
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10.0)),
-                                              border: Border.all(
-                                                color: Colors.black,
-                                                width: 1,
-                                              ),
-                                            ),
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 10, right: 10, top: 20),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: [
-                                                  // Column(
-                                                  //   crossAxisAlignment:
-                                                  //       CrossAxisAlignment
-                                                  //           .start,
-                                                  //   children: [
-                                                  //     Text(
-                                                  //       'Degree :',
-                                                  //       style: TextStyle(
-                                                  //           fontWeight:
-                                                  //               FontWeight.bold,
-                                                  //           fontFamily:
-                                                  //               "Nunito",
-                                                  //           fontSize: 16,
-                                                  //           color:
-                                                  //               Colors.black),
-                                                  //     ),
-                                                  //     SizedBox(
-                                                  //       width: 15,
-                                                  //     ),
-                                                  //     Text(
-                                                  //       'University :',
-                                                  //       style: TextStyle(
-                                                  //           fontWeight:
-                                                  //               FontWeight.bold,
-                                                  //           fontFamily:
-                                                  //               "Nunito",
-                                                  //           fontSize: 16,
-                                                  //           color:
-                                                  //               Colors.black),
-                                                  //     ),
-                                                  //     Text(
-                                                  //       'Collage :',
-                                                  //       style: TextStyle(
-                                                  //           fontWeight:
-                                                  //               FontWeight.bold,
-                                                  //           fontFamily:
-                                                  //               "Nunito",
-                                                  //           fontSize: 16,
-                                                  //           color:
-                                                  //               Colors.black),
-                                                  //     ),
-                                                  //     Text(
-                                                  //       'Speciality :',
-                                                  //       style: TextStyle(
-                                                  //           fontWeight:
-                                                  //               FontWeight.bold,
-                                                  //           fontFamily:
-                                                  //               "Nunito",
-                                                  //           fontSize: 16,
-                                                  //           color:
-                                                  //               Colors.black),
-                                                  //     ),
-                                                  //   ],
-                                                  // ),
-                                                  SizedBox(
-                                                    width: 15,
-                                                  ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        eduData[index]
-                                                            .dEGREE
-                                                            .toString(),
-                                                        maxLines: 3,
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                "Nunito",
-                                                            fontSize: 16,
-                                                            color:
-                                                                Colors.black),
-                                                      ),
-                                                      Text(
-                                                        eduData[index]
-                                                            .uNIVERSITY
-                                                            .toString(),
-                                                        // overflow: TextOverflow
-                                                        //     .ellipsis,
-                                                        // maxLines: 2,
-                                                        // textAlign:
-                                                        //     TextAlign.left,
+                                          child: 
+                                          Container(
+                                              padding: EdgeInsets.all(10),
 
+                                              // height: context.height * .55 / 2,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                                border: Border.all(
+                                                  color: Colors.black,
+                                                  width: 1,
+                                                ),
+                                              ),
+                                              child: Column(
+                                                children: [
+                                                  Table(
+                                                    columnWidths: {
+                                                      0: FlexColumnWidth(1.5),
+                                                      1: FlexColumnWidth(0.3),
+                                                      2: FlexColumnWidth(4),
+                                                    },
+                                                    children: [
+                                                      TableRow(children: [
+                                                        Text(
+                                                          'Degree',
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontFamily:
+                                                                  "Nunito",
+                                                              fontSize: 16,
+                                                              color:
+                                                                  Colors.black),
+                                                        ),
+                                                        Text(
+                                                          ':',
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                        Text(
+                                                          eduData[index]
+                                                              .dEGREE
+                                                              .toString(),
+                                                          maxLines: 3,
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "Nunito",
+                                                              fontSize: 16,
+                                                              color:
+                                                                  Colors.black),
+                                                        ),
+                                                      ]),
+                                                      TableRow(children: [
+                                                        Text(
+                                                          'University',
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontFamily:
+                                                                  "Nunito",
+                                                              fontSize: 16,
+                                                              color:
+                                                                  Colors.black),
+                                                        ),
+                                                        Text(
+                                                          ':',
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                        Text(
+                                                          eduData[index]
+                                                              .uNIVERSITY
+                                                              .toString(),
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          maxLines: 2,
+                                                          // textAlign:
+                                                          //     TextAlign.left,
+
+                                                          style: TextStyle(
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              fontFamily:
+                                                                  "Nunito",
+                                                              fontSize: 16,
+                                                              color:
+                                                                  Colors.black),
+                                                        ),
+                                                      ]),
+                                                      TableRow(children: [
+                                                        //
+                                                        Text(
+                                                          'Collage',
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontFamily:
+                                                                  "Nunito",
+                                                              fontSize: 16,
+                                                              color:
+                                                                  Colors.black),
+                                                        ),
+                                                        Text(
+                                                          ':',
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                        Text(
+                                                          eduData[index]
+                                                              .cOLLEGE
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "Nunito",
+                                                              fontSize: 15,
+                                                              color:
+                                                                  Colors.black),
+                                                        ),
+                                                      ]),
+                                                      TableRow(children: [
+                                                        Text(
+                                                          'Speciality',
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontFamily:
+                                                                  "Nunito",
+                                                              fontSize: 16,
+                                                              color:
+                                                                  Colors.black),
+                                                        ),
+                                                        Text(
+                                                          ':',
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                        Text(
+                                                          eduData[index]
+                                                              .yEAROFPASSING
+                                                              .toString(),
+                                                          maxLines: 3,
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "Nunito",
+                                                              fontSize: 16,
+                                                              color:
+                                                                  Colors.black),
+                                                        )
+                                                      ])
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: 15,
+                                                  ),
+                                                  ElevatedButton(
+                                                      onPressed: () {
+                                                        Get.to(EditEduDetails(
+                                                          index: index,
+                                                        ));
+                                                      },
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                              backgroundColor:
+                                                                  Colors.black,
+                                                              shape:
+                                                                  RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10),
+                                                              )),
+                                                      child: Text(
+                                                        'Edit',
                                                         style: TextStyle(
                                                             fontFamily:
-                                                                "Nunito",
-                                                            fontSize: 16,
-                                                            color:
-                                                                Colors.black),
-                                                      ),
-                                                      // Text(
-                                                      //   eduData[index]
-                                                      //       .cOLLEGE
-                                                      //       .toString(),
-                                                      //   style: TextStyle(
-                                                      //       fontFamily:
-                                                      //           "Nunito",
-                                                      //       fontSize: 16,
-                                                      //       color:
-                                                      //           Colors.black),
-                                                      // ),
-                                                      // Text(
-                                                      //   eduData[index]
-                                                      //       .yEAROFPASSING
-                                                      //       .toString(),
-                                                      //   maxLines: 3,
-                                                      //   style: TextStyle(
-                                                      //       fontFamily:
-                                                      //           "Nunito",
-                                                      //       fontSize: 16,
-                                                      //       color:
-                                                      //           Colors.black),
-                                                      // )
-                                                    ],
-                                                  )
+                                                                "Nunito"),
+                                                      )),
                                                 ],
-                                              ),
-                                            ),
-                                          ),
+                                              )),
                                         ),
                                     separatorBuilder: (context, index) =>
                                         SizedBox(

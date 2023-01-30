@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 import 'package:hslr/models/get_eduid_list.model.dart';
 import 'package:hslr/screen/education_details/education_controller.dart';
@@ -30,8 +31,17 @@ class _EditEduDetailsState extends State<EditEduDetails> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    eduController.degreeController.clear();
+    eduController.universityController.clear();
+    eduController.collegeController.clear();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return  GetBuilder<EducationController>(builder: ((_) {
+    return GetBuilder<EducationController>(builder: ((_) {
       return GestureDetector(
         onTap: () {
           FocusScope.of(context).unfocus();
@@ -102,14 +112,91 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                           // key: eduController.editEduFormKey,
                           child: Column(
                         children: [
-                          customeDropDownTextCource(
-                              context: context,
-                              hintText: dashControll
-                                  .eduList.value.result![widget.index].dEGREE
-                                  .toString(),
-                              item: eduController.specialtyList![0].specialtyName,
-                              text: 'Degree',
-                              items: eduController.specialtyList!),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Degree',
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontFamily: "Nunito",
+                                      color: Colors.black87),
+                                ),
+                                Spacer(),
+                                Container(
+                                  width: context.width * 0.55,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border:
+                                          Border.all(color: Colors.black87)),
+                                  child: TypeAheadField(
+                                      minCharsForSuggestions: 2,
+                                      hideOnError: true,
+                                      hideSuggestionsOnKeyboardHide: false,
+                                      hideKeyboardOnDrag: true,
+                                      textFieldConfiguration:
+                                          TextFieldConfiguration(
+                                              // cursorHeight: 20,
+                                              cursorColor: Colors.black87,
+                                              decoration: new InputDecoration(
+                                                border: InputBorder.none,
+                                                focusedBorder: InputBorder.none,
+                                                enabledBorder: InputBorder.none,
+                                                errorBorder: InputBorder.none,
+                                                disabledBorder:
+                                                    InputBorder.none,
+                                                contentPadding: EdgeInsets.only(
+                                                    left: 15,
+                                                    bottom: 11,
+                                                    top: 11,
+                                                    right: 15),
+                                                hintText: dashControll
+                                                    .eduList
+                                                    .value
+                                                    .result![widget.index]
+                                                    .dEGREE
+                                                    .toString(),
+                                              ),
+                                              controller: eduController
+                                                  .degreeController),
+                                      suggestionsCallback: (pattern) {
+                                        return eduController.specialtyList
+                                            .where((element) => element
+                                                .specialtyName!
+                                                .toLowerCase()
+                                                .contains(
+                                                    pattern.toLowerCase()));
+                                      },
+                                      itemBuilder:
+                                          (context, SpecialtyList suggestion) {
+                                        return Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child:
+                                              Text(suggestion.specialtyName!),
+                                        );
+                                      },
+                                      onSuggestionSelected:
+                                          (SpecialtyList suggestion) {
+                                        eduController.degreeController.text =
+                                            suggestion.specialtyName!;
+                                        eduController.corseCode =
+                                            suggestion.specialtyId!.toString();
+                                      }),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          // customeDropDownTextCource(
+                          //     context: context,
+                          //     hintText: dashControll
+                          //         .eduList.value.result![widget.index].dEGREE
+                          //         .toString(),
+                          //     item:
+                          //         eduController.specialtyList[0].specialtyName,
+                          //     text: 'Degree',
+                          //     items: eduController.specialtyList),
                           // customeDropDownText(
                           //   context: context,
                           //   hintText: dashControll.eduList.value.result![widget.index].dEGREE.toString(),
@@ -124,7 +211,8 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                               context: context,
                               hintText: dashControll.eduList.value
                                   .result![widget.index].yEAROFPASSING
-                                  .toString(),
+                                  .toString()
+                                  .split(' ')[0],
                               item: eduController.month,
                               items: eduController.months,
                               text: 'Year Of\nPassing'),
@@ -139,7 +227,7 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                             height: 15,
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
                             child: Row(
                               children: [
                                 Spacer(),
@@ -193,7 +281,8 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                       hint: Text(
                                         dashControll.eduList.value
                                             .result![widget.index].yEAROFPASSING
-                                            .toString(),
+                                            .toString()
+                                            .split(' ')[1],
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontFamily: "Nunito",
@@ -217,16 +306,94 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                           SizedBox(
                             height: 15,
                           ),
-                          customeDropDownText(
-                              context: context,
-                              hintText: dashControll.eduList.value
-                                  .result![widget.index].uNIVERSITY
-                                  .toString(),
-                              item: eduController
-                                  .universityList![0].universitName,
-                              items: eduController.universityList!,
-                              text: 'University\nName',
-                              ),
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Select University',
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontFamily: "Nunito",
+                                      color: Colors.black87),
+                                ),
+                                Spacer(),
+                                Container(
+                                  width: context.width * 0.55,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border:
+                                          Border.all(color: Colors.black87)),
+                                  child: TypeAheadField(
+                                      minCharsForSuggestions: 2,
+                                      hideOnError: true,
+                                      hideSuggestionsOnKeyboardHide: false,
+                                      hideKeyboardOnDrag: true,
+                                      textFieldConfiguration:
+                                          TextFieldConfiguration(
+
+                                              // cursorHeight: 20,
+                                              cursorColor: Colors.black87,
+                                              decoration: new InputDecoration(
+                  
+                                                border: InputBorder.none,
+                                                focusedBorder: InputBorder.none,
+                                                enabledBorder: InputBorder.none,
+                                                errorBorder: InputBorder.none,
+                                                disabledBorder:
+                                                    InputBorder.none,
+                                                contentPadding: EdgeInsets.only(
+                                                    left: 15,
+                                                    bottom: 11,
+                                                    top: 11,
+                                                    right: 15),
+                                                hintText: dashControll
+                                                    .eduList
+                                                    .value
+                                                    .result![widget.index]
+                                                    .uNIVERSITY
+                                                    .toString(),
+                                              ),
+                                              controller: eduController
+                                                  .universityController),
+                                      suggestionsCallback: (pattern) {
+                                        return eduController.universityList
+                                            .where((element) => element
+                                                .universitName!
+                                                .toLowerCase()
+                                                .contains(
+                                                    pattern.toLowerCase()));
+                                      },
+                                      itemBuilder:
+                                          (context, UniversityList suggestion) {
+                                        return Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child:
+                                              Text(suggestion.universitName!),
+                                        );
+                                      },
+                                      onSuggestionSelected:
+                                          (UniversityList suggestion) {
+                                        eduController.universityController
+                                            .text = suggestion.universitName!;
+                                        eduController.universityCode =
+                                            suggestion.universitCode!;
+                                      }),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          // customeDropDownText(
+                          //   context: context,
+                          //   hintText: dashControll
+                          //       .eduList.value.result![widget.index].uNIVERSITY
+                          //       .toString(),
+                          //   item: eduController.universityList[0].universitName,
+                          //   items: eduController.universityList,
+                          //   text: 'University\nName',
+                          // ),
                           // customeDropDownText(
                           //     context: context,
                           //     hintText: dashControll.eduList.value
@@ -239,14 +406,87 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                           SizedBox(
                             height: 15,
                           ),
-                          customeDropDownTextCollege(
-                              context: context,
-                              hintText: dashControll
-                                  .eduList.value.result![widget.index].cOLLEGE
-                                  .toString(),
-                              item: eduController.collegeList![0].collegeName,
-                              items: eduController.collegeList!,
-                              text: 'College'),
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'College',
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontFamily: "Nunito",
+                                      color: Colors.black87),
+                                ),
+                                Spacer(),
+                                Container(
+                                  width: context.width * 0.55,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border:
+                                          Border.all(color: Colors.black87)),
+                                  child: TypeAheadField(
+                                    minCharsForSuggestions: 2,
+                                    hideOnError: true,
+                                    hideSuggestionsOnKeyboardHide: false,
+                                    hideKeyboardOnDrag: true,
+                                    textFieldConfiguration:
+                                        TextFieldConfiguration(
+                                            cursorColor: Colors.black87,
+                                            decoration: new InputDecoration(
+                                              border: InputBorder.none,
+                                              focusedBorder: InputBorder.none,
+                                              enabledBorder: InputBorder.none,
+                                              errorBorder: InputBorder.none,
+                                              disabledBorder: InputBorder.none,
+                                              contentPadding: EdgeInsets.only(
+                                                  left: 15,
+                                                  bottom: 11,
+                                                  top: 11,
+                                                  right: 15),
+                                              hintText: dashControll
+                                                  .eduList
+                                                  .value
+                                                  .result![widget.index]
+                                                  .cOLLEGE
+                                                  .toString(),
+                                            ),
+                                            controller: eduController
+                                                .collegeController),
+                                    suggestionsCallback: (pattern) {
+                                      return eduController.collegeList!.where(
+                                          (element) => element.collegeName!
+                                              .toLowerCase()
+                                              .contains(pattern.toLowerCase()));
+                                    },
+                                    itemBuilder:
+                                        (context, CollegeList suggestion) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(suggestion.collegeName!),
+                                      );
+                                    },
+                                    onSuggestionSelected:
+                                        (CollegeList suggestion) {
+                                      eduController.collegeController.text =
+                                          suggestion.collegeName!;
+                                      eduController.collegeCode =
+                                          suggestion.collegeCode!;
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          // customeDropDownTextCollege(
+                          //     context: context,
+                          //     hintText: dashControll
+                          //         .eduList.value.result![widget.index].cOLLEGE
+                          //         .toString(),
+                          //     item: eduController.collegeList![0].collegeName,
+                          //     items: eduController.collegeList!,
+                          //     text: 'College'),
                           // customeDropDownText(
                           //     context: context,
                           //     hintText: dashControll
@@ -541,9 +781,9 @@ class _EditEduDetailsState extends State<EditEduDetails> {
       required String text,
       required String? item,
       required List<dynamic> items,
-      required String hintText}) {
+      required String? hintText}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Row(
         children: [
           Text(
@@ -586,7 +826,7 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                 style: TextStyle(
                     fontSize: 17, fontFamily: "Nunito", color: Colors.black87),
                 hint: Text(
-                  'Select Month',
+                  hintText ?? 'Select Month',
                   style: TextStyle(
                       fontSize: 16,
                       fontFamily: "Nunito",

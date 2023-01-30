@@ -73,7 +73,8 @@ class _BottomDrawerState extends State<BottomDrawer> {
                             // Spacer(),
                             Text(
                               bdrawerController
-                                      .getUserDetails.value.loginName == null
+                                          .getUserDetails.value.loginName ==
+                                      null
                                   ? " "
                                   : bdrawerController
                                       .getUserDetails.value.loginName
@@ -545,7 +546,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                 children: [
                                   Container(
                                     margin: EdgeInsets.only(left: 60),
-                                    height: 150,
+                                    height: 100,
                                     width: 250,
                                     // color: Colors.amber,
                                     decoration: BoxDecoration(
@@ -581,10 +582,10 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                                       const EdgeInsets.only(
                                                           top: 5.0),
                                                   child: Text(
-                                                    "Test",
+                                                    "CET / NEET Test",
                                                     style: TextStyle(
                                                       fontFamily: "Nunito",
-                                                      fontSize: 19,
+                                                      fontSize: 18,
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       color: Colors.white,
@@ -635,46 +636,46 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                             ),
                                           ),
                                         ),
-                                        InkWell(
-                                          onTap: () {
-                                            Get.to(PaymentDetails());
-                                          },
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 20.0, top: 15),
-                                            child: Row(
-                                              children: [
-                                                SizedBox(
-                                                  height: 22,
-                                                  width: 22,
-                                                  // padding: const EdgeInsets.all(0.0),
-                                                  child: Image.asset(
-                                                    'assets/ed.png',
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 20,
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 5.0),
-                                                  child: Text(
-                                                    "Receipts",
-                                                    style: TextStyle(
-                                                      fontFamily: "Nunito",
-                                                      fontSize: 19,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
+                                        // InkWell(
+                                        //   onTap: () {
+                                        //     Get.to(PaymentDetails());
+                                        //   },
+                                        //   child: Padding(
+                                        //     padding: const EdgeInsets.only(
+                                        //         left: 20.0, top: 15),
+                                        //     child: Row(
+                                        //       children: [
+                                        //         SizedBox(
+                                        //           height: 22,
+                                        //           width: 22,
+                                        //           // padding: const EdgeInsets.all(0.0),
+                                        //           child: Image.asset(
+                                        //             'assets/ed.png',
+                                        //             fit: BoxFit.cover,
+                                        //           ),
+                                        //         ),
+                                        //         SizedBox(
+                                        //           width: 20,
+                                        //         ),
+                                        //         Padding(
+                                        //           padding:
+                                        //               const EdgeInsets.only(
+                                        //                   top: 5.0),
+                                        //           child: Text(
+                                        //             "Receipts",
+                                        //             style: TextStyle(
+                                        //               fontFamily: "Nunito",
+                                        //               fontSize: 19,
+                                        //               fontWeight:
+                                        //                   FontWeight.w500,
+                                        //               color: Colors.white,
+                                        //             ),
+                                        //           ),
+                                        //         ),
+                                        //       ],
+                                        //     ),
+                                        //   ),
+                                        // ),
                                       ],
                                     ),
                                   ),

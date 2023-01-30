@@ -121,6 +121,7 @@ class LoginController extends GetxController {
       // var jsonFile = convert.jsonDecode(response.data);
 
       if (response.statusCode == 200 && response.data != "User Doesn't Exist") {
+        
         userLogin.value = UserLogin.fromJson(response.data);
         print(userLogin.value.userId.toString());
 

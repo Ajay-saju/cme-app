@@ -1,14 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:pdf/widgets.dart' as pw;
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/get_instance.dart';
-import 'package:hslr/screen/cmeprogrm_points/certificate_pdf.dart';
-import 'package:hslr/screen/login/login_controller.dart';
 import 'package:hslr/screen/member_details/member_controller.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
@@ -91,13 +86,267 @@ class _CmepointsState extends State<Cmepoints> {
                   SizedBox(
                     height: 20,
                   ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: _CreateDataTable(cmeData),
-                    ),
-                  ),
+                  cmeData == null && cmeData == []
+                      ? Center(
+                          child: Text(
+                          'No Data Available',
+                          style: TextStyle(
+                            fontFamily: "Nunito",
+                            color: Colors.black,
+                            fontSize: 20,
+                          ),
+                        ))
+                      : Expanded(
+                          child: ListView.separated(
+                              itemBuilder: (context, index) => Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Container(
+                                      padding: EdgeInsets.all(10),
+
+                                      // height: context.height * .55 / 2,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 1,
+                                        ),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Table(
+                                            columnWidths: {
+                                              0: FlexColumnWidth(3),
+                                              1: FlexColumnWidth(0.3),
+                                              2: FlexColumnWidth(4),
+                                            },
+                                            children: [
+                                              TableRow(children: [
+                                                Text(
+                                                  'Program name',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontFamily: "Nunito",
+                                                      fontSize: 16,
+                                                      color: Colors.black),
+                                                ),
+                                                Text(
+                                                  ':',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                Text(
+                                                  cmeData![index]
+                                                      .videoName
+                                                      .toString(),
+                                                  maxLines: 3,
+                                                  style: TextStyle(
+                                                      fontFamily: "Nunito",
+                                                      fontSize: 16,
+                                                      color: Colors.black),
+                                                ),
+                                              ]),
+                                              TableRow(children: [
+                                                Text(
+                                                  'Attended date',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontFamily: "Nunito",
+                                                      fontSize: 16,
+                                                      color: Colors.black),
+                                                ),
+                                                Text(
+                                                  ':',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                Text(
+                                                  cmeData[index]
+                                                      .attendedDate
+                                                      .toString(),
+                                                  maxLines: 3,
+                                                  style: TextStyle(
+                                                      fontFamily: "Nunito",
+                                                      fontSize: 16,
+                                                      color: Colors.black),
+                                                ),
+                                              ]),
+                                              TableRow(children: [
+                                                Text(
+                                                  'Attempts',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontFamily: "Nunito",
+                                                      fontSize: 16,
+                                                      color: Colors.black),
+                                                ),
+                                                Text(
+                                                  ':',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                Text(
+                                                  cmeData[index]
+                                                      .attempt
+                                                      .toString(),
+                                                  maxLines: 3,
+                                                  style: TextStyle(
+                                                      fontFamily: "Nunito",
+                                                      fontSize: 16,
+                                                      color: Colors.black),
+                                                ),
+                                              ]),
+                                              TableRow(children: [
+                                                Text(
+                                                  'Credit points',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontFamily: "Nunito",
+                                                      fontSize: 16,
+                                                      color: Colors.black),
+                                                ),
+                                                Text(
+                                                  ':',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                Text(
+                                                  cmeData[index]
+                                                      .creditPointsNumber
+                                                      .toString(),
+                                                  maxLines: 3,
+                                                  style: TextStyle(
+                                                      fontFamily: "Nunito",
+                                                      fontSize: 16,
+                                                      color: Colors.black),
+                                                ),
+                                              ])
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                          ElevatedButton(
+                                              onPressed: () {
+                                                Get.defaultDialog(
+                                                    title: 'Download PDF',
+                                                    titleStyle: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontFamily: "Nunito",
+                                                        fontSize: 18,
+                                                        color: Colors.black),
+                                                    middleText:
+                                                        'Do you want to download the certificate as PDF?',
+                                                    middleTextStyle: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontFamily: "Nunito",
+                                                        fontSize: 16,
+                                                        color: Colors.black),
+                                                    actions: [
+                                                      ElevatedButton(
+                                                        onPressed: () async {
+                                                          var link =
+                                                              cmeData[index]
+                                                                  .cmeCertLink!
+                                                                  .replaceAll(
+                                                                      'https',
+                                                                      'http');
+                                                          await openPdf(
+                                                            filename:
+                                                                'example.pdf',
+                                                            url:
+                                                                link.replaceAll(
+                                                                    '"', ''),
+                                                          );
+                                                          Get.back();
+                                                        },
+                                                        child: Text(
+                                                          'Yes',
+                                                          style: TextStyle(
+                                                            fontSize: 16,
+                                                            fontFamily:
+                                                                "Nunito",
+                                                          ),
+                                                        ),
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .black,
+                                                                shape:
+                                                                    RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              30),
+                                                                )),
+                                                      ),
+                                                      ElevatedButton(
+                                                        onPressed: () {
+                                                          Get.back();
+                                                        },
+                                                        child: Text(
+                                                          'Cancel',
+                                                          style: TextStyle(
+                                                            fontSize: 16,
+                                                            fontFamily:
+                                                                "Nunito",
+                                                          ),
+                                                        ),
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .black,
+                                                                shape:
+                                                                    RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              30),
+                                                                )),
+                                                      )
+                                                    ]);
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                  backgroundColor: Colors.black,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                  )),
+                                              child: Text(
+                                                'Print Certificate',
+                                                style: TextStyle(
+                                                    fontFamily: "Nunito"),
+                                              )),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                              separatorBuilder: (context, index) => SizedBox(
+                                    height: 10,
+                                  ),
+                              itemCount: cmeData!.length),
+                        ),
+
+                  // SingleChildScrollView(
+                  //   scrollDirection: Axis.horizontal,
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.all(20.0),
+                  //     child: _CreateDataTable(cmeData),
+                  //   ),
+                  // ),
 
                   //           children: [
                   //             Container(
