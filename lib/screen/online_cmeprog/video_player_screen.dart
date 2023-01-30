@@ -154,7 +154,9 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
 
   void playVideo({index, bool init = false}) {
     // if (index < 0 || index > videos.length) return;
-    videoController = VideoPlayerController.network(cmeController
+    videoController = VideoPlayerController.network
+    (
+      cmeController
             .allCmeVideos.value!.videoList![index].videoPath
             .toString()
             .replaceAll('https', 'http')

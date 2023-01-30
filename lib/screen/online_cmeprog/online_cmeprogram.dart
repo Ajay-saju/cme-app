@@ -5,6 +5,7 @@ import 'package:hslr/screen/dashboard/dashboard.dart';
 import 'package:hslr/screen/online_cmeprog/online_cmeprogram_controller.dart';
 import 'package:hslr/screen/online_cmeprog/video_player_screen.dart';
 import 'package:hslr/screen/videoplayerwidget/videoplayerwidget.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
 
 class Onlinecmeprogram extends StatefulWidget {
@@ -46,6 +47,9 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
     //   ..setLooping(true)
     //   ..initialize().then((_) => controller!.pause());
   }
+
+  var downloading = false;
+  var progressString = '';
 
   // @override
   // void dispose() {
@@ -594,10 +598,20 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                   ),
                                                   ElevatedButton(
                                                     onPressed: () {
-                                                      downloadCmeVideo(index);
+                                                      downloadVideo(index);
                                                     },
-                                                    child:
-                                                        Text('Download Video'),
+                                                    child: downloading == true
+                                                        ? Center(
+                                                            child: Text(
+                                                                progressString)
+                                                            //  CircularProgressIndicator(
+                                                            //     strokeWidth: 2,
+                                                            //     color: Colors
+                                                            //   .white,
+                                                            //   ),
+                                                            )
+                                                        : Text(
+                                                            'Download Video'),
                                                     style: ElevatedButton
                                                         .styleFrom(
                                                             backgroundColor:
@@ -823,11 +837,35 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
     // );
   }
 
-  void downloadCmeVideo(int index) {
-    String video_url = cmeProgramController
+  Future downloadVideo(index) async {
+    var url = cmeProgramController
         .allCmeVideos.value!.videoList![index].videoPath
-        .toString();
-    final dio = Dio();
+        .toString()
+        .replaceAll('https', 'http');
+
+    Dio dio = Dio();
+    try {
+      var dir = await getApplicationDocumentsDirectory();
+      print("path ${dir.path}");
+      await dio.download(
+        url,
+        "${dir.path}/demo.mp4",
+        onReceiveProgress: (rec, total) {
+          print("Rec: $rec , Total: $total");
+          setState(() {
+            downloading = true;
+            progressString = ((rec / total) * 100).toStringAsFixed(0) + "%";
+          });
+        },
+      );
+    } catch (e) {
+      print(e);
+    }
+    setState(() {
+      downloading = false;
+      progressString = "Completed";
+    });
+    print("Download completed");
   }
 }
 
