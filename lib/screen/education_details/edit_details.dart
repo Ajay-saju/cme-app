@@ -336,7 +336,6 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                               // cursorHeight: 20,
                                               cursorColor: Colors.black87,
                                               decoration: new InputDecoration(
-                  
                                                 border: InputBorder.none,
                                                 focusedBorder: InputBorder.none,
                                                 enabledBorder: InputBorder.none,
@@ -525,15 +524,25 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                 )),
                             ElevatedButton(
                                 onPressed: () async {
-                                  await Get.snackbar(
-                                      'Success', 'Edit Details successfully',
-                                      colorText: Colors.white,
-                                      backgroundColor: Colors.black,
-                                      duration: Duration(seconds: 3));
-
-                                  Timer(Duration(seconds: 2), () async {
-                                    Get.off(EducationDetailsScreen());
-                                  });
+                                  await Get.defaultDialog(
+                                      middleTextStyle: TextStyle(
+                                        fontFamily: "Nunito",
+                                        color: Colors.black87,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      titleStyle: TextStyle(
+                                        fontFamily: "Nunito",
+                                        color: Colors.black87,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      barrierDismissible: false,
+                                      title: "Success",
+                                      middleText: 'Edit Details successfully',
+                                      onConfirm: () {
+                                        Get.off(EducationDetailsScreen());
+                                      });
                                 },
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,

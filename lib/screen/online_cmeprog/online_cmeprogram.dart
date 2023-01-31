@@ -896,7 +896,7 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
       progressString = "Completed";
       cmeProgramController.allCmeVideos.value!.videoList![index].isDownloading =
           false;
-          
+           
     });
     print("Download completed");
   }

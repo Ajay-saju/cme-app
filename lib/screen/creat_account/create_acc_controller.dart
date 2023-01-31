@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/models/add_user_model.dart';
+import 'package:hslr/screen/loading_class/loading_class.dart';
 import 'package:hslr/screen/login/login.dart';
 import 'package:hslr/services/create_user.dart';
 
@@ -54,6 +55,7 @@ class CreateAccountController extends GetxController {
       required String regno,
       required String catId,
       required String password}) async {
+    DialogHelper.showLoading();
     final userRegistrationServise = UserRegistrationServise();
     try {
       var response = await userRegistrationServise.crateNewUser(
@@ -62,6 +64,7 @@ class CreateAccountController extends GetxController {
       log(response.statusCode.toString());
       // print(response.data.massage.toString());
       if (response.statusCode == 200) {
+        DialogHelper.hideLoading();
         getUserDetails.value = AddUserModel.fromJson(jsonDecode(response.data));
         print(getUserDetails.value.message.toString());
         log(response.data);
@@ -152,7 +155,8 @@ class CreateAccountController extends GetxController {
             color: Colors.black87,
             fontSize: 18,
             fontWeight: FontWeight.bold,
-          ));
+          )
+          );
     }
   }
 

@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:hslr/base_api/orginal_api.dart';
 import 'package:hslr/main.dart';
 import 'package:hslr/screen/education_details/education_screen.dart';
+import 'package:hslr/screen/loading_class/loading_class.dart';
 
 import '../../models/get_eduid_list.model.dart';
 import '../../services/get_eduid_list_servise.dart';
@@ -168,6 +169,7 @@ class EducationController extends GetxController {
       required String year,
       required String university,
       required String college}) async {
+    DialogHelper.showLoading();
     OrginalApi orginalApi = OrginalApi();
     final dio = Dio(BaseOptions(
         baseUrl: orginalApi.baseUrl, responseType: ResponseType.plain));
@@ -185,17 +187,29 @@ class EducationController extends GetxController {
     try {
       var response = await dio.post('SaveAddUpdateEduinfoNew', data: eduData);
       if (response.statusCode == 200) {
-        await
-            //  Get.defaultDialog(
-            //     title: "Success",
-            //     middleText: 'Save Details successfully',
-            //     onConfirm: () {
-            //       Get.off(EducationDetailsScreen());
-            //     });
-            Get.snackbar('Success', 'Save Details successfully',
-                colorText: Colors.white,
-                backgroundColor: Colors.black,
-                duration: Duration(seconds: 3));
+        DialogHelper.hideLoading();
+        await Get.defaultDialog(
+            barrierDismissible: false,
+            title: "Success",
+            middleTextStyle: TextStyle(
+            fontFamily: "Nunito",
+            color: Colors.black87,
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),titleStyle: TextStyle(
+            fontFamily: "Nunito",
+            color: Colors.black87,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+            middleText: 'Save Details successfully',
+            onConfirm: () {
+              Get.off(EducationDetailsScreen());
+            });
+        // Get.snackbar('Success', 'Save Details successfully',
+        //     colorText: Colors.white,
+        //     backgroundColor: Colors.black,
+        //     duration: Duration(seconds: 3));
 
         Timer(Duration(seconds: 2), () async {
           Get.off(EducationDetailsScreen());
