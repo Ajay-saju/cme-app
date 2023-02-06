@@ -1,11 +1,14 @@
+import 'dart:isolate';
+import 'dart:ui';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/dashboard/dashboard.dart';
 import 'package:hslr/screen/online_cmeprog/online_cmeprogram_controller.dart';
 import 'package:hslr/screen/online_cmeprog/video_player_screen.dart';
 import 'package:hslr/screen/videoplayerwidget/videoplayerwidget.dart';
-import 'package:path_provider/path_provider.dart';
+
 import 'package:video_player/video_player.dart';
 
 class Onlinecmeprogram extends StatefulWidget {
@@ -26,11 +29,19 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
   VideoPlayerController? controller1;
   VideoPlayerController? controller2;
 
+  var progress = 0;
+
+  ReceivePort _port = ReceivePort();
+  // List<Map> downloadsListMaps = [];
+
   @override
   void initState() {
     // TODO: implement initState
 
     super.initState();
+    task();
+    _bindBackgroundIsolate();
+    FlutterDownloader.registerCallback(downloadCallback);
     //  cmeProgramController.allCmeVideos();
     // controller = VideoPlayerController.asset(asset)
     //   ..addListener(() => setState(() {}))
@@ -48,16 +59,75 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
     //   ..initialize().then((_) => controller!.pause());
   }
 
+  void downloadCallback(String id, DownloadTaskStatus status, int progress) {
+    final SendPort? send =
+        IsolateNameServer.lookupPortByName('downloader_send_port');
+    send!.send([id, status, progress]);
+    setState(() {
+      progress = int.parse("${(progress * 100).toStringAsFixed(2)}%");
+      print(progress.toString());
+    });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _unbindBackgroundIsolate();
+    super.dispose();
+  }
+
   var downloading = false;
   var progressString = '';
+  void _bindBackgroundIsolate() {
+    bool isSuccess = IsolateNameServer.registerPortWithName(
+        _port.sendPort, 'downloader_send_port');
+    if (!isSuccess) {
+      _unbindBackgroundIsolate();
+      _bindBackgroundIsolate();
+      return;
+    }
 
-  // @override
-  // void dispose() {
-  //   // TODO: implement dispose
+    _port.listen((dynamic data) {
+      String id = data[0];
+      DownloadTaskStatus status = data[1];
+      int progress = data[2];
 
-  //   super.dispose();
-  //   controller!.dispose();
+      // var task = downloadsListMaps.where((element) => element['id'] == id);
+      // task.forEach((element) {
+      //   element['progress'] = progress;
+      //   element['status'] = status;
+
+      //   setState(() {});
+      // });
+      setState(() {});
+    });
+  }
+
+  Future task() async {
+    final tasks = await FlutterDownloader.loadTasks();
+    // List<DownloadTask>? getTasks = await FlutterDownloader.loadTasks();
+    // getTasks!.forEach((_task) {
+    //   Map _map = Map();
+    //   _map['status'] = _task.status;
+    //   _map['progress'] = _task.progress;
+    //   _map['id'] = _task.taskId;
+    //   _map['filename'] = _task.filename;
+    //   _map['savedDirectory'] = _task.savedDir;
+    //   downloadsListMaps.add(_map);
+    // });
+    setState(() {});
+  }
+  // Future<bool> _openDownloadedFile(_TaskInfo? task) {
+  //   if (task != null) {
+  //     return FlutterDownloader.open(taskId: task.taskId!);
+  //   } else {
+  //     return Future.value(false);
+  //   }
   // }
+
+  void _unbindBackgroundIsolate() {
+    IsolateNameServer.removePortNameMapping('downloader_send_port');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -598,36 +668,58 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                   ),
                                                   ElevatedButton(
                                                     onPressed: () {
-                                                      cmeProgramController
+                                                      cmeProgramController.requestDownload(
+                                                          name:
+                                                              cmeProgramController
                                                                   .allCmeVideos
                                                                   .value!
                                                                   .videoList![
                                                                       index]
-                                                                  .isDownloading ??
-                                                              false
-                                                          ? cancelDownload(
-                                                              index)
-                                                          : downloadVideo(
-                                                              index);
+                                                                  .videoName
+                                                                  .toString(),
+                                                          url:
+                                                              cmeProgramController
+                                                                  .allCmeVideos
+                                                                  .value!
+                                                                  .videoList![
+                                                                      index]
+                                                                  .videoPath
+                                                                  .toString()
+                                                                  .replaceAll(
+                                                                      'https',
+                                                                      'http'));
+                                                      // cmeProgramController
+                                                      //             .allCmeVideos
+                                                      //             .value!
+                                                      //             .videoList![
+                                                      //                 index]
+                                                      //             .isDownloading ??
+                                                      //         false
+                                                      //     ? cancelDownload(
+                                                      //         index)
+                                                      //     : cmeProgramController
+                                                      //         .getPermission(
+                                                      //             index);
                                                     },
-                                                    child: cmeProgramController
-                                                                .allCmeVideos
-                                                                .value!
-                                                                .videoList![
-                                                                    index]
-                                                                .isDownloading ??
-                                                            false
-                                                        ? Center(
-                                                            child: Text(
-                                                                progressString)
-                                                            //  CircularProgressIndicator(
-                                                            //     strokeWidth: 2,
-                                                            //     color: Colors
-                                                            //   .white,
-                                                            //   ),
-                                                            )
-                                                        : Text(
-                                                            'Download Video'),
+                                                    child:
+                                                        //  cmeProgramController
+                                                        //             .allCmeVideos
+                                                        //             .value!
+                                                        //             .videoList![
+                                                        //                 index]
+                                                        //             .isDownloading ??
+                                                        //         false
+                                                        //     ? Center(
+                                                        //         child: Text(
+                                                        //             progressString)
+                                                        //         //  CircularProgressIndicator(
+                                                        //         //     strokeWidth: 2,
+                                                        //         //     color: Colors
+                                                        //         //   .white,
+                                                        //         //   ),
+                                                        //         )
+                                                        //     :
+                                                        Text('Download Video'),
                                                     style: ElevatedButton
                                                         .styleFrom(
                                                             backgroundColor:
@@ -860,46 +952,70 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
     cancelToken.cancel();
   }
 
-  Future downloadVideo(index) async {
-    cmeProgramController.allCmeVideos.value!.videoList![index].isDownloading =
-        true;
+//   Future downloadVideo(index) async {
 
-    var url = cmeProgramController
-        .allCmeVideos.value!.videoList![index].videoPath
-        .toString()
-        .replaceAll('https', 'http');
+//     cmeProgramController.allCmeVideos.value!.videoList![index].isDownloading =
+//         true;
 
-    Dio dio = Dio();
-    try {
-      var dir = await getApplicationDocumentsDirectory();
-      print("path ${dir.path}");
-      var path = "${dir.path}/$url.mp4";
-      await dio.download(
-        url,
-        path,
-        cancelToken: cancelToken,
-        onReceiveProgress: (rec, total) {
-          print("Rec: $rec , Total: $total");
-          setState(() {
-            downloading = true;
-            progressString = ((rec / total) * 100).toStringAsFixed(0) + "%";
-          });
-        },
-      );
-    } catch (e) {
-      cmeProgramController.allCmeVideos.value!.videoList![index].isDownloading =
-          false;
-      print(e);
-    }
-    setState(() {
-      downloading = false;
-      progressString = "Completed";
-      cmeProgramController.allCmeVideos.value!.videoList![index].isDownloading =
-          false;
-           
-    });
-    print("Download completed");
-  }
+//     var url = cmeProgramController
+//         .allCmeVideos.value!.videoList![index].videoPath
+//         .toString()
+//         .replaceAll('https', 'http');
+//     var name =cmeProgramController
+//         .allCmeVideos.value!.videoList![index].videoName.toString() ;
+
+//     final dir = await getApplicationDocumentsDirectory();
+// //From path_provider package
+//     var localPath = dir.path + name;
+//     final savedDir = Directory(localPath);
+//     await savedDir.create(recursive: true).then((value) async {
+//       final taskid = await FlutterDownloader.enqueue(
+//         url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+//         fileName: name,
+//         savedDir: localPath,
+//         showNotification: true,
+//         openFileFromNotification: true,
+//       );
+//       print(taskid);
+//     });
+//     void listenToProgress() async {
+//   FlutterDownloader.registerCallback((id, status, progress) {
+//     // Update the progress of the download
+//   });
+// }
+
+  // Dio dio = Dio();
+
+  // try {
+  //   var dir = await getApplicationDocumentsDirectory();
+  //   print("path ${dir.path}");
+  //   var path = "${dir.path}/$url.mp4";
+  //   await dio.download(
+  //     url,
+  //     path,
+  //     cancelToken: cancelToken,
+  //     onReceiveProgress: (rec, total) {
+  //       print("Rec: $rec , Total: $total");
+  //       setState(() {
+  //         downloading = true;
+  //         progressString = ((rec / total) * 100).toStringAsFixed(0) + "%";
+  //       });
+  //     },
+  //   );
+  // } catch (e) {
+  //   cmeProgramController.allCmeVideos.value!.videoList![index].isDownloading =
+  //       false;
+  //   print(e);
+  // }
+  // setState(() {
+  //   downloading = false;
+  //   progressString = "Completed";
+  //   cmeProgramController.allCmeVideos.value!.videoList![index].isDownloading =
+  //       false;
+
+  // });
+  // print("Download completed");
+  // }
 }
 
 class AssetPlayerWidget extends StatefulWidget {

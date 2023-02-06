@@ -1,15 +1,18 @@
 // ignore_for_file: unused_local_variable
 
 import 'dart:developer';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:get/get.dart';
 import 'package:hslr/models/questions_ans_model.dart';
 import 'package:hslr/services/all_cme_video_service.dart';
 import 'package:hslr/services/questions_ans_service.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -205,7 +208,24 @@ class CmeProgramController extends GetxController {
     ));
   }
 
-  
-
-  
+  Future<void> requestDownload(
+      {required String url, required String name}) async {
+    final dir =
+        await getApplicationDocumentsDirectory(); //From path_provider package
+    var _localPath = dir.path + name;
+    final savedDir = Directory(_localPath);
+    await savedDir.create(recursive: true).then((value) async {
+      print(url);
+      print(name);
+      final _taskid = await FlutterDownloader.enqueue(
+        url: url,
+        fileName: name,
+        savedDir: _localPath,
+        showNotification: true,
+        openFileFromNotification: true,
+      );
+      
+      print(_taskid);
+    });
+  }
 }

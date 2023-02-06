@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:hslr/main.dart';
 import 'package:hslr/screen/cmeprogrm_points/cme_points.dart';
 import 'package:hslr/screen/dashboard/dashboard_controller.dart';
+import 'package:hslr/screen/downloaded_videos/video_list.dart';
 import 'package:hslr/screen/education_details/education_screen.dart';
 import 'package:hslr/screen/login/login.dart';
 import 'package:hslr/screen/login/login_controller.dart';
@@ -379,7 +380,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                 children: [
                                   Container(
                                     margin: EdgeInsets.only(left: 60),
-                                    height: 150,
+                                    height: 200,
                                     width: 250,
                                     decoration: BoxDecoration(
                                         border: Border.all(color: Colors.white),
@@ -494,6 +495,46 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                                           top: 5.0),
                                                   child: Text(
                                                     "CME Receipts",
+                                                    style: TextStyle(
+                                                      fontFamily: "Nunito",
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 25),
+                                          child: InkWell(
+                                            onTap: () {
+                                              Get.to(VideoListScreen());
+                                            },
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                  height: 22,
+                                                  child: Image.asset(
+                                                    'assets/att.png',
+                                                    // height: 22,
+                                                    // width: 22,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 22,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5.0),
+                                                  child: Text(
+                                                    "Your Videos",
                                                     style: TextStyle(
                                                       fontFamily: "Nunito",
                                                       fontSize: 18,
