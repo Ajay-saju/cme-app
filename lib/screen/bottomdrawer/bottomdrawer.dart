@@ -226,7 +226,8 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                                   height: 22,
                                                   width: 22,
                                                   // padding: const EdgeInsets.all(0.0),
-                                                  child: Image.asset(
+                                                  child:
+                                                   Image.asset(
                                                     'assets/ed.png',
                                                     fit: BoxFit.cover,
                                                   ),
@@ -575,7 +576,8 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                     fit: BoxFit.cover,
                                   ),
                                 ),
-                                title: Text(
+                                title:
+                                 Text(
                                   "CET / NEET",
                                   style: TextStyle(
                                     fontSize: 18,

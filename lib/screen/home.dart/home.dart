@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hslr/main.dart';
 import 'package:hslr/screen/dashboard/dashboard_controller.dart';
 import 'package:hslr/screen/login/login_controller.dart';
 
@@ -13,6 +14,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   LoginController logController = Get.put(LoginController());
   DashboardController dashController = Get.find();
+  final pick = sessionlog.getString('proPick')!.replaceAll("https", 'http');
   // final LoginController logControll = Get.find();
 
   @override
@@ -40,20 +42,50 @@ class _HomeState extends State<Home> {
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 10),
-                          height: context.height * 0.09,
-                          width: context.width,
-                          color: Colors.white, //Color(0xff63c3fe),
-                          child: SizedBox(
-                            height: 25,
-                            width: 25,
-                            // padding: const EdgeInsets.all(0.0),
-                            child: Image.asset(
-                              'assets/FB.png',
-                              fit: BoxFit.cover,
+                        // Container(
+                        //   margin: EdgeInsets.only(top: 10),
+                        //   height: context.height * 0.09,
+                        //   width: context.width,
+                        //   color: Colors.white, //Color(0xff63c3fe),
+                        //   child:
+                        // SizedBox(
+                        //     height: 25,
+                        //     width: 25,
+                        //     // padding: const EdgeInsets.all(0.0),
+                        //     child: Image.asset(
+                        //       'assets/FB.png',
+                        //       fit: BoxFit.cover,
+                        //     ),
+                        //   ),
+                        // ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: context.height * 0.1,
+                              width: context.width * 0.8,
+                              // padding: const EdgeInsets.all(0.0),
+                              child: Image.asset(
+                                'assets/FB.png',
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 10,
+                              ),
+                              child: CircleAvatar(
+                                radius: 35,
+                                backgroundImage: Image.network(
+                                        dashController.profilePick == null
+                                            ? pick.replaceAll('"', '')
+                                            : dashController.profilePick
+                                                .replaceAll('"', ''))
+                                    .image,
+                                backgroundColor: Colors.white,
+                              ),
+                            )
+                          ],
                         ),
                         Divider(
                           thickness: 2,

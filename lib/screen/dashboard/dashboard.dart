@@ -6,6 +6,7 @@ import 'package:hslr/screen/bottomdrawer/bottomdrawer.dart';
 import 'package:hslr/screen/dashboard/dashboard_controller.dart';
 import 'package:hslr/screen/home.dart/home.dart';
 import 'package:hslr/screen/login/login_controller.dart';
+import 'package:hslr/screen/profile_tab/profile_tab.dart';
 
 ValueNotifier<int> indexChaingeNotifier = ValueNotifier(0);
 
@@ -18,7 +19,10 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   final screens = [
+    // BottomDrawer(),
+    
     Home(),
+    ProfileScreenTab(),
   ];
   DashboardController dashboardController = Get.put(DashboardController());
   // final logCOntroller = Get.find<LoginController>();
@@ -30,7 +34,6 @@ class _DashboardState extends State<Dashboard> {
     super.initState();
     indexChaingeNotifier = ValueNotifier(0);
     dashboardController.getUserData(sessionlog.getString('userId').toString());
-
     dashboardController.getDashboardData();
     dashboardController.getUserCmeVideo();
     dashboardController.getUserCmeVideoPurchese();
@@ -130,11 +133,10 @@ class _DashboardState extends State<Dashboard> {
           return
               //
               Scaffold(
-            key:DashboardController.drawerKey,
+            key: DashboardController.drawerKey,
             drawer: const BottomDrawer(),
             body: SafeArea(
-              child:
-               dashboardController.userCmeVideoPurchese == null &&
+              child: dashboardController.userCmeVideoPurchese == null &&
                       dashboardController.userCmeVideo == null &&
                       dashboardController.userCmeVideoLastTest == null &&
                       dashboardController.profilePick == null
@@ -163,11 +165,20 @@ class _DashboardState extends State<Dashboard> {
                       // unselectedItemColor: Colors.black87, //Colors.blue.shade200,
                       // selectedItemColor: Colors
                       //     .black87, //Color(0xffC8C8C8), //Colors.blue.shade700,00000
-                      onTap: dashboardController.changeTabIndex,
+                      onTap: dashboardController.changeTab,
+                      // onTap: (index) {
+                      //   indexChaingeNotifier.value = index;
+                      //   // dashboardController.changeTabIndex;
+                      // },
                       currentIndex: dashboardController.tabIndex,
                       showSelectedLabels: false,
                       showUnselectedLabels: false,
                       items: const [
+                        BottomNavigationBarItem(
+                          icon: ImageIcon(AssetImage("assets/nd.png"),
+                              color: Colors.black87),
+                          label: "",
+                        ),
                         BottomNavigationBarItem(
                           icon: ImageIcon(
                             AssetImage("assets/hm.png"),
@@ -176,8 +187,16 @@ class _DashboardState extends State<Dashboard> {
                           label: "",
                         ),
                         BottomNavigationBarItem(
-                          icon: ImageIcon(AssetImage("assets/nd.png"),
-                              color: Colors.black87),
+                          icon: Icon(
+                            Icons.account_circle_rounded,
+                            size: 30,
+                            color: Colors.black87,
+                          ),
+                          //  ImageIcon(
+                          //   AssetImage("assets/profile.png"),
+                          //   color: Colors.black87,
+                          // ),
+
                           label: "",
                         ),
                       ]);

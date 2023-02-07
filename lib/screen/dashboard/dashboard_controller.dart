@@ -10,6 +10,9 @@ import 'package:hslr/models/dashboard_data_models.dart';
 import 'package:hslr/models/get_eduid_list.model.dart';
 import 'package:hslr/models/get_reciepts.dart';
 import 'package:hslr/models/user_details.dart';
+import 'package:hslr/screen/dashboard/dashboard.dart';
+import 'package:hslr/screen/home.dart/home.dart';
+import 'package:hslr/screen/profile_tab/profile_tab.dart';
 import 'package:hslr/services/all_cme_video_service.dart';
 import 'package:hslr/services/get_eduid_list_servise.dart';
 import 'package:hslr/services/user_profile_service/get_user_profile_service.dart';
@@ -85,12 +88,38 @@ class DashboardController extends GetxController {
   }
 
   void changeTabIndex(int index) {
-    if (index == 1) {
+    if (index == 0) {
       drawerKey.currentState!.openDrawer();
       tabIndex = index;
+      print(index);
+    } else if (index == 2) {
+      tabIndex = index;
+      print(index);
+      print(tabIndex);
     } else {
       tabIndex = index;
+      print(index);
       update();
+    }
+  }
+
+  void changeTab(int index) {
+    switch (index) {
+      case 0:
+        drawerKey.currentState!.openDrawer();
+
+        break;
+      // case 1:
+      //   Get.to(Dashboard());
+
+      //   break;
+
+      case 2:
+        Get.to(ProfileScreenTab());
+        break;
+      default:
+        // Get.to(Home());
+        break;
     }
   }
 
@@ -134,7 +163,6 @@ class DashboardController extends GetxController {
         // print(sessionlog.getString('proPick'));
         // profileImage = response.data;
         // print(profileImage.replaceAll('.', ''));
-
       }
     } catch (e) {
       if (e is DioError) {
@@ -317,7 +345,6 @@ class DashboardController extends GetxController {
         //     counId: userLogin.value.councilId);
 
         // await getUserLastLogin(mId);
-
       } else {
         // isfade = true;
         Get.defaultDialog(
