@@ -133,8 +133,7 @@ class _EducationDetailsScreenState extends State<EducationDetailsScreen> {
                                 child: ListView.separated(
                                     itemBuilder: (context, index) => Padding(
                                           padding: const EdgeInsets.all(10),
-                                          child: 
-                                          Container(
+                                          child: Container(
                                               padding: EdgeInsets.all(10),
 
                                               // height: context.height * .55 / 2,

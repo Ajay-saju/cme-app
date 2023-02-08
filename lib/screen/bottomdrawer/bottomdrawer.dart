@@ -130,136 +130,136 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                 Get.back();
                               },
                             ),
-                            Theme(
-                              data: Theme.of(context).copyWith(
-                                unselectedWidgetColor:
-                                    Colors.white, // here for close state
-                                colorScheme: ColorScheme.light(
-                                  primary: Colors.white,
-                                ), // here for open state in replacement of deprecated accentColor
-                                dividerColor: Colors
-                                    .transparent, // if you want to remove the border
-                              ),
-                              child: ExpansionTile(
-                                leading: SizedBox(
-                                  height: 25,
-                                  width: 22,
-                                  // padding: const EdgeInsets.all(0.0),
-                                  child: Image.asset(
-                                    'assets/Untitled.png',
-                                    // height: 15,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                title: Text(
-                                  "Profile",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontFamily: "Nunito",
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 60),
-                                    height: 110,
-                                    width: 250,
-                                    // color: Colors.amber,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                        border:
-                                            Border.all(color: Colors.white)),
-                                    child: Column(
-                                      children: [
-                                        InkWell(
-                                          onTap: () {
-                                            Get.to(Memberdetail());
-                                          },
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 20.0, top: 15),
-                                            child: Row(
-                                              children: [
-                                                SizedBox(
-                                                  height: 22,
-                                                  width: 22,
-                                                  // padding: const EdgeInsets.all(0.0),
-                                                  child: Image.asset(
-                                                    'assets/ff.png',
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 20,
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 5.0),
-                                                  child: Text(
-                                                    "Members Details",
-                                                    style: TextStyle(
-                                                      fontFamily: "Nunito",
-                                                      fontSize: 18,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            Get.to(EducationDetailsScreen());
-                                          },
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 20.0, top: 15),
-                                            child: Row(
-                                              children: [
-                                                SizedBox(
-                                                  height: 22,
-                                                  width: 22,
-                                                  // padding: const EdgeInsets.all(0.0),
-                                                  child:
-                                                   Image.asset(
-                                                    'assets/ed.png',
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 20,
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 5.0),
-                                                  child: Text(
-                                                    "Education Details",
-                                                    style: TextStyle(
-                                                      fontFamily: "Nunito",
-                                                      fontSize: 18,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            // Theme(
+                            //   data: Theme.of(context).copyWith(
+                            //     unselectedWidgetColor:
+                            //         Colors.white, // here for close state
+                            //     colorScheme: ColorScheme.light(
+                            //       primary: Colors.white,
+                            //     ), // here for open state in replacement of deprecated accentColor
+                            //     dividerColor: Colors
+                            //         .transparent, // if you want to remove the border
+                            //   ),
+                            //   child: ExpansionTile(
+                            //     leading: SizedBox(
+                            //       height: 25,
+                            //       width: 22,
+                            //       // padding: const EdgeInsets.all(0.0),
+                            //       child: Image.asset(
+                            //         'assets/Untitled.png',
+                            //         // height: 15,
+                            //         fit: BoxFit.cover,
+                            //       ),
+                            //     ),
+                            //     title: Text(
+                            //       "Profile",
+                            //       style: TextStyle(
+                            //         fontSize: 18,
+                            //         fontFamily: "Nunito",
+                            //         fontWeight: FontWeight.bold,
+                            //         color: Colors.white,
+                            //       ),
+                            //     ),
+                            //     children: [
+                            //       Container(
+                            //         margin: EdgeInsets.only(left: 60),
+                            //         height: 110,
+                            //         width: 250,
+                            //         // color: Colors.amber,
+                            //         decoration: BoxDecoration(
+                            //             borderRadius:
+                            //                 BorderRadius.circular(10.0),
+                            //             border:
+                            //                 Border.all(color: Colors.white)),
+                            //         child: Column(
+                            //           children: [
+                            //             InkWell(
+                            //               onTap: () {
+                            //                 Get.to(Memberdetail());
+                            //               },
+                            //               child: Padding(
+                            //                 padding: const EdgeInsets.only(
+                            //                     left: 20.0, top: 15),
+                            //                 child: Row(
+                            //                   children: [
+                            //                     SizedBox(
+                            //                       height: 22,
+                            //                       width: 22,
+                            //                       // padding: const EdgeInsets.all(0.0),
+                            //                       child: Image.asset(
+                            //                         'assets/ff.png',
+                            //                         fit: BoxFit.cover,
+                            //                       ),
+                            //                     ),
+                            //                     SizedBox(
+                            //                       width: 20,
+                            //                     ),
+                            //                     Padding(
+                            //                       padding:
+                            //                           const EdgeInsets.only(
+                            //                               top: 5.0),
+                            //                       child: Text(
+                            //                         "Members Details",
+                            //                         style: TextStyle(
+                            //                           fontFamily: "Nunito",
+                            //                           fontSize: 18,
+                            //                           fontWeight:
+                            //                               FontWeight.w500,
+                            //                           color: Colors.white,
+                            //                         ),
+                            //                       ),
+                            //                     ),
+                            //                   ],
+                            //                 ),
+                            //               ),
+                            //             ),
+                            //             InkWell(
+                            //               onTap: () {
+                            //                 Get.to(EducationDetailsScreen());
+                            //               },
+                            //               child: Padding(
+                            //                 padding: const EdgeInsets.only(
+                            //                     left: 20.0, top: 15),
+                            //                 child: Row(
+                            //                   children: [
+                            //                     SizedBox(
+                            //                       height: 22,
+                            //                       width: 22,
+                            //                       // padding: const EdgeInsets.all(0.0),
+                            //                       child:
+                            //                        Image.asset(
+                            //                         'assets/ed.png',
+                            //                         fit: BoxFit.cover,
+                            //                       ),
+                            //                     ),
+                            //                     SizedBox(
+                            //                       width: 20,
+                            //                     ),
+                            //                     Padding(
+                            //                       padding:
+                            //                           const EdgeInsets.only(
+                            //                               top: 5.0),
+                            //                       child: Text(
+                            //                         "Education Details",
+                            //                         style: TextStyle(
+                            //                           fontFamily: "Nunito",
+                            //                           fontSize: 18,
+                            //                           fontWeight:
+                            //                               FontWeight.w500,
+                            //                           color: Colors.white,
+                            //                         ),
+                            //                       ),
+                            //                     ),
+                            //                   ],
+                            //                 ),
+                            //               ),
+                            //             ),
+                            //           ],
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                             Visibility(
                               visible: bdrawerController.visibledrop,
                               child: Container(
@@ -576,8 +576,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                     fit: BoxFit.cover,
                                   ),
                                 ),
-                                title:
-                                 Text(
+                                title: Text(
                                   "CET / NEET",
                                   style: TextStyle(
                                     fontSize: 18,

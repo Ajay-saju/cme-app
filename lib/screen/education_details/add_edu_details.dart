@@ -208,99 +208,99 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                                   SizedBox(
                                     height: 15,
                                   ),
-                                  customeDropDownTextMonth(
-                                      context: context,
-                                      hintText: 'Select month',
-                                      item: eduController.month,
-                                      items: eduController.months,
-                                      text: 'Year Of\nPassing'),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 15),
-                                    child: Row(
-                                      children: [
-                                        Spacer(),
-                                        Container(
-                                          width: context.width * 0.55,
-                                          child: DropdownButtonFormField(
-                                              validator: (value) =>
-                                                  value == null
-                                                      ? 'field required'
-                                                      : null,
-                                              itemHeight: null,
-                                              isExpanded: true,
-                                              decoration: InputDecoration(
-                                                contentPadding:
-                                                    EdgeInsets.symmetric(
-                                                        horizontal: 7),
-                                                border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.black),
-                                                ),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.black),
-                                                ),
-                                                errorBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.black),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                  borderSide: BorderSide(
-                                                      color: Colors.black),
-                                                ),
-                                                focusedErrorBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                  borderSide: const BorderSide(
-                                                    color: Colors.black,
-                                                  ),
-                                                ),
-                                              ),
-                                              style: TextStyle(
-                                                  fontSize: 17,
-                                                  fontFamily: "Nunito",
-                                                  color: Colors.black87),
-                                              hint: Text(
-                                                'Select Year',
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontFamily: "Nunito",
-                                                    color: Colors.black87),
-                                              ),
-                                              items: eduController.years
-                                                  .map((item) {
-                                                return eduController
-                                                    .buildMenuItemYear(item);
-                                              }).toList(),
-                                              onChanged: (value) {
-                                                eduController.year =
-                                                    value.toString();
-                                                eduController.update();
-                                              }),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                  // customeDropDownTextMonth(
+                                  //     context: context,
+                                  //     hintText: 'Select month',
+                                  //     item: eduController.month,
+                                  //     items: eduController.months,
+                                  //     text: 'Year Of\nPassing'),
+                                  // SizedBox(
+                                  //   height: 15,
+                                  // ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.symmetric(
+                                  //       horizontal: 15),
+                                  //   child: Row(
+                                  //     children: [
+                                  //       Spacer(),
+                                  //       Container(
+                                  //         width: context.width * 0.55,
+                                  //         child: DropdownButtonFormField(
+                                  //             validator: (value) =>
+                                  //                 value == null
+                                  //                     ? 'field required'
+                                  //                     : null,
+                                  //             itemHeight: null,
+                                  //             isExpanded: true,
+                                  //             decoration: InputDecoration(
+                                  //               contentPadding:
+                                  //                   EdgeInsets.symmetric(
+                                  //                       horizontal: 7),
+                                  //               border: OutlineInputBorder(
+                                  //                 borderRadius:
+                                  //                     BorderRadius.circular(
+                                  //                         10.0),
+                                  //                 borderSide: const BorderSide(
+                                  //                     color: Colors.black),
+                                  //               ),
+                                  //               enabledBorder:
+                                  //                   OutlineInputBorder(
+                                  //                 borderRadius:
+                                  //                     BorderRadius.circular(
+                                  //                         10.0),
+                                  //                 borderSide: const BorderSide(
+                                  //                     color: Colors.black),
+                                  //               ),
+                                  //               errorBorder: OutlineInputBorder(
+                                  //                 borderRadius:
+                                  //                     BorderRadius.circular(
+                                  //                         10.0),
+                                  //                 borderSide: const BorderSide(
+                                  //                     color: Colors.black),
+                                  //               ),
+                                  //               focusedBorder:
+                                  //                   OutlineInputBorder(
+                                  //                 borderRadius:
+                                  //                     BorderRadius.circular(
+                                  //                         10.0),
+                                  //                 borderSide: BorderSide(
+                                  //                     color: Colors.black),
+                                  //               ),
+                                  //               focusedErrorBorder:
+                                  //                   OutlineInputBorder(
+                                  //                 borderRadius:
+                                  //                     BorderRadius.circular(
+                                  //                         10.0),
+                                  //                 borderSide: const BorderSide(
+                                  //                   color: Colors.black,
+                                  //                 ),
+                                  //               ),
+                                  //             ),
+                                  //             style: TextStyle(
+                                  //                 fontSize: 17,
+                                  //                 fontFamily: "Nunito",
+                                  //                 color: Colors.black87),
+                                  //             hint: Text(
+                                  //               'Select Year',
+                                  //               style: TextStyle(
+                                  //                   fontSize: 16,
+                                  //                   fontFamily: "Nunito",
+                                  //                   color: Colors.black87),
+                                  //             ),
+                                  //             items: eduController.years
+                                  //                 .map((item) {
+                                  //               return eduController
+                                  //                   .buildMenuItemYear(item);
+                                  //             }).toList(),
+                                  //             onChanged: (value) {
+                                  //               eduController.year =
+                                  //                   value.toString();
+                                  //               eduController.update();
+                                  //             }),
+                                  //       ),
+                                  //     ],
+                                  //   ),
+                                  // ),
                                   SizedBox(
                                     height: 15,
                                   ),

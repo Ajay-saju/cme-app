@@ -207,15 +207,15 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                           SizedBox(
                             height: 15,
                           ),
-                          customeDropDownTextMonth(
-                              context: context,
-                              hintText: dashControll.eduList.value
-                                  .result![widget.index].yEAROFPASSING
-                                  .toString()
-                                  .split(' ')[0],
-                              item: eduController.month,
-                              items: eduController.months,
-                              text: 'Year Of\nPassing'),
+                          // customeDropDownTextMonth(
+                          //     context: context,
+                          //     hintText: dashControll.eduList.value
+                          //         .result![widget.index].yEAROFPASSING
+                          //         .toString()
+                          //         .split(' ')[0],
+                          //     item: eduController.month,
+                          //     items: eduController.months,
+                          //     text: 'Year Of\nPassing'),
                           // customeDropDownText(
                           //   context: context,
                           //   hintText: 'February',
@@ -223,83 +223,83 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                           //   items: eduController.months,
                           //   text: 'Yearof\nPassing',
                           // ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Row(
-                              children: [
-                                Spacer(),
-                                Container(
-                                  width: context.width * 0.55,
-                                  child: DropdownButtonFormField(
-                                      validator: (value) => value == null
-                                          ? 'field required'
-                                          : null,
-                                      itemHeight: null,
-                                      isExpanded: true,
-                                      decoration: InputDecoration(
-                                        contentPadding:
-                                            EdgeInsets.symmetric(horizontal: 7),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          borderSide: const BorderSide(
-                                              color: Colors.black),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          borderSide: const BorderSide(
-                                              color: Colors.black),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          borderSide: const BorderSide(
-                                              color: Colors.black),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          borderSide:
-                                              BorderSide(color: Colors.black),
-                                        ),
-                                        focusedErrorBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          borderSide: const BorderSide(
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ),
-                                      style: TextStyle(
-                                          fontSize: 17,
-                                          fontFamily: "Nunito",
-                                          color: Colors.black87),
-                                      hint: Text(
-                                        dashControll.eduList.value
-                                            .result![widget.index].yEAROFPASSING
-                                            .toString()
-                                            .split(' ')[1],
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontFamily: "Nunito",
-                                            color: Colors.black87),
-                                      ),
-                                      items: eduController.years.map((item) {
-                                        return eduController
-                                            .buildMenuItemYear(item);
-                                      }).toList(),
-                                      onChanged: (value) {
-                                        eduController.year = value.toString();
-                                        eduController.update();
-                                      }),
-                                ),
-                              ],
-                            ),
-                          ),
+                          // SizedBox(
+                          //   height: 15,
+                          // ),
+                          // Padding(
+                          //   padding: const EdgeInsets.symmetric(horizontal: 15),
+                          //   child: Row(
+                          //     children: [
+                          //       Spacer(),
+                          //       Container(
+                          //         width: context.width * 0.55,
+                          //         child: DropdownButtonFormField(
+                          //             validator: (value) => value == null
+                          //                 ? 'field required'
+                          //                 : null,
+                          //             itemHeight: null,
+                          //             isExpanded: true,
+                          //             decoration: InputDecoration(
+                          //               contentPadding:
+                          //                   EdgeInsets.symmetric(horizontal: 7),
+                          //               border: OutlineInputBorder(
+                          //                 borderRadius:
+                          //                     BorderRadius.circular(10.0),
+                          //                 borderSide: const BorderSide(
+                          //                     color: Colors.black),
+                          //               ),
+                          //               enabledBorder: OutlineInputBorder(
+                          //                 borderRadius:
+                          //                     BorderRadius.circular(10.0),
+                          //                 borderSide: const BorderSide(
+                          //                     color: Colors.black),
+                          //               ),
+                          //               errorBorder: OutlineInputBorder(
+                          //                 borderRadius:
+                          //                     BorderRadius.circular(10.0),
+                          //                 borderSide: const BorderSide(
+                          //                     color: Colors.black),
+                          //               ),
+                          //               focusedBorder: OutlineInputBorder(
+                          //                 borderRadius:
+                          //                     BorderRadius.circular(10.0),
+                          //                 borderSide:
+                          //                     BorderSide(color: Colors.black),
+                          //               ),
+                          //               focusedErrorBorder: OutlineInputBorder(
+                          //                 borderRadius:
+                          //                     BorderRadius.circular(10.0),
+                          //                 borderSide: const BorderSide(
+                          //                   color: Colors.black,
+                          //                 ),
+                          //               ),
+                          //             ),
+                          //             style: TextStyle(
+                          //                 fontSize: 17,
+                          //                 fontFamily: "Nunito",
+                          //                 color: Colors.black87),
+                          //             hint: Text(
+                          //               dashControll.eduList.value
+                          //                   .result![widget.index].yEAROFPASSING
+                          //                   .toString()
+                          //                   .split(' ')[1],
+                          //               style: TextStyle(
+                          //                   fontSize: 16,
+                          //                   fontFamily: "Nunito",
+                          //                   color: Colors.black87),
+                          //             ),
+                          //             items: eduController.years.map((item) {
+                          //               return eduController
+                          //                   .buildMenuItemYear(item);
+                          //             }).toList(),
+                          //             onChanged: (value) {
+                          //               eduController.year = value.toString();
+                          //               eduController.update();
+                          //             }),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
                           SizedBox(
                             height: 15,
                           ),

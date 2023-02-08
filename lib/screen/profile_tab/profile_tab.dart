@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:hslr/screen/education_details/add_edu_details.dart';
+import 'package:hslr/screen/education_details/edit_details.dart';
+import 'package:hslr/screen/education_details/education_controller.dart';
 import 'package:hslr/screen/profile_tab/profile_tab_controller.dart';
 
 import '../change_password/change_password_screen.dart';
@@ -15,11 +18,13 @@ class ProfileScreenTab extends StatefulWidget {
 }
 
 class _ProfileScreenTabState extends State<ProfileScreenTab> {
-  ProfileTabController profileTabController = ProfileTabController();
+  ProfileTabController profileTabController = Get.put(ProfileTabController());
+  EducationController eduController = Get.put(EducationController());
   DashboardController logController = Get.find();
 
   @override
   Widget build(BuildContext context) {
+    var eduData = logController.eduList.value.result;
     logController.getUserDetails.value.loginName == null
         ? ""
         : profileTabController.memName.text =
@@ -354,9 +359,107 @@ class _ProfileScreenTabState extends State<ProfileScreenTab> {
                       fontWeight: FontWeight.bold),
                 ),
                 children: [
-                  ExpansionTile(
-                    title: Text(''),
-                  )
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: ElevatedButton(
+                            onPressed: () {
+                              Get.to(AddEducationDetails());
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.black,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                )),
+                            child: Text(
+                              'Add',
+                              style: TextStyle(fontFamily: "Nunito"),
+                            )),
+                      ),
+                    ],
+                  ),
+                  eduData == null || eduData == []
+                      ? Center(
+                          child: Text(
+                            'No data available',
+                            style: TextStyle(
+                                fontFamily: "Nunito",
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          ),
+                        )
+                      : ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: eduData.length,
+                          itemBuilder: (context, index) => ExpansionTile(
+                                title: Text(
+                                  eduData[index].dEGREE.toString(),
+                                  maxLines: 3,
+                                  style: TextStyle(
+                                      fontFamily: "Nunito",
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                ),
+                                children: [
+                                  ListTile(
+                                    title: Text(
+                                      eduData[index].uNIVERSITY.toString(),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                      // textAlign:
+                                      //     TextAlign.left,
+
+                                      style: TextStyle(
+                                          overflow: TextOverflow.ellipsis,
+                                          fontFamily: "Nunito",
+                                          fontSize: 16,
+                                          color: Colors.black),
+                                    ),
+                                  ),
+                                  ListTile(
+                                    title: Text(
+                                      eduData[index].cOLLEGE.toString(),
+                                      style: TextStyle(
+                                          fontFamily: "Nunito",
+                                          fontSize: 15,
+                                          color: Colors.black),
+                                    ),
+                                  ),
+                                  ListTile(
+                                    title: Text(
+                                      eduData[index].yEAROFPASSING.toString(),
+                                      maxLines: 3,
+                                      style: TextStyle(
+                                          fontFamily: "Nunito",
+                                          fontSize: 16,
+                                          color: Colors.black),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        Get.to(EditEduDetails(
+                                          index: index,
+                                        ));
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.black,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          )),
+                                      child: Text(
+                                        'Edit',
+                                        style: TextStyle(fontFamily: "Nunito"),
+                                      )),
+                                ],
+                              )),
                 ],
               ),
             )
