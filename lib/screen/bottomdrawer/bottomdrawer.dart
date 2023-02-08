@@ -59,7 +59,8 @@ class _BottomDrawerState extends State<BottomDrawer> {
                         child: Row(
                           children: [
                             CircleAvatar(
-                              backgroundImage: Image.network(
+                              backgroundImage: 
+                              Image.network(
                                       bdrawerController.profilePick == null
                                           ? pick.replaceAll('"', '')
                                           : bdrawerController.profilePick

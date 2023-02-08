@@ -20,7 +20,7 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   final screens = [
     // BottomDrawer(),
-    
+
     Home(),
     ProfileScreenTab(),
   ];
@@ -55,75 +55,80 @@ class _DashboardState extends State<Dashboard> {
         } else {
           // return Future.value(true);
           Get.defaultDialog(
-              backgroundColor: Colors.black87,
+              // backgroundColor: Colors.black87,
               title: 'Are you Sure!',
               titleStyle: TextStyle(
                 fontFamily: "Nunito",
-                color: Colors.white,
+                color: Colors.black87,
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
               ),
-              content: Column(
-                children: [
-                  // const Text('Are you Sure!'),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ElevatedButton(
-                          child: Text(
-                            'Back',
-                            style: TextStyle(
-                              fontFamily: "Nunito",
-                              color: Colors.black87,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
+              middleText: 'Do you really want to exit from this application',
+              middleTextStyle: TextStyle(
+                fontFamily: "Nunito",
+                color: Colors.black87,
+                fontSize: 16,
+                // fontWeight: FontWeight.bold,
+              ),
+              actions: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        child: Text(
+                          'Back',
+                          style: TextStyle(
+                            fontFamily: "Nunito",
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
                           ),
-                          onPressed: () {
-                            Get.back();
-                          },
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              )),
                         ),
+                        onPressed: () {
+                          Get.back();
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black87,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            )),
                       ),
-                      Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            exit(0);
-                          },
-                          child: Text(
-                            'Exit',
-                            style: TextStyle(
-                              fontFamily: "Nunito",
-                              color: Colors.black87,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
+                    ),
+                    // Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          exit(0);
+                        },
+                        child: Text(
+                          'Exit',
+                          style: TextStyle(
+                            fontFamily: "Nunito",
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
                           ),
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              )),
                         ),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black87,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            )),
+                      ),
 
-                        // child: ButtonWidget(
-                        //     text: 'Exit',
-                        //     onClicked: () {
-                        //       // Future.value(true);
-                        //       exit(0);
-                        //     }),
-                      ),
-                    ],
-                  )
-                ],
-              ));
+                      // child: ButtonWidget(
+                      //     text: 'Exit',
+                      //     onClicked: () {
+                      //       // Future.value(true);
+                      //       exit(0);
+                      //     }),
+                    ),
+                  ],
+                )
+              ]);
         }
         return Future.value(false);
       },
