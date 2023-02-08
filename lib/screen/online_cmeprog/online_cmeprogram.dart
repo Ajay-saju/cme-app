@@ -8,6 +8,8 @@ import 'package:hslr/screen/dashboard/dashboard.dart';
 import 'package:hslr/screen/online_cmeprog/online_cmeprogram_controller.dart';
 import 'package:hslr/screen/online_cmeprog/video_player_screen.dart';
 import 'package:hslr/screen/videoplayerwidget/videoplayerwidget.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'package:video_player/video_player.dart';
 
@@ -21,112 +23,52 @@ class Onlinecmeprogram extends StatefulWidget {
 class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
   CmeProgramController cmeProgramController = Get.put(CmeProgramController());
 
-  final asset = 'assets/1.mp4';
-  final asset1 = 'assets/2.mp4';
-  final asset2 = 'assets/3.mp4';
-
-  VideoPlayerController? controller;
-  VideoPlayerController? controller1;
-  VideoPlayerController? controller2;
-
-  var progress = 0;
-
   ReceivePort _port = ReceivePort();
-  // List<Map> downloadsListMaps = [];
 
-  @override
-  void initState() {
-    // TODO: implement initState
-
-    super.initState();
-    task();
-    _bindBackgroundIsolate();
-    FlutterDownloader.registerCallback(downloadCallback);
-    //  cmeProgramController.allCmeVideos();
-    // controller = VideoPlayerController.asset(asset)
-    //   ..addListener(() => setState(() {}))
-    //   ..setLooping(true)
-    //   ..initialize().then((_) => controller!.pause());
-
-    // controller1 = VideoPlayerController.asset(asset1)
-    //   ..addListener(() => setState(() {}))
-    //   ..setLooping(true)
-    //   ..initialize().then((_) => controller!.pause());
-
-    // controller2 = VideoPlayerController.asset(asset2)
-    //   ..addListener(() => setState(() {}))
-    //   ..setLooping(true)
-    //   ..initialize().then((_) => controller!.pause());
-  }
-
-  void downloadCallback(String id, DownloadTaskStatus status, int progress) {
+  @pragma('vm:entry-point')
+  static void downloadCallback(
+      String id, DownloadTaskStatus status, int progress) {
     final SendPort? send =
         IsolateNameServer.lookupPortByName('downloader_send_port');
     send!.send([id, status, progress]);
-    setState(() {
-      progress = int.parse("${(progress * 100).toStringAsFixed(2)}%");
-      print(progress.toString());
-    });
   }
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-    _unbindBackgroundIsolate();
-    super.dispose();
-  }
-
-  var downloading = false;
-  var progressString = '';
-  void _bindBackgroundIsolate() {
-    bool isSuccess = IsolateNameServer.registerPortWithName(
+  void initState() {
+    IsolateNameServer.registerPortWithName(
         _port.sendPort, 'downloader_send_port');
-    if (!isSuccess) {
-      _unbindBackgroundIsolate();
-      _bindBackgroundIsolate();
-      return;
-    }
-
     _port.listen((dynamic data) {
       String id = data[0];
       DownloadTaskStatus status = data[1];
       int progress = data[2];
-
-      // var task = downloadsListMaps.where((element) => element['id'] == id);
-      // task.forEach((element) {
-      //   element['progress'] = progress;
-      //   element['status'] = status;
-
-      //   setState(() {});
-      // });
       setState(() {});
     });
+    FlutterDownloader.registerCallback(downloadCallback);
+    super.initState();
   }
 
-  Future task() async {
-    final tasks = await FlutterDownloader.loadTasks();
-    // List<DownloadTask>? getTasks = await FlutterDownloader.loadTasks();
-    // getTasks!.forEach((_task) {
-    //   Map _map = Map();
-    //   _map['status'] = _task.status;
-    //   _map['progress'] = _task.progress;
-    //   _map['id'] = _task.taskId;
-    //   _map['filename'] = _task.filename;
-    //   _map['savedDirectory'] = _task.savedDir;
-    //   downloadsListMaps.add(_map);
-    // });
-    setState(() {});
-  }
-  // Future<bool> _openDownloadedFile(_TaskInfo? task) {
-  //   if (task != null) {
-  //     return FlutterDownloader.open(taskId: task.taskId!);
-  //   } else {
-  //     return Future.value(false);
-  //   }
-  // }
-
-  void _unbindBackgroundIsolate() {
+  @override
+  void dispose() {
     IsolateNameServer.removePortNameMapping('downloader_send_port');
+    super.dispose();
+  }
+
+  Future downloadVideo(String url) async {
+    var status = Permission.storage.request();
+    if (await status.isGranted) {
+      final directory = await getExternalStorageDirectory();
+      final taskId = await FlutterDownloader.enqueue(
+        url: url,
+        headers: {}, // optional: header send with url (auth token etc)
+        savedDir: directory!.path,
+        showNotification:
+            true, // show download progress in status bar (for Android)
+        openFileFromNotification:
+            true, // click on notification to open downloaded file (for Android)
+      );
+    } else {
+      print('Permission denied');
+    }
   }
 
   @override
@@ -668,26 +610,96 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                   ),
                                                   ElevatedButton(
                                                     onPressed: () {
-                                                      cmeProgramController.requestDownload(
-                                                          name:
-                                                              cmeProgramController
-                                                                  .allCmeVideos
-                                                                  .value!
-                                                                  .videoList![
-                                                                      index]
-                                                                  .videoName
-                                                                  .toString(),
-                                                          url:
-                                                              cmeProgramController
-                                                                  .allCmeVideos
-                                                                  .value!
-                                                                  .videoList![
-                                                                      index]
-                                                                  .videoPath
-                                                                  .toString()
-                                                                  .replaceAll(
-                                                                      'https',
-                                                                      'http'));
+                                                      Get.defaultDialog(
+                                                          title: 'Download',
+                                                          middleText:
+                                                              'Do you want to download this video ?',
+                                                          middleTextStyle:
+                                                              TextStyle(
+                                                                  fontFamily:
+                                                                      "Nunito",
+                                                                  color: Colors
+                                                                      .black87),
+                                                          titleStyle: TextStyle(
+                                                              fontFamily:
+                                                                  "Nunito",
+                                                              color: Colors
+                                                                  .black87),
+                                                          actions: [
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceAround,
+                                                              children: [
+                                                                ElevatedButton(
+                                                                  onPressed:
+                                                                      () {
+                                                                    Get.back();
+                                                                  },
+                                                                  child: Text(
+                                                                      'Cancel'),
+                                                                  style: ElevatedButton
+                                                                      .styleFrom(
+                                                                          backgroundColor: Colors
+                                                                              .black87,
+                                                                          // Colors.orange,//// Color.fromARGB(255, 218, 206, 37),
+                                                                          shape:
+                                                                              RoundedRectangleBorder(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(15),
+                                                                          )),
+                                                                ),
+                                                                ElevatedButton(
+                                                                  onPressed:
+                                                                      () {
+                                                                    downloadVideo(
+                                                                      
+                                                                          'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+                                                                      // name: cmeProgramController
+                                                                      //     .allCmeVideos
+                                                                      //     .value!
+                                                                      //     .videoList![
+                                                                      //         index]
+                                                                      //     .videoName
+                                                                      //     .toString(),
+                                                                    );
+                                                                  },
+                                                                  child: Text(
+                                                                      'Ok'),
+                                                                  style: ElevatedButton
+                                                                      .styleFrom(
+                                                                          backgroundColor: Colors
+                                                                              .black87,
+                                                                          // Colors.orange,//// Color.fromARGB(255, 218, 206, 37),
+                                                                          shape:
+                                                                              RoundedRectangleBorder(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(15),
+                                                                          )),
+                                                                )
+                                                              ],
+                                                            )
+                                                          ]);
+                                                      // cmeProgramController.requestDownload(
+                                                      //     name:
+                                                      //         cmeProgramController
+                                                      //             .allCmeVideos
+                                                      //             .value!
+                                                      //             .videoList![
+                                                      //                 index]
+                                                      //             .videoName
+                                                      //             .toString(),
+                                                      //     url:
+                                                      //         cmeProgramController
+                                                      //             .allCmeVideos
+                                                      //             .value!
+                                                      //             .videoList![
+                                                      //                 index]
+                                                      //             .videoPath
+                                                      //             .toString()
+                                                      //             .replaceAll(
+                                                      //                 'https',
+                                                      //                 'http'));
                                                       // cmeProgramController
                                                       //             .allCmeVideos
                                                       //             .value!
@@ -732,7 +744,7 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                                       .circular(
                                                                           15),
                                                             )),
-                                                  )
+                                                  ),
                                                 ],
                                               ),
                                               Positioned(

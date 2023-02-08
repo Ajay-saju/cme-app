@@ -3,10 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/dashboard/dashboard_controller.dart';
 import 'package:hslr/screen/member_details/member_controller.dart';
-
 import '../change_password/change_password_screen.dart';
 import '../change_profile_pick/change_profile_pick_screen.dart';
-import '../login/login_controller.dart';
+
 
 class Memberdetail extends StatefulWidget {
   const Memberdetail({Key? key}) : super(key: key);
@@ -26,23 +25,23 @@ class _MemberdetailState extends State<Memberdetail> {
         : mebController.memName.text =
             logController.getUserDetails.value.loginName!;
 
-    logController.getUserDetails.value.councilName == null
-        ? ""
-        : mebController.councilName.text =
-            logController.getUserDetails.value.councilName!;
+    // logController.getUserDetails.value.councilName == null
+    //     ? ""
+    //     : mebController.councilName.text =
+    //         logController.getUserDetails.value.councilName!;
 
-    logController.getUserDetails.value.mobileNumber == null
-        ? ""
-        : mebController.membmobile.text =
-            logController.getUserDetails.value.mobileNumber!;
-    logController.getUserDetails.value.stateDesc == null
-        ? ""
-        : mebController.membstate.text =
-            logController.getUserDetails.value.stateDesc!;
-    logController.getUserDetails.value.districtName == null
-        ? ""
-        : mebController.membdistr.text =
-            logController.getUserDetails.value.districtName!;
+    // logController.getUserDetails.value.mobileNumber == null
+    //     ? ""
+    //     : mebController.membmobile.text =
+    //         logController.getUserDetails.value.mobileNumber!;
+    // logController.getUserDetails.value.stateDesc == null
+    //     ? ""
+    //     : mebController.membstate.text =
+    //         logController.getUserDetails.value.stateDesc!;
+    // logController.getUserDetails.value.districtName == null
+    //     ? ""
+    //     : mebController.membdistr.text =
+    //         logController.getUserDetails.value.districtName!;
     return GetBuilder<MemberDetailsController>(
       builder: ((_) {
         return GestureDetector(
@@ -279,120 +278,7 @@ class _MemberdetailState extends State<Memberdetail> {
                           ),
                         ),
                       ),
-                      // Center(
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.only(
-                      //         left: 20.0, top: 25, right: 20.0),
-                      //     child: TextFormField(
-                      //       // initialValue:
-                      //       //     logController.getUserDetails.value.stateDesc,
-                      //       cursorColor: Colors.black87,
-
-                      //       keyboardType: TextInputType.text,
-                      //       controller: mebController.membstate,
-                      //       validator: (value) {
-                      //         if (value!.isNotEmpty && value.length > 1) {
-                      //           return null;
-                      //         } else if (value.length < 1 && value.isNotEmpty) {
-                      //           return "Your State Name is Short";
-                      //         } else {
-                      //           return 'Required State Name ';
-                      //         }
-                      //       },
-                      //       decoration: InputDecoration(
-                      //           border: OutlineInputBorder(
-                      //             borderRadius: BorderRadius.circular(15.0),
-                      //             borderSide:
-                      //                 const BorderSide(color: Colors.black),
-                      //           ),
-                      //           enabledBorder: OutlineInputBorder(
-                      //             borderRadius: BorderRadius.circular(15.0),
-                      //             borderSide:
-                      //                 const BorderSide(color: Colors.black),
-                      //           ),
-                      //           errorBorder: OutlineInputBorder(
-                      //             borderRadius: BorderRadius.circular(15.0),
-                      //             borderSide:
-                      //                 const BorderSide(color: Colors.grey),
-                      //           ),
-                      //           focusedBorder: OutlineInputBorder(
-                      //             borderRadius: BorderRadius.circular(15.0),
-                      //             borderSide: BorderSide(color: Colors.black),
-                      //           ),
-                      //           focusedErrorBorder: OutlineInputBorder(
-                      //             borderRadius: BorderRadius.circular(15.0),
-                      //             borderSide: BorderSide(
-                      //               color: Colors.black,
-                      //             ),
-                      //           ),
-                      //           hintText: "State Name",
-                      //           hintStyle: TextStyle(
-                      //             fontFamily: "Nunito",
-                      //           ),
-                      //           filled: true,
-                      //           fillColor: Colors.white,
-                      //           contentPadding:
-                      //               const EdgeInsets.only(left: 20.0)),
-                      //     ),
-                      //   ),
-                      // ),
-                      // Center(
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.only(
-                      //         left: 20.0, top: 25, right: 20.0),
-                      //     child: TextFormField(
-                      //       // initialValue:
-                      //       //     logController.getUserDetails.value.districtName,
-                      //       cursorColor: Colors.black87,
-
-                      //       keyboardType: TextInputType.text,
-                      //       controller: mebController.membdistr,
-                      //       validator: (value) {
-                      //         if (value!.isNotEmpty && value.length > 3) {
-                      //           return null;
-                      //         } else if (value.length < 3 && value.isNotEmpty) {
-                      //           return "Your Distict Name is Short";
-                      //         } else {
-                      //           return 'Required Distict Name';
-                      //         }
-                      //       },
-                      //       decoration: InputDecoration(
-                      //           border: OutlineInputBorder(
-                      //             borderRadius: BorderRadius.circular(15.0),
-                      //             borderSide:
-                      //                 const BorderSide(color: Colors.black),
-                      //           ),
-                      //           enabledBorder: OutlineInputBorder(
-                      //             borderRadius: BorderRadius.circular(15.0),
-                      //             borderSide:
-                      //                 const BorderSide(color: Colors.black),
-                      //           ),
-                      //           errorBorder: OutlineInputBorder(
-                      //             borderRadius: BorderRadius.circular(15.0),
-                      //             borderSide:
-                      //                 const BorderSide(color: Colors.grey),
-                      //           ),
-                      //           focusedBorder: OutlineInputBorder(
-                      //             borderRadius: BorderRadius.circular(15.0),
-                      //             borderSide: BorderSide(color: Colors.black),
-                      //           ),
-                      //           focusedErrorBorder: OutlineInputBorder(
-                      //             borderRadius: BorderRadius.circular(15.0),
-                      //             borderSide: BorderSide(
-                      //               color: Colors.black,
-                      //             ),
-                      //           ),
-                      //           hintText: "Distict Name",
-                      //           hintStyle: TextStyle(
-                      //             fontFamily: "Nunito",
-                      //           ),
-                      //           filled: true,
-                      //           fillColor: Colors.white,
-                      //           contentPadding:
-                      //               const EdgeInsets.only(left: 20.0)),
-                      //     ),
-                      //   ),
-                      // ),
+                      
                       SizedBox(
                         height: 25.0,
                       ),
@@ -452,55 +338,6 @@ class _MemberdetailState extends State<Memberdetail> {
                               style: TextStyle(fontFamily: "Nunito"),
                             )),
                       )),
-
-                      ///////////////
-                      // Container(
-                      //   margin: EdgeInsets.only(top: 20.0),
-                      //   height: context.height * 0.9,
-                      //   decoration: BoxDecoration(
-                      //     borderRadius: BorderRadius.circular(25.0),
-                      //     color: Color(0xfff6f9fb),
-                      //     shape: BoxShape.rectangle,
-                      //     boxShadow: [
-                      //       BoxShadow(
-                      //           color: Colors.grey.shade300,
-                      //           spreadRadius: 0.0,
-                      //           blurRadius: 5,
-                      //           offset: const Offset(3.0, 3.0)),
-                      //       BoxShadow(
-                      //           color: Colors.grey.shade400,
-                      //           spreadRadius: 0.0,
-                      //           blurRadius: 5 / 2.0,
-                      //           offset: const Offset(3.0, 3.0)),
-                      //       const BoxShadow(
-                      //           color: Colors.white,
-                      //           spreadRadius: 2.0,
-                      //           blurRadius: 2,
-                      //           offset: Offset(-1.0, -1.0)),
-                      //       const BoxShadow(
-                      //           color: Colors.white,
-                      //           spreadRadius: 3.0,
-                      //           blurRadius: 5 / 2,
-                      //           offset: Offset(-1.0, -1.0)),
-                      //     ],
-                      //   ),
-                      //   child: Column(
-                      //     crossAxisAlignment: CrossAxisAlignment.start,
-                      //     children: [
-                      //       // const Padding(
-                      //       //   padding: EdgeInsets.all(20.0),
-                      //       //   child: Text(
-                      //       //     "Member Details",
-                      //       //     style: TextStyle(fontSize: 20.0),
-                      //       //   ),
-                      //       // ),
-                      //     ],
-                      //   ),
-                      // ),
-                      // // SizedBox(
-                      //   height: context.height * 0.1,
-                      // ),
-                      /////////////////////////
                     ],
                   ),
                 ),
