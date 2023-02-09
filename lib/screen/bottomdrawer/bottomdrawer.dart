@@ -2,10 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/main.dart';
+import 'package:hslr/screen/change_profile_pick/change_profile_pick_screen.dart';
 import 'package:hslr/screen/cmeprogrm_points/cme_points.dart';
 import 'package:hslr/screen/dashboard/dashboard_controller.dart';
 import 'package:hslr/screen/downloaded_videos/video_list.dart';
-import 'package:hslr/screen/education_details/education_screen.dart';
 import 'package:hslr/screen/login/login.dart';
 import 'package:hslr/screen/login/login_controller.dart';
 import 'package:hslr/screen/member_details/member_details.dart';
@@ -58,15 +58,28 @@ class _BottomDrawerState extends State<BottomDrawer> {
                             left: 18.0, top: 25.0, right: 18.0),
                         child: Row(
                           children: [
-                            CircleAvatar(
-                              backgroundImage: Image.network(
-                                      bdrawerController.profilePick == null
-                                          ? pick.replaceAll('"', '')
-                                          : bdrawerController.profilePick
-                                              .replaceAll('"', ''))
-                                  .image,
-                              radius: 25.0,
-                              backgroundColor: Colors.white,
+                            InkWell(
+                              onTap: () {
+                                Get.to(ChangeProfilePicture());
+                              },
+                              child: CircleAvatar(
+                                child: bdrawerController.profilePick == null ||
+                                        pick == "No Photo Available"
+                                    ? Icon(
+                                        Icons.add_a_photo_rounded,
+                                        color: Colors.black87,
+                                        size: 30,
+                                      )
+                                    : null,
+                                backgroundImage: Image.network(
+                                        bdrawerController.profilePick == null
+                                            ? pick.replaceAll('"', '')
+                                            : bdrawerController.profilePick
+                                                .replaceAll('"', ''))
+                                    .image,
+                                radius: 25.0,
+                                backgroundColor: Colors.white,
+                              ),
                             ),
                             SizedBox(
                               width: context.width * 0.05,

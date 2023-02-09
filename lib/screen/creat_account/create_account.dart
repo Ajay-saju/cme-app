@@ -104,45 +104,113 @@ class _CreateAccountState extends State<CreateAccount> {
                           ),
                         ),
                       ),
-                      Center(
-                        child: Container(
-                          margin: EdgeInsets.all(16),
-                          height: context.height * 0.06,
-                          width: context.width * 0.9,
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                          decoration: BoxDecoration(
-                              // color: Color(0xffDC3638),
-                              borderRadius: BorderRadius.circular(10.0),
-                              border: Border.all(color: Colors.black)),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(top: 20, left: 20, right: 20),
+                        child: Center(
                           child: DropdownButtonHideUnderline(
-                            child: DropdownButton<String>(
-                                value: accountController.dropvalue,
-                                isExpanded: true,
-                                icon: Padding(
-                                  padding: const EdgeInsets.only(left: 8.0),
-                                  child: Image.asset(
-                                    'assets/Dropdownb.png',
-                                    color: Color(0xffDC3638),
+                            child: DropdownButtonFormField<String>(
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: BorderSide(color: Colors.black),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
                                   ),
                                 ),
-                                hint: Text(
-                                  "Select Profession",
-                                  style: TextStyle(
-                                      // fontWeight: FontWeight.bold,
-                                      fontFamily: "Nunito",
-                                      color: Colors.black87),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black),
                                 ),
-                                items: accountController.dropitems
-                                    .map(accountController.buildMenuItem)
-                                    .toList(),
-                                onChanged: (value) {
-                                  accountController.dropvalue = value;
-                                  accountController.update();
-                                }),
+                                contentPadding:
+                                    EdgeInsets.only(right: 10, left: 15),
+                                // border: InputBorder.none
+                              ),
+                              value: accountController.dropvalue,
+                              isExpanded: true,
+                              icon: Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Image.asset(
+                                  'assets/Dropdownb.png',
+                                  color: Color(0xffDC3638),
+                                ),
+                              ),
+                              hint: Text(
+                                "  Select Profession",
+                                style: TextStyle(
+                                    fontFamily: "Nunito",
+                                    color: Colors.black87),
+                              ),
+                              items: accountController.dropitems
+                                  .map(accountController.buildMenuItem)
+                                  .toList(),
+                              onChanged: (value) {
+                                accountController.dropvalue = value;
+                                accountController.update();
+                              },
+                              validator: (value) {
+                                if (value == null) {
+                                  return "Please select a profession.";
+                                }
+                                return null;
+                              },
+                            ),
                           ),
                         ),
                       ),
+                      // Center(
+                      //   child: Container(
+                      //     margin: EdgeInsets.all(16),
+                      //     height: context.height * 0.06,
+                      //     width: context.width * 0.9,
+                      //     padding:
+                      //         EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                      //     decoration: BoxDecoration(
+                      //         // color: Color(0xffDC3638),
+                      //         borderRadius: BorderRadius.circular(10.0),
+                      //         border: Border.all(color: Colors.black)),
+                      //     child: DropdownButtonHideUnderline(
+                      //       child: DropdownButton<String>(
+                      //           value: accountController.dropvalue,
+                      //           isExpanded: true,
+                      //           icon: Padding(
+                      //             padding: const EdgeInsets.only(left: 8.0),
+                      //             child: Image.asset(
+                      //               'assets/Dropdownb.png',
+                      //               color: Color(0xffDC3638),
+                      //             ),
+                      //           ),
+                      //           hint: Text(
+                      //             "Select Profession",
+                      //             style: TextStyle(
+                      //                 // fontWeight: FontWeight.bold,
+                      //                 fontFamily: "Nunito",
+                      //                 color: Colors.black87),
+                      //           ),
+                      //           items: accountController.dropitems
+                      //               .map(accountController.buildMenuItem)
+                      //               .toList(),
+                      //           onChanged: (value) {
+                      //             accountController.dropvalue = value;
+                      //             accountController.update();
+                      //           }),
+                      //     ),
+                      //   ),
+                      // ),
                       Center(
                         child: Padding(
                           padding: const EdgeInsets.all(

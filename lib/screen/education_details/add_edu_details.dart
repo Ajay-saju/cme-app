@@ -130,7 +130,6 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                                               },
                                               errorBuilder: (context, error) =>
                                                   Text(error.toString()),
-                                              minCharsForSuggestions: 2,
                                               hideOnError: true,
                                               hideSuggestionsOnKeyboardHide:
                                                   false,
@@ -329,7 +328,6 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                                               // hideKeyboardOnDrag: true,
                                               errorBuilder: (context, error) =>
                                                   Text(error.toString()),
-                                              minCharsForSuggestions: 2,
                                               hideOnError: true,
                                               hideSuggestionsOnKeyboardHide:
                                                   false,
@@ -444,7 +442,6 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                                               },
                                               errorBuilder: (context, error) =>
                                                   Text(error.toString()),
-                                              minCharsForSuggestions: 2,
                                               hideOnError: true,
                                               hideSuggestionsOnKeyboardHide:
                                                   false,

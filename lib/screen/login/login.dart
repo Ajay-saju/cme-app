@@ -65,10 +65,6 @@ class _LoginState extends State<Login> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // SizedBox(
-                        //   height: 10,
-                        // ),
-
                         Center(
                           child: SizedBox(
                             height: 150,
@@ -78,10 +74,6 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                         ),
-
-                        // SizedBox(
-                        //   height: 10,
-                        // ),
                         Center(
                           child: Text(
                             'Sign in',
@@ -96,42 +88,69 @@ class _LoginState extends State<Login> {
                         ),
 
                         Padding(
-                          padding: const EdgeInsets.only(top: 20),
+                          padding: const EdgeInsets.only(
+                              top: 20, left: 20, right: 20),
                           child: Center(
-                            child: Container(
-                              margin: EdgeInsets.only(top: 0),
-                              height: 50, //context.height * 0.06,
-                              width: context.width * 0.9,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 4),
-                              decoration: BoxDecoration(
-                                  // color: Color(0xffDC3638),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  border: Border.all(color: Colors.black)),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton<String>(
-                                    value: logController.dropvalue,
-                                    isExpanded: true,
-                                    icon: Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Image.asset(
-                                        'assets/Dropdownb.png',
-                                        color: Color(0xffDC3638),
-                                      ),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButtonFormField<String>(
+                                decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderSide:
+                                        const BorderSide(color: Colors.black),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderSide:
+                                        const BorderSide(color: Colors.black),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderSide: BorderSide(color: Colors.black),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
                                     ),
-                                    hint: Text(
-                                      "  Select Profession",
-                                      style: TextStyle(
-                                          fontFamily: "Nunito",
-                                          color: Colors.black87),
-                                    ),
-                                    items: logController.dropitems
-                                        .map(logController.buildMenuItem)
-                                        .toList(),
-                                    onChanged: (value) {
-                                      logController.dropvalue = value;
-                                      logController.update();
-                                    }),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderSide:
+                                        const BorderSide(color: Colors.black),
+                                  ),
+                                  contentPadding:
+                                      EdgeInsets.only(right: 10, left: 15),
+                                  // border: InputBorder.none
+                                ),
+                                value: logController.dropvalue,
+                                isExpanded: true,
+                                icon: Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: Image.asset(
+                                    'assets/Dropdownb.png',
+                                    color: Color(0xffDC3638),
+                                  ),
+                                ),
+                                hint: Text(
+                                  "  Select Profession",
+                                  style: TextStyle(
+                                      fontFamily: "Nunito",
+                                      color: Colors.black87),
+                                ),
+                                items: logController.dropitems
+                                    .map(logController.buildMenuItem)
+                                    .toList(),
+                                onChanged: (value) {
+                                  logController.dropvalue = value;
+                                  logController.update();
+                                },
+                                validator: (value) {
+                                  if (value == null) {
+                                    return "Please select a profession.";
+                                  }
+                                  return null;
+                                },
                               ),
                             ),
                           ),
@@ -224,10 +243,10 @@ class _LoginState extends State<Login> {
                               if (value!.isNotEmpty && value.length > 3) {
                                 return null;
                               } else if (value.length < 3 && value.isNotEmpty) {
-                                return "Your Password is Short";
+                                return "Your Pin is Short";
                               } else {
                                 logController.sizedtext();
-                                return 'Required Password';
+                                return 'Required Pin';
                               }
                             },
                             decoration: InputDecoration(

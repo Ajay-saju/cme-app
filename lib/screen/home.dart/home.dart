@@ -4,6 +4,8 @@ import 'package:hslr/main.dart';
 import 'package:hslr/screen/dashboard/dashboard_controller.dart';
 import 'package:hslr/screen/login/login_controller.dart';
 
+import '../change_profile_pick/change_profile_pick_screen.dart';
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -19,6 +21,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    // print(pick.toString());
+    print(dashController.profilePick.toString());
     // final date  =
     int _selectedIndex = 0;
     return GetBuilder<DashboardController>(
@@ -74,15 +78,27 @@ class _HomeState extends State<Home> {
                               padding: const EdgeInsets.only(
                                 top: 10,
                               ),
-                              child: CircleAvatar(
-                                radius: 35,
-                                backgroundImage: Image.network(
-                                        dashController.profilePick == null
-                                            ? pick.replaceAll('"', '')
-                                            : dashController.profilePick
-                                                .replaceAll('"', ''))
-                                    .image,
-                                backgroundColor: Colors.black87,
+                              child: InkWell(
+                                onTap: () {
+                                  Get.to(ChangeProfilePicture());
+                                },
+                                child: CircleAvatar(
+                                  radius: 28,
+                                  child: dashController.profilePick == null ||
+                                          pick == "No Photo Available"
+                                      ? Icon(
+                                          Icons.add_a_photo_rounded,
+                                          size: 30,
+                                        )
+                                      : null,
+                                  backgroundImage: Image.network(
+                                          dashController.profilePick == null
+                                              ? pick.replaceAll('"', '')
+                                              : dashController.profilePick
+                                                  .replaceAll('"', ''))
+                                      .image,
+                                  backgroundColor: Colors.black87,
+                                ),
                               ),
                             )
                           ],
@@ -135,7 +151,6 @@ class _HomeState extends State<Home> {
                                           spreadRadius: 0.0,
                                           blurRadius: 5,
                                           offset: const Offset(3.0, 3.0)),
-                                     
                                       const BoxShadow(
                                           color: Colors.white,
                                           spreadRadius: 2.0,

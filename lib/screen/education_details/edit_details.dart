@@ -131,7 +131,6 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                       border:
                                           Border.all(color: Colors.black87)),
                                   child: TypeAheadField(
-                                      minCharsForSuggestions: 2,
                                       hideOnError: true,
                                       hideSuggestionsOnKeyboardHide: false,
                                       hideKeyboardOnDrag: true,
@@ -326,7 +325,6 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                       border:
                                           Border.all(color: Colors.black87)),
                                   child: TypeAheadField(
-                                      minCharsForSuggestions: 2,
                                       hideOnError: true,
                                       hideSuggestionsOnKeyboardHide: false,
                                       hideKeyboardOnDrag: true,
@@ -425,7 +423,6 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                       border:
                                           Border.all(color: Colors.black87)),
                                   child: TypeAheadField(
-                                    minCharsForSuggestions: 2,
                                     hideOnError: true,
                                     hideSuggestionsOnKeyboardHide: false,
                                     hideKeyboardOnDrag: true,
