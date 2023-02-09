@@ -307,10 +307,11 @@ class _ProfileScreenTabState extends State<ProfileScreenTab> {
                                     child: Text(
                                       "Change Password",
                                       style: TextStyle(
-                                          color: Colors.grey.shade900,
+                                          color: Colors.grey.shade900, fontWeight: FontWeight.bold,
                                           fontFamily: "Nunito"),
                                     ),
                                   ),
+                                  Spacer(),
                                   InkWell(
                                     onTap: () {
                                       Get.to(ChangeProfilePicture());
@@ -319,6 +320,7 @@ class _ProfileScreenTabState extends State<ProfileScreenTab> {
                                       "Change Profile Pitcture",
                                       style: TextStyle(
                                           color: Colors.grey.shade900,
+                                          fontWeight: FontWeight.bold,
                                           fontFamily: "Nunito"),
                                     ),
                                   ),
