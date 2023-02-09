@@ -59,8 +59,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                         child: Row(
                           children: [
                             CircleAvatar(
-                              backgroundImage: 
-                              Image.network(
+                              backgroundImage: Image.network(
                                       bdrawerController.profilePick == null
                                           ? pick.replaceAll('"', '')
                                           : bdrawerController.profilePick
@@ -729,11 +728,81 @@ class _BottomDrawerState extends State<BottomDrawer> {
                               onTap: () async {
                                 // SharedPreferences sessionlog =
                                 //     await SharedPreferences.getInstance();
-                                sessionlog.remove("log_name");
-                                sessionlog.remove('userId');
-                                sessionlog.remove('proPick');
 
-                                Get.offAll(Login());
+                                Get.defaultDialog(
+                                  title: 'Are you sure',
+                                  titleStyle: TextStyle(
+                                    fontFamily: "Nunito",
+                                    color: Colors.black87,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  middleText: 'Do you want to Logout  ?',
+                                  middleTextStyle: TextStyle(
+                                    fontFamily: "Nunito",
+                                    color: Colors.black87,
+                                    fontSize: 16,
+                                    // fontWeight: FontWeight.bold,
+                                  ),
+                                  actions: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: ElevatedButton(
+                                            child: Text(
+                                              'Back',
+                                              style: TextStyle(
+                                                fontFamily: "Nunito",
+                                                color: Colors.white,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              Get.back();
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.black87,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(30),
+                                                )),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              sessionlog.remove("log_name");
+                                              sessionlog.remove('userId');
+                                              sessionlog.remove('proPick');
+
+                                              Get.offAll(Login());
+                                            },
+                                            child: Text(
+                                              'Logout',
+                                              style: TextStyle(
+                                                fontFamily: "Nunito",
+                                                color: Colors.white,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.black87,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(30),
+                                                )),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                );
                               },
                               leading: SizedBox(
                                 height: 25,

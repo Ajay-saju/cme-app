@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:hslr/main.dart';
 import 'package:hslr/models/user_details.dart';
 import 'package:hslr/screen/dashboard/dashboard.dart';
+import 'package:hslr/screen/loading_class/loading_class.dart';
 import 'package:hslr/services/last_login_service/last_login_service.dart';
 import 'package:hslr/services/user_login_servise.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,7 +45,7 @@ class LoginController extends GetxController {
   bool sizetext = false;
   bool creatsize = false;
   var isLOading = true.obs;
-  String? dropvalue ;
+  String? dropvalue;
   var date = ''.obs;
   var time = ''.obs;
 
@@ -121,7 +122,8 @@ class LoginController extends GetxController {
       // var jsonFile = convert.jsonDecode(response.data);
 
       if (response.statusCode == 200 && response.data != "User Doesn't Exist") {
-        
+        DialogHelper.hideLoading();
+
         userLogin.value = UserLogin.fromJson(response.data);
         print(userLogin.value.userId.toString());
 
@@ -137,8 +139,8 @@ class LoginController extends GetxController {
         await sessionlog.setString(
             'catId', userLogin.value.categoryId.toString());
         await sessionlog.setInt('country', userLogin.value.countryId!);
-        if(mid !=null){
-           await Get.offAll(Dashboard());
+        if (mid != null) {
+          await Get.offAll(Dashboard());
         }
       } else if (response.data == "User Doesn't Exist") {
         isfade = true;

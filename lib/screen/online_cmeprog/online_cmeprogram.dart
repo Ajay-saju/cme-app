@@ -27,7 +27,8 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
 
   @pragma('vm:entry-point')
   static void downloadCallback(
-      String id, DownloadTaskStatus status, int progress) {
+      String id, DownloadTaskStatus status, int progress) 
+      {
     final SendPort? send =
         IsolateNameServer.lookupPortByName('downloader_send_port');
     send!.send([id, status, progress]);
@@ -55,20 +56,20 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
 
   Future downloadVideo(String url) async {
     var status = Permission.storage.request();
-    if (await status.isGranted) {
-      final directory = await getExternalStorageDirectory();
-      final taskId = await FlutterDownloader.enqueue(
-        url: url,
-        headers: {}, // optional: header send with url (auth token etc)
-        savedDir: directory!.path,
-        showNotification:
-            true, // show download progress in status bar (for Android)
-        openFileFromNotification:
-            true, // click on notification to open downloaded file (for Android)
-      );
-    } else {
-      print('Permission denied');
-    }
+    // if (await status.isGranted) {
+    final directory = await getExternalStorageDirectory();
+    final taskId = await FlutterDownloader.enqueue(
+      url: url,
+      headers: {}, // optional: header send with url (auth token etc)
+      savedDir: directory!.path,
+      showNotification:
+          true, // show download progress in status bar (for Android)
+      openFileFromNotification:
+          true, // click on notification to open downloaded file (for Android)
+    );
+    // } else {
+    //   print('Permission denied');
+    // }
   }
 
   @override
@@ -652,9 +653,8 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                                 ElevatedButton(
                                                                   onPressed:
                                                                       () {
-                                                                    downloadVideo(
-                                                                      
-                                                                          'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+                                                                    // downloadVideo(
+                                                                    //   'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
                                                                       // name: cmeProgramController
                                                                       //     .allCmeVideos
                                                                       //     .value!
@@ -662,7 +662,7 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                                       //         index]
                                                                       //     .videoName
                                                                       //     .toString(),
-                                                                    );
+                                                                    // );
                                                                   },
                                                                   child: Text(
                                                                       'Ok'),
@@ -957,12 +957,7 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
     // );
   }
 
-  CancelToken cancelToken = CancelToken();
-  cancelDownload(index) {
-    cmeProgramController.allCmeVideos.value!.videoList![index].isDownloading =
-        false;
-    cancelToken.cancel();
-  }
+  
 
 //   Future downloadVideo(index) async {
 

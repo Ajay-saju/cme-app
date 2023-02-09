@@ -155,8 +155,7 @@ class CreateAccountController extends GetxController {
             color: Colors.black87,
             fontSize: 18,
             fontWeight: FontWeight.bold,
-          )
-          );
+          ));
     }
   }
 

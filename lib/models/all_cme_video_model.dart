@@ -25,7 +25,7 @@ class AllCmeVideos {
 }
 
 class VideoList {
-  bool? isDownloading;
+  // bool? isDownloading;
   String? message;
   String? videoPath;
   String? videoTimingHour;
@@ -39,7 +39,7 @@ class VideoList {
 
   VideoList(
       {this.message,
-      this.isDownloading,
+      // this.isDownloading,
       this.videoPath,
       this.videoTimingHour,
       this.videoAmount,
