@@ -5,7 +5,6 @@ import 'package:hslr/screen/education_details/add_edu_details.dart';
 import 'package:hslr/screen/education_details/edit_details.dart';
 import 'package:hslr/screen/education_details/education_controller.dart';
 import 'package:hslr/screen/profile_tab/profile_tab_controller.dart';
-
 import '../change_password/change_password_screen.dart';
 import '../change_profile_pick/change_profile_pick_screen.dart';
 import '../dashboard/dashboard_controller.dart';
@@ -130,6 +129,7 @@ class _ProfileScreenTabState extends State<ProfileScreenTab> {
                         child: Column(
                           children: [
                             TextFormField(
+                              readOnly: profileTabController.isReadOnly,
                               cursorColor: Colors.black87,
                               inputFormatters: [
                                 LengthLimitingTextInputFormatter(25),
@@ -149,10 +149,15 @@ class _ProfileScreenTabState extends State<ProfileScreenTab> {
                               },
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                suffix: Icon(
-                                  Icons.edit,
-                                  size: 20,
+                                suffix: IconButton(
                                   color: Colors.black,
+                                  icon: Icon(Icons.edit),
+                                  onPressed: () {
+                                    setState(() {
+                                      profileTabController.isReadOnly =
+                                          !profileTabController.isReadOnly;
+                                    });
+                                  },
                                 ),
                                 hintText: "Name",
                                 hintStyle: TextStyle(
@@ -166,6 +171,7 @@ class _ProfileScreenTabState extends State<ProfileScreenTab> {
                               ),
                             ),
                             TextFormField(
+                              readOnly: profileTabController.isReadOnly,
                               cursorColor: Colors.black87,
                               keyboardType: TextInputType.text,
                               controller: profileTabController.memCouncilName,
@@ -181,10 +187,15 @@ class _ProfileScreenTabState extends State<ProfileScreenTab> {
                               },
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                suffix: Icon(
-                                  Icons.edit,
-                                  size: 20,
+                                suffix: IconButton(
                                   color: Colors.black,
+                                  icon: Icon(Icons.edit),
+                                  onPressed: () {
+                                    setState(() {
+                                      profileTabController.isReadOnly =
+                                          !profileTabController.isReadOnly;
+                                    });
+                                  },
                                 ),
                                 hintText: "Councile Name",
                                 hintStyle: TextStyle(
@@ -198,6 +209,7 @@ class _ProfileScreenTabState extends State<ProfileScreenTab> {
                               ),
                             ),
                             TextFormField(
+                              readOnly: profileTabController.isReadOnly,
                               cursorColor: Colors.black87,
                               inputFormatters: [
                                 LengthLimitingTextInputFormatter(10),
@@ -217,10 +229,15 @@ class _ProfileScreenTabState extends State<ProfileScreenTab> {
                               },
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                suffix: Icon(
-                                  Icons.edit,
-                                  size: 20,
+                                suffix: IconButton(
                                   color: Colors.black,
+                                  icon: Icon(Icons.edit),
+                                  onPressed: () {
+                                    setState(() {
+                                      profileTabController.isReadOnly =
+                                          !profileTabController.isReadOnly;
+                                    });
+                                  },
                                 ),
                                 hintText: "Mobile Number",
                                 hintStyle: TextStyle(
@@ -234,6 +251,7 @@ class _ProfileScreenTabState extends State<ProfileScreenTab> {
                               ),
                             ),
                             TextFormField(
+                              readOnly: profileTabController.isReadOnly,
                               cursorColor: Colors.black87,
                               inputFormatters: [
                                 // LengthLimitingTextInputFormatter(10),
@@ -252,10 +270,15 @@ class _ProfileScreenTabState extends State<ProfileScreenTab> {
                               },
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                suffix: Icon(
-                                  Icons.edit,
-                                  size: 20,
+                                suffix: IconButton(
                                   color: Colors.black,
+                                  icon: Icon(Icons.edit),
+                                  onPressed: () {
+                                    setState(() {
+                                      profileTabController.isReadOnly =
+                                          !profileTabController.isReadOnly;
+                                    });
+                                  },
                                 ),
                                 hintText: "Council Reg No",
                                 hintStyle: TextStyle(
@@ -294,8 +317,7 @@ class _ProfileScreenTabState extends State<ProfileScreenTab> {
                               height: 15,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 30.0, right: 30.0),
+                              padding: const EdgeInsets.only(left: 0, right: 0),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -307,7 +329,9 @@ class _ProfileScreenTabState extends State<ProfileScreenTab> {
                                     child: Text(
                                       "Change Password",
                                       style: TextStyle(
-                                          color: Colors.grey.shade900, fontWeight: FontWeight.bold,
+                                          color: Colors.grey.shade900,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
                                           fontFamily: "Nunito"),
                                     ),
                                   ),
@@ -319,6 +343,7 @@ class _ProfileScreenTabState extends State<ProfileScreenTab> {
                                     child: Text(
                                       "Change Profile Pitcture",
                                       style: TextStyle(
+                                          fontSize: 15,
                                           color: Colors.grey.shade900,
                                           fontWeight: FontWeight.bold,
                                           fontFamily: "Nunito"),
@@ -327,6 +352,9 @@ class _ProfileScreenTabState extends State<ProfileScreenTab> {
                                 ],
                               ),
                             ),
+                            SizedBox(
+                              height: 20,
+                            )
                           ],
                         ),
                       )),

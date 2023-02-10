@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    // print(pick.toString());
+    print(pick.toString());
     print(dashController.profilePick.toString());
     // final date  =
     int _selectedIndex = 0;
@@ -34,413 +34,418 @@ class _HomeState extends State<Home> {
           child: Scaffold(
             backgroundColor: Colors.white, //Color(0xff63c3fe),
             body: SafeArea(
-              child:
-                  //  dashController.userCmeVideoPurchese == null &&
-                  //         dashController.userCmeVideo == null &&
-                  //         dashController.userCmeVideoLastTest == null
-                  //     ?
-                  //     Center(
-                  //         child: CircularProgressIndicator(
-                  //           color: Colors.black87,
-                  //           strokeWidth: 2,
-                  //         ),
-                  //       )
-                  //     :
-                  Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Container(
-                  //   margin: EdgeInsets.only(top: 10),
-                  //   height: context.height * 0.09,
-                  //   width: context.width,
-                  //   color: Colors.white, //Color(0xff63c3fe),
-                  //   child:
-                  // SizedBox(
-                  //     height: 25,
-                  //     width: 25,
-                  //     // padding: const EdgeInsets.all(0.0),
-                  //     child: Image.asset(
-                  //       'assets/FB.png',
-                  //       fit: BoxFit.cover,
-                  //     ),
-                  //   ),
-                  // ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: context.height * 0.1,
-                        width: context.width * 0.8,
-                        // padding: const EdgeInsets.all(0.0),
-                        child: Image.asset(
-                          'assets/FB.png',
-                          fit: BoxFit.cover,
-                        ),
+              child: dashController.getUserDetails.value.loginName == null
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.black87,
+                        strokeWidth: 2,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          top: 10,
-                        ),
-                        child: InkWell(
-                          onTap: () {
-                            Get.to(ChangeProfilePicture());
-                          },
-                          child: CircleAvatar(
-                            radius: 28,
-                            child: dashController.profilePick == null &&
-                                    pick == "No Photo Available"
-                                ? Icon(
-                                    Icons.add_a_photo_rounded,
-                                    size: 30,
-                                  )
-                                : null,
-                            backgroundImage: Image.network(
-                                    dashController.profilePick == null
-                                        ? pick.replaceAll('"', '')
-                                        : dashController.profilePick
-                                            .replaceAll('"', ''))
-                                .image,
-                            backgroundColor: Colors.black87,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  Divider(
-                    thickness: 2,
-                    color: Colors.black,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    height: context.width > 410
-                        ? context.height * 0.75
-                        : context.height * 0.73,
-                    width: 450,
-                    // color: Colors.amber,
-                    child: SingleChildScrollView(
-                      // scrollDirection: Axis.vertical,
-                      physics: BouncingScrollPhysics(),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20.0),
-                            child: Text(
-                              "Dashboard",
-                              style: TextStyle(
-                                fontSize: 35,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "Nunito",
+                    )
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Container(
+                        //   margin: EdgeInsets.only(top: 10),
+                        //   height: context.height * 0.09,
+                        //   width: context.width,
+                        //   color: Colors.white, //Color(0xff63c3fe),
+                        //   child:
+                        // SizedBox(
+                        //     height: 25,
+                        //     width: 25,
+                        //     // padding: const EdgeInsets.all(0.0),
+                        //     child: Image.asset(
+                        //       'assets/FB.png',
+                        //       fit: BoxFit.cover,
+                        //     ),
+                        //   ),
+                        // ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: context.height * 0.1,
+                              width: context.width * 0.8,
+                              // padding: const EdgeInsets.all(0.0),
+                              child: Image.asset(
+                                'assets/FB.png',
+                                fit: BoxFit.cover,
                               ),
                             ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(top: 20.0, left: 20),
-                            height: context.width > 410
-                                ? context.height * 0.15
-                                : context.height * 0.16,
-                            width: context.height * 0.35,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: Color.fromARGB(255, 23, 162, 184), //9ac3a1
-                              shape: BoxShape.rectangle,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey.shade300,
-                                    spreadRadius: 0.0,
-                                    blurRadius: 5,
-                                    offset: const Offset(3.0, 3.0)),
-                                const BoxShadow(
-                                    color: Colors.white,
-                                    spreadRadius: 2.0,
-                                    blurRadius: 2,
-                                    offset: Offset(-1.0, -1.0)),
-                                const BoxShadow(
-                                    color: Colors.white,
-                                    spreadRadius: 3.0,
-                                    blurRadius: 5 / 2,
-                                    offset: Offset(-1.0, -1.0)),
-                              ],
-                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 10,
+                              ),
+                              child: InkWell(
+                                onTap: () {
+                                  Get.to(ChangeProfilePicture());
+                                },
+                                child: CircleAvatar(
+                                  radius: 28,
+                                  child: dashController.profilePick == null &&
+                                          pick == "No Photo Available"
+                                      ? Icon(
+                                          Icons.add_a_photo_rounded,
+                                          size: 30,
+                                        )
+                                      : null,
+                                  backgroundImage: Image.network(
+                                          dashController.profilePick == null
+                                              ? pick.replaceAll('"', '')
+                                              : dashController.profilePick
+                                                  .replaceAll('"', ''))
+                                      .image,
+                                  backgroundColor: Colors.black87,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        Divider(
+                          thickness: 2,
+                          color: Colors.black,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          height: context.width > 410
+                              ? context.height * 0.75
+                              : context.height * 0.73,
+                          width: 450,
+                          // color: Colors.amber,
+                          child: SingleChildScrollView(
+                            // scrollDirection: Axis.vertical,
+                            physics: BouncingScrollPhysics(),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
-                                  padding:
-                                      EdgeInsets.only(top: 20.0, left: 20.0),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        "Last Logged in",
-                                        style: TextStyle(
-                                            fontFamily: "Nunito",
-                                            fontSize:
-                                                context.width > 410 ? 25 : 20,
-                                            color: Colors.white),
-                                      ),
-                                      // Obx(() => Text(
-                                      //       logController.date.value,
-                                      //       style: TextStyle(
-                                      //           fontFamily: "Nunito",
-                                      //           fontSize:
-                                      //               context.width > 410
-                                      //                   ? 20
-                                      //                   : 18,
-                                      //           color: Colors.white),
-                                      //     )),
-                                      // Obx(() => Text(
-                                      //       logController.time.value,
-                                      //       style: TextStyle(
-                                      //           fontFamily: "Nunito",
-                                      //           fontSize:
-                                      //               context.width > 410
-                                      //                   ? 20
-                                      //                   : 18,
-                                      //           color: Colors.white),
-                                      //     )),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                    ],
+                                  padding: const EdgeInsets.only(left: 20.0),
+                                  child: Text(
+                                    "Dashboard",
+                                    style: TextStyle(
+                                      fontSize: 35,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "Nunito",
+                                    ),
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 20.0, left: 20),
-                            height: context.height * 0.15,
-                            width: context.height * 0.35,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color:
-                                  Color.fromARGB(255, 111, 66, 193), //,be99c2
-                              shape: BoxShape.rectangle,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey.shade300,
-                                    spreadRadius: 0.0,
-                                    blurRadius: 5,
-                                    offset: const Offset(3.0, 3.0)),
-                                // BoxShadow(
-                                //     color: Colors.grey.shade400,
-                                //     spreadRadius: 0.0,
-                                //     blurRadius: 5 / 2.0,
-                                //     offset: const Offset(3.0, 3.0)),
-                                const BoxShadow(
-                                    color: Colors.white,
-                                    spreadRadius: 2.0,
-                                    blurRadius: 2,
-                                    offset: Offset(-1.0, -1.0)),
-                                const BoxShadow(
-                                    color: Colors.white,
-                                    spreadRadius: 3.0,
-                                    blurRadius: 5 / 2,
-                                    offset: Offset(-1.0, -1.0)),
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(top: 12.0, left: 20.0),
+                                Container(
+                                  margin: const EdgeInsets.only(
+                                      top: 20.0, left: 20),
+                                  height: context.width > 410
+                                      ? context.height * 0.15
+                                      : context.height * 0.16,
+                                  width: context.height * 0.35,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Color.fromARGB(
+                                        255, 23, 162, 184), //9ac3a1
+                                    shape: BoxShape.rectangle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey.shade300,
+                                          spreadRadius: 0.0,
+                                          blurRadius: 5,
+                                          offset: const Offset(3.0, 3.0)),
+                                      const BoxShadow(
+                                          color: Colors.white,
+                                          spreadRadius: 2.0,
+                                          blurRadius: 2,
+                                          offset: Offset(-1.0, -1.0)),
+                                      const BoxShadow(
+                                          color: Colors.white,
+                                          spreadRadius: 3.0,
+                                          blurRadius: 5 / 2,
+                                          offset: Offset(-1.0, -1.0)),
+                                    ],
+                                  ),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        "Last Test Taken",
-                                        style: TextStyle(
-                                            fontFamily: "Nunito",
-                                            fontSize:
-                                                context.width > 410 ? 25 : 20,
-                                            color: Colors.white),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            top: 20.0, left: 20.0),
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              "Last Logged in",
+                                              style: TextStyle(
+                                                  fontFamily: "Nunito",
+                                                  fontSize: context.width > 410
+                                                      ? 25
+                                                      : 20,
+                                                  color: Colors.white),
+                                            ),
+                                            // Obx(() => Text(
+                                            //       logController.date.value,
+                                            //       style: TextStyle(
+                                            //           fontFamily: "Nunito",
+                                            //           fontSize:
+                                            //               context.width > 410
+                                            //                   ? 20
+                                            //                   : 18,
+                                            //           color: Colors.white),
+                                            //     )),
+                                            // Obx(() => Text(
+                                            //       logController.time.value,
+                                            //       style: TextStyle(
+                                            //           fontFamily: "Nunito",
+                                            //           fontSize:
+                                            //               context.width > 410
+                                            //                   ? 20
+                                            //                   : 18,
+                                            //           color: Colors.white),
+                                            //     )),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      // Text(
-                                      //   dashController
-                                      //               .userCmeVideoLastTest!
-                                      //               .latest ==
-                                      //           null
-                                      //       ? " "
-                                      //       : dashController
-                                      //           .userCmeVideoLastTest!
-                                      //           .latest
-                                      //           .toString(),
-                                      //   style: TextStyle(
-                                      //       fontFamily: "Nunito",
-                                      //       fontSize: context.width > 410
-                                      //           ? 20
-                                      //           : 18,
-                                      //       color: Colors.white),
-                                      // ),
                                     ],
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 20.0, left: 20),
-                            height: context.height * 0.15,
-                            width: context.height * 0.35,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color:
-                                  Color.fromARGB(255, 28, 175, 154), //,c1bc9b
-                              shape: BoxShape.rectangle,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey.shade300,
-                                    spreadRadius: 0.0,
-                                    blurRadius: 5,
-                                    offset: const Offset(3.0, 3.0)),
-                                // BoxShadow(
-                                //     color: Colors.grey.shade400,
-                                //     spreadRadius: 0.0,
-                                //     blurRadius: 5 / 2.0,
-                                //     offset: const Offset(3.0, 3.0)),
-                                const BoxShadow(
-                                    color: Colors.white,
-                                    spreadRadius: 2.0,
-                                    blurRadius: 2,
-                                    offset: Offset(-1.0, -1.0)),
-                                const BoxShadow(
-                                    color: Colors.white,
-                                    spreadRadius: 3.0,
-                                    blurRadius: 5 / 2,
-                                    offset: Offset(-1.0, -1.0)),
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(top: 15.0, left: 20.0),
+                                Container(
+                                  margin: EdgeInsets.only(top: 20.0, left: 20),
+                                  height: context.height * 0.15,
+                                  width: context.height * 0.35,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Color.fromARGB(
+                                        255, 111, 66, 193), //,be99c2
+                                    shape: BoxShape.rectangle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey.shade300,
+                                          spreadRadius: 0.0,
+                                          blurRadius: 5,
+                                          offset: const Offset(3.0, 3.0)),
+                                      // BoxShadow(
+                                      //     color: Colors.grey.shade400,
+                                      //     spreadRadius: 0.0,
+                                      //     blurRadius: 5 / 2.0,
+                                      //     offset: const Offset(3.0, 3.0)),
+                                      const BoxShadow(
+                                          color: Colors.white,
+                                          spreadRadius: 2.0,
+                                          blurRadius: 2,
+                                          offset: Offset(-1.0, -1.0)),
+                                      const BoxShadow(
+                                          color: Colors.white,
+                                          spreadRadius: 3.0,
+                                          blurRadius: 5 / 2,
+                                          offset: Offset(-1.0, -1.0)),
+                                    ],
+                                  ),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        "Lastest Video Uploaded",
-                                        style: TextStyle(
-                                            fontFamily: "Nunito",
-                                            fontSize:
-                                                context.width > 410 ? 25 : 20,
-                                            color: Colors.white),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            top: 12.0, left: 20.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Last Test Taken",
+                                              style: TextStyle(
+                                                  fontFamily: "Nunito",
+                                                  fontSize: context.width > 410
+                                                      ? 25
+                                                      : 20,
+                                                  color: Colors.white),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            // Text(
+                                            //   dashController
+                                            //               .userCmeVideoLastTest!
+                                            //               .latest ==
+                                            //           null
+                                            //       ? " "
+                                            //       : dashController
+                                            //           .userCmeVideoLastTest!
+                                            //           .latest
+                                            //           .toString(),
+                                            //   style: TextStyle(
+                                            //       fontFamily: "Nunito",
+                                            //       fontSize: context.width > 410
+                                            //           ? 20
+                                            //           : 18,
+                                            //       color: Colors.white),
+                                            // ),
+                                          ],
+                                        ),
                                       ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      // Text(
-                                      //   dashController.userCmeVideo!
-                                      //               .latest ==
-                                      //           null
-                                      //       ? ""
-                                      //       : dashController
-                                      //           .userCmeVideo!.latest
-                                      //           .toString(),
-                                      //   style: TextStyle(
-                                      //       fontFamily: "Nunito",
-                                      //       fontSize: context.width > 410
-                                      //           ? 25
-                                      //           : 20,
-                                      //       color: Colors.white),
-                                      // )
                                     ],
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 20.0, left: 20),
-                            height: context.height * 0.15,
-                            width: context.height * 0.35,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color:
-                                  Color.fromARGB(255, 8, 102, 198), //,c1bc9b,
-                              shape: BoxShape.rectangle,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey.shade300,
-                                    spreadRadius: 0.0,
-                                    blurRadius: 5,
-                                    offset: const Offset(3.0, 3.0)),
-                                // BoxShadow(
-                                //     color: Colors.grey.shade400,
-                                //     spreadRadius: 0.0,
-                                //     blurRadius: 5 / 2.0,
-                                //     offset: const Offset(3.0, 3.0)),
-                                const BoxShadow(
-                                    color: Colors.white,
-                                    spreadRadius: 2.0,
-                                    blurRadius: 2,
-                                    offset: Offset(-1.0, -1.0)),
-                                const BoxShadow(
-                                    color: Colors.white,
-                                    spreadRadius: 3.0,
-                                    blurRadius: 5 / 2,
-                                    offset: Offset(-1.0, -1.0)),
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(top: 15.0, left: 20.0),
+                                Container(
+                                  margin: EdgeInsets.only(top: 20.0, left: 20),
+                                  height: context.height * 0.15,
+                                  width: context.height * 0.35,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Color.fromARGB(
+                                        255, 28, 175, 154), //,c1bc9b
+                                    shape: BoxShape.rectangle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey.shade300,
+                                          spreadRadius: 0.0,
+                                          blurRadius: 5,
+                                          offset: const Offset(3.0, 3.0)),
+                                      // BoxShadow(
+                                      //     color: Colors.grey.shade400,
+                                      //     spreadRadius: 0.0,
+                                      //     blurRadius: 5 / 2.0,
+                                      //     offset: const Offset(3.0, 3.0)),
+                                      const BoxShadow(
+                                          color: Colors.white,
+                                          spreadRadius: 2.0,
+                                          blurRadius: 2,
+                                          offset: Offset(-1.0, -1.0)),
+                                      const BoxShadow(
+                                          color: Colors.white,
+                                          spreadRadius: 3.0,
+                                          blurRadius: 5 / 2,
+                                          offset: Offset(-1.0, -1.0)),
+                                    ],
+                                  ),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        "Last Video Purchased",
-                                        style: TextStyle(
-                                            fontFamily: "Nunito",
-                                            fontSize:
-                                                context.width > 410 ? 25 : 20,
-                                            color: Colors.white),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            top: 15.0, left: 20.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Lastest Video Uploaded",
+                                              style: TextStyle(
+                                                  fontFamily: "Nunito",
+                                                  fontSize: context.width > 410
+                                                      ? 25
+                                                      : 20,
+                                                  color: Colors.white),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            // Text(
+                                            //   dashController.userCmeVideo!
+                                            //               .latest ==
+                                            //           null
+                                            //       ? ""
+                                            //       : dashController
+                                            //           .userCmeVideo!.latest
+                                            //           .toString(),
+                                            //   style: TextStyle(
+                                            //       fontFamily: "Nunito",
+                                            //       fontSize: context.width > 410
+                                            //           ? 25
+                                            //           : 20,
+                                            //       color: Colors.white),
+                                            // )
+                                          ],
+                                        ),
                                       ),
-                                      SizedBox(
-                                        height: 10,
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 20.0, left: 20),
+                                  height: context.height * 0.15,
+                                  width: context.height * 0.35,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Color.fromARGB(
+                                        255, 8, 102, 198), //,c1bc9b,
+                                    shape: BoxShape.rectangle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey.shade300,
+                                          spreadRadius: 0.0,
+                                          blurRadius: 5,
+                                          offset: const Offset(3.0, 3.0)),
+                                      // BoxShadow(
+                                      //     color: Colors.grey.shade400,
+                                      //     spreadRadius: 0.0,
+                                      //     blurRadius: 5 / 2.0,
+                                      //     offset: const Offset(3.0, 3.0)),
+                                      const BoxShadow(
+                                          color: Colors.white,
+                                          spreadRadius: 2.0,
+                                          blurRadius: 2,
+                                          offset: Offset(-1.0, -1.0)),
+                                      const BoxShadow(
+                                          color: Colors.white,
+                                          spreadRadius: 3.0,
+                                          blurRadius: 5 / 2,
+                                          offset: Offset(-1.0, -1.0)),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            top: 15.0, left: 20.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Last Video Purchased",
+                                              style: TextStyle(
+                                                  fontFamily: "Nunito",
+                                                  fontSize: context.width > 410
+                                                      ? 25
+                                                      : 20,
+                                                  color: Colors.white),
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            // Text(
+                                            //   dashController
+                                            //               .userCmeVideoPurchese!
+                                            //               .latest ==
+                                            //           null
+                                            //       ? " "
+                                            //       : dashController
+                                            //           .userCmeVideoPurchese!
+                                            //           .latest
+                                            //           .toString(),
+                                            //   style: TextStyle(
+                                            //       fontFamily: "Nunito",
+                                            //       fontSize: context.width > 410
+                                            //           ? 25
+                                            //           : 20,
+                                            //       color: Colors.white),
+                                            // ),
+                                          ],
+                                        ),
                                       ),
-                                      // Text(
-                                      //   dashController
-                                      //               .userCmeVideoPurchese!
-                                      //               .latest ==
-                                      //           null
-                                      //       ? " "
-                                      //       : dashController
-                                      //           .userCmeVideoPurchese!
-                                      //           .latest
-                                      //           .toString(),
-                                      //   style: TextStyle(
-                                      //       fontFamily: "Nunito",
-                                      //       fontSize: context.width > 410
-                                      //           ? 25
-                                      //           : 20,
-                                      //       color: Colors.white),
-                                      // ),
                                     ],
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
             ),
             // bottomNavigationBar:
             //     BottomNavigationBar(items: <BottomNavigationBarItem>[

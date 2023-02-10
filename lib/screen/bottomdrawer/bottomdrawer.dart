@@ -111,9 +111,9 @@ class _BottomDrawerState extends State<BottomDrawer> {
                         color: Colors.white,
                       ),
                       Container(
-                        height: context.width > 410
-                            ? context.height * 0.9
-                            : context.height * 0.75,
+                        // height: context.width > 410
+                        //     ? context.height * 0.9
+                        //     : context.height * 0.70,
                         child: SingleChildScrollView(
                           controller: controller,
                           // reverse: true,
@@ -143,136 +143,6 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                 Get.back();
                               },
                             ),
-                            // Theme(
-                            //   data: Theme.of(context).copyWith(
-                            //     unselectedWidgetColor:
-                            //         Colors.white, // here for close state
-                            //     colorScheme: ColorScheme.light(
-                            //       primary: Colors.white,
-                            //     ), // here for open state in replacement of deprecated accentColor
-                            //     dividerColor: Colors
-                            //         .transparent, // if you want to remove the border
-                            //   ),
-                            //   child: ExpansionTile(
-                            //     leading: SizedBox(
-                            //       height: 25,
-                            //       width: 22,
-                            //       // padding: const EdgeInsets.all(0.0),
-                            //       child: Image.asset(
-                            //         'assets/Untitled.png',
-                            //         // height: 15,
-                            //         fit: BoxFit.cover,
-                            //       ),
-                            //     ),
-                            //     title: Text(
-                            //       "Profile",
-                            //       style: TextStyle(
-                            //         fontSize: 18,
-                            //         fontFamily: "Nunito",
-                            //         fontWeight: FontWeight.bold,
-                            //         color: Colors.white,
-                            //       ),
-                            //     ),
-                            //     children: [
-                            //       Container(
-                            //         margin: EdgeInsets.only(left: 60),
-                            //         height: 110,
-                            //         width: 250,
-                            //         // color: Colors.amber,
-                            //         decoration: BoxDecoration(
-                            //             borderRadius:
-                            //                 BorderRadius.circular(10.0),
-                            //             border:
-                            //                 Border.all(color: Colors.white)),
-                            //         child: Column(
-                            //           children: [
-                            //             InkWell(
-                            //               onTap: () {
-                            //                 Get.to(Memberdetail());
-                            //               },
-                            //               child: Padding(
-                            //                 padding: const EdgeInsets.only(
-                            //                     left: 20.0, top: 15),
-                            //                 child: Row(
-                            //                   children: [
-                            //                     SizedBox(
-                            //                       height: 22,
-                            //                       width: 22,
-                            //                       // padding: const EdgeInsets.all(0.0),
-                            //                       child: Image.asset(
-                            //                         'assets/ff.png',
-                            //                         fit: BoxFit.cover,
-                            //                       ),
-                            //                     ),
-                            //                     SizedBox(
-                            //                       width: 20,
-                            //                     ),
-                            //                     Padding(
-                            //                       padding:
-                            //                           const EdgeInsets.only(
-                            //                               top: 5.0),
-                            //                       child: Text(
-                            //                         "Members Details",
-                            //                         style: TextStyle(
-                            //                           fontFamily: "Nunito",
-                            //                           fontSize: 18,
-                            //                           fontWeight:
-                            //                               FontWeight.w500,
-                            //                           color: Colors.white,
-                            //                         ),
-                            //                       ),
-                            //                     ),
-                            //                   ],
-                            //                 ),
-                            //               ),
-                            //             ),
-                            //             InkWell(
-                            //               onTap: () {
-                            //                 Get.to(EducationDetailsScreen());
-                            //               },
-                            //               child: Padding(
-                            //                 padding: const EdgeInsets.only(
-                            //                     left: 20.0, top: 15),
-                            //                 child: Row(
-                            //                   children: [
-                            //                     SizedBox(
-                            //                       height: 22,
-                            //                       width: 22,
-                            //                       // padding: const EdgeInsets.all(0.0),
-                            //                       child:
-                            //                        Image.asset(
-                            //                         'assets/ed.png',
-                            //                         fit: BoxFit.cover,
-                            //                       ),
-                            //                     ),
-                            //                     SizedBox(
-                            //                       width: 20,
-                            //                     ),
-                            //                     Padding(
-                            //                       padding:
-                            //                           const EdgeInsets.only(
-                            //                               top: 5.0),
-                            //                       child: Text(
-                            //                         "Education Details",
-                            //                         style: TextStyle(
-                            //                           fontFamily: "Nunito",
-                            //                           fontSize: 18,
-                            //                           fontWeight:
-                            //                               FontWeight.w500,
-                            //                           color: Colors.white,
-                            //                         ),
-                            //                       ),
-                            //                     ),
-                            //                   ],
-                            //                 ),
-                            //               ),
-                            //             ),
-                            //           ],
-                            //         ),
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
                             Visibility(
                               visible: bdrawerController.visibledrop,
                               child: Container(
@@ -691,46 +561,6 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                             ),
                                           ),
                                         ),
-                                        // InkWell(
-                                        //   onTap: () {
-                                        //     Get.to(PaymentDetails());
-                                        //   },
-                                        //   child: Padding(
-                                        //     padding: const EdgeInsets.only(
-                                        //         left: 20.0, top: 15),
-                                        //     child: Row(
-                                        //       children: [
-                                        //         SizedBox(
-                                        //           height: 22,
-                                        //           width: 22,
-                                        //           // padding: const EdgeInsets.all(0.0),
-                                        //           child: Image.asset(
-                                        //             'assets/ed.png',
-                                        //             fit: BoxFit.cover,
-                                        //           ),
-                                        //         ),
-                                        //         SizedBox(
-                                        //           width: 20,
-                                        //         ),
-                                        //         Padding(
-                                        //           padding:
-                                        //               const EdgeInsets.only(
-                                        //                   top: 5.0),
-                                        //           child: Text(
-                                        //             "Receipts",
-                                        //             style: TextStyle(
-                                        //               fontFamily: "Nunito",
-                                        //               fontSize: 19,
-                                        //               fontWeight:
-                                        //                   FontWeight.w500,
-                                        //               color: Colors.white,
-                                        //             ),
-                                        //           ),
-                                        //         ),
-                                        //       ],
-                                        //     ),
-                                        //   ),
-                                        // ),
                                       ],
                                     ),
                                   ),
@@ -739,9 +569,6 @@ class _BottomDrawerState extends State<BottomDrawer> {
                             ),
                             ListTile(
                               onTap: () async {
-                                // SharedPreferences sessionlog =
-                                //     await SharedPreferences.getInstance();
-
                                 Get.defaultDialog(
                                   title: 'Are you sure',
                                   titleStyle: TextStyle(
@@ -835,20 +662,21 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
-                            context.width > 410
-                                ? SizedBox(
-                                    height: bdrawerController.visibledrop
-                                        ? context.height * 0.05
-                                        : context.height * 0.2,
-                                  )
-                                : SizedBox(
-                                    height: bdrawerController.visibledrop
-                                        ? context.height * 0.0
-                                        : context.height * 0.0,
-                                  ),
+                            // context.width > 410
+                            //     ? SizedBox(
+                            //         height: bdrawerController.visibledrop
+                            //             ? context.height * 0.01
+                            //             : context.height * 0.2,
+                            //       )
+                            //     : SizedBox(
+                            //         height: bdrawerController.visibledrop
+                            //             ? context.height * 0.0
+                            //             : context.height * 0.0,
+                            //       ),
                           ]),
                         ),
                       ),
+                      Spacer(),
                       Center(
                           child: Text(
                         "Copyright @ 2022 All Right Received",
@@ -883,6 +711,9 @@ class _BottomDrawerState extends State<BottomDrawer> {
                             ),
                           ),
                         ),
+                      ),
+                      SizedBox(
+                        height: 15,
                       )
                     ],
                   ),

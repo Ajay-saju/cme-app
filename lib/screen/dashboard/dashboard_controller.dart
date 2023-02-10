@@ -117,7 +117,6 @@ class DashboardController extends GetxController {
     }
   }
 
-  
 // ****User Education details****
   Rx<GetEduDEtails> eduList = GetEduDEtails().obs;
   Future<GetEduDEtails?> getEduList() async {
@@ -166,7 +165,6 @@ class DashboardController extends GetxController {
     update();
   }
 
-
 //*** Education list for add update education data */
 
   List<UniversityList>? universityList = [];
@@ -190,7 +188,6 @@ class DashboardController extends GetxController {
       }
     } catch (e) {}
   }
-
 
   //*** Dash board data */
 
@@ -255,6 +252,7 @@ class DashboardController extends GetxController {
           queryParameters: {
             "CategoryId": sessionlog.getString('catId').toString()
           });
+      print(responseUserCme_video.toString());
       if (responseUserCme_video.statusCode == 200) {
         userCmeVideo =
             UserCmeVideo.fromJson(jsonDecode(responseUserCme_video.data));

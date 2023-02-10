@@ -7,6 +7,10 @@ class ProfileTabController extends GetxController {
   final memName = TextEditingController();
   final memPhoneno = TextEditingController();
   final memCouncilno = TextEditingController();
-  final memCouncilName= TextEditingController();
-   bool isEditable = false;
+  final memCouncilName = TextEditingController();
+  var isEditable = false.obs;
+  bool isReadOnly = true;
+  bool isReadOnly1 = true;
+  bool isReadOnly2 = true;
+  bool isReadOnly3 = true;
 }

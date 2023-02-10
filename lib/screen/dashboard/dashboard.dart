@@ -33,9 +33,6 @@ class _DashboardState extends State<Dashboard> {
     super.initState();
     indexChaingeNotifier = ValueNotifier(0);
     dashboardController.getUserData(sessionlog.getString('userId').toString());
-    // dashboardController.getDashboardData();
-    dashboardController.getUserCmeVideo();
-    // dashboardController.getUserCmeVideoPurchese();
     dashboardController.getUserProfilePick();
     dashboardController.getRecieptList();
     dashboardController.getCmeList();
@@ -140,29 +137,23 @@ class _DashboardState extends State<Dashboard> {
             key: DashboardController.drawerKey,
             drawer: const BottomDrawer(),
             body: SafeArea(
-              child:
-                  //  dashboardController.userCmeVideoPurchese == null &&
-                  // dashboardController.userCmeVideo == null &&
-                  // dashboardController.userCmeVideoLastTest == null &&
-                  // dashboardController.profilePick == null
-                  // ?
-                  //  Center(
-                  //     child: CircularProgressIndicator(
-                  //       color: Colors.black87,
-                  //       strokeWidth: 1.5,
-                  //     ),
-                  //   )
-                  // :
-                  Stack(
-                // index: dashboardController.tabIndex,
-                children: [
-                  ValueListenableBuilder(
-                      valueListenable: indexChaingeNotifier,
-                      builder: (context, int index, _) {
-                        return screens[index];
-                      })
-                ],
-              ),
+              child: dashboardController.getUserDetails.value.loginName == null
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.black87,
+                        strokeWidth: 1.5,
+                      ),
+                    )
+                  : Stack(
+                      // index: dashboardController.tabIndex,
+                      children: [
+                        ValueListenableBuilder(
+                            valueListenable: indexChaingeNotifier,
+                            builder: (context, int index, _) {
+                              return screens[index];
+                            })
+                      ],
+                    ),
             ),
             bottomNavigationBar: ValueListenableBuilder(
                 valueListenable: indexChaingeNotifier,
