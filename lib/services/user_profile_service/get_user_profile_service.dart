@@ -16,8 +16,13 @@ class GetUserDetailsService {
   Future<Response> getUserProfile(String mid) async {
     try {
       print('working...............');
-      Response response =
-          await dio.get('getpersonaldetails', queryParameters: {"Mid": mid});
+      Response response = await dio.get('getpersonaldetails', queryParameters: {
+        "memberid": mid,
+        'countryId': 1,
+        'stateId': 2,
+        'councilId': 2
+      });
+      print(response.toString());
       return response;
     } on DioError catch (e) {
       print(e.message);

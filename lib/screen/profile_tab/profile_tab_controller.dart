@@ -8,5 +8,5 @@ class ProfileTabController extends GetxController {
   final memPhoneno = TextEditingController();
   final memCouncilno = TextEditingController();
   final memCouncilName= TextEditingController();
-   bool isObscure = true;
+   bool isEditable = false;
 }

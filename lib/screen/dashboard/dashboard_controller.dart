@@ -1,23 +1,17 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/base_api/orginal_api.dart';
-import 'package:hslr/models/all_cme_video_model.dart';
 import 'package:hslr/models/dashboard_data_models.dart';
 import 'package:hslr/models/get_eduid_list.model.dart';
 import 'package:hslr/models/get_reciepts.dart';
 import 'package:hslr/models/user_details.dart';
-import 'package:hslr/screen/dashboard/dashboard.dart';
-import 'package:hslr/screen/home.dart/home.dart';
 import 'package:hslr/screen/profile_tab/profile_tab.dart';
-import 'package:hslr/services/all_cme_video_service.dart';
 import 'package:hslr/services/get_eduid_list_servise.dart';
 import 'package:hslr/services/user_profile_service/get_user_profile_service.dart';
 import 'package:hslr/services/user_progile_pick_service.dart';
-
 import '../../main.dart';
 import '../../models/get_cme_list_model.dart';
 import '../../models/get_edu_details_model.dart';
@@ -123,10 +117,9 @@ class DashboardController extends GetxController {
     }
   }
 
-  void iconChange() {}
-
+  
+// ****User Education details****
   Rx<GetEduDEtails> eduList = GetEduDEtails().obs;
-
   Future<GetEduDEtails?> getEduList() async {
     print('working education list...');
     final ediListService = EducationDetalsServ();
@@ -143,6 +136,7 @@ class DashboardController extends GetxController {
     }
   }
 
+  //*** user Profile picture */
   var profilePick;
   Future getUserProfilePick() async {
     final proPicService = UserPickService();
@@ -172,6 +166,9 @@ class DashboardController extends GetxController {
     update();
   }
 
+
+//*** Education list for add update education data */
+
   List<UniversityList>? universityList = [];
   List<CollegeList>? collegeList = [];
   List<SpecialtyList>? courseList = [];
@@ -193,6 +190,9 @@ class DashboardController extends GetxController {
       }
     } catch (e) {}
   }
+
+
+  //*** Dash board data */
 
   UserCmeVideo? userCmeVideo;
   UserCmeVideoPurchese? userCmeVideoPurchese;

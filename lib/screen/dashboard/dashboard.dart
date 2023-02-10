@@ -5,7 +5,6 @@ import 'package:hslr/main.dart';
 import 'package:hslr/screen/bottomdrawer/bottomdrawer.dart';
 import 'package:hslr/screen/dashboard/dashboard_controller.dart';
 import 'package:hslr/screen/home.dart/home.dart';
-import 'package:hslr/screen/login/login_controller.dart';
 import 'package:hslr/screen/profile_tab/profile_tab.dart';
 
 ValueNotifier<int> indexChaingeNotifier = ValueNotifier(0);
@@ -26,7 +25,7 @@ class _DashboardState extends State<Dashboard> {
   ];
   DashboardController dashboardController = Get.put(DashboardController());
   // final logCOntroller = Get.find<LoginController>();
-  static final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+  // static final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 
   @override
   void initState() {
@@ -34,9 +33,9 @@ class _DashboardState extends State<Dashboard> {
     super.initState();
     indexChaingeNotifier = ValueNotifier(0);
     dashboardController.getUserData(sessionlog.getString('userId').toString());
-    dashboardController.getDashboardData();
+    // dashboardController.getDashboardData();
     dashboardController.getUserCmeVideo();
-    dashboardController.getUserCmeVideoPurchese();
+    // dashboardController.getUserCmeVideoPurchese();
     dashboardController.getUserProfilePick();
     dashboardController.getRecieptList();
     dashboardController.getCmeList();
@@ -141,26 +140,29 @@ class _DashboardState extends State<Dashboard> {
             key: DashboardController.drawerKey,
             drawer: const BottomDrawer(),
             body: SafeArea(
-              child: dashboardController.userCmeVideoPurchese == null &&
-                      dashboardController.userCmeVideo == null &&
-                      dashboardController.userCmeVideoLastTest == null &&
-                      dashboardController.profilePick == null
-                  ? Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.black87,
-                        strokeWidth: 1.5,
-                      ),
-                    )
-                  : Stack(
-                      // index: dashboardController.tabIndex,
-                      children: [
-                        ValueListenableBuilder(
-                            valueListenable: indexChaingeNotifier,
-                            builder: (context, int index, _) {
-                              return screens[index];
-                            })
-                      ],
-                    ),
+              child:
+                  //  dashboardController.userCmeVideoPurchese == null &&
+                  // dashboardController.userCmeVideo == null &&
+                  // dashboardController.userCmeVideoLastTest == null &&
+                  // dashboardController.profilePick == null
+                  // ?
+                  //  Center(
+                  //     child: CircularProgressIndicator(
+                  //       color: Colors.black87,
+                  //       strokeWidth: 1.5,
+                  //     ),
+                  //   )
+                  // :
+                  Stack(
+                // index: dashboardController.tabIndex,
+                children: [
+                  ValueListenableBuilder(
+                      valueListenable: indexChaingeNotifier,
+                      builder: (context, int index, _) {
+                        return screens[index];
+                      })
+                ],
+              ),
             ),
             bottomNavigationBar: ValueListenableBuilder(
                 valueListenable: indexChaingeNotifier,

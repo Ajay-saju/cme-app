@@ -32,6 +32,7 @@ class DialogHelper {
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: Container(
+              // height: 00,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(10))),
               child: Column(
@@ -42,7 +43,7 @@ class DialogHelper {
                     strokeWidth: 2.5,
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 10,
                   ),
                   Text(
                     message ?? "Loading...",

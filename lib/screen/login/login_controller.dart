@@ -6,14 +6,10 @@ import 'package:hslr/main.dart';
 import 'package:hslr/models/user_details.dart';
 import 'package:hslr/screen/dashboard/dashboard.dart';
 import 'package:hslr/screen/loading_class/loading_class.dart';
-import 'package:hslr/services/last_login_service/last_login_service.dart';
 import 'package:hslr/services/user_login_servise.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert' as convert;
 import 'dart:developer' as dp;
 import '../../models/user_login_model.dart';
-import '../../services/user_profile_service/get_user_profile_service.dart';
-import '../../services/user_progile_pick_service.dart';
 
 class LoginController extends GetxController {
   final GlobalKey<FormState> regformkey = GlobalKey<FormState>();
@@ -57,8 +53,6 @@ class LoginController extends GetxController {
   ];
 
   DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
-    
-    
         value: item,
         child: Text(
           item,
@@ -117,6 +111,7 @@ class LoginController extends GetxController {
     final userLoginService = UserLoginService();
 
     try {
+      DialogHelper.showLoading();
       final response =
           await userLoginService.userLogin(mobileNo, pin, categoryId);
       print(response.toString());
@@ -124,15 +119,12 @@ class LoginController extends GetxController {
       // var jsonFile = convert.jsonDecode(response.data);
 
       if (response.statusCode == 200 && response.data != "User Doesn't Exist") {
-        DialogHelper.hideLoading();
-
         userLogin.value = UserLogin.fromJson(response.data);
         print(userLogin.value.userId.toString());
 
         await sessionlog.setString('userId', userLogin.value.userId.toString());
         var mid = await sessionlog.getString('userId');
         // await getUserData(mid!);
-
         await sessionlog.setString(
             'councilId', userLogin.value.councilId.toString());
         await sessionlog.setString(
@@ -142,12 +134,15 @@ class LoginController extends GetxController {
             'catId', userLogin.value.categoryId.toString());
         await sessionlog.setInt('country', userLogin.value.countryId!);
         if (mid != null) {
+          DialogHelper.hideLoading();
           await Get.offAll(Dashboard());
         }
       } else if (response.data == "User Doesn't Exist") {
+        DialogHelper.hideLoading();
         isfade = true;
         Get.defaultDialog(
-            title: 'Something is wrong',
+            barrierDismissible: true,
+            title: 'Something is wrong fucku',
             middleText:
                 "User Doesn't Exist, Please enter valid phone number and pin number",
             middleTextStyle: TextStyle(
@@ -161,13 +156,16 @@ class LoginController extends GetxController {
               color: Colors.black87,
               fontSize: 18,
               fontWeight: FontWeight.bold,
-            ));
+            ),
+            actions: []);
       }
     } catch (e) {
       if (e is DioError) {
+        DialogHelper.hideLoading();
         print(e.toString());
         isfade = true;
         Get.defaultDialog(
+            barrierDismissible: true,
             title: 'Something is wrong',
             middleText: "Please try again",
             middleTextStyle: TextStyle(
@@ -181,7 +179,8 @@ class LoginController extends GetxController {
               color: Colors.black87,
               fontSize: 18,
               fontWeight: FontWeight.bold,
-            ));
+            ),
+            actions: [OkButton.okButton('Ok')]);
       }
       return null;
     }
@@ -230,31 +229,31 @@ class LoginController extends GetxController {
   //   return null;
   // }
 
-  getUserLastLogin(mId) async {
-    final userLastLoginService = UserLastLoginService();
+  // getUserLastLogin(mId) async {
+  //   final userLastLoginService = UserLastLoginService();
 
-    try {
-      final response = await userLastLoginService.getUserLastLoginData(mId);
-      // var jsonFile = jsonDecode(response.data);po
-      if (response.statusCode == 200) {
-        dp.log(response.data);
-        // var jsonFile = convert.jsonDecode(response.data[0]);
-        final splitted = response.data.split('T');
-        print(splitted.toString());
-        print(splitted[0].toString());
-        print(splitted[1].toString());
-        date.value = splitted[0].toString();
-        time.value = splitted[1].toString();
-        print(date.value);
-        print(time.value);
-      }
-    } catch (e) {
-      if (e is DioError) {
-        print(e.toString());
-      }
-    }
-    update();
-  }
+  //   try {
+  //     final response = await userLastLoginService.getUserLastLoginData(mId);
+  //     // var jsonFile = jsonDecode(response.data);po
+  //     if (response.statusCode == 200) {
+  //       dp.log(response.data);
+  //       // var jsonFile = convert.jsonDecode(response.data[0]);
+  //       final splitted = response.data.split('T');
+  //       print(splitted.toString());
+  //       print(splitted[0].toString());
+  //       print(splitted[1].toString());
+  //       date.value = splitted[0].toString();
+  //       time.value = splitted[1].toString();
+  //       print(date.value);
+  //       print(time.value);
+  //     }
+  //   } catch (e) {
+  //     if (e is DioError) {
+  //       print(e.toString());
+  //     }
+  //   }
+  //   update();
+  // }
 
   int selectCategoryId(dropvalue) {
     var choice = dropvalue;
@@ -273,4 +272,12 @@ class LoginController extends GetxController {
     }
     return value;
   }
+}
+
+class OkButton {
+  static ElevatedButton okButton(String text) => ElevatedButton(
+      onPressed: () {
+        Get.back();
+      },
+      child: Text(text));
 }
