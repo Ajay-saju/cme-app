@@ -9,7 +9,7 @@ class ProfileTabController extends GetxController {
   final memCouncilno = TextEditingController();
   final memCouncilName = TextEditingController();
   var isEditable = false.obs;
-  bool isReadOnly = true;
+  bool isReadOnly = false;
   bool isReadOnly1 = true;
   bool isReadOnly2 = true;
   bool isReadOnly3 = true;

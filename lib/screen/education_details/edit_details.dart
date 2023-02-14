@@ -28,19 +28,26 @@ class _EditEduDetailsState extends State<EditEduDetails> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    eduController.collegeController.text =
+        dashControll.eduList.value.result![widget.index].cOLLEGE.toString();
+    eduController.universityController.text =
+        dashControll.eduList.value.result![widget.index].uNIVERSITY.toString();
+    eduController.degreeController.text =
+        dashControll.eduList.value.result![widget.index].dEGREE.toString();
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    eduController.degreeController.clear();
-    eduController.universityController.clear();
-    eduController.collegeController.clear();
+    // eduController.degreeController.clear();
+    // eduController.universityController.clear();
+    // eduController.collegeController.clear();
   }
 
   @override
   Widget build(BuildContext context) {
+    print(eduController.universityController.toString());
     return GetBuilder<EducationController>(builder: ((_) {
       return GestureDetector(
         onTap: () {
@@ -103,13 +110,7 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                       SizedBox(
                         height: 20,
                       ),
-                      // costomeDropDown(
-                      //   item: eduController.degree!,
-                      //   items: eduController.degreeItem,
-                      // ),
-
                       Form(
-                          // key: eduController.editEduFormKey,
                           child: Column(
                         children: [
                           Padding(
@@ -130,12 +131,19 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                       borderRadius: BorderRadius.circular(10),
                                       border:
                                           Border.all(color: Colors.black87)),
-                                  child: TypeAheadField(
+                                  child: TypeAheadFormField(
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return eduController
+                                              .degreeController.text;
+                                        }
+                                      },
                                       hideOnError: true,
                                       hideSuggestionsOnKeyboardHide: false,
                                       hideKeyboardOnDrag: true,
                                       textFieldConfiguration:
                                           TextFieldConfiguration(
+
                                               // cursorHeight: 20,
                                               cursorColor: Colors.black87,
                                               decoration: new InputDecoration(
@@ -150,12 +158,7 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                                     bottom: 11,
                                                     top: 11,
                                                     right: 15),
-                                                hintText: dashControll
-                                                    .eduList
-                                                    .value
-                                                    .result![widget.index]
-                                                    .dEGREE
-                                                    .toString(),
+                                                hintText: 'Select Course',
                                               ),
                                               controller: eduController
                                                   .degreeController),
@@ -186,126 +189,10 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                               ],
                             ),
                           ),
-
-                          // customeDropDownTextCource(
-                          //     context: context,
-                          //     hintText: dashControll
-                          //         .eduList.value.result![widget.index].dEGREE
-                          //         .toString(),
-                          //     item:
-                          //         eduController.specialtyList[0].specialtyName,
-                          //     text: 'Degree',
-                          //     items: eduController.specialtyList),
-                          // customeDropDownText(
-                          //   context: context,
-                          //   hintText: dashControll.eduList.value.result![widget.index].dEGREE.toString(),
-                          //   item: eduController.degree,
-                          //   items: eduController.universityList!,
-                          //   text: 'Degree',
-                          // ),
+                          
                           SizedBox(
-                            height: 15,
+                            height: 25,
                           ),
-                          // customeDropDownTextMonth(
-                          //     context: context,
-                          //     hintText: dashControll.eduList.value
-                          //         .result![widget.index].yEAROFPASSING
-                          //         .toString()
-                          //         .split(' ')[0],
-                          //     item: eduController.month,
-                          //     items: eduController.months,
-                          //     text: 'Year Of\nPassing'),
-                          // customeDropDownText(
-                          //   context: context,
-                          //   hintText: 'February',
-                          //   item: eduController.month,
-                          //   items: eduController.months,
-                          //   text: 'Yearof\nPassing',
-                          // ),
-                          // SizedBox(
-                          //   height: 15,
-                          // ),
-                          // Padding(
-                          //   padding: const EdgeInsets.symmetric(horizontal: 15),
-                          //   child: Row(
-                          //     children: [
-                          //       Spacer(),
-                          //       Container(
-                          //         width: context.width * 0.55,
-                          //         child: DropdownButtonFormField(
-                          //             validator: (value) => value == null
-                          //                 ? 'field required'
-                          //                 : null,
-                          //             itemHeight: null,
-                          //             isExpanded: true,
-                          //             decoration: InputDecoration(
-                          //               contentPadding:
-                          //                   EdgeInsets.symmetric(horizontal: 7),
-                          //               border: OutlineInputBorder(
-                          //                 borderRadius:
-                          //                     BorderRadius.circular(10.0),
-                          //                 borderSide: const BorderSide(
-                          //                     color: Colors.black),
-                          //               ),
-                          //               enabledBorder: OutlineInputBorder(
-                          //                 borderRadius:
-                          //                     BorderRadius.circular(10.0),
-                          //                 borderSide: const BorderSide(
-                          //                     color: Colors.black),
-                          //               ),
-                          //               errorBorder: OutlineInputBorder(
-                          //                 borderRadius:
-                          //                     BorderRadius.circular(10.0),
-                          //                 borderSide: const BorderSide(
-                          //                     color: Colors.black),
-                          //               ),
-                          //               focusedBorder: OutlineInputBorder(
-                          //                 borderRadius:
-                          //                     BorderRadius.circular(10.0),
-                          //                 borderSide:
-                          //                     BorderSide(color: Colors.black),
-                          //               ),
-                          //               focusedErrorBorder: OutlineInputBorder(
-                          //                 borderRadius:
-                          //                     BorderRadius.circular(10.0),
-                          //                 borderSide: const BorderSide(
-                          //                   color: Colors.black,
-                          //                 ),
-                          //               ),
-                          //             ),
-                          //             style: TextStyle(
-                          //                 fontSize: 17,
-                          //                 fontFamily: "Nunito",
-                          //                 color: Colors.black87),
-                          //             hint: Text(
-                          //               dashControll.eduList.value
-                          //                   .result![widget.index].yEAROFPASSING
-                          //                   .toString()
-                          //                   .split(' ')[1],
-                          //               style: TextStyle(
-                          //                   fontSize: 16,
-                          //                   fontFamily: "Nunito",
-                          //                   color: Colors.black87),
-                          //             ),
-                          //             items: eduController.years.map((item) {
-                          //               return eduController
-                          //                   .buildMenuItemYear(item);
-                          //             }).toList(),
-                          //             onChanged: (value) {
-                          //               eduController.year = value.toString();
-                          //               eduController.update();
-                          //             }),
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 15),
                             child: Row(
@@ -324,7 +211,13 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                       borderRadius: BorderRadius.circular(10),
                                       border:
                                           Border.all(color: Colors.black87)),
-                                  child: TypeAheadField(
+                                  child: TypeAheadFormField(
+                                    validator: (value) {
+                                      // if(value==null){
+                                      //   eduController.universityCode =
+                                      //       suggestion.universitCode!
+                                      // }
+                                    },
                                       hideOnError: true,
                                       hideSuggestionsOnKeyboardHide: false,
                                       hideKeyboardOnDrag: true,
@@ -345,12 +238,7 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                                     bottom: 11,
                                                     top: 11,
                                                     right: 15),
-                                                hintText: dashControll
-                                                    .eduList
-                                                    .value
-                                                    .result![widget.index]
-                                                    .uNIVERSITY
-                                                    .toString(),
+                                                hintText: 'Select University',
                                               ),
                                               controller: eduController
                                                   .universityController),
@@ -381,29 +269,9 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                               ],
                             ),
                           ),
-
-                          // customeDropDownText(
-                          //   context: context,
-                          //   hintText: dashControll
-                          //       .eduList.value.result![widget.index].uNIVERSITY
-                          //       .toString(),
-                          //   item: eduController.universityList[0].universitName,
-                          //   items: eduController.universityList,
-                          //   text: 'University\nName',
-                          // ),
-                          // customeDropDownText(
-                          //     context: context,
-                          //     hintText: dashControll.eduList.value
-                          //         .result![widget.index].uNIVERSITY
-                          //         .toString(),
-                          //     item: eduController.university,
-                          //     items: eduController.universityItem,
-                          //     text: 'University\nName'),
-
                           SizedBox(
-                            height: 15,
+                            height: 25,
                           ),
-
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 15),
                             child: Row(
@@ -440,12 +308,7 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                                   bottom: 11,
                                                   top: 11,
                                                   right: 15),
-                                              hintText: dashControll
-                                                  .eduList
-                                                  .value
-                                                  .result![widget.index]
-                                                  .cOLLEGE
-                                                  .toString(),
+                                              hintText: "Select Collage",
                                             ),
                                             controller: eduController
                                                 .collegeController),
@@ -474,30 +337,11 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                               ],
                             ),
                           ),
-
-                          // customeDropDownTextCollege(
-                          //     context: context,
-                          //     hintText: dashControll
-                          //         .eduList.value.result![widget.index].cOLLEGE
-                          //         .toString(),
-                          //     item: eduController.collegeList![0].collegeName,
-                          //     items: eduController.collegeList!,
-                          //     text: 'College'),
-                          // customeDropDownText(
-                          //     context: context,
-                          //     hintText: dashControll
-                          //         .eduList.value.result![widget.index].cOLLEGE
-                          //         .toString(),
-                          //     item: eduController.college,
-                          //     items: eduController.collegeItem,
-                          //     text: 'College'),
                         ],
                       )),
-
                       SizedBox(
                         height: 40,
                       ),
-
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Row(
@@ -521,25 +365,47 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                 )),
                             ElevatedButton(
                                 onPressed: () async {
-                                  await Get.defaultDialog(
-                                      middleTextStyle: TextStyle(
-                                        fontFamily: "Nunito",
-                                        color: Colors.black87,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      titleStyle: TextStyle(
-                                        fontFamily: "Nunito",
-                                        color: Colors.black87,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      barrierDismissible: false,
-                                      title: "Success",
-                                      middleText: 'Edit Details successfully',
-                                      onConfirm: () {
-                                        Get.off(EducationDetailsScreen());
-                                      });
+                                  await eduController.addEducationDetails(
+                                    college: eduController.collegeCode,
+                                    course: eduController.corseCode,
+                                    month: eduController.month.toString(),
+                                    year: eduController.year.toString(),
+                                    university: eduController.universityCode,
+                                  );
+                                  // Get.defaultDialog(
+                                  //     middleTextStyle: TextStyle(
+                                  //       fontFamily: "Nunito",
+                                  //       color: Colors.black87,
+                                  //       fontSize: 15,
+                                  //       fontWeight: FontWeight.bold,
+                                  //     ),
+                                  //     titleStyle: TextStyle(
+                                  //       fontFamily: "Nunito",
+                                  //       color: Colors.black87,
+                                  //       fontSize: 18,
+                                  //       fontWeight: FontWeight.bold,
+                                  //     ),
+                                  //     barrierDismissible: false,
+                                  //     title: "Success",
+                                  //     middleText: 'Edit Details successfully',
+                                  //     actions: [
+                                  //       ElevatedButton(
+                                  //         onPressed: () {
+                                  //           Get.off(EducationDetailsScreen());
+                                  //         },
+                                  //         child: Text('OK'),
+                                  //         style: ElevatedButton.styleFrom(
+                                  //             backgroundColor: Colors.black,
+                                  //             shape: RoundedRectangleBorder(
+                                  //               borderRadius:
+                                  //                   BorderRadius.circular(30),
+                                  //             )),
+                                  //       )
+                                  //     ]
+                                  //     // onConfirm: () {
+                                  //     //   Get.off(EducationDetailsScreen());
+                                  //     // }
+                                  //     );
                                 },
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,

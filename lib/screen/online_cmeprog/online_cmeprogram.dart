@@ -27,8 +27,7 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
 
   @pragma('vm:entry-point')
   static void downloadCallback(
-      String id, DownloadTaskStatus status, int progress) 
-      {
+      String id, DownloadTaskStatus status, int progress) {
     final SendPort? send =
         IsolateNameServer.lookupPortByName('downloader_send_port');
     send!.send([id, status, progress]);
@@ -96,6 +95,7 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                     )
                   : Center(
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
@@ -329,451 +329,467 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                             height: 20,
                           ),
 
-                          Expanded(
-                            child: SizedBox(
-                              height: context.height,
-                              child: ListView.separated(
-                                  // physics: BouncingScrollPhysics(),
-                                  shrinkWrap: true,
-                                  itemBuilder: (context, index) => Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 10),
-                                        child: Container(
-                                          height: context.height * .65 / 2,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10.0)),
-                                            border: Border.all(
-                                              color: Colors.black,
-                                              width: 1,
+                          SizedBox(
+                            height: context.height * .5,
+                            child: ListView.separated(
+                                itemBuilder: (context, index) =>
+                                    cmeProgramController.allCmeVideos.value!
+                                                .videoList ==
+                                            null
+                                        ? Center(
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: 2.5,
+                                              color: Colors.black87,
                                             ),
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 10, left: 10),
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  // mainAxisAlignment:
-                                                  // MainAxisAlignment.start,
-                                                  children: [
-                                                    InkWell(
-                                                      onTap: () => Get.to(
-                                                          VideoPlayerPage(
-                                                        index: index,
-                                                      )),
-                                                      child: Container(
-                                                        decoration: BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
+                                          )
+                                        : Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 10),
+                                            child: Container(
+                                              height: context.height * .65 / 2,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                                border: Border.all(
+                                                  color: Colors.black,
+                                                  width: 1,
+                                                ),
+                                              ),
+                                              child: Column(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 10, left: 10),
+                                                    child: Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      // mainAxisAlignment:
+                                                      // MainAxisAlignment.start,
+                                                      children: [
+                                                        InkWell(
+                                                          onTap: () => Get.to(
+                                                              VideoPlayerPage(
+                                                            index: index,
+                                                          )),
+                                                          child: Container(
+                                                            decoration: BoxDecoration(
+                                                                borderRadius: BorderRadius
                                                                     .all(Radius
                                                                         .circular(
                                                                             5))),
-                                                        width:
-                                                            context.width * .2,
-                                                        height: context.height *
-                                                            0.1,
-                                                        child: Image.network(
-                                                            // 'http://www.emed.co.in/Upload/ChnlPart_HdrFtr/Thumbnails/V201501190947507412111197010.jpeg'
-                                                            cmeProgramController
-                                                                .allCmeVideos
-                                                                .value!
-                                                                .videoList![
-                                                                    index]
-                                                                .videothambnails
-                                                                .toString()
-                                                                .replaceAll(
-                                                                    'https',
-                                                                    'http')),
-                                                      ),
+                                                            width:
+                                                                context.width *
+                                                                    .2,
+                                                            height:
+                                                                context.height *
+                                                                    0.1,
+                                                            child:
+                                                                Image.network(
+                                                                    // 'http://www.emed.co.in/Upload/ChnlPart_HdrFtr/Thumbnails/V201501190947507412111197010.jpeg'
+                                                                    cmeProgramController
+                                                                        .allCmeVideos
+                                                                        .value!
+                                                                        .videoList![
+                                                                            index]
+                                                                        .videothambnails
+                                                                        .toString()
+                                                                        .replaceAll(
+                                                                            'https',
+                                                                            'http')),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 10,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 20),
+                                                          child: Column(
+                                                            children: [
+                                                              Text(
+                                                                cmeProgramController
+                                                                    .allCmeVideos
+                                                                    .value!
+                                                                    .videoList![
+                                                                        index]
+                                                                    .videoName
+                                                                    .toString(),
+                                                                maxLines: 2,
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .fade,
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize: 18,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontFamily:
+                                                                      "Nunito",
+                                                                ),
+                                                              ),
+                                                              // SizedBox(
+                                                              //   height: 8,
+                                                              // ),
+                                                              Text(
+                                                                'For all ${cmeProgramController.allCmeVideos.value!.videoList![index].speakerSpecialty} Practitioner',
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .fade,
+                                                                maxLines: 1,
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize: 16,
+                                                                  fontFamily:
+                                                                      "Nunito",
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        )
+                                                      ],
                                                     ),
-                                                    SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              top: 20),
-                                                      child: Column(
-                                                        children: [
-                                                          Text(
-                                                            cmeProgramController
-                                                                .allCmeVideos
-                                                                .value!
-                                                                .videoList![
-                                                                    index]
-                                                                .videoName
-                                                                .toString(),
-                                                            maxLines: 2,
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .fade,
-                                                            style: TextStyle(
-                                                              fontSize: 18,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontFamily:
-                                                                  "Nunito",
-                                                            ),
-                                                          ),
-                                                          // SizedBox(
-                                                          //   height: 8,
-                                                          // ),
-                                                          Text(
-                                                            'For all ${cmeProgramController.allCmeVideos.value!.videoList![index].speakerSpecialty} Practitioner',
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .fade,
-                                                            maxLines: 1,
-                                                            style: TextStyle(
-                                                              fontSize: 16,
-                                                              fontFamily:
-                                                                  "Nunito",
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 16,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 15),
-                                                child: Center(
-                                                  child: Table(
-                                                    columnWidths: {
-                                                      0: FlexColumnWidth(0.5),
-                                                      1: FlexColumnWidth(0.1),
-                                                      3: FlexColumnWidth(2)
-                                                    },
-                                                    children: [
-                                                      TableRow(children: [
-                                                        Text(
-                                                          'Duration',
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontSize: 15,
-                                                            fontFamily:
-                                                                "Nunito",
-                                                          ),
-                                                        ),
-                                                        Text(':',
-                                                            style: TextStyle(
-                                                                fontFamily:
-                                                                    "Nunito",
-                                                                color: Colors
-                                                                    .black87)),
-                                                        Text(
-                                                          "${cmeProgramController.allCmeVideos.value!.videoList![index].videoTimingHour} h",
-                                                          style: TextStyle(
-                                                            // fontSize: 18,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontFamily:
-                                                                "Nunito",
-                                                            // color: Colors.blue.shade700,
-                                                          ),
-                                                        ),
-                                                      ]),
-                                                      TableRow(children: [
-                                                        Text(
-                                                          'Credit Point ',
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontSize: 15,
-                                                            fontFamily:
-                                                                "Nunito",
-                                                          ),
-                                                        ),
-                                                        Text(':',
-                                                            style: TextStyle(
-                                                                fontFamily:
-                                                                    "Nunito",
-                                                                color: Colors
-                                                                    .black87)),
-                                                        Text(
-                                                          "${cmeProgramController.allCmeVideos.value!.videoList![index].creditPoint} Credit Point",
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontFamily:
-                                                                "Nunito",
-                                                          ),
-                                                        ),
-                                                      ]),
-                                                      TableRow(children: [
-                                                        Text(
-                                                          'Speaker ',
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontSize: 15,
-                                                            fontFamily:
-                                                                "Nunito",
-                                                          ),
-                                                        ),
-                                                        Text(':',
-                                                            style: TextStyle(
-                                                                fontFamily:
-                                                                    "Nunito",
-                                                                color: Colors
-                                                                    .black87)),
-                                                        Text(
-                                                          cmeProgramController
-                                                              .allCmeVideos
-                                                              .value!
-                                                              .videoList![index]
-                                                              .speakerName
-                                                              .toString(),
-                                                          style: TextStyle(
-                                                            fontSize: 15,
-                                                            // fontWeight:
-                                                            //     FontWeight.bold,
-                                                            fontFamily:
-                                                                "Nunito",
-                                                          ),
-                                                        ),
-                                                      ]),
-                                                      TableRow(children: [
-                                                        Text(
-                                                          'Approved by ',
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontSize: 15,
-                                                            fontFamily:
-                                                                "Nunito",
-                                                          ),
-                                                        ),
-                                                        Text(':',
-                                                            style: TextStyle(
-                                                                fontFamily:
-                                                                    "Nunito",
-                                                                color: Colors
-                                                                    .black87)),
-                                                        Text(
-                                                          "Karnataka Medical Council",
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontFamily:
-                                                                "Nunito",
-                                                          ),
-                                                        ),
-                                                      ])
-                                                    ],
                                                   ),
-                                                ),
-                                              ),
-                                              Spacer(),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  ElevatedButton(
-                                                    onPressed: () async {
-                                                      cmeProgramController
-                                                          .getAllQuestionsData(
+                                                  SizedBox(
+                                                    height: 16,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 15),
+                                                    child: Center(
+                                                      child: Table(
+                                                        columnWidths: {
+                                                          0: FlexColumnWidth(
+                                                              0.5),
+                                                          1: FlexColumnWidth(
+                                                              0.1),
+                                                          3: FlexColumnWidth(2)
+                                                        },
+                                                        children: [
+                                                          TableRow(children: [
+                                                            Text(
+                                                              'Duration',
+                                                              style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontSize: 15,
+                                                                fontFamily:
+                                                                    "Nunito",
+                                                              ),
+                                                            ),
+                                                            Text(':',
+                                                                style: TextStyle(
+                                                                    fontFamily:
+                                                                        "Nunito",
+                                                                    color: Colors
+                                                                        .black87)),
+                                                            Text(
+                                                              "${cmeProgramController.allCmeVideos.value!.videoList![index].videoTimingHour} h",
+                                                              style: TextStyle(
+                                                                // fontSize: 18,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontFamily:
+                                                                    "Nunito",
+                                                                // color: Colors.blue.shade700,
+                                                              ),
+                                                            ),
+                                                          ]),
+                                                          TableRow(children: [
+                                                            Text(
+                                                              'Credit Point ',
+                                                              style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontSize: 15,
+                                                                fontFamily:
+                                                                    "Nunito",
+                                                              ),
+                                                            ),
+                                                            Text(':',
+                                                                style: TextStyle(
+                                                                    fontFamily:
+                                                                        "Nunito",
+                                                                    color: Colors
+                                                                        .black87)),
+                                                            Text(
+                                                              "${cmeProgramController.allCmeVideos.value!.videoList![index].creditPoint} Credit Point",
+                                                              style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontFamily:
+                                                                    "Nunito",
+                                                              ),
+                                                            ),
+                                                          ]),
+                                                          TableRow(children: [
+                                                            Text(
+                                                              'Speaker ',
+                                                              style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontSize: 15,
+                                                                fontFamily:
+                                                                    "Nunito",
+                                                              ),
+                                                            ),
+                                                            Text(':',
+                                                                style: TextStyle(
+                                                                    fontFamily:
+                                                                        "Nunito",
+                                                                    color: Colors
+                                                                        .black87)),
+                                                            Text(
                                                               cmeProgramController
                                                                   .allCmeVideos
                                                                   .value!
                                                                   .videoList![
                                                                       index]
-                                                                  .videoId);
-                                                    },
-                                                    child: Text(
-                                                        '    Take Test    '),
-                                                    style: ElevatedButton
-                                                        .styleFrom(
-                                                            backgroundColor:
-                                                                Colors.black87,
-                                                            // Colors.orange,//// Color.fromARGB(255, 218, 206, 37),
-                                                            shape:
-                                                                RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          15),
-                                                            )),
+                                                                  .speakerName
+                                                                  .toString(),
+                                                              style: TextStyle(
+                                                                fontSize: 15,
+                                                                // fontWeight:
+                                                                //     FontWeight.bold,
+                                                                fontFamily:
+                                                                    "Nunito",
+                                                              ),
+                                                            ),
+                                                          ]),
+                                                          TableRow(children: [
+                                                            Text(
+                                                              'Approved by ',
+                                                              style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontSize: 15,
+                                                                fontFamily:
+                                                                    "Nunito",
+                                                              ),
+                                                            ),
+                                                            Text(':',
+                                                                style: TextStyle(
+                                                                    fontFamily:
+                                                                        "Nunito",
+                                                                    color: Colors
+                                                                        .black87)),
+                                                            Text(
+                                                              "Karnataka Medical Council",
+                                                              style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontFamily:
+                                                                    "Nunito",
+                                                              ),
+                                                            ),
+                                                          ])
+                                                        ],
+                                                      ),
+                                                    ),
                                                   ),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  ElevatedButton(
-                                                    onPressed: () {
-                                                      Get.defaultDialog(
-                                                          title: 'Download',
-                                                          middleText:
-                                                              'Do you want to download this video ?',
-                                                          middleTextStyle:
-                                                              TextStyle(
+                                                  Spacer(),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      ElevatedButton(
+                                                        onPressed: () async {
+                                                          cmeProgramController
+                                                              .getAllQuestionsData(
+                                                                  cmeProgramController
+                                                                      .allCmeVideos
+                                                                      .value!
+                                                                      .videoList![
+                                                                          index]
+                                                                      .videoId);
+                                                        },
+                                                        child: Text(
+                                                            '    Take Test    '),
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .black87,
+                                                                // Colors.orange,//// Color.fromARGB(255, 218, 206, 37),
+                                                                shape:
+                                                                    RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              15),
+                                                                )),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      ElevatedButton(
+                                                        onPressed: () {
+                                                          Get.defaultDialog(
+                                                              title: 'Download',
+                                                              middleText:
+                                                                  'Do you want to download this video ?',
+                                                              middleTextStyle: TextStyle(
                                                                   fontFamily:
                                                                       "Nunito",
                                                                   color: Colors
                                                                       .black87),
-                                                          titleStyle: TextStyle(
-                                                              fontFamily:
-                                                                  "Nunito",
-                                                              color: Colors
-                                                                  .black87),
-                                                          actions: [
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceAround,
-                                                              children: [
-                                                                ElevatedButton(
-                                                                  onPressed:
-                                                                      () {
-                                                                    Get.back();
-                                                                  },
-                                                                  child: Text(
-                                                                      'Cancel'),
-                                                                  style: ElevatedButton
-                                                                      .styleFrom(
-                                                                          backgroundColor: Colors
-                                                                              .black87,
+                                                              titleStyle: TextStyle(
+                                                                  fontFamily:
+                                                                      "Nunito",
+                                                                  color: Colors
+                                                                      .black87),
+                                                              actions: [
+                                                                Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceAround,
+                                                                  children: [
+                                                                    ElevatedButton(
+                                                                      onPressed:
+                                                                          () {
+                                                                        Get.back();
+                                                                      },
+                                                                      child: Text(
+                                                                          'Cancel'),
+                                                                      style: ElevatedButton.styleFrom(
+                                                                          backgroundColor: Colors.black87,
                                                                           // Colors.orange,//// Color.fromARGB(255, 218, 206, 37),
-                                                                          shape:
-                                                                              RoundedRectangleBorder(
+                                                                          shape: RoundedRectangleBorder(
                                                                             borderRadius:
                                                                                 BorderRadius.circular(15),
                                                                           )),
-                                                                ),
-                                                                ElevatedButton(
-                                                                  onPressed:
-                                                                      () {
-                                                                    // downloadVideo(
-                                                                    //   'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
-                                                                      // name: cmeProgramController
-                                                                      //     .allCmeVideos
-                                                                      //     .value!
-                                                                      //     .videoList![
-                                                                      //         index]
-                                                                      //     .videoName
-                                                                      //     .toString(),
-                                                                    // );
-                                                                  },
-                                                                  child: Text(
-                                                                      'Ok'),
-                                                                  style: ElevatedButton
-                                                                      .styleFrom(
-                                                                          backgroundColor: Colors
-                                                                              .black87,
+                                                                    ),
+                                                                    ElevatedButton(
+                                                                      onPressed:
+                                                                          () {
+                                                                        // downloadVideo(
+                                                                        //   'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+                                                                        // name: cmeProgramController
+                                                                        //     .allCmeVideos
+                                                                        //     .value!
+                                                                        //     .videoList![
+                                                                        //         index]
+                                                                        //     .videoName
+                                                                        //     .toString(),
+                                                                        // );
+                                                                      },
+                                                                      child: Text(
+                                                                          'Ok'),
+                                                                      style: ElevatedButton.styleFrom(
+                                                                          backgroundColor: Colors.black87,
                                                                           // Colors.orange,//// Color.fromARGB(255, 218, 206, 37),
-                                                                          shape:
-                                                                              RoundedRectangleBorder(
+                                                                          shape: RoundedRectangleBorder(
                                                                             borderRadius:
                                                                                 BorderRadius.circular(15),
                                                                           )),
+                                                                    )
+                                                                  ],
                                                                 )
-                                                              ],
-                                                            )
-                                                          ]);
-                                                      // cmeProgramController.requestDownload(
-                                                      //     name:
-                                                      //         cmeProgramController
-                                                      //             .allCmeVideos
-                                                      //             .value!
-                                                      //             .videoList![
-                                                      //                 index]
-                                                      //             .videoName
-                                                      //             .toString(),
-                                                      //     url:
-                                                      //         cmeProgramController
-                                                      //             .allCmeVideos
-                                                      //             .value!
-                                                      //             .videoList![
-                                                      //                 index]
-                                                      //             .videoPath
-                                                      //             .toString()
-                                                      //             .replaceAll(
-                                                      //                 'https',
-                                                      //                 'http'));
-                                                      // cmeProgramController
-                                                      //             .allCmeVideos
-                                                      //             .value!
-                                                      //             .videoList![
-                                                      //                 index]
-                                                      //             .isDownloading ??
-                                                      //         false
-                                                      //     ? cancelDownload(
-                                                      //         index)
-                                                      //     : cmeProgramController
-                                                      //         .getPermission(
-                                                      //             index);
-                                                    },
-                                                    child:
-                                                        //  cmeProgramController
-                                                        //             .allCmeVideos
-                                                        //             .value!
-                                                        //             .videoList![
-                                                        //                 index]
-                                                        //             .isDownloading ??
-                                                        //         false
-                                                        //     ? Center(
-                                                        //         child: Text(
-                                                        //             progressString)
-                                                        //         //  CircularProgressIndicator(
-                                                        //         //     strokeWidth: 2,
-                                                        //         //     color: Colors
-                                                        //         //   .white,
-                                                        //         //   ),
-                                                        //         )
-                                                        //     :
-                                                        Text('Download Video'),
-                                                    style: ElevatedButton
-                                                        .styleFrom(
-                                                            backgroundColor:
-                                                                Colors.black87,
-                                                            // Colors.orange,//// Color.fromARGB(255, 218, 206, 37),
-                                                            shape:
-                                                                RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          15),
-                                                            )),
+                                                              ]);
+                                                          // cmeProgramController.requestDownload(
+                                                          //     name:
+                                                          //         cmeProgramController
+                                                          //             .allCmeVideos
+                                                          //             .value!
+                                                          //             .videoList![
+                                                          //                 index]
+                                                          //             .videoName
+                                                          //             .toString(),
+                                                          //     url:
+                                                          //         cmeProgramController
+                                                          //             .allCmeVideos
+                                                          //             .value!
+                                                          //             .videoList![
+                                                          //                 index]
+                                                          //             .videoPath
+                                                          //             .toString()
+                                                          //             .replaceAll(
+                                                          //                 'https',
+                                                          //                 'http'));
+                                                          // cmeProgramController
+                                                          //             .allCmeVideos
+                                                          //             .value!
+                                                          //             .videoList![
+                                                          //                 index]
+                                                          //             .isDownloading ??
+                                                          //         false
+                                                          //     ? cancelDownload(
+                                                          //         index)
+                                                          //     : cmeProgramController
+                                                          //         .getPermission(
+                                                          //             index);
+                                                        },
+                                                        child:
+                                                            //  cmeProgramController
+                                                            //             .allCmeVideos
+                                                            //             .value!
+                                                            //             .videoList![
+                                                            //                 index]
+                                                            //             .isDownloading ??
+                                                            //         false
+                                                            //     ? Center(
+                                                            //         child: Text(
+                                                            //             progressString)
+                                                            //         //  CircularProgressIndicator(
+                                                            //         //     strokeWidth: 2,
+                                                            //         //     color: Colors
+                                                            //         //   .white,
+                                                            //         //   ),
+                                                            //         )
+                                                            //     :
+                                                            Text(
+                                                                'Download Video'),
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .black87,
+                                                                // Colors.orange,//// Color.fromARGB(255, 218, 206, 37),
+                                                                shape:
+                                                                    RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              15),
+                                                                )),
+                                                      ),
+                                                    ],
                                                   ),
+                                                  // Positioned(
+                                                  //   bottom: 3,
+                                                  //   left: 10,
+                                                  //   child: Column(
+                                                  //     children: [
+                                                  //       SizedBox(
+                                                  //         height: 1.5,
+                                                  //       ),
+                                                  //     ],
+                                                  //   ),
+                                                  // ),
                                                 ],
                                               ),
-                                              Positioned(
-                                                bottom: 3,
-                                                left: 10,
-                                                child: Column(
-                                                  children: [
-                                                    SizedBox(
-                                                      height: 1.5,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
+                                            ),
                                           ),
-                                        ),
-                                      ),
-                                  separatorBuilder: (context, index) =>
-                                      Container(
-                                        height: 20,
-                                      ),
-                                  itemCount: cmeProgramController
-                                      .allCmeVideos.value!.videoList!.length),
-                            ),
+                                separatorBuilder: (context, index) => Container(
+                                      height: 20,
+                                    ),
+                                itemCount: cmeProgramController
+                                    .allCmeVideos.value!.videoList!.length),
                           ),
 
-                          SizedBox(
-                            height: 0,
-                          ),
                           SizedBox(
                             height: 20,
                           ),
@@ -956,8 +972,6 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
     //   }),
     // );
   }
-
-  
 
 //   Future downloadVideo(index) async {
 

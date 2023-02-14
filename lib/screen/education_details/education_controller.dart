@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,7 +8,6 @@ import 'package:hslr/base_api/orginal_api.dart';
 import 'package:hslr/main.dart';
 import 'package:hslr/screen/education_details/education_screen.dart';
 import 'package:hslr/screen/loading_class/loading_class.dart';
-
 import '../../models/get_eduid_list.model.dart';
 import '../../services/get_eduid_list_servise.dart';
 
@@ -186,34 +184,50 @@ class EducationController extends GetxController {
 
     try {
       var response = await dio.post('SaveAddUpdateEduinfoNew', data: eduData);
+      print(response.data.toString());
       if (response.statusCode == 200) {
         DialogHelper.hideLoading();
         await Get.defaultDialog(
             barrierDismissible: false,
             title: "Success",
             middleTextStyle: TextStyle(
-            fontFamily: "Nunito",
-            color: Colors.black87,
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
-          ),titleStyle: TextStyle(
-            fontFamily: "Nunito",
-            color: Colors.black87,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
+              fontFamily: "Nunito",
+              color: Colors.black87,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+            titleStyle: TextStyle(
+              fontFamily: "Nunito",
+              color: Colors.black87,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
             middleText: 'Save Details successfully',
-            onConfirm: () {
-              Get.off(EducationDetailsScreen());
-            });
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  Get.off(EducationDetailsScreen());
+                },
+                child: Text('Ok'),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    )),
+              )
+            ]
+            // onConfirm: () {
+            //
+            // }
+            );
         // Get.snackbar('Success', 'Save Details successfully',
         //     colorText: Colors.white,
         //     backgroundColor: Colors.black,
         //     duration: Duration(seconds: 3));
 
-        Timer(Duration(seconds: 2), () async {
-          Get.off(EducationDetailsScreen());
-        });
+        // Timer(Duration(seconds: 2), () async {
+        //   Get.off(EducationDetailsScreen());
+        // });
       }
     } on DioError catch (e) {
       print(e.message);

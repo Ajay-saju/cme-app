@@ -405,14 +405,6 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                                     ),
                                   ),
 
-                                  // customeDropDownText(
-                                  //     context: context,
-                                  //     hintText: 'Select University',
-                                  //     item: eduController
-                                  //         .universityList![0].universitName,
-                                  //     items: eduController.universityList!,
-                                  //     text: 'University\nName',
-                                  //     selectedBox: 'Select University'),
                                   SizedBox(
                                     height: 15,
                                   ),
@@ -507,20 +499,6 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                                       ],
                                     ),
                                   ),
-
-                                  // customeDropDownTextCollege(
-                                  //     context: context,
-                                  //     hintText: 'Select College',
-                                  //     item: eduController
-                                  //         .collegeList![0].collegeName,
-                                  //     items: eduController.collegeList!,
-                                  //     text: 'College'),
-                                  // customeDropDownText(
-                                  //     context: context,
-                                  //     hintText: 'Select University',
-                                  //     item: eduController.collegeList![0].collegeName,
-                                  //     items: eduController.collegeList!,
-                                  //     text: 'College'),
                                 ],
                               )),
                           SizedBox(
@@ -559,8 +537,8 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                                             .save();
                                         eduController.addEducationDetails(
                                             month:
-                                                eduController.month.toString(),
-                                            year: eduController.year.toString(),
+                                                '',
+                                            year: '',
                                             college: eduController.collegeCode,
                                             course: eduController.corseCode
                                                 .toString(),

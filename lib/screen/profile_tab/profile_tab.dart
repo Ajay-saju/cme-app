@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -129,7 +131,6 @@ class _ProfileScreenTabState extends State<ProfileScreenTab> {
                         child: Column(
                           children: [
                             TextFormField(
-                              readOnly: profileTabController.isReadOnly,
                               cursorColor: Colors.black87,
                               inputFormatters: [
                                 LengthLimitingTextInputFormatter(25),
@@ -153,6 +154,7 @@ class _ProfileScreenTabState extends State<ProfileScreenTab> {
                                   color: Colors.black,
                                   icon: Icon(Icons.edit),
                                   onPressed: () {
+                                    print('working');
                                     setState(() {
                                       profileTabController.isReadOnly =
                                           !profileTabController.isReadOnly;
@@ -169,9 +171,11 @@ class _ProfileScreenTabState extends State<ProfileScreenTab> {
                               style: TextStyle(
                                 fontFamily: "Nunito",
                               ),
+                              // enabled: profileTabController.isReadOnly,
+                              readOnly: !profileTabController.isReadOnly,
                             ),
                             TextFormField(
-                              readOnly: profileTabController.isReadOnly,
+                              enabled: profileTabController.isReadOnly1,
                               cursorColor: Colors.black87,
                               keyboardType: TextInputType.text,
                               controller: profileTabController.memCouncilName,
@@ -192,7 +196,7 @@ class _ProfileScreenTabState extends State<ProfileScreenTab> {
                                   icon: Icon(Icons.edit),
                                   onPressed: () {
                                     setState(() {
-                                      profileTabController.isReadOnly =
+                                      profileTabController.isReadOnly=
                                           !profileTabController.isReadOnly;
                                     });
                                   },
@@ -234,8 +238,8 @@ class _ProfileScreenTabState extends State<ProfileScreenTab> {
                                   icon: Icon(Icons.edit),
                                   onPressed: () {
                                     setState(() {
-                                      profileTabController.isReadOnly =
-                                          !profileTabController.isReadOnly;
+                                      profileTabController.isReadOnly2 =
+                                          !profileTabController.isReadOnly2;
                                     });
                                   },
                                 ),
