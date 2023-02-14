@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hslr/main.dart';
 import 'package:hslr/screen/test_screen/testscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../online_cmeprog/online_cmeprogram.dart';
@@ -236,7 +237,7 @@ class QuestionController extends GetxController {
     );
   }
 
-  completeTest({bool? isGoingtoTest, input, correctAns, selectedOption}) {
+  completeTest({bool? isGoingtoTest, input, correctAns, selectedOption,}) {
     answers[pageChange + 1] = selectedOption;
     print(answers);
     Get.defaultDialog(
@@ -390,37 +391,29 @@ class QuestionController extends GetxController {
       );
     }
   }
+  
 
-  // void startTimer() {
-  //   countdownTimerMin = Timer.periodic(Duration(minutes: 1), (_) {
-  //     startSecTimer();
-  //     if (min > 0 && isStopTimer == true) {
+  void saveTest({
+    required String speakerId,
+    required String videoId,
+    required String result,
+    required String mark,
+    required var answers
+  }) {
+    
 
-  //       min--;
-  //       print(min);
-  //     } else {
-  //       isStopTimer.value = false;
-  //     }
-  //   });
-  // }
-
-  // startSecTimer() {
-  //   countdownTimer = Timer.periodic(Duration(seconds: 1), (_) {
-  //     if (seconds > 0 && min > 0) {
-  //       seconds--;
-
-  //       print(seconds);
-  //     }
-  //     if(seconds == 0 ){
-
-  //       min --;
-
-  //     }
-  //      else {
-  //       isStopTimer.value = false;
-  //     }
-  //   });
-  // }
+    Map<String, dynamic> _resultData = {
+      "cntryId": sessionlog.getInt('country').toString(),
+      "stateId": sessionlog.getString('stateId'),
+      "councilId": sessionlog.getString('councilId'),
+      "memberId": sessionlog.getString('userId'),
+      "speakerId": speakerId,
+      "videoId": videoId,
+      "Result": result,
+      "marks": mark,
+      "Answers": answers,
+    };
+  }
 }
 
 class Question {

@@ -154,7 +154,11 @@ class CmeProgramController extends GetxController {
       var response = await questionAnsService.getMCQData(videoId);
       if (response.statusCode == 200) {
         questions.value = QuestionsAnsList.fromJson(response.data);
-        selectedQus = selectedQues(quesList: questions.value!.qAList!.toList());
+        print(questions.value!.qAList![0].qlis.toString());
+        selectedQus = selectedQues(
+            quesList: questions.value!.qAList!.toList(),
+            numberOfQuiestions:
+                int.parse(questions.value!.qAList![0].qlis.toString()));
         // if (selectedQus != null) {
         //   Get.to(Question(
         //     correctAnswer: correctAnswer,
@@ -169,11 +173,12 @@ class CmeProgramController extends GetxController {
     update();
   }
 
-  List selectedQues({required List quesList}) {
+  List selectedQues({required List quesList, required int numberOfQuiestions}) {
+    print(numberOfQuiestions.toString());
     List tempp = [];
     final _random = new Random();
     var temp = quesList.shuffle(_random);
-    for (int i = 0; i < 15; i++) {
+    for (int i = 0; i < numberOfQuiestions; i++) {
       tempp.add(quesList[i]);
     }
     correctAnswers(quesList: tempp);
@@ -202,7 +207,4 @@ class CmeProgramController extends GetxController {
       isGoingtoTest: false,
     ));
   }
-
-  
-
 }

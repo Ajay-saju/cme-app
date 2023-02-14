@@ -27,21 +27,30 @@ class QuestionsAnsList {
 class QAList {
   String? message;
   String? qN;
+  String? qId;
   String? aNS;
+  String? cOff;
+  String? qlis;
 
-  QAList({this.message, this.qN, this.aNS});
+  QAList({this.message, this.qN, this.qId, this.aNS, this.cOff, this.qlis});
 
   QAList.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     qN = json['QN'];
+    qId = json['QId'];
     aNS = json['ANS'];
+    cOff = json['COff'];
+    qlis = json['qlis'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['message'] = this.message;
     data['QN'] = this.qN;
+    data['QId'] = this.qId;
     data['ANS'] = this.aNS;
+    data['COff'] = this.cOff;
+    data['qlis'] = this.qlis;
     return data;
   }
 }

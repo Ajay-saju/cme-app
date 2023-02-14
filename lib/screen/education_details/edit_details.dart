@@ -40,9 +40,9 @@ class _EditEduDetailsState extends State<EditEduDetails> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    // eduController.degreeController.clear();
-    // eduController.universityController.clear();
-    // eduController.collegeController.clear();
+    eduController.degreeController.clear();
+    eduController.universityController.clear();
+    eduController.collegeController.clear();
   }
 
   @override

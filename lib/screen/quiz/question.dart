@@ -162,7 +162,7 @@ class _QuestionState extends State<Question> {
                             Container(
                                 // color: Colors.amber,
                                 height: context.width > 410
-                                    ? context.height * 0.67
+                                    ? context.height * 0.6
                                     : context.height * 0.6,
                                 child: PageView.builder(
                                   // scrollDirection: Axis.vertical,
@@ -177,7 +177,7 @@ class _QuestionState extends State<Question> {
                                   itemCount: finalQuesList.length,
                                   itemBuilder: (context, index) {
                                     return Obx(() => Container(
-                                          height: context.height,
+                                          // height: context.height,
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -200,7 +200,7 @@ class _QuestionState extends State<Question> {
                                                           FontWeight.bold),
                                                 ),
                                               ),
-                                              InkWell(
+                                               InkWell(
                                                 onTap: () {
                                                   qController
                                                       .changeSelectedOPtion(
@@ -934,7 +934,7 @@ class _QuestionState extends State<Question> {
                                                     widget.isGoingtoTest,
                                                 correctAns:
                                                     widget.correctAnswer,
-                                                input: qController.answers);
+                                                input: qController.answers, );
 
                                         print(qController.answers);
 
@@ -1040,5 +1040,4 @@ class _QuestionState extends State<Question> {
   // void storeCorrectAns() {
   //   for (int i = 0; i < widget.quesList.length; i++) {
   //     // qController.correctAnswer[i+1] = widget.quesList[i].
-
 }

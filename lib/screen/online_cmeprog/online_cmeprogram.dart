@@ -1,6 +1,5 @@
 import 'dart:isolate';
 import 'dart:ui';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:get/get.dart';
@@ -10,7 +9,6 @@ import 'package:hslr/screen/online_cmeprog/video_player_screen.dart';
 import 'package:hslr/screen/videoplayerwidget/videoplayerwidget.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-
 import 'package:video_player/video_player.dart';
 
 class Onlinecmeprogram extends StatefulWidget {
@@ -34,6 +32,7 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
   }
 
   @override
+  @override
   void initState() {
     IsolateNameServer.registerPortWithName(
         _port.sendPort, 'downloader_send_port');
@@ -43,6 +42,7 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
       int progress = data[2];
       setState(() {});
     });
+
     FlutterDownloader.registerCallback(downloadCallback);
     super.initState();
   }
@@ -55,20 +55,20 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
 
   Future downloadVideo(String url) async {
     var status = Permission.storage.request();
-    // if (await status.isGranted) {
-    final directory = await getExternalStorageDirectory();
-    final taskId = await FlutterDownloader.enqueue(
-      url: url,
-      headers: {}, // optional: header send with url (auth token etc)
-      savedDir: directory!.path,
-      showNotification:
-          true, // show download progress in status bar (for Android)
-      openFileFromNotification:
-          true, // click on notification to open downloaded file (for Android)
-    );
-    // } else {
-    //   print('Permission denied');
-    // }
+    if (await status.isGranted) {
+      final directory = await getApplicationDocumentsDirectory();
+      final taskId = await FlutterDownloader.enqueue(
+        url: url,
+        headers: {}, // optional: header send with url (auth token etc)
+        savedDir: directory.path,
+        showNotification:
+            true, // show download progress in status bar (for Android)
+        openFileFromNotification:
+            true, // click on notification to open downloaded file (for Android)
+      );
+    } else {
+      print('Permission denied');
+    }
   }
 
   @override
@@ -675,16 +675,16 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                                     ElevatedButton(
                                                                       onPressed:
                                                                           () {
-                                                                        // downloadVideo(
-                                                                        //   'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
-                                                                        // name: cmeProgramController
-                                                                        //     .allCmeVideos
-                                                                        //     .value!
-                                                                        //     .videoList![
-                                                                        //         index]
-                                                                        //     .videoName
-                                                                        //     .toString(),
-                                                                        // );
+                                                                        downloadVideo(
+                                                                          'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+                                                                          // name: cmeProgramController
+                                                                          //     .allCmeVideos
+                                                                          //     .value!
+                                                                          //     .videoList![
+                                                                          //         index]
+                                                                          //     .videoName
+                                                                          //     .toString(),
+                                                                        );
                                                                       },
                                                                       child: Text(
                                                                           'Ok'),
