@@ -1,9 +1,11 @@
 import 'dart:isolate';
 import 'dart:ui';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/dashboard/dashboard.dart';
+import 'package:hslr/screen/downloaded_videos/video_list.dart';
 import 'package:hslr/screen/online_cmeprog/online_cmeprogram_controller.dart';
 import 'package:hslr/screen/online_cmeprog/video_player_screen.dart';
 import 'package:hslr/screen/videoplayerwidget/videoplayerwidget.dart';
@@ -54,6 +56,7 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
   }
 
   Future downloadVideo(String url) async {
+    late Timer _timer;
     var status = Permission.storage.request();
     if (await status.isGranted) {
       final directory = await getApplicationDocumentsDirectory();
@@ -685,6 +688,12 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                                           //     .videoName
                                                                           //     .toString(),
                                                                         );
+                                                                        Timer.periodic(
+                                                                            Duration(seconds: 2),
+                                                                            (timer) {
+                                                                          Get.off(
+                                                                              VideoListScreen());
+                                                                        });
                                                                       },
                                                                       child: Text(
                                                                           'Ok'),

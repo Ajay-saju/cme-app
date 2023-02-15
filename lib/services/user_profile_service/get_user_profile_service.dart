@@ -4,6 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:hslr/base_api/orginal_api.dart';
 import 'package:hslr/main.dart';
+import 'package:hslr/screen/login/login_controller.dart';
 
 class GetUserDetailsService {
   static OrginalApi orginalApi = OrginalApi();
@@ -31,6 +32,7 @@ class GetUserDetailsService {
     } on DioError catch (e) {
       print(e.message);
       Get.defaultDialog(
+          actions: [OkButton.okButton('Ok')],
           title: 'Something is wrong',
           middleText: "Please try again",
           middleTextStyle: TextStyle(

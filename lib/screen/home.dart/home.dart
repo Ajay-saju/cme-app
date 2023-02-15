@@ -17,7 +17,6 @@ class _HomeState extends State<Home> {
   LoginController logController = Get.put(LoginController());
   DashboardController dashController = Get.find();
   final pick = sessionlog.getString('proPick')!.replaceAll("https", 'http');
-  // final LoginController logControll = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +33,9 @@ class _HomeState extends State<Home> {
           child: Scaffold(
             backgroundColor: Colors.white, //Color(0xff63c3fe),
             body: SafeArea(
-              child: dashController.getUserDetails.value.loginName == null
+              child: dashController.getUserDetails.value.loginName == null &&
+                      dashController.dateTime.value == null &&
+                      dashController.dashBordData.value == ''
                   ? Center(
                       child: CircularProgressIndicator(
                         color: Colors.black87,
@@ -113,9 +114,7 @@ class _HomeState extends State<Home> {
                               ? context.height * 0.75
                               : context.height * 0.73,
                           width: 450,
-                          // color: Colors.amber,
                           child: SingleChildScrollView(
-                            // scrollDirection: Axis.vertical,
                             physics: BouncingScrollPhysics(),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -179,26 +178,47 @@ class _HomeState extends State<Home> {
                                                       : 20,
                                                   color: Colors.white),
                                             ),
-                                            // Obx(() => Text(
-                                            //       logController.date.value,
-                                            //       style: TextStyle(
-                                            //           fontFamily: "Nunito",
-                                            //           fontSize:
-                                            //               context.width > 410
-                                            //                   ? 20
-                                            //                   : 18,
-                                            //           color: Colors.white),
-                                            //     )),
-                                            // Obx(() => Text(
-                                            //       logController.time.value,
-                                            //       style: TextStyle(
-                                            //           fontFamily: "Nunito",
-                                            //           fontSize:
-                                            //               context.width > 410
-                                            //                   ? 20
-                                            //                   : 18,
-                                            //           color: Colors.white),
-                                            //     )),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8,
+                                                  right: 40,
+                                                  top: 8,
+                                                  bottom: 8),
+                                              child: Text(
+                                                dashController.dateTime.value ==
+                                                        ''
+                                                    ? ""
+                                                    : dashController
+                                                        .dateTime.value[0]
+                                                        .toString(),
+                                                style: TextStyle(
+                                                    fontFamily: "Nunito",
+                                                    fontSize:
+                                                        context.width > 410
+                                                            ? 20
+                                                            : 18,
+                                                    color: Colors.white),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 65),
+                                              child: Text(
+                                                dashController.dateTime.value ==
+                                                        ''
+                                                    ? ""
+                                                    : dashController
+                                                        .dateTime.value[1]
+                                                        .toString(),
+                                                style: TextStyle(
+                                                    fontFamily: "Nunito",
+                                                    fontSize:
+                                                        context.width > 410
+                                                            ? 20
+                                                            : 18,
+                                                    color: Colors.white),
+                                              ),
+                                            ),
                                             SizedBox(
                                               height: 10,
                                             ),
@@ -261,25 +281,26 @@ class _HomeState extends State<Home> {
                                                   color: Colors.white),
                                             ),
                                             SizedBox(
-                                              height: 10,
+                                              height: 20,
                                             ),
-                                            // Text(
-                                            //   dashController
-                                            //               .userCmeVideoLastTest!
-                                            //               .latest ==
-                                            //           null
-                                            //       ? " "
-                                            //       : dashController
-                                            //           .userCmeVideoLastTest!
-                                            //           .latest
-                                            //           .toString(),
-                                            //   style: TextStyle(
-                                            //       fontFamily: "Nunito",
-                                            //       fontSize: context.width > 410
-                                            //           ? 20
-                                            //           : 18,
-                                            //       color: Colors.white),
-                                            // ),
+                                            Text(
+                                              dashController.dashBordData.value
+                                                          .lastTest ==
+                                                      null
+                                                  ? " "
+                                                  : dashController
+                                                      .dashBordData
+                                                      .value
+                                                      .lastTest![0]
+                                                      .lastTest
+                                                      .toString(),
+                                              style: TextStyle(
+                                                  fontFamily: "Nunito",
+                                                  fontSize: context.width > 410
+                                                      ? 20
+                                                      : 18,
+                                                  color: Colors.white),
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -339,23 +360,26 @@ class _HomeState extends State<Home> {
                                                   color: Colors.white),
                                             ),
                                             SizedBox(
-                                              height: 10,
+                                              height: 20,
                                             ),
-                                            // Text(
-                                            //   dashController.userCmeVideo!
-                                            //               .latest ==
-                                            //           null
-                                            //       ? ""
-                                            //       : dashController
-                                            //           .userCmeVideo!.latest
-                                            //           .toString(),
-                                            //   style: TextStyle(
-                                            //       fontFamily: "Nunito",
-                                            //       fontSize: context.width > 410
-                                            //           ? 25
-                                            //           : 20,
-                                            //       color: Colors.white),
-                                            // )
+                                            Text(
+                                              dashController.dashBordData.value
+                                                          .newVideolist ==
+                                                      null
+                                                  ? ""
+                                                  : dashController
+                                                      .dashBordData
+                                                      .value
+                                                      .newVideolist![0]
+                                                      .latestV
+                                                      .toString(),
+                                              style: TextStyle(
+                                                  fontFamily: "Nunito",
+                                                  fontSize: context.width > 410
+                                                      ? 25
+                                                      : 20,
+                                                  color: Colors.white),
+                                            )
                                           ],
                                         ),
                                       ),
@@ -417,23 +441,24 @@ class _HomeState extends State<Home> {
                                             SizedBox(
                                               height: 20,
                                             ),
-                                            // Text(
-                                            //   dashController
-                                            //               .userCmeVideoPurchese!
-                                            //               .latest ==
-                                            //           null
-                                            //       ? " "
-                                            //       : dashController
-                                            //           .userCmeVideoPurchese!
-                                            //           .latest
-                                            //           .toString(),
-                                            //   style: TextStyle(
-                                            //       fontFamily: "Nunito",
-                                            //       fontSize: context.width > 410
-                                            //           ? 25
-                                            //           : 20,
-                                            //       color: Colors.white),
-                                            // ),
+                                            Text(
+                                              dashController.dashBordData.value
+                                                          .lastBuyVideo ==
+                                                      null
+                                                  ? " "
+                                                  : dashController
+                                                      .dashBordData
+                                                      .value
+                                                      .lastBuyVideo![0]
+                                                      .lastBuy
+                                                      .toString(),
+                                              style: TextStyle(
+                                                  fontFamily: "Nunito",
+                                                  fontSize: context.width > 410
+                                                      ? 25
+                                                      : 20,
+                                                  color: Colors.white),
+                                            ),
                                           ],
                                         ),
                                       ),

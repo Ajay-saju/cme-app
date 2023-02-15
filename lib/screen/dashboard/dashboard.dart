@@ -33,6 +33,7 @@ class _DashboardState extends State<Dashboard> {
     super.initState();
     indexChaingeNotifier = ValueNotifier(0);
     dashboardController.getUserData(sessionlog.getString('userId').toString());
+    dashboardController.getuserDashboardData(); 
     dashboardController.getUserProfilePick();
     dashboardController.getRecieptList();
     dashboardController.getCmeList();

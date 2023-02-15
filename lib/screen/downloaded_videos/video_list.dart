@@ -1,5 +1,7 @@
+import 'dart:isolate';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hslr/screen/dashboard/dashboard.dart';
@@ -14,34 +16,73 @@ class VideoListScreen extends StatefulWidget {
 }
 
 class _VideoListScreenState extends State<VideoListScreen> {
+
+  static void downloadCallback(
+      String id, DownloadTaskStatus status, int progress) {
+    final SendPort? send =
+        IsolateNameServer.lookupPortByName('downloader_send_port');
+    send!.send([id, status, progress]);
+  }
+
+  
+
   final videoListController = Get.put(VideoListController());
   late Box<VideoListModel> videoBox;
+
+  List<Map> downloadsListMaps = [];
+  ReceivePort port = ReceivePort();
+
   @override
   void initState() {
     // TODO: implement initState
 
     super.initState();
     videoBox = Hive.box<VideoListModel>('video_list');
-    // FlutterDownloader.registerCallback(downloadCallback, step: 1);
-    // videoListController.prepare();
+
+
+    task();
+    bindBackgroundIsolate();
+    FlutterDownloader.registerCallback(downloadCallback);
   }
 
-  @pragma('vm:entry-point')
-  // static void downloadCallback(
-  //   String id,
-  //   // DownloadTaskStatus status,
-  //   int progress,
-  // ) {
-  //   print(
-  //     'Callback on background isolate: '
-  //     'task ($id) is in status ($status) and process ($progress)',
-  //   );
+  Future task() async {
+    List<DownloadTask>? getTasks = await FlutterDownloader.loadTasks();
+    getTasks!.forEach((task) {
+      Map map = {};
+      map['status'] = task.status;
+      map['progress'] = task.progress;
+      map['id'] = task.taskId;
+      map['filename'] = task.filename;
+      map['savedDirectory'] = task.savedDir;
+      downloadsListMaps.add(map);
+    });
+    setState(() {});
+  }
+  void bindBackgroundIsolate() {
+    bool isSuccess = IsolateNameServer.registerPortWithName(
+        port.sendPort, 'downloader_send_port');
+    if (!isSuccess) {
+      unbindBackgroundIsolate();
+      bindBackgroundIsolate();
+      return;
+    }
+    port.listen((dynamic data) {
+      String id = data[0];
+      DownloadTaskStatus status = data[1];
+      int progress = data[2];
+      var task = downloadsListMaps.where((element) => element['id'] == id);
+      task.forEach((element) {
+        element['progress'] = progress;
+        element['status'] = status;
+        setState(() {});
+      });
+    });
+  }
 
-  //   print(status.toString());
+  void unbindBackgroundIsolate() {
+    IsolateNameServer.removePortNameMapping('downloader_send_port');
+  }
 
-  //   IsolateNameServer.lookupPortByName('downloader_send_port')
-  //       ?.send([id, status, progress]);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +131,21 @@ class _VideoListScreenState extends State<VideoListScreen> {
             Container(
               height: 2,
               color: Colors.black,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Visibility(
+              // visible: false,
+              child: SizedBox(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) => ListTile(
+                    title: Text('Heading'),
+                  ),
+                  itemCount: 3,
+                ),
+              ),
             ),
             SizedBox(
               height: 20,

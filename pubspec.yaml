@@ -57,6 +57,7 @@ dependencies:
   build_runner: ^2.3.3
   flutter_downloader: any
   permission_handler: ^10.2.0
+  intl: ^0.18.0
   
   
   

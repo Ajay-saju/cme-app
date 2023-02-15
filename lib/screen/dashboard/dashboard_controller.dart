@@ -8,6 +8,7 @@ import 'package:hslr/models/dashboard_data_models.dart';
 import 'package:hslr/models/get_eduid_list.model.dart';
 import 'package:hslr/models/get_reciepts.dart';
 import 'package:hslr/models/user_details.dart';
+import 'package:hslr/screen/login/login_controller.dart';
 import 'package:hslr/screen/profile_tab/profile_tab.dart';
 import 'package:hslr/services/get_eduid_list_servise.dart';
 import 'package:hslr/services/user_profile_service/get_user_profile_service.dart';
@@ -15,9 +16,12 @@ import 'package:hslr/services/user_progile_pick_service.dart';
 import '../../main.dart';
 import '../../models/get_cme_list_model.dart';
 import '../../models/get_edu_details_model.dart';
+import '../../models/user_dashboard_details_model.dart';
 import '../../services/cme_list_service.dart';
+import '../../services/dashbord_details_service.dart';
 import '../../services/education_details_service.dart';
 import '../../services/user_payment_service.dart';
+import 'package:intl/intl.dart';
 
 final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
 
@@ -125,7 +129,7 @@ class DashboardController extends GetxController {
 
     try {
       final response = await ediListService.getEduDetails();
-      log(response.statusCode.toString());
+
       var jsonFile = jsonDecode(response.data);
       if (response.statusCode == 200) {
         eduList.value = GetEduDEtails.fromJson(jsonFile);
@@ -146,16 +150,10 @@ class DashboardController extends GetxController {
           contryId: sessionlog.getInt('country'),
           councilId: sessionlog.getString('councilId'));
       if (response.statusCode == 200) {
-        // var temp = response.data.replaceAll('https', "http");
-        // var ok = temp.replaceAll(" \", " /");
         profilePick = response.data.replaceAll('https', "http");
         print(profilePick);
         print('=================================');
-
         await sessionlog.setString('proPick', response.data);
-        // print(sessionlog.getString('proPick'));
-        // profileImage = response.data;
-        // print(profileImage.replaceAll('.', ''));
       }
     } catch (e) {
       if (e is DioError) {
@@ -176,7 +174,7 @@ class DashboardController extends GetxController {
 
     try {
       final response = await eduIdListServise.getAllIdList();
-      log(response.data);
+
       var jsonFile = jsonDecode(response.data);
 
       if (response.statusCode == 200) {
@@ -298,6 +296,7 @@ class DashboardController extends GetxController {
     } on DioError catch (e) {
       print(e.message);
       Get.defaultDialog(
+        barrierDismissible: false,
           title: 'Something is wrong',
           middleText: "Please try again",
           middleTextStyle: TextStyle(
@@ -316,6 +315,50 @@ class DashboardController extends GetxController {
       print(e.toString());
     }
     update();
+  }
+
+  var dateTime =[].obs;
+  Rx<UserDashBordDetails> dashBordData = UserDashBordDetails().obs;
+  Future<UserDashBordDetails?> getuserDashboardData() async {
+    final dashbordService = DashbordService();
+    try {
+      final response = await dashbordService.getDashboardData();
+      var jsonFile = jsonDecode(response.data);
+
+      if (response.statusCode == 200) {
+        dashBordData.value = UserDashBordDetails.fromJson(jsonFile);
+        dateTime.value =
+            getLastLogin(dashBordData.value.lastlogin![0].lastLogT.toString())
+                ;
+        print(dashBordData.value.lastlogin![0].lastLogT.toString());
+      } else {
+        Get.defaultDialog(
+            barrierDismissible: false,
+            title: 'Something is wrong',
+            middleText:
+                "User Doesn't Exist, Please enter valid phone number and pin number",
+            middleTextStyle: TextStyle(
+              fontFamily: "Nunito",
+              color: Colors.black87,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+            titleStyle: TextStyle(
+              fontFamily: "Nunito",
+              color: Colors.black87,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+            actions: [OkButton.okButton('Ok')]);
+      }
+    } catch (e) {
+      if (e is DioError) {
+        print(e.toString());
+      }
+      return null;
+    }
+    update();
+    return null;
   }
 
   Rx<UserDetails> getUserDetails = UserDetails().obs;
@@ -358,16 +401,20 @@ class DashboardController extends GetxController {
     return null;
   }
 
-  // Rx<AllCmeVideos?> allCmeVideos = AllCmeVideos().obs;
-  // Future getAllVideos() async {
-  //   final allCmeVideoService = AllCmeVideoService();
+  List getLastLogin(String data)  {
+    String input = data;
+    DateTime dateTime = DateTime.parse(input);
 
-  //   try {
-  //     var response = await allCmeVideoService.getAllVideo();
-  //     if (response.statusCode == 200) {
-  //       allCmeVideos.value = AllCmeVideos.fromJson(jsonDecode(response.data));
-  //       print(allCmeVideos.value!.videoList![0].speakerName);
-  //     }
-  //   } catch (e) {}
-  // }
+    // Format date
+    DateFormat dateFormat = DateFormat('dd-MM-yyyy');
+    String date =  dateFormat.format(dateTime);
+
+    // Format time
+    DateFormat timeFormat = DateFormat('h:mm a');
+    String time =  timeFormat.format(dateTime);
+    print(date.toString());
+    print(time.toString());
+
+    return [date, time];
+  }
 }

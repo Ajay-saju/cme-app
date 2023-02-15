@@ -157,7 +157,7 @@ class LoginController extends GetxController {
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
-            actions: []);
+            actions: [OkButton.okButton('Ok')]);
       }
     } catch (e) {
       if (e is DioError) {
@@ -276,6 +276,11 @@ class LoginController extends GetxController {
 
 class OkButton {
   static ElevatedButton okButton(String text) => ElevatedButton(
+      style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          )),
       onPressed: () {
         Get.back();
       },
