@@ -1,9 +1,12 @@
+import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/screen/member_details/member_controller.dart';
 import 'package:hslr/screen/paymentdetails/pdfviewer.dart';
+import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/widgets.dart' as pw;
 
@@ -17,16 +20,41 @@ class PaymentDetails extends StatefulWidget {
 }
 
 class _PaymentDetailsState extends State<PaymentDetails> {
-  // final Uri _url = Uri.parse('https://www.orimi.com/pdf-test.pdf');
   final pdf = pw.Document();
   MemberDetailsController mebController = Get.put(MemberDetailsController());
-  // PaymentController paymentController = Get.put(PaymentController());
+  final ScrollController _scrollController = ScrollController();
+  List<String> _data = List.generate(10, (index) => 'Item $index');
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    if (_scrollController.offset >=
+            _scrollController.position.maxScrollExtent &&
+        !_scrollController.position.outOfRange) {
+      // Reach the end of the list, load more data
+      setState(() {
+        _data.addAll(
+            List.generate(10, (index) => 'Item ${_data.length + index}'));
+      });
+    }
+  }
+
   final paymentController = Get.find<DashboardController>();
 
   @override
   Widget build(BuildContext context) {
     var data = paymentController.getpaymentList.value.userData1;
-    // var link= paymentController.getpaymentList.value.userData1.
+
     print(data!.length.toString());
 
     return GetBuilder<DashboardController>(
@@ -225,7 +253,8 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                                   await openPdf(
                                                     url: link.replaceAll(
                                                         '"', ''),
-                                                    fileName: 'exmp.pdf',
+                                                    fileName:
+                                                        "${data[index].videoName}.pdf",
                                                   );
                                                   Get.back();
                                                 },
@@ -288,177 +317,10 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                             separatorBuilder: (context, index) => SizedBox(
                               height: 10,
                             ),
-                            itemCount: data.length,
+                            itemCount:
+                                data.length < 10 ? data.length : _data.length,
                           ),
                         ),
-                  // SingleChildScrollView(
-                  //   scrollDirection: Axis.horizontal,
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.all(20.0),
-                  //     child: _createDataTable(data),
-                  //   ),
-                  // ),
-                  SizedBox(
-                    height: 20,
-                  ),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // SizedBox(
-                      //   width: 180,
-                      // ),
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Center(
-                            child: Icon(
-                          Icons.keyboard_double_arrow_left_rounded,
-                          color: Colors.white,
-                        )),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Center(
-                            child: Icon(
-                          Icons.keyboard_arrow_left_rounded,
-                          color: Colors.white,
-                        )),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Color(0xffDC3638),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Center(
-                          child: Text(
-                            '1',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: "Nunito",
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Center(
-                          child: Text(
-                            '2',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: "Nunito",
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Center(
-                          child: Text(
-                            '3',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: "Nunito",
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Center(
-                            child: Icon(
-                          Icons.keyboard_arrow_right_rounded,
-                          color: Colors.white,
-                        )),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Center(
-                            child: Icon(
-                          Icons.keyboard_double_arrow_right_rounded,
-                          color: Colors.white,
-                        )),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      children: [
-                        Text(
-                          'Showing 1 of 1 Entries',
-                          style: TextStyle(fontSize: 14, fontFamily: "Nunito"
-                              // color: Colors.blue.shade700,
-                              ),
-                        ),
-                        Spacer(),
-
-                        // Padding(
-                        //   padding: const EdgeInsets.only(left: 8.0),
-                        //   child: Image.asset(
-                        //     'assets/hj.png',
-                        //     height: 25,
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  ),
                 ],
               ),
             )),
@@ -543,7 +405,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 url: link.replaceAll('"', ''),
                                 fileName: 'exmp.pdf',
                               );
-                              Get.back();
+                              // Get.back();
                             },
                             child: Text(
                               'Yes',
@@ -590,18 +452,6 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   ),
                 )
               ])),
-      // data
-      //     .map((datas) => DataRow(cells: [
-      //           DataCell(Text('1')),
-      //           DataCell(Text(datas.videoName.toString())),
-      //           DataCell(Text(datas.receiptNumber.toString())),
-      //           DataCell(Text(datas.amount.toString())),
-      //           DataCell(Text(datas.receiptNumber.toString())),
-      //           DataCell(Text('print'))
-      //         ]))
-      //     .toList(),
-      // decoration:
-      //     BoxDecoration(border: Border.all(width: 1, color: Colors.black)),
     );
   }
 
@@ -709,18 +559,14 @@ class _PaymentDetailsState extends State<PaymentDetails> {
   }
 
   Future openPdf({required String url, required String fileName}) async {
-    print(url.toString());
     final file = await downloadPdf(url, fileName);
-    print(url.toString());
 
     if (file == null) return null;
-    print('Path:${file.path}');
+    Uint8List fileBytes = file.readAsBytesSync();
+    String base64String = base64Encode(fileBytes);
 
-    if (file != null) {
-      Get.to(SyncPdfViwer(
-        filePath: file.path,
-      ));
-    }
+    print('Path:${file.path}');
+    OpenFile.open(file.path);
     // Get.back();
   }
 

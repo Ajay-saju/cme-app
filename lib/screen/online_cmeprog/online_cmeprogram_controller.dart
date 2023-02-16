@@ -20,6 +20,7 @@ class CmeProgramController extends GetxController {
   bool isLoading = true;
   bool isClicked = true;
   final _razorpay = Razorpay();
+  
 
   @override
   void onInit() {
@@ -28,13 +29,16 @@ class CmeProgramController extends GetxController {
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+     
   }
 
   @override
   void dispose() {
     _razorpay.clear();
+   
     super.dispose();
   }
+  
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     print(response);
