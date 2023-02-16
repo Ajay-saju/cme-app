@@ -165,27 +165,27 @@ class DashboardController extends GetxController {
 
 //*** Education list for add update education data */
 
-  List<UniversityList>? universityList = [];
-  List<CollegeList>? collegeList = [];
-  List<SpecialtyList>? courseList = [];
-  Rx<GetEducationIdList?> eduIdList = GetEducationIdList().obs;
-  getEduIdList() async {
-    final eduIdListServise = EduIdListServise();
+  // List<UniversityList>? universityList = [];
+  // List<CollegeList>? collegeList = [];
+  // List<SpecialtyList>? courseList = [];
+  // Rx<GetEducationIdList?> eduIdList = GetEducationIdList().obs;
+  // getEduIdList() async {
+  //   final eduIdListServise = EduIdListServise();
 
-    try {
-      final response = await eduIdListServise.getAllIdList();
+  //   try {
+  //     final response = await eduIdListServise.getAllIdList();
 
-      var jsonFile = jsonDecode(response.data);
+  //     var jsonFile = jsonDecode(response.data);
 
-      if (response.statusCode == 200) {
-        eduIdList.value = GetEducationIdList.fromJson(jsonFile);
+  //     if (response.statusCode == 200) {
+  //       eduIdList.value = GetEducationIdList.fromJson(jsonFile);
 
-        universityList = eduIdList.value!.universityList!;
-        collegeList = eduIdList.value!.collegeList!;
-        courseList = eduIdList.value!.specialtyList!;
-      }
-    } catch (e) {}
-  }
+  //       universityList = eduIdList.value!.universityList!;
+  //       collegeList = eduIdList.value!.collegeList!;
+  //       courseList = eduIdList.value!.specialtyList!;
+  //     }
+  //   } catch (e) {}
+  // }
 
   //*** Dash board data */
 
@@ -379,13 +379,7 @@ class DashboardController extends GetxController {
         print(getUserDetails.value.loginName);
         // username = sessionlog.getString('log_name');
         sessionlog.setString('log_name', getUserDetails.value.loginName!);
-        // await getUserProfilePick(
-        //     mid: userLogin.value.userId,
-        //     conId: userLogin.value.countryId,
-        //     stateId: userLogin.value.stateId,
-        //     counId: userLogin.value.councilId);
-
-        // await getUserLastLogin(mId);
+        
       } else {
         // isfade = true;
         Get.defaultDialog(

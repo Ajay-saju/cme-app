@@ -38,7 +38,7 @@ class _DashboardState extends State<Dashboard> {
     dashboardController.getRecieptList();
     dashboardController.getCmeList();
     dashboardController.getEduList();
-    dashboardController.getEduIdList();
+    // dashboardController.getEduIdList();
   }
 
   @override

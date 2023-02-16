@@ -189,7 +189,6 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                               ],
                             ),
                           ),
-                          
                           SizedBox(
                             height: 25,
                           ),
@@ -212,12 +211,12 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                       border:
                                           Border.all(color: Colors.black87)),
                                   child: TypeAheadFormField(
-                                    validator: (value) {
-                                      // if(value==null){
-                                      //   eduController.universityCode =
-                                      //       suggestion.universitCode!
-                                      // }
-                                    },
+                                      validator: (value) {
+                                        // if(value==null){
+                                        //   eduController.universityCode =
+                                        //       suggestion.universitCode!
+                                        // }
+                                      },
                                       hideOnError: true,
                                       hideSuggestionsOnKeyboardHide: false,
                                       hideKeyboardOnDrag: true,
@@ -260,6 +259,9 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                       },
                                       onSuggestionSelected:
                                           (UniversityList suggestion) {
+                                        eduController.getCollageCode(
+                                            universityId:
+                                                suggestion.universitCode!);
                                         eduController.universityController
                                             .text = suggestion.universitName!;
                                         eduController.universityCode =
@@ -365,47 +367,13 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                 )),
                             ElevatedButton(
                                 onPressed: () async {
-                                  await eduController.addEducationDetails(
+                                  await eduController.editEducationDetails(
                                     college: eduController.collegeCode,
                                     course: eduController.corseCode,
                                     month: eduController.month.toString(),
                                     year: eduController.year.toString(),
                                     university: eduController.universityCode,
                                   );
-                                  // Get.defaultDialog(
-                                  //     middleTextStyle: TextStyle(
-                                  //       fontFamily: "Nunito",
-                                  //       color: Colors.black87,
-                                  //       fontSize: 15,
-                                  //       fontWeight: FontWeight.bold,
-                                  //     ),
-                                  //     titleStyle: TextStyle(
-                                  //       fontFamily: "Nunito",
-                                  //       color: Colors.black87,
-                                  //       fontSize: 18,
-                                  //       fontWeight: FontWeight.bold,
-                                  //     ),
-                                  //     barrierDismissible: false,
-                                  //     title: "Success",
-                                  //     middleText: 'Edit Details successfully',
-                                  //     actions: [
-                                  //       ElevatedButton(
-                                  //         onPressed: () {
-                                  //           Get.off(EducationDetailsScreen());
-                                  //         },
-                                  //         child: Text('OK'),
-                                  //         style: ElevatedButton.styleFrom(
-                                  //             backgroundColor: Colors.black,
-                                  //             shape: RoundedRectangleBorder(
-                                  //               borderRadius:
-                                  //                   BorderRadius.circular(30),
-                                  //             )),
-                                  //       )
-                                  //     ]
-                                  //     // onConfirm: () {
-                                  //     //   Get.off(EducationDetailsScreen());
-                                  //     // }
-                                  //     );
                                 },
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,

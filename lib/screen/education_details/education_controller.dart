@@ -147,9 +147,10 @@ class EducationController extends GetxController {
 
       if (response.statusCode == 200) {
         eduIdList.value = GetEducationIdList.fromJson(jsonFile);
-
         universityList = eduIdList.value!.universityList!;
-        collegeList = eduIdList.value!.collegeList!;
+
+        // collegeList = eduIdList.value!.collegeList!;
+
         specialtyList = eduIdList.value!.specialtyList!;
         for (var i = 0; i < specialtyList.length; i++) {
           userNames.add(specialtyList[i].specialtyName);
@@ -161,7 +162,84 @@ class EducationController extends GetxController {
     update();
   }
 
-  Future addEducationDetails(
+  Rx<CollegeLis> collageList = CollegeLis().obs;
+  getCollageCode({required String universityId}) async {
+    DialogHelper.showLoading();
+    OrginalApi orginalApi = OrginalApi();
+    final dio = Dio(BaseOptions(
+        baseUrl: orginalApi.baseUrl, responseType: ResponseType.plain));
+    try {
+      var response =
+          await dio.post('getcollege', data: {'university_Code': universityId});
+      if (response.statusCode == 200) {
+        DialogHelper.hideLoading();
+      }
+    } catch (e) {}
+  }
+
+  Future addNewEduData(
+      {required String universityId,
+      required String collageCode,
+      required String courseId}) async {
+    DialogHelper.showLoading();
+    OrginalApi orginalApi = OrginalApi();
+    final dio = Dio(BaseOptions(
+        baseUrl: orginalApi.baseUrl, responseType: ResponseType.plain));
+    var newEduData = {
+      "countryId": sessionlog.getInt('country').toString(),
+      "stateId": sessionlog.getString('stateId').toString(),
+      "councilId": sessionlog.getString('councilId').toString(),
+      "memberid": sessionlog.getString('userId'),
+      "courseCode": courseId,
+      "universitycode": universityId,
+      "collegecode": collageCode,
+      "createdby": sessionlog.getString('log_name'),
+      "updatedby": sessionlog.getString('log_name'),
+    };
+    print(newEduData);
+    try {
+      var response = await dio.post('SaveAddNewEduinfoNew', data: newEduData);
+      if (response.statusCode == 200) {
+        DialogHelper.hideLoading();
+        await Get.defaultDialog(
+            barrierDismissible: false,
+            title: "Success",
+            middleTextStyle: TextStyle(
+              fontFamily: "Nunito",
+              color: Colors.black87,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+            titleStyle: TextStyle(
+              fontFamily: "Nunito",
+              color: Colors.black87,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+            middleText: 'Save Details successfully',
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  Get.off(EducationDetailsScreen());
+                },
+                child: Text('Ok'),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    )),
+              )
+            ]);
+      }
+    } on DioError catch (e) {
+      print(e.message);
+      rethrow;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future editEducationDetails(
       {required String course,
       required String month,
       required String year,
