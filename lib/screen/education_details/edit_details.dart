@@ -7,6 +7,7 @@ import 'package:hslr/models/get_eduid_list.model.dart';
 import 'package:hslr/screen/education_details/education_controller.dart';
 import 'package:hslr/screen/education_details/education_screen.dart';
 
+import '../../models/college_list_model.dart';
 import '../dashboard/dashboard_controller.dart';
 
 class EditEduDetails extends StatefulWidget {
@@ -211,6 +212,7 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                       border:
                                           Border.all(color: Colors.black87)),
                                   child: TypeAheadFormField(
+                                      getImmediateSuggestions: true,
                                       validator: (value) {
                                         // if(value==null){
                                         //   eduController.universityCode =
@@ -258,14 +260,15 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                         );
                                       },
                                       onSuggestionSelected:
-                                          (UniversityList suggestion) {
+                                          (UniversityList suggestion) async {
                                         eduController.getCollageCode(
                                             universityId:
                                                 suggestion.universitCode!);
-                                        eduController.universityController
-                                            .text = suggestion.universitName!;
+                                        eduController
+                                                .universityController.text =
+                                            await suggestion.universitName!;
                                         eduController.universityCode =
-                                            suggestion.universitCode!;
+                                            await suggestion.universitCode!;
                                       }),
                                 ),
                               ],

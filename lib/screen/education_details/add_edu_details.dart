@@ -5,6 +5,8 @@ import 'package:hslr/screen/education_details/education_controller.dart';
 import 'package:hslr/screen/education_details/education_screen.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
+import '../../models/college_list_model.dart';
+
 class AddEducationDetails extends StatefulWidget {
   const AddEducationDetails({Key? key}) : super(key: key);
 
@@ -285,13 +287,18 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                                                       .universitName!),
                                                 );
                                               },
-                                              onSuggestionSelected: (UniversityList suggestion) {
+                                              onSuggestionSelected: (UniversityList suggestion) async {
+                                                eduController.getCollageCode(
+                                                    universityId: suggestion
+                                                        .universitCode!);
                                                 eduController
                                                         .universityController
                                                         .text =
-                                                    suggestion.universitName!;
+                                                    await suggestion
+                                                        .universitName!;
                                                 eduController.universityCode =
-                                                    suggestion.universitCode!;
+                                                    await suggestion
+                                                        .universitCode!;
                                               }),
                                         ),
                                       ],
@@ -325,42 +332,30 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                                               },
                                               errorBuilder: (context, error) =>
                                                   Text(error.toString()),
-                                              hideOnError: true,
-                                              hideSuggestionsOnKeyboardHide:
-                                                  false,
-                                              hideKeyboardOnDrag: true,
-                                              textFieldConfiguration:
-                                                  TextFieldConfiguration(
-                                                      cursorColor:
-                                                          Colors.black87,
-                                                      decoration:
-                                                          InputDecoration(
-                                                              errorBorder: OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius.circular(
-                                                                          10),
-                                                                  borderSide: BorderSide(
-                                                                      color: Colors
-                                                                          .black87)),
-                                                              hintText:
-                                                                  "Select college",
-                                                              // errorBorder:
-                                                              //     InputBorder(borderSide: BorderSide(color: Colors.black87)),
-
-                                                              border: OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius.circular(
-                                                                          10),
-                                                                  borderSide: BorderSide(
-                                                                      color: Colors
-                                                                          .black87)),
-                                                              contentPadding: EdgeInsets.only(
-                                                                  left: 15,
-                                                                  bottom: 11,
-                                                                  top: 11,
-                                                                  right: 15)),
-                                                      controller: eduController
-                                                          .collegeController),
+                                              // hideOnError: true,
+                                              // hideSuggestionsOnKeyboardHide:
+                                              //     false,
+                                              // hideKeyboardOnDrag: true,
+                                              textFieldConfiguration: TextFieldConfiguration(
+                                                  cursorColor: Colors.black87,
+                                                  decoration: InputDecoration(
+                                                      errorBorder: OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  10),
+                                                          borderSide: BorderSide(
+                                                              color: Colors
+                                                                  .black87)),
+                                                      hintText:
+                                                          "Select college",
+                                                      border: OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          borderSide: BorderSide(
+                                                              color: Colors.black87)),
+                                                      contentPadding: EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15)),
+                                                  controller: eduController.collegeController),
                                               suggestionsCallback: (pattern) {
                                                 return eduController
                                                     .collegeList!
@@ -370,8 +365,9 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                                                         .contains(pattern
                                                             .toLowerCase()));
                                               },
-                                              itemBuilder: (context,
-                                                  CollegeList suggestion) {
+                                              itemBuilder: (context, CollegeList suggestion) {
+                                                print(suggestion.collegeName);
+                                                print(suggestion.collegeCode);
                                                 return Padding(
                                                   padding:
                                                       const EdgeInsets.all(8.0),
@@ -379,12 +375,14 @@ class _AddEducationDetailsState extends State<AddEducationDetails> {
                                                       suggestion.collegeName!),
                                                 );
                                               },
-                                              onSuggestionSelected: (CollegeList suggestion) {
+                                              onSuggestionSelected: (CollegeList suggestion) async {
                                                 eduController.collegeController
                                                         .text =
-                                                    suggestion.collegeName!;
+                                                    await suggestion
+                                                        .collegeName!;
                                                 eduController.collegeCode =
-                                                    suggestion.collegeCode!;
+                                                    await suggestion
+                                                        .collegeCode!;
                                               }),
                                         ),
                                       ],

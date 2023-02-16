@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,10 @@ import 'package:hslr/base_api/orginal_api.dart';
 import 'package:hslr/main.dart';
 import 'package:hslr/screen/education_details/education_screen.dart';
 import 'package:hslr/screen/loading_class/loading_class.dart';
+import 'package:hslr/screen/profile_tab/profile_tab.dart';
+import 'package:hslr/services/add_edu_data_servise.dart';
+import 'package:hslr/services/collage_list_servise.dart';
+import '../../models/college_list_model.dart';
 import '../../models/get_eduid_list.model.dart';
 import '../../services/get_eduid_list_servise.dart';
 
@@ -162,17 +167,21 @@ class EducationController extends GetxController {
     update();
   }
 
-  Rx<CollegeLis> collageList = CollegeLis().obs;
+  Rx<GetCollegeList> getCollegeList = GetCollegeList().obs;
   getCollageCode({required String universityId}) async {
     DialogHelper.showLoading();
-    OrginalApi orginalApi = OrginalApi();
-    final dio = Dio(BaseOptions(
-        baseUrl: orginalApi.baseUrl, responseType: ResponseType.plain));
+    final collegeListServise = CollageListServise();
     try {
-      var response =
-          await dio.post('getcollege', data: {'university_Code': universityId});
+      final response = await collegeListServise.getCollageList(universityId);
       if (response.statusCode == 200) {
         DialogHelper.hideLoading();
+        log(response.data);
+        var jsonFile = jsonDecode(response.data);
+        getCollegeList.value = GetCollegeList.fromJson(jsonFile);
+
+        collegeList = getCollegeList.value.collegeList;
+
+        print(getCollegeList.value.collegeList![0].collegeName);
       }
     } catch (e) {}
   }
@@ -181,10 +190,10 @@ class EducationController extends GetxController {
       {required String universityId,
       required String collageCode,
       required String courseId}) async {
+    final addEduDataServise = AddEduDataServise();
     DialogHelper.showLoading();
-    OrginalApi orginalApi = OrginalApi();
-    final dio = Dio(BaseOptions(
-        baseUrl: orginalApi.baseUrl, responseType: ResponseType.plain));
+
+    // Map<String, dynamic> newEduData;
     var newEduData = {
       "countryId": sessionlog.getInt('country').toString(),
       "stateId": sessionlog.getString('stateId').toString(),
@@ -198,10 +207,16 @@ class EducationController extends GetxController {
     };
     print(newEduData);
     try {
-      var response = await dio.post('SaveAddNewEduinfoNew', data: newEduData);
+      var response = await addEduDataServise.postNewEduData(
+        collageCode: collageCode,
+        courseId: corseCode,
+        universityId: universityId,
+      );
       if (response.statusCode == 200) {
+        log(response.data);
         DialogHelper.hideLoading();
-        await Get.defaultDialog(
+        await 
+        Get.defaultDialog(
             barrierDismissible: false,
             title: "Success",
             middleTextStyle: TextStyle(
@@ -220,7 +235,7 @@ class EducationController extends GetxController {
             actions: [
               ElevatedButton(
                 onPressed: () {
-                  Get.off(EducationDetailsScreen());
+                  Get.offAll(ProfileScreenTab());
                 },
                 child: Text('Ok'),
                 style: ElevatedButton.styleFrom(
