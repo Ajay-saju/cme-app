@@ -26,17 +26,23 @@ class GetEduDEtails {
 
 class Result {
   String? message;
-  String? yEAROFPASSING;
+  Null? yEAROFPASSING;
   String? uNIVERSITY;
   String? cOLLEGE;
   String? dEGREE;
+  String? uNIVERSITYId;
+  String? cOLLEGEId;
+  String? dEGREEId;
 
   Result(
       {this.message,
       this.yEAROFPASSING,
       this.uNIVERSITY,
       this.cOLLEGE,
-      this.dEGREE});
+      this.dEGREE,
+      this.uNIVERSITYId,
+      this.cOLLEGEId,
+      this.dEGREEId});
 
   Result.fromJson(Map<String, dynamic> json) {
     message = json['message'];
@@ -44,6 +50,9 @@ class Result {
     uNIVERSITY = json['UNIVERSITY'];
     cOLLEGE = json['COLLEGE'];
     dEGREE = json['DEGREE'];
+    uNIVERSITYId = json['UNIVERSITY_id'];
+    cOLLEGEId = json['COLLEGE_id'];
+    dEGREEId = json['DEGREE_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -53,6 +62,9 @@ class Result {
     data['UNIVERSITY'] = this.uNIVERSITY;
     data['COLLEGE'] = this.cOLLEGE;
     data['DEGREE'] = this.dEGREE;
+    data['UNIVERSITY_id'] = this.uNIVERSITYId;
+    data['COLLEGE_id'] = this.cOLLEGEId;
+    data['DEGREE_id'] = this.dEGREEId;
     return data;
   }
 }

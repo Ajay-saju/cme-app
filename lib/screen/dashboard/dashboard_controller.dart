@@ -122,22 +122,7 @@ class DashboardController extends GetxController {
   }
 
 // ****User Education details****
-  Rx<GetEduDEtails> eduList = GetEduDEtails().obs;
-  Future<GetEduDEtails?> getEduList() async {
-    print('working education list...');
-    final ediListService = EducationDetalsServ();
-
-    try {
-      final response = await ediListService.getEduDetails();
-
-      var jsonFile = jsonDecode(response.data);
-      if (response.statusCode == 200) {
-        eduList.value = GetEduDEtails.fromJson(jsonFile);
-      }
-    } catch (e) {
-      print(e.toString());
-    }
-  }
+  
 
   //*** user Profile picture */
   var profilePick;
@@ -152,7 +137,7 @@ class DashboardController extends GetxController {
       if (response.statusCode == 200) {
         profilePick = response.data.replaceAll('https', "http");
         print(profilePick);
-        print('=================================');
+    
         await sessionlog.setString('proPick', response.data);
       }
     } catch (e) {
@@ -163,31 +148,6 @@ class DashboardController extends GetxController {
     update();
   }
 
-//*** Education list for add update education data */
-
-  // List<UniversityList>? universityList = [];
-  // List<CollegeList>? collegeList = [];
-  // List<SpecialtyList>? courseList = [];
-  // Rx<GetEducationIdList?> eduIdList = GetEducationIdList().obs;
-  // getEduIdList() async {
-  //   final eduIdListServise = EduIdListServise();
-
-  //   try {
-  //     final response = await eduIdListServise.getAllIdList();
-
-  //     var jsonFile = jsonDecode(response.data);
-
-  //     if (response.statusCode == 200) {
-  //       eduIdList.value = GetEducationIdList.fromJson(jsonFile);
-
-  //       universityList = eduIdList.value!.universityList!;
-  //       collegeList = eduIdList.value!.collegeList!;
-  //       courseList = eduIdList.value!.specialtyList!;
-  //     }
-  //   } catch (e) {}
-  // }
-
-  //*** Dash board data */
 
   UserCmeVideo? userCmeVideo;
   UserCmeVideoPurchese? userCmeVideoPurchese;
@@ -278,44 +238,7 @@ class DashboardController extends GetxController {
     update();
   }
 
-  getUserCmeVideoPurchese() async {
-    OrginalApi orginalApi = OrginalApi();
-    final dio = Dio(BaseOptions(
-        //
-        baseUrl: orginalApi.baseUrl,
-        responseType: ResponseType.plain));
-    try {
-      var responseUserCme_video_PURCHES = await dio.get("UserCme_video_PURCHES",
-          queryParameters: {
-            'Mid11': sessionlog.getString('userId').toString()
-          });
-      if (responseUserCme_video_PURCHES.statusCode == 200) {
-        userCmeVideoPurchese = UserCmeVideoPurchese.fromJson(
-            jsonDecode(responseUserCme_video_PURCHES.data));
-      }
-    } on DioError catch (e) {
-      print(e.message);
-      Get.defaultDialog(
-        barrierDismissible: false,
-          title: 'Something is wrong',
-          middleText: "Please try again",
-          middleTextStyle: TextStyle(
-            fontFamily: "Nunito",
-            color: Colors.black87,
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
-          ),
-          titleStyle: TextStyle(
-            fontFamily: "Nunito",
-            color: Colors.black87,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ));
-    } catch (e) {
-      print(e.toString());
-    }
-    update();
-  }
+
 
   var dateTime =[].obs;
   Rx<UserDashBordDetails> dashBordData = UserDashBordDetails().obs;

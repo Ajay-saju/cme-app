@@ -1,14 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 import 'package:hslr/models/get_eduid_list.model.dart';
-import 'package:hslr/screen/education_details/education_controller.dart';
-import 'package:hslr/screen/education_details/education_screen.dart';
-
+import 'package:hslr/screen/profile_tab/profile_tab_controller.dart';
 import '../../models/college_list_model.dart';
-import '../dashboard/dashboard_controller.dart';
+import '../profile_tab/profile_tab.dart';
 
 class EditEduDetails extends StatefulWidget {
   final index;
@@ -23,33 +19,34 @@ class EditEduDetails extends StatefulWidget {
 }
 
 class _EditEduDetailsState extends State<EditEduDetails> {
-  final eduController = Get.find<EducationController>();
-  final dashControll = Get.find<DashboardController>();
+ 
+  final profileController = Get.find<ProfileTabController>();
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    eduController.collegeController.text =
-        dashControll.eduList.value.result![widget.index].cOLLEGE.toString();
-    eduController.universityController.text =
-        dashControll.eduList.value.result![widget.index].uNIVERSITY.toString();
-    eduController.degreeController.text =
-        dashControll.eduList.value.result![widget.index].dEGREE.toString();
+    profileController.collegeController.text =
+        profileController.eduList.value.result![widget.index].cOLLEGE.toString();
+    profileController.universityController.text =
+        profileController.eduList.value.result![widget.index].uNIVERSITY.toString();
+    profileController.degreeController.text =
+        profileController.eduList.value.result![widget.index].dEGREE.toString();
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    eduController.degreeController.clear();
-    eduController.universityController.clear();
-    eduController.collegeController.clear();
+    profileController.degreeController.clear();
+    profileController.universityController.clear();
+    profileController.collegeController.clear();
   }
 
   @override
   Widget build(BuildContext context) {
-    print(eduController.universityController.toString());
-    return GetBuilder<EducationController>(builder: ((_) {
+    print(profileController.universityController.toString());
+    return GetBuilder<ProfileTabController>(builder: ((_) {
       return GestureDetector(
         onTap: () {
           FocusScope.of(context).unfocus();
@@ -135,7 +132,7 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                   child: TypeAheadFormField(
                                       validator: (value) {
                                         if (value!.isEmpty) {
-                                          return eduController
+                                          return profileController
                                               .degreeController.text;
                                         }
                                       },
@@ -161,10 +158,10 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                                     right: 15),
                                                 hintText: 'Select Course',
                                               ),
-                                              controller: eduController
+                                              controller: profileController
                                                   .degreeController),
                                       suggestionsCallback: (pattern) {
-                                        return eduController.specialtyList
+                                        return profileController.specialtyList
                                             .where((element) => element
                                                 .specialtyName!
                                                 .toLowerCase()
@@ -181,9 +178,9 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                       },
                                       onSuggestionSelected:
                                           (SpecialtyList suggestion) {
-                                        eduController.degreeController.text =
+                                        profileController.degreeController.text =
                                             suggestion.specialtyName!;
-                                        eduController.corseCode =
+                                        profileController.corseCode =
                                             suggestion.specialtyId!.toString();
                                       }),
                                 ),
@@ -215,7 +212,7 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                       getImmediateSuggestions: true,
                                       validator: (value) {
                                         // if(value==null){
-                                        //   eduController.universityCode =
+                                        //   profileController.universityCode =
                                         //       suggestion.universitCode!
                                         // }
                                       },
@@ -241,10 +238,10 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                                     right: 15),
                                                 hintText: 'Select University',
                                               ),
-                                              controller: eduController
+                                              controller: profileController
                                                   .universityController),
                                       suggestionsCallback: (pattern) {
-                                        return eduController.universityList
+                                        return profileController.universityList
                                             .where((element) => element
                                                 .universitName!
                                                 .toLowerCase()
@@ -261,13 +258,13 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                       },
                                       onSuggestionSelected:
                                           (UniversityList suggestion) async {
-                                        eduController.getCollageCode(
+                                        profileController.getCollageCode(
                                             universityId:
                                                 suggestion.universitCode!);
-                                        eduController
+                                        profileController
                                                 .universityController.text =
                                             await suggestion.universitName!;
-                                        eduController.universityCode =
+                                        profileController.universityCode =
                                             await suggestion.universitCode!;
                                       }),
                                 ),
@@ -315,10 +312,10 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                                   right: 15),
                                               hintText: "Select Collage",
                                             ),
-                                            controller: eduController
+                                            controller: profileController
                                                 .collegeController),
                                     suggestionsCallback: (pattern) {
-                                      return eduController.collegeList!.where(
+                                      return profileController.collegeList!.where(
                                           (element) => element.collegeName!
                                               .toLowerCase()
                                               .contains(pattern.toLowerCase()));
@@ -332,9 +329,9 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                     },
                                     onSuggestionSelected:
                                         (CollegeList suggestion) {
-                                      eduController.collegeController.text =
+                                      profileController.collegeController.text =
                                           suggestion.collegeName!;
-                                      eduController.collegeCode =
+                                      profileController.collegeCode =
                                           suggestion.collegeCode!;
                                     },
                                   ),
@@ -354,7 +351,7 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                           children: [
                             ElevatedButton(
                                 onPressed: () {
-                                  Get.off(EducationDetailsScreen());
+                                  Get.off(ProfileScreenTab());
                                 },
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,
@@ -370,12 +367,12 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                 )),
                             ElevatedButton(
                                 onPressed: () async {
-                                  await eduController.editEducationDetails(
-                                    college: eduController.collegeCode,
-                                    course: eduController.corseCode,
-                                    month: eduController.month.toString(),
-                                    year: eduController.year.toString(),
-                                    university: eduController.universityCode,
+                                  await profileController.editEducationDetails(
+                                    collegeId: profileController.collegeCode,
+                                    courseId: profileController.corseCode,
+                                    month: profileController.month.toString(),
+                                    year: profileController.year.toString(),
+                                    universityId: profileController.universityCode,
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(
@@ -402,289 +399,6 @@ class _EditEduDetailsState extends State<EditEduDetails> {
     }));
   }
 
-  Padding customeDropDownText(
-      {required BuildContext context,
-      // required String selectedBox,
-      required String text,
-      required String? item,
-      required List<dynamic> items,
-      required String hintText}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
-        children: [
-          Text(
-            text,
-            style: TextStyle(
-                fontSize: 17, fontFamily: "Nunito", color: Colors.black87),
-          ),
-          Spacer(),
-          Container(
-            width: context.width * 0.55,
-            child: DropdownButtonFormField<UniversityList>(
-                validator: (value) => value == null ? 'field required' : null,
-                itemHeight: null,
-                isExpanded: true,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 7),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(color: Colors.black),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(color: Colors.black),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(color: Colors.black),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                style: TextStyle(
-                    fontSize: 17, fontFamily: "Nunito", color: Colors.black87),
-                hint: Text(
-                  hintText,
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: "Nunito",
-                      color: Colors.black87),
-                ),
-                items: items.map((item) {
-                  return eduController.buildMenuItem(item);
-                }).toList(),
-                onChanged: (value) {
-                  item = value.toString();
-                  var id = value!.universitCode;
-                  print(id.toString());
-                  print('==============================');
-                  eduController.update();
-                }),
-          ),
-        ],
-      ),
-    );
-  }
+ 
 
-  Padding customeDropDownTextCource(
-      {required BuildContext context,
-      required String text,
-      required String? item,
-      required List<dynamic> items,
-      required String hintText}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
-        children: [
-          Text(
-            text,
-            style: TextStyle(
-                fontSize: 17, fontFamily: "Nunito", color: Colors.black87),
-          ),
-          Spacer(),
-          Container(
-            width: context.width * 0.55,
-            child: DropdownButtonFormField<SpecialtyList>(
-                validator: (value) => value == null ? 'field required' : null,
-                itemHeight: null,
-                isExpanded: true,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 7),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(color: Colors.black),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(color: Colors.black),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(color: Colors.black),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                style: TextStyle(
-                    fontSize: 17, fontFamily: "Nunito", color: Colors.black87),
-                hint: Text(
-                  hintText,
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: "Nunito",
-                      color: Colors.black87),
-                ),
-                items: items.map((item) {
-                  return eduController.buildMenuItemCource(item);
-                }).toList(),
-                onChanged: (value) {
-                  item = value.toString();
-                  var id = value!.specialtyId;
-                  print(id.toString());
-                  print('==============================');
-                  eduController.update();
-                }),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Padding customeDropDownTextCollege(
-      {required BuildContext context,
-      required String text,
-      required String? item,
-      required List<dynamic> items,
-      required String hintText}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
-        children: [
-          Text(
-            text,
-            style: TextStyle(
-                fontSize: 17, fontFamily: "Nunito", color: Colors.black87),
-          ),
-          Spacer(),
-          Container(
-            width: context.width * 0.55,
-            child: DropdownButtonFormField<CollegeList>(
-                validator: (value) => value == null ? 'field required' : null,
-                itemHeight: null,
-                isExpanded: true,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 7),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(color: Colors.black),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(color: Colors.black),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(color: Colors.black),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                style: TextStyle(
-                    fontSize: 17, fontFamily: "Nunito", color: Colors.black87),
-                hint: Text(
-                  hintText,
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: "Nunito",
-                      color: Colors.black87),
-                ),
-                items: items.map((item) {
-                  return eduController.buildMenuItemCollege(item);
-                }).toList(),
-                onChanged: (value) {
-                  item = value.toString();
-                  var id = value!.collegeCode;
-                  print(id.toString());
-                  print('==============================');
-                  eduController.update();
-                }),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Padding customeDropDownTextMonth(
-      {required BuildContext context,
-      required String text,
-      required String? item,
-      required List<dynamic> items,
-      required String? hintText}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: Row(
-        children: [
-          Text(
-            text,
-            style: TextStyle(
-                fontSize: 17, fontFamily: "Nunito", color: Colors.black87),
-          ),
-          Spacer(),
-          Container(
-            width: context.width * 0.55,
-            child: DropdownButtonFormField(
-                validator: (value) => value == null ? 'field required' : null,
-                itemHeight: null,
-                isExpanded: true,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 7),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(color: Colors.black),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(color: Colors.black),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(color: Colors.black),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                style: TextStyle(
-                    fontSize: 17, fontFamily: "Nunito", color: Colors.black87),
-                hint: Text(
-                  hintText ?? 'Select Month',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: "Nunito",
-                      color: Colors.black87),
-                ),
-                items: eduController.months.map((item) {
-                  return eduController.buildMenuItemYear(item);
-                }).toList(),
-                onChanged: (value) {
-                  eduController.month = value.toString();
-                  eduController.update();
-                }),
-          ),
-        ],
-      ),
-    );
-  }
 }

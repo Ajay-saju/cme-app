@@ -10,10 +10,17 @@ class EducationDetalsServ {
 
   Future<Response> getEduDetails() async {
     final mid = await sessionlog.getString('userId');
+    final countryId = await sessionlog.getInt('country');
+    final councilId = await sessionlog.getString('councilId');
+    final stateId = await sessionlog.getString('stateId');
 
     try {
-      var response =
-          await dio.get('GetEduinfo', queryParameters: {'Mid7': mid});
+      var response = await dio.get('GetEduinfo', queryParameters: {
+        "memberId": mid,
+        "countryId": countryId,
+        "councilId": councilId,
+        "stateId": stateId
+      });
       return response;
     } on DioError catch (e) {
       print(e.message);

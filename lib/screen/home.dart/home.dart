@@ -79,7 +79,7 @@ class _HomeState extends State<Home> {
                               ),
                               child: InkWell(
                                 onTap: () {
-                                  Get.to(ChangeProfilePicture());
+                                  // Get.to(ChangeProfilePicture());
                                 },
                                 child: CircleAvatar(
                                   radius: 28,

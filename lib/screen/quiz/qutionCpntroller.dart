@@ -89,14 +89,8 @@ class QuestionController extends GetxController {
         print(e);
       }
 
-      // var images = await prefs.setStringList('i', image!.path);
-
       print(
           'kitttttttttttttttttttttttttttttttttttttttttttttttttttiiiiiiiiiiiiiiiiiii');
-      // Get.defaultDialog(content: Image.file(File(image!.path)));
-
-      // imageList.add(image!.path);
-      // print(imageList.toList());
     }
   }
 
@@ -204,16 +198,6 @@ class QuestionController extends GetxController {
             remainingSecond = 0;
             isCancelTest = true;
 
-            // if (timer != null) {
-            //   remainingSecond = 0;
-            //   timer!.cancel();
-            //   if (timer!.isActive) {
-            //     print('timer is active');
-            //   }
-            //   print(timer!.isActive);
-            //   cameraController.dispose();
-            // }
-
             isGoingtoTest == isGoingtoTest
                 ? Get.offAll(Onlinecmeprogram())
                 : Get.offAll(TestScreen());
@@ -237,7 +221,12 @@ class QuestionController extends GetxController {
     );
   }
 
-  completeTest({bool? isGoingtoTest, input, correctAns, selectedOption,}) {
+  completeTest({
+    bool? isGoingtoTest,
+    input,
+    correctAns,
+    selectedOption,
+  }) {
     answers[pageChange + 1] = selectedOption;
     print(answers);
     Get.defaultDialog(
@@ -270,14 +259,6 @@ class QuestionController extends GetxController {
             timer!.cancel();
             remainingSecond = 0;
             isCancelTest = true;
-            // cameraController.stopImageStream();
-            // cameraController.dispose();
-            // if (timer != null){
-
-            // } timer!.cancel();
-            // isGoingtoTest == true
-            //     ? Get.offAll(TestScreen())
-            //     : Get.offAll(Onlinecmeprogram());
           },
           child: Text(
             'OK',
@@ -297,17 +278,6 @@ class QuestionController extends GetxController {
       ),
     );
   }
-
-  // Rx<QuestionsAnsList> mcqData = QuestionsAnsList().obs;
-  //   Future<QuestionsAnsList?> getAllMCQdata(String videoId) async {
-  //     final mcqDataService = QuestionAnsService();
-  //     try {
-  //       final response = await mcqDataService.getMCQData(videoId);
-  //       if (response.statusCode == 200) {
-  //         mcqData.value = QuestionsAnsList.fromJson(jsonDecode(response.data));
-  //       }
-  //     } catch (e) {}
-  //   }
 
   void testResult({input, correctAns, isGOingto}) {
     var count = 0;
@@ -341,9 +311,7 @@ class QuestionController extends GetxController {
                   borderRadius: BorderRadius.circular(30),
                 )),
             onPressed: () {
-              // if (timer != null) {
-              //   timer!.cancel();
-              // }
+             
               isGOingto == true
                   ? Get.offAll(TestScreen())
                   : Get.offAll(Onlinecmeprogram());
@@ -391,17 +359,13 @@ class QuestionController extends GetxController {
       );
     }
   }
-  
 
-  void saveTest({
-    required String speakerId,
-    required String videoId,
-    required String result,
-    required String mark,
-    required var answers
-  }) {
-    
-
+  void saveTest(
+      {required String speakerId,
+      required String videoId,
+      required String result,
+      required String mark,
+      required var answers}) {
     Map<String, dynamic> _resultData = {
       "cntryId": sessionlog.getInt('country').toString(),
       "stateId": sessionlog.getString('stateId'),
@@ -413,6 +377,12 @@ class QuestionController extends GetxController {
       "marks": mark,
       "Answers": answers,
     };
+  }
+
+  List<Map<String, String>> finalAnswers = [];
+
+  void setAnswers({required String qId, required String ans}) {
+    // finalAnswers.add( );
   }
 }
 

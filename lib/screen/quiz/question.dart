@@ -50,51 +50,6 @@ class _QuestionState extends State<Question> {
           return Future.value(false);
         } else {
           qController.cancelTest(widget.isGoingtoTest);
-          // Get.defaultDialog(
-          //   title: 'Are you sure',
-          //   confirm: ElevatedButton(
-          //       style: ElevatedButton.styleFrom(
-          //           backgroundColor: Colors.black,
-          //           shape: RoundedRectangleBorder(
-          //             borderRadius: BorderRadius.circular(30),
-          //           )),
-          //       onPressed: () {
-          //         qController.cancelTest(true);
-          //         // if (qController.timer != null) {
-          //         //   // qController.cameraController.stopImageStream();
-          //         // }
-
-          //         // widget.isGoingtoTest == true
-          //         //     ? Get.offAll(TestScreen())
-          //         //     : Get.offAll(Onlinecmeprogram());
-          //       },
-          //       child: Text(
-          //         'Ok',
-          //         style: TextStyle(
-          //           fontFamily: "Nunito",
-          //         ),
-          //       )),
-          //   cancel: ElevatedButton(
-          //     style: ElevatedButton.styleFrom(
-          //         backgroundColor: Colors.black,
-          //         shape: RoundedRectangleBorder(
-          //           borderRadius: BorderRadius.circular(30),
-          //         )),
-          //     onPressed: () {
-          //       Get.back();
-          //     },
-          //     child: Text(
-          //       'Cancel',
-          //       style: TextStyle(
-          //         fontFamily: "Nunito",
-          //       ),
-          //     ),
-          //   ),
-          //   middleText: "Your answers will be countable",
-          //   middleTextStyle: TextStyle(
-          //     fontFamily: "Nunito",
-          //   ),
-          // );
         }
         return Future.value(false);
       },
@@ -200,7 +155,7 @@ class _QuestionState extends State<Question> {
                                                           FontWeight.bold),
                                                 ),
                                               ),
-                                               InkWell(
+                                              InkWell(
                                                 onTap: () {
                                                   qController
                                                       .changeSelectedOPtion(
@@ -732,6 +687,7 @@ class _QuestionState extends State<Question> {
                                                         .selectedOption
                                                         .toString()
                                                         .toLowerCase();
+
                                                     print(qController.answers);
                                                   } else {
                                                     qController.optionD.value =
@@ -920,11 +876,6 @@ class _QuestionState extends State<Question> {
                                       onPressed: () async {
                                         qController.pageChange != 14
                                             ? null
-                                            //  qController.answers[
-                                            //         qController.pageChange + 1] =
-                                            //     qController.selectedOption
-                                            //         .toString()
-                                            //         .toLowerCase()
                                             : qController.completeTest(
                                                 selectedOption: qController
                                                     .selectedOption
@@ -934,7 +885,8 @@ class _QuestionState extends State<Question> {
                                                     widget.isGoingtoTest,
                                                 correctAns:
                                                     widget.correctAnswer,
-                                                input: qController.answers, );
+                                                input: qController.answers,
+                                              );
 
                                         print(qController.answers);
 

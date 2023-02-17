@@ -61,7 +61,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                           children: [
                             InkWell(
                               onTap: () {
-                                Get.to(ChangeProfilePicture());
+                                // Get.to(ChangeProfilePicture());
                               },
                               child: CircleAvatar(
                                 child: bdrawerController.profilePick == null ||
