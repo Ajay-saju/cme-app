@@ -687,6 +687,14 @@ class _QuestionState extends State<Question> {
                                                         .selectedOption
                                                         .toString()
                                                         .toLowerCase();
+                                                    // qController.answers['Ans'] =
+                                                    //     qController
+                                                    //         .selectedOption
+                                                    //         .toString()
+                                                    //         .toLowerCase();
+                                                    // qController.answers['QID'] =
+                                                    //     finalQuesList[index]
+                                                    //         .qId;
 
                                                     print(qController.answers);
                                                   } else {
@@ -886,7 +894,7 @@ class _QuestionState extends State<Question> {
                                                 correctAns:
                                                     widget.correctAnswer,
                                                 input: qController.answers,
-                                              );
+                                                qid: 'hi');
 
                                         print(qController.answers);
 
@@ -935,61 +943,5 @@ class _QuestionState extends State<Question> {
         }),
       ),
     );
-    // else
-    //   return SizedBox();
   }
-
-  // competeTest() {
-  //   Get.defaultDialog(
-  //     barrierDismissible: false,
-  //     cancel: ElevatedButton(
-  //       style: ElevatedButton.styleFrom(
-  //           backgroundColor: Colors.black,
-  //           shape: RoundedRectangleBorder(
-  //             borderRadius: BorderRadius.circular(30),
-  //           )),
-  //       onPressed: () {
-  //         Get.back();
-  //       },
-  //       child: Text(
-  //         'Cancel',
-  //         style: TextStyle(
-  //           fontFamily: "Nunito",
-  //         ),
-  //       ),
-  //     ),
-  //     confirm: ElevatedButton(
-  //         style: ElevatedButton.styleFrom(
-  //             backgroundColor: Colors.black,
-  //             shape: RoundedRectangleBorder(
-  //               borderRadius: BorderRadius.circular(30),
-  //             )),
-  //         onPressed: () {
-  //           qController.timer!.cancel();
-  //           widget.isGoingtoTest == true
-  //               ? Get.offAll(TestScreen())
-  //               : Get.offAll(Onlinecmeprogram());
-  //         },
-  //         child: Text(
-  //           'OK',
-  //           style: TextStyle(
-  //             fontFamily: "Nunito",
-  //           ),
-  //         )),
-  //     title: 'Complete',
-  //     titleStyle: TextStyle(
-  //       fontSize: 20,
-  //       fontWeight: FontWeight.bold,
-  //       fontFamily: "Nunito",
-  //     ),
-  //     middleText: 'Test Completed Successfully',
-  //     middleTextStyle: TextStyle(
-  //       fontFamily: "Nunito",
-  //     ),
-  //   );
-  // }
-
-  // void storeCorrectAns() {
-  //   for (int i = 0; i < widget.quesList.length; i++) {
-  //     // qController.correctAnswer[i+1] = widget.quesList[i].
 }

@@ -221,13 +221,9 @@ class QuestionController extends GetxController {
     );
   }
 
-  completeTest({
-    bool? isGoingtoTest,
-    input,
-    correctAns,
-    selectedOption,
-  }) {
-    answers[pageChange + 1] = selectedOption;
+  completeTest({bool? isGoingtoTest, input, correctAns, selectedOption, qid}) {
+    answers['Ans'] = selectedOption;
+    answers['QID'] = qid;
     print(answers);
     Get.defaultDialog(
       barrierDismissible: false,
@@ -311,7 +307,6 @@ class QuestionController extends GetxController {
                   borderRadius: BorderRadius.circular(30),
                 )),
             onPressed: () {
-             
               isGOingto == true
                   ? Get.offAll(TestScreen())
                   : Get.offAll(Onlinecmeprogram());

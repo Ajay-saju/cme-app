@@ -401,11 +401,7 @@ class _HomeState extends State<Home> {
                                           spreadRadius: 0.0,
                                           blurRadius: 5,
                                           offset: const Offset(3.0, 3.0)),
-                                      // BoxShadow(
-                                      //     color: Colors.grey.shade400,
-                                      //     spreadRadius: 0.0,
-                                      //     blurRadius: 5 / 2.0,
-                                      //     offset: const Offset(3.0, 3.0)),
+                                      
                                       const BoxShadow(
                                           color: Colors.white,
                                           spreadRadius: 2.0,
