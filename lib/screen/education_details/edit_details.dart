@@ -19,19 +19,21 @@ class EditEduDetails extends StatefulWidget {
 }
 
 class _EditEduDetailsState extends State<EditEduDetails> {
- 
   final profileController = Get.find<ProfileTabController>();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    profileController.collegeController.text =
-        profileController.eduList.value.result![widget.index].cOLLEGE.toString();
-    profileController.universityController.text =
-        profileController.eduList.value.result![widget.index].uNIVERSITY.toString();
+    profileController.collegeController.text = profileController
+        .eduList.value.result![widget.index].cOLLEGE
+        .toString();
+    profileController.universityController.text = profileController
+        .eduList.value.result![widget.index].uNIVERSITY
+        .toString();
     profileController.degreeController.text =
         profileController.eduList.value.result![widget.index].dEGREE.toString();
+    //
   }
 
   @override
@@ -45,6 +47,7 @@ class _EditEduDetailsState extends State<EditEduDetails> {
 
   @override
   Widget build(BuildContext context) {
+    callCollegeId();
     print(profileController.universityController.toString());
     return GetBuilder<ProfileTabController>(builder: ((_) {
       return GestureDetector(
@@ -178,8 +181,8 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                       },
                                       onSuggestionSelected:
                                           (SpecialtyList suggestion) {
-                                        profileController.degreeController.text =
-                                            suggestion.specialtyName!;
+                                        profileController.degreeController
+                                            .text = suggestion.specialtyName!;
                                         profileController.corseCode =
                                             suggestion.specialtyId!.toString();
                                       }),
@@ -298,6 +301,8 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                     hideKeyboardOnDrag: true,
                                     textFieldConfiguration:
                                         TextFieldConfiguration(
+
+                                            // onTap: () => callCollegeId(),
                                             cursorColor: Colors.black87,
                                             decoration: new InputDecoration(
                                               border: InputBorder.none,
@@ -315,8 +320,9 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                             controller: profileController
                                                 .collegeController),
                                     suggestionsCallback: (pattern) {
-                                      return profileController.collegeList!.where(
-                                          (element) => element.collegeName!
+                                      return profileController.collegeList!
+                                          .where((element) => element
+                                              .collegeName!
                                               .toLowerCase()
                                               .contains(pattern.toLowerCase()));
                                     },
@@ -372,7 +378,8 @@ class _EditEduDetailsState extends State<EditEduDetails> {
                                     courseId: profileController.corseCode,
                                     month: profileController.month.toString(),
                                     year: profileController.year.toString(),
-                                    universityId: profileController.universityCode,
+                                    universityId:
+                                        profileController.universityCode,
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(
@@ -399,6 +406,10 @@ class _EditEduDetailsState extends State<EditEduDetails> {
     }));
   }
 
- 
-
+  void callCollegeId() async {
+    await profileController.getInitialCollageList(
+        universityId: profileController
+            .eduList.value.result![widget.index].uNIVERSITYId
+            .toString());
+  }
 }

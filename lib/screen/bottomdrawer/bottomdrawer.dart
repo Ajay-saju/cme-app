@@ -66,11 +66,12 @@ class _BottomDrawerState extends State<BottomDrawer> {
                               child: CircleAvatar(
                                 child: bdrawerController.profilePick == null ||
                                         pick == "No Photo Available"
-                                    ? Icon(
-                                        Icons.add_a_photo_rounded,
-                                        color: Colors.black87,
-                                        size: 30,
-                                      )
+                                    ? Text('')
+                                    //  Icon(
+                                    //     Icons.add_a_photo_rounded,
+                                    //     color: Colors.black87,
+                                    //     size: 30,
+                                    //   )
                                     : null,
                                 backgroundImage: Image.network(
                                         bdrawerController.profilePick == null
@@ -86,19 +87,25 @@ class _BottomDrawerState extends State<BottomDrawer> {
                               width: context.width * 0.05,
                             ),
                             // Spacer(),
-                            Text(
-                              bdrawerController
-                                          .getUserDetails.value.loginName ==
-                                      null
-                                  ? " "
-                                  : bdrawerController
-                                      .getUserDetails.value.loginName
-                                      .toString(),
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "Nunito",
-                                color: Colors.white,
+                            Container(
+                              // color: Colors.black87,
+                              width: 200,
+                              height: 30,
+                              child: Text(
+                                bdrawerController
+                                            .getUserDetails.value.loginName ==
+                                        null
+                                    ? " "
+                                    : bdrawerController
+                                        .getUserDetails.value.loginName
+                                        .toString(),
+                                style: TextStyle(
+                                  // overflow: TextOverflow.fade,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "Nunito",
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ],

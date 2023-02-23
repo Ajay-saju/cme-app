@@ -49,7 +49,7 @@ class ProfileTabController extends GetxController {
 
   Rx<GetEduDEtails> eduList = GetEduDEtails().obs;
   Future<GetEduDEtails?> getEduList() async {
-     isLoading.value = true;
+    isLoading.value = true;
     print('working education list...');
     final ediListService = EducationDetalsServ();
 
@@ -98,6 +98,29 @@ class ProfileTabController extends GetxController {
   }
 
   Rx<GetCollegeList> getCollegeList = GetCollegeList().obs;
+
+  Future getInitialCollageList({required String universityId}) async {
+    final collegeListServise = CollageListServise();
+    try {
+      final response = await collegeListServise.getCollageList(universityId);
+      if (response.statusCode == 200) {
+        log(response.data);
+        var jsonFile = jsonDecode(response.data);
+        getCollegeList.value = GetCollegeList.fromJson(jsonFile);
+
+        collegeList = getCollegeList.value.collegeList;
+
+        print(getCollegeList.value.collegeList![0].collegeName);
+      }
+    } on DioError catch (e) {
+      print(e.message);
+      rethrow;
+    } catch (e) {
+      rethrow;
+    }
+    update();
+  }
+
   getCollageCode({required String universityId}) async {
     DialogHelper.showLoading();
     final collegeListServise = CollageListServise();

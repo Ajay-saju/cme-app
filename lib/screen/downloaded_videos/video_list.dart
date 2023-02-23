@@ -154,7 +154,8 @@ class _VideoListScreenState extends State<VideoListScreen> {
               builder: (BuildContext context, Box<VideoListModel> item, _) {
                 List<int> keys = item.keys.cast<int>().toList();
                 return videoBox.isEmpty
-                    ? Center(
+                    ?
+                     Center(
                         child: Text(
                           'You dont have any videos ',
                           style: TextStyle(
