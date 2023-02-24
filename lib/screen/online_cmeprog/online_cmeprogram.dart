@@ -8,6 +8,7 @@ import 'package:hslr/screen/dashboard/dashboard.dart';
 import 'package:hslr/screen/downloaded_videos/video_list.dart';
 import 'package:hslr/screen/online_cmeprog/online_cmeprogram_controller.dart';
 import 'package:hslr/screen/online_cmeprog/video_player_screen.dart';
+import 'package:hslr/screen/quiz/tske_test_instru_screen.dart';
 import 'package:hslr/screen/videoplayerwidget/videoplayerwidget.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -107,7 +108,9 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
         backgroundColor: Colors.white, //Color(0xff63c3fe),
         body: GetBuilder<CmeProgramController>(builder: (_) {
           return SafeArea(
-              child: cmeProgramController.allCmeVideos.value!.videoList == null
+              child: cmeProgramController.allCmeVideos.value!.videoList ==
+                          null &&
+                      cmeProgramController.specialtyNames.isEmpty
                   ? Center(
                       child: CircularProgressIndicator(
                         strokeWidth: 2.5,
@@ -213,7 +216,6 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                   : 13),
                                         ),
 
-                                        // Down Arrow Icon
                                         icon: Padding(
                                           padding:
                                               const EdgeInsets.only(left: 0.0),
@@ -223,23 +225,23 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                           ),
                                         ),
 
-                                        // Array list of items
                                         items: cmeProgramController
-                                            .specialitylist
+                                            .specialtyNames
                                             .map((String items) {
                                           return DropdownMenuItem(
                                             value: items,
                                             child: Text(items,
                                                 style: const TextStyle(
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Color(
-                                                        0xff2D2D2D)) //Color(0xff4169e1)),#
+                                                  fontSize: 13,
+                                                  fontFamily: "Nunito",
+                                                  color: Colors.white,
+                                                )
+
+                                                //Color(0xff4169e1)),#
                                                 ),
                                           );
                                         }).toList(),
-                                        // After selecting the desired option,it will
-                                        // change button value to selected value
+
                                         onChanged: (String? newValue) {
                                           cmeProgramController.speciality =
                                               newValue;
@@ -617,16 +619,31 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                     ElevatedButton(
                                                       onPressed: () async {
                                                         cmeProgramController
-                                                            .getAllQuestionsData(
-                                                                cmeProgramController
+                                                            .createOrder(
+                                                                amound: cmeProgramController
                                                                     .allCmeVideos
                                                                     .value!
                                                                     .videoList![
                                                                         index]
-                                                                    .videoId);
+                                                                    .videoAmount
+                                                                    .toString() );
+
+                                                        // Get.to(
+                                                        //     TestInstructionScreen(
+                                                        //   index: index,
+                                                        // ));
+
+                                                        // cmeProgramController
+                                                        //     .getAllQuestionsData(
+                                                        //         cmeProgramController
+                                                        //             .allCmeVideos
+                                                        //             .value!
+                                                        //             .videoList![
+                                                        //                 index]
+                                                        //             .videoId);
                                                       },
                                                       child: Text(
-                                                          '    Take Test    '),
+                                                          '    Buy Now    '),
                                                       style: ElevatedButton
                                                           .styleFrom(
                                                               backgroundColor:

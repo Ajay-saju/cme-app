@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/main.dart';
-import 'package:hslr/screen/change_profile_pick/change_profile_pick_screen.dart';
 import 'package:hslr/screen/cmeprogrm_points/cme_points.dart';
 import 'package:hslr/screen/dashboard/dashboard_controller.dart';
 import 'package:hslr/screen/downloaded_videos/video_list.dart';
@@ -10,7 +9,6 @@ import 'package:hslr/screen/login/login.dart';
 import 'package:hslr/screen/login/login_controller.dart';
 import 'package:hslr/screen/member_details/member_details.dart';
 import 'package:hslr/screen/online_cmeprog/online_cmeprogram.dart';
-import 'package:hslr/screen/online_cmeprog/sample.dart';
 import 'package:hslr/screen/paymentdetails/paymentdetails.dart';
 import 'package:hslr/screen/test_screen/testscreen.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -93,12 +91,13 @@ class _BottomDrawerState extends State<BottomDrawer> {
                               height: 30,
                               child: Text(
                                 bdrawerController
-                                            .getUserDetails.value.loginName ==
-                                        null
-                                    ? " "
-                                    : bdrawerController
-                                        .getUserDetails.value.loginName
-                                        .toString(),
+                                        .getUserDetails.value.loginName ??
+                                    '',
+                                //     null
+                                // ? " "
+                                // : bdrawerController
+                                //     .getUserDetails.value.loginName
+                                //     .toString(),
                                 style: TextStyle(
                                   // overflow: TextOverflow.fade,
                                   fontSize: 20,
