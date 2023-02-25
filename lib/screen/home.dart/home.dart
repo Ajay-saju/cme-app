@@ -188,9 +188,12 @@ class _HomeState extends State<Home> {
                                                 dashController.dateTime.value ==
                                                         ''
                                                     ? ""
-                                                    : dashController
-                                                        .dateTime.value[0]
-                                                        .toString(),
+                                                    : dashController.dateTime
+                                                            .value.isNotEmpty
+                                                        ? dashController
+                                                            .dateTime.value[0]
+                                                            .toString()
+                                                        : ' - - - ',
                                                 style: TextStyle(
                                                     fontFamily: "Nunito",
                                                     fontSize:
@@ -204,12 +207,12 @@ class _HomeState extends State<Home> {
                                               padding: const EdgeInsets.only(
                                                   right: 65),
                                               child: Text(
-                                                dashController.dateTime.value ==
-                                                        ''
-                                                    ? ""
-                                                    : dashController
-                                                        .dateTime.value[1]
-                                                        .toString(),
+                                                dashController.dateTime
+                                                            .value.isNotEmpty
+                                                        ? dashController
+                                                            .dateTime.value[1]
+                                                            .toString()
+                                                        : ' - - - ',
                                                 style: TextStyle(
                                                     fontFamily: "Nunito",
                                                     fontSize:
@@ -401,7 +404,6 @@ class _HomeState extends State<Home> {
                                           spreadRadius: 0.0,
                                           blurRadius: 5,
                                           offset: const Offset(3.0, 3.0)),
-                                      
                                       const BoxShadow(
                                           color: Colors.white,
                                           spreadRadius: 2.0,

@@ -8,6 +8,7 @@ import 'package:hslr/models/dashboard_data_models.dart';
 import 'package:hslr/models/get_eduid_list.model.dart';
 import 'package:hslr/models/get_reciepts.dart';
 import 'package:hslr/models/user_details.dart';
+import 'package:hslr/screen/dashboard/dashboard.dart';
 import 'package:hslr/screen/login/login_controller.dart';
 import 'package:hslr/screen/profile_tab/profile_tab.dart';
 import 'package:hslr/services/get_eduid_list_servise.dart';
@@ -26,7 +27,6 @@ import 'package:intl/intl.dart';
 final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
 
 class DashboardController extends GetxController {
-  static final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
 
   Rx<GetPayment> getpaymentList = GetPayment().obs;
   Future<GetPayment?> getRecieptList() async {
@@ -101,28 +101,28 @@ class DashboardController extends GetxController {
     }
   }
 
-  void changeTab(int index) {
-    switch (index) {
-      case 0:
-        drawerKey.currentState!.openDrawer();
+  // void changeTab(int index) {
+  //   tabIndex = index;
+  //   switch (index) {
+  //     case 0:
+  //       drawerKey.currentState!.openDrawer();
 
-        break;
-      // case 1:
-      //   Get.to(Dashboard());
+  //       break;
+  //     case 1:
+  //       Get.to(Dashboard());
 
-      //   break;
+  //       break;
 
-      case 2:
-        Get.to(ProfileScreenTab());
-        break;
-      default:
-        // Get.to(Home());
-        break;
-    }
-  }
+  //     case 2:
+  //       // Get.to(ProfileScreenTab());
+  //       break;
+  //     default:
+  //       // Get.to(Home());
+  //       break;
+  //   }
+  // }
 
 // ****User Education details****
-  
 
   //*** user Profile picture */
   var profilePick;
@@ -137,7 +137,7 @@ class DashboardController extends GetxController {
       if (response.statusCode == 200) {
         profilePick = response.data.replaceAll('https', "http");
         print(profilePick);
-    
+
         await sessionlog.setString('proPick', response.data);
       }
     } catch (e) {
@@ -147,7 +147,6 @@ class DashboardController extends GetxController {
     }
     update();
   }
-
 
   UserCmeVideo? userCmeVideo;
   UserCmeVideoPurchese? userCmeVideoPurchese;
@@ -238,9 +237,7 @@ class DashboardController extends GetxController {
     update();
   }
 
-
-
-  var dateTime =[].obs;
+  var dateTime = [].obs;
   Rx<UserDashBordDetails> dashBordData = UserDashBordDetails().obs;
   Future<UserDashBordDetails?> getuserDashboardData() async {
     final dashbordService = DashbordService();
@@ -251,8 +248,7 @@ class DashboardController extends GetxController {
       if (response.statusCode == 200) {
         dashBordData.value = UserDashBordDetails.fromJson(jsonFile);
         dateTime.value =
-            getLastLogin(dashBordData.value.lastlogin![0].lastLogT.toString())
-                ;
+            getLastLogin(dashBordData.value.lastlogin![0].lastLogT.toString());
         print(dashBordData.value.lastlogin![0].lastLogT.toString());
       } else {
         Get.defaultDialog(
@@ -302,7 +298,6 @@ class DashboardController extends GetxController {
         print(getUserDetails.value.loginName);
         // username = sessionlog.getString('log_name');
         sessionlog.setString('log_name', getUserDetails.value.loginName!);
-        
       } else {
         // isfade = true;
         Get.defaultDialog(
@@ -318,17 +313,17 @@ class DashboardController extends GetxController {
     return null;
   }
 
-  List getLastLogin(String data)  {
+  List getLastLogin(String data) {
     String input = data;
     DateTime dateTime = DateTime.parse(input);
 
     // Format date
     DateFormat dateFormat = DateFormat('dd-MM-yyyy');
-    String date =  dateFormat.format(dateTime);
+    String date = dateFormat.format(dateTime);
 
     // Format time
     DateFormat timeFormat = DateFormat('h:mm a');
-    String time =  timeFormat.format(dateTime);
+    String time = timeFormat.format(dateTime);
     print(date.toString());
     print(time.toString());
 

@@ -15,7 +15,9 @@ class VideoListModel {
   final String videoPath;
   @HiveField(5)
   final String creditPoint;
+  @HiveField(6)
+  final String videoId;
 
   VideoListModel(this.videoName, this.speakerName, this.videothambnails,
-      this.videoTimingHour, this.videoPath, this.creditPoint);
+      this.videoTimingHour, this.videoPath, this.creditPoint, this.videoId);
 }

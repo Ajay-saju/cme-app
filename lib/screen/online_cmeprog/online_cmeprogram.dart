@@ -1,9 +1,12 @@
+import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
 import 'dart:async';
+import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:get/get.dart';
+import 'package:hslr/main.dart';
 import 'package:hslr/screen/dashboard/dashboard.dart';
 import 'package:hslr/screen/downloaded_videos/video_list.dart';
 import 'package:hslr/screen/online_cmeprog/online_cmeprogram_controller.dart';
@@ -13,6 +16,18 @@ import 'package:hslr/screen/videoplayerwidget/videoplayerwidget.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:video_player/video_player.dart';
+
+// Future<bool> isStoragePermission() async => Future.value(
+//     await Permission.storage.request().isGranted || await getAndroidSdk());
+
+Future<bool> getAndroidSdk() async {
+  bool? isSdkAndroid13 = false;
+  if (Platform.isAndroid) {
+    AndroidDeviceInfo androidInfo = await DeviceInfoPlugin().androidInfo;
+    isSdkAndroid13 = androidInfo.version.sdkInt >= 33;
+  }
+  return isSdkAndroid13;
+}
 
 class Onlinecmeprogram extends StatefulWidget {
   const Onlinecmeprogram({Key? key}) : super(key: key);
@@ -74,10 +89,70 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
     }
   }
 
+  void isDownloadVideo(String videoId) {
+    if (sessionlog.containsKey(videoId)) {
+    } else {
+      Get.defaultDialog(
+          title: 'Download',
+          middleText: 'Do you want to download this video ?',
+          middleTextStyle:
+              TextStyle(fontFamily: "Nunito", color: Colors.black87),
+          titleStyle: TextStyle(fontFamily: "Nunito", color: Colors.black87),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: Text('Cancel'),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black87,
+                      // Colors.orange,//// Color.fromARGB(255, 218, 206, 37),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      )),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    downloadVideo(
+                      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+                      // name: cmeProgramController
+                      //     .allCmeVideos
+                      //     .value!
+                      //     .videoList![
+                      //         index]
+                      //     .videoName
+                      //     .toString(),
+                    );
+                  },
+                  child: Text('Ok'),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black87,
+                      // Colors.orange,//// Color.fromARGB(255, 218, 206, 37),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      )),
+                )
+              ],
+            )
+          ]);
+    }
+  }
+
   Future downloadVideo(String url) async {
+    var setting = Platform.isAndroid
+        ? await getAndroidSdk()
+            ? Permission.photos
+            : Permission.storage
+        : Permission.photos;
     late Timer _timer;
-    var status = Permission.storage.request();
-    if (await status.isGranted) {
+    // var status = await Permission.storage.request();
+    if (await Future.value(setting.isGranted)) {
+      Timer.periodic(Duration(seconds: 2), (timer) {
+        Get.to(VideoListScreen());
+      });
       final directory = await getApplicationDocumentsDirectory();
       final taskId = await FlutterDownloader.enqueue(
         url: url,
@@ -89,7 +164,14 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
             true, // click on notification to open downloaded file (for Android)
       );
     } else {
-      print('Permission denied');
+      final status = await setting.request();
+      if (!(status == PermissionStatus.granted)) {
+        openAppSettings();
+      } else if (status == PermissionStatus.denied) {
+        openAppSettings();
+      } else if (status == PermissionStatus.permanentlyDenied) {
+        openAppSettings();
+      }
     }
   }
 
@@ -234,7 +316,7 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                 style: const TextStyle(
                                                   fontSize: 13,
                                                   fontFamily: "Nunito",
-                                                  color: Colors.white,
+                                                  color: Colors.black,
                                                 )
 
                                                 //Color(0xff4169e1)),#
@@ -298,10 +380,10 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                             value: items,
                                             child: Text(items,
                                                 style: const TextStyle(
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Color(
-                                                        0xff2D2D2D)) //Color(0xff4169e1)),#
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Color(0xff2D2D2D),
+                                                ) //Color(0xff4169e1)),#
                                                 ),
                                           );
                                         }).toList(),
@@ -626,7 +708,7 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                                     .videoList![
                                                                         index]
                                                                     .videoAmount
-                                                                    .toString() );
+                                                                    .toString());
 
                                                         // Get.to(
                                                         //     TestInstructionScreen(
@@ -663,76 +745,14 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                     ),
                                                     ElevatedButton(
                                                       onPressed: () {
-                                                        Get.defaultDialog(
-                                                            title: 'Download',
-                                                            middleText:
-                                                                'Do you want to download this video ?',
-                                                            middleTextStyle:
-                                                                TextStyle(
-                                                                    fontFamily:
-                                                                        "Nunito",
-                                                                    color: Colors
-                                                                        .black87),
-                                                            titleStyle: TextStyle(
-                                                                fontFamily:
-                                                                    "Nunito",
-                                                                color: Colors
-                                                                    .black87),
-                                                            actions: [
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceAround,
-                                                                children: [
-                                                                  ElevatedButton(
-                                                                    onPressed:
-                                                                        () {
-                                                                      Get.back();
-                                                                    },
-                                                                    child: Text(
-                                                                        'Cancel'),
-                                                                    style: ElevatedButton.styleFrom(
-                                                                        backgroundColor: Colors.black87,
-                                                                        // Colors.orange,//// Color.fromARGB(255, 218, 206, 37),
-                                                                        shape: RoundedRectangleBorder(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(15),
-                                                                        )),
-                                                                  ),
-                                                                  ElevatedButton(
-                                                                    onPressed:
-                                                                        () {
-                                                                      downloadVideo(
-                                                                        'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
-                                                                        // name: cmeProgramController
-                                                                        //     .allCmeVideos
-                                                                        //     .value!
-                                                                        //     .videoList![
-                                                                        //         index]
-                                                                        //     .videoName
-                                                                        //     .toString(),
-                                                                      );
-                                                                      Timer.periodic(
-                                                                          Duration(
-                                                                              seconds: 2),
-                                                                          (timer) {
-                                                                        Get.off(
-                                                                            VideoListScreen());
-                                                                      });
-                                                                    },
-                                                                    child: Text(
-                                                                        'Ok'),
-                                                                    style: ElevatedButton.styleFrom(
-                                                                        backgroundColor: Colors.black87,
-                                                                        // Colors.orange,//// Color.fromARGB(255, 218, 206, 37),
-                                                                        shape: RoundedRectangleBorder(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(15),
-                                                                        )),
-                                                                  )
-                                                                ],
-                                                              )
-                                                            ]);
+                                                        isDownloadVideo(
+                                                            cmeProgramController
+                                                                .allCmeVideos
+                                                                .value!
+                                                                .videoList![
+                                                                    index]
+                                                                .videoId
+                                                                .toString());
                                                       },
                                                       child: Text(
                                                           'Download Video'),

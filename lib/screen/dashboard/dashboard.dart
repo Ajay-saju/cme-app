@@ -17,9 +17,12 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
+  int screenIndex = 1;
   final screens = [
     // BottomDrawer(),
 
+    Home(),
     Home(),
     ProfileScreenTab(),
   ];
@@ -33,11 +36,10 @@ class _DashboardState extends State<Dashboard> {
     super.initState();
     indexChaingeNotifier = ValueNotifier(0);
     dashboardController.getUserData(sessionlog.getString('userId').toString());
-    dashboardController.getuserDashboardData(); 
+    dashboardController.getuserDashboardData();
     dashboardController.getUserProfilePick();
     dashboardController.getRecieptList();
     dashboardController.getCmeList();
-   
   }
 
   @override
@@ -134,7 +136,7 @@ class _DashboardState extends State<Dashboard> {
           return
               //
               Scaffold(
-            key: DashboardController.drawerKey,
+            key: drawerKey,
             drawer: const BottomDrawer(),
             body: SafeArea(
               child: dashboardController.getUserDetails.value.loginName == null
@@ -146,59 +148,57 @@ class _DashboardState extends State<Dashboard> {
                     )
                   : Stack(
                       // index: dashboardController.tabIndex,
-                      children: [
-                        ValueListenableBuilder(
-                            valueListenable: indexChaingeNotifier,
-                            builder: (context, int index, _) {
-                              return screens[index];
-                            })
-                      ],
+                      children: [screens[screenIndex]],
                     ),
             ),
-            bottomNavigationBar: ValueListenableBuilder(
-                valueListenable: indexChaingeNotifier,
-                builder: (context, int newIndex, _) {
-                  return BottomNavigationBar(
-                      type: BottomNavigationBarType.fixed,
-                      // unselectedItemColor: Colors.black87, //Colors.blue.shade200,
-                      // selectedItemColor: Colors
-                      //     .black87, //Color(0xffC8C8C8), //Colors.blue.shade700,00000
-                      onTap: dashboardController.changeTab,
-                      // onTap: (index) {
-                      //   indexChaingeNotifier.value = index;
-                      //   // dashboardController.changeTabIndex;
-                      // },
-                      currentIndex: dashboardController.tabIndex,
-                      showSelectedLabels: false,
-                      showUnselectedLabels: false,
-                      items: const [
-                        BottomNavigationBarItem(
-                          icon: ImageIcon(AssetImage("assets/nd.png"),
-                              color: Colors.black87),
-                          label: "",
-                        ),
-                        BottomNavigationBarItem(
-                          icon: ImageIcon(
-                            AssetImage("assets/hm.png"),
-                            color: Colors.black87,
-                          ),
-                          label: "",
-                        ),
-                        BottomNavigationBarItem(
-                          icon: Icon(
-                            Icons.account_circle_rounded,
-                            size: 30,
-                            color: Colors.black87,
-                          ),
-                          //  ImageIcon(
-                          //   AssetImage("assets/profile.png"),
-                          //   color: Colors.black87,
-                          // ),
+            bottomNavigationBar: BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
+                // unselectedItemColor: Colors.black87, //Colors.blue.shade200,
+                // selectedItemColor: Colors
+                //     .black87, //Color(0xffC8C8C8), //Colors.blue.shade700,00000
+                onTap: (int index) {
+                  if (index == 0) drawerKey.currentState!.openDrawer();
+                  else
+                  setState(() {
+                    screenIndex = index;
+                    // dashboardController.changeTab(index);
+                  });
+                },
 
-                          label: "",
-                        ),
-                      ]);
-                }),
+                // onTap: (index) {
+                //   indexChaingeNotifier.value = index;
+                //   // dashboardController.changeTabIndex;
+                // },
+                currentIndex: dashboardController.tabIndex,
+                showSelectedLabels: false,
+                showUnselectedLabels: false,
+                items: const [
+                  BottomNavigationBarItem(
+                    icon: ImageIcon(AssetImage("assets/nd.png"),
+                        color: Colors.black87),
+                    label: "",
+                  ),
+                  BottomNavigationBarItem(
+                    icon: ImageIcon(
+                      AssetImage("assets/hm.png"),
+                      color: Colors.black87,
+                    ),
+                    label: "",
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.account_circle_rounded,
+                      size: 30,
+                      color: Colors.black87,
+                    ),
+                    //  ImageIcon(
+                    //   AssetImage("assets/profile.png"),
+                    //   color: Colors.black87,
+                    // ),
+
+                    label: "",
+                  ),
+                ]),
             // ),
           );
         }),

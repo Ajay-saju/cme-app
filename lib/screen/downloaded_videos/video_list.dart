@@ -16,15 +16,12 @@ class VideoListScreen extends StatefulWidget {
 }
 
 class _VideoListScreenState extends State<VideoListScreen> {
-
-  static void downloadCallback(
-      String id, DownloadTaskStatus status, int progress) {
-    final SendPort? send =
-        IsolateNameServer.lookupPortByName('downloader_send_port');
-    send!.send([id, status, progress]);
-  }
-
-  
+  // static void downloadCallback(
+  //     String id, DownloadTaskStatus status, int progress) {
+  //   final SendPort? send =
+  //       IsolateNameServer.lookupPortByName('downloader_send_port');
+  //   send!.send([id, status, progress]);
+  // }
 
   final videoListController = Get.put(VideoListController());
   late Box<VideoListModel> videoBox;
@@ -39,10 +36,9 @@ class _VideoListScreenState extends State<VideoListScreen> {
     super.initState();
     videoBox = Hive.box<VideoListModel>('video_list');
 
-
-    task();
-    bindBackgroundIsolate();
-    FlutterDownloader.registerCallback(downloadCallback);
+    // task();
+    // bindBackgroundIsolate();
+    // FlutterDownloader.registerCallback(downloadCallback);
   }
 
   Future task() async {
@@ -58,6 +54,7 @@ class _VideoListScreenState extends State<VideoListScreen> {
     });
     setState(() {});
   }
+
   void bindBackgroundIsolate() {
     bool isSuccess = IsolateNameServer.registerPortWithName(
         port.sendPort, 'downloader_send_port');
@@ -83,7 +80,6 @@ class _VideoListScreenState extends State<VideoListScreen> {
     IsolateNameServer.removePortNameMapping('downloader_send_port');
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,7 +93,8 @@ class _VideoListScreenState extends State<VideoListScreen> {
             ),
             InkWell(
               onTap: () {
-                Get.off(Dashboard());
+                Get.back();
+                // Get.off(Dashboard());
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -154,8 +151,7 @@ class _VideoListScreenState extends State<VideoListScreen> {
               builder: (BuildContext context, Box<VideoListModel> item, _) {
                 List<int> keys = item.keys.cast<int>().toList();
                 return videoBox.isEmpty
-                    ?
-                     Center(
+                    ? Center(
                         child: Text(
                           'You dont have any videos ',
                           style: TextStyle(

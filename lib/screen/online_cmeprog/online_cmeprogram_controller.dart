@@ -58,14 +58,14 @@ class CmeProgramController extends GetxController {
     print(response);
   }
 
-  void createOrder( {required String amound,}) async {
+  void createOrder({
+    required String amound,
+  }) async {
     isLoading.value = true;
     String username = key;
     String password = secret;
     String basicAuth =
         'Basic ${base64Encode(utf8.encode('$username:$password'))}';
-
-        
 
     Map<String, dynamic> body = {
       "amount": amound * 100,

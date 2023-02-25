@@ -95,7 +95,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                     '',
                                 //     null
                                 // ? " "
-                                // : bdrawerController
+                                // : bdrawerControllerj
                                 //     .getUserDetails.value.loginName
                                 //     .toString(),
                                 style: TextStyle(
