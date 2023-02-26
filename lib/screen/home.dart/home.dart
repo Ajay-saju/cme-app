@@ -16,7 +16,9 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   LoginController logController = Get.put(LoginController());
   DashboardController dashController = Get.find();
-  final pick = sessionlog.getString('proPick')!.replaceAll("https", 'http');
+  final pick = sessionlog.getString('proPick') == null
+      ? ''
+      : sessionlog.getString('proPick')!.replaceAll("https", 'http');
 
   @override
   Widget build(BuildContext context) {
@@ -207,12 +209,12 @@ class _HomeState extends State<Home> {
                                               padding: const EdgeInsets.only(
                                                   right: 65),
                                               child: Text(
-                                                dashController.dateTime
-                                                            .value.isNotEmpty
-                                                        ? dashController
-                                                            .dateTime.value[1]
-                                                            .toString()
-                                                        : ' - - - ',
+                                                dashController.dateTime.value
+                                                        .isNotEmpty
+                                                    ? dashController
+                                                        .dateTime.value[1]
+                                                        .toString()
+                                                    : ' - - - ',
                                                 style: TextStyle(
                                                     fontFamily: "Nunito",
                                                     fontSize:

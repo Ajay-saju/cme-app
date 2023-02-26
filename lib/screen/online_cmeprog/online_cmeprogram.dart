@@ -11,7 +11,6 @@ import 'package:hslr/screen/dashboard/dashboard.dart';
 import 'package:hslr/screen/downloaded_videos/video_list.dart';
 import 'package:hslr/screen/online_cmeprog/online_cmeprogram_controller.dart';
 import 'package:hslr/screen/online_cmeprog/video_player_screen.dart';
-import 'package:hslr/screen/quiz/tske_test_instru_screen.dart';
 import 'package:hslr/screen/videoplayerwidget/videoplayerwidget.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -150,19 +149,16 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
     late Timer _timer;
     // var status = await Permission.storage.request();
     if (await Future.value(setting.isGranted)) {
-      Timer.periodic(Duration(seconds: 2), (timer) {
-        Get.to(VideoListScreen());
-      });
       final directory = await getApplicationDocumentsDirectory();
-      final taskId = await FlutterDownloader.enqueue(
+      await FlutterDownloader.enqueue(
         url: url,
         headers: {}, // optional: header send with url (auth token etc)
-        savedDir: directory.path,
+        savedDir: directory.path+'/jhghjgbj',
         showNotification:
             true, // show download progress in status bar (for Android)
         openFileFromNotification:
             true, // click on notification to open downloaded file (for Android)
-      );
+      ).whenComplete(() => Get.to(VideoListScreen()));
     } else {
       final status = await setting.request();
       if (!(status == PermissionStatus.granted)) {
