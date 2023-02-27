@@ -117,6 +117,21 @@ class QuestionController extends GetxController {
     });
   }
 
+  List finalAnswers = [];
+
+  List getAnswers({required String qid, required String option}) {
+    
+    var newMap = {};
+    // newMap.addAll(newMap);
+    newMap['QID'] = qid;
+    newMap['Ans'] = option;
+    print(newMap);
+    finalAnswers.add(newMap);
+    print(answers);
+
+    return finalAnswers;
+  }
+
   void startPhotoTimer(int min) {
     int remainingSeconds = 1;
     const duration = Duration(minutes: 1);
@@ -374,7 +389,7 @@ class QuestionController extends GetxController {
     };
   }
 
-  List<Map<String, String>> finalAnswers = [];
+  // List<Map<String, String?>> finalAnswers = [];
 
   void setAnswers({required String qId, required String ans}) {
     // finalAnswers.add( );

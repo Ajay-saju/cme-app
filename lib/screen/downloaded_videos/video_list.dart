@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:hslr/screen/dashboard/dashboard.dart';
 import 'package:hslr/screen/downloaded_videos/video_list_controller.dart';
 import '../online_cmeprog/local_database/video_list_model.dart';
 
@@ -241,8 +240,7 @@ class _VideoListScreenState extends State<VideoListScreen> {
                             child: Text('video Container'),
                           );
                         },
-                        separatorBuilder: (context, index) => 
-                        SizedBox(
+                        separatorBuilder: (context, index) => SizedBox(
                               height: 10,
                             ),
                         itemCount: keys.length);

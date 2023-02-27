@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:hslr/models/questions_ans_model.dart';
 import 'package:hslr/services/all_cme_video_service.dart';
 import 'package:hslr/services/questions_ans_service.dart';
+import 'package:intl/intl.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -19,8 +20,8 @@ class CmeProgramController extends GetxController {
   bool isClicked = true;
   final _razorpay = Razorpay();
 
-  String key = "rzp_test_uXO8Pi9ywEXMH4";
-  String secret = "ClwVCL3p8xOdsKjmNWiMmAVo";
+  String key = "rzp_live_IC34JZjDPqSQTl";
+  String secret = "zL7eX9oVxWXDRYXBDTkLLt8i";
 
   @override
   void onInit() {
@@ -61,6 +62,7 @@ class CmeProgramController extends GetxController {
   void createOrder({
     required String amound,
   }) async {
+    String receipt = createReceipt();
     isLoading.value = true;
     String username = key;
     String password = secret;
@@ -68,9 +70,9 @@ class CmeProgramController extends GetxController {
         'Basic ${base64Encode(utf8.encode('$username:$password'))}';
 
     Map<String, dynamic> body = {
-      "amount": amound * 100,
+      "amount": 1 * 100,
       "currency": "INR",
-      "receipt": "rcptid_11"
+      "receipt": receipt
     };
 
     var res = await http.post(
@@ -94,12 +96,13 @@ class CmeProgramController extends GetxController {
     var options = {
       'key': key,
       'amount': 2000 * 100, //in the smallest currency sub-unit.
-      'name': 'CME',
+      'name': 'EMED',
       'order_id': orderId, // Generate order_id using Orders API
       'description': 'Course Fee',
       // 'timeout': 60*8, // in seconds
       'prefill': {'contact': '9123456789', 'email': 'gaurav.kumar@example.com'}
     };
+    print(options);
     _razorpay.open(options);
   }
 
@@ -201,17 +204,26 @@ class CmeProgramController extends GetxController {
   }
 
   var finalQuesAns;
+  var finalQuesId;
   createQuesData({required List quesList}) {
     var temp = [];
+    var temp1 = [];
     for (var i = 0; i < quesList.length; i++) {
       temp.add(quesList[i].qN.split('\r'));
     }
+    for (var i = 0; i < quesList.length; i++) {
+      temp1.add(quesList[i].qId);
+    }
+    print(temp);
+    print(temp1);
 
     finalQuesAns = temp;
+    finalQuesId = temp1;
     Get.to(Question(
       correctAnswer: correctAnswer,
       quesList: finalQuesAns,
       isGoingtoTest: false,
+      quesId: finalQuesId,
     ));
   }
 
@@ -249,5 +261,15 @@ class CmeProgramController extends GetxController {
     }
 
     update();
+  }
+
+  int counter = 0;
+  String createReceipt() {
+    DateTime now = DateTime.now();
+    String timestamp = DateFormat('yyyyMMddHHmmss').format(now);
+    String uniqueId = '$timestamp${counter.toString().padLeft(9, '0')}';
+    counter++;
+    print(uniqueId);
+    return uniqueId;
   }
 }

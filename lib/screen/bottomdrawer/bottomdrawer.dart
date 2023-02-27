@@ -31,7 +31,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    // print(bdrawerController.profilePick.replaceAll('"', ''));
+  
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return GetBuilder<DashboardController>(
@@ -425,7 +425,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                                                       const EdgeInsets.only(
                                                           top: 5.0),
                                                   child: Text(
-                                                    "Your Videos",
+                                                    "My Videos",
                                                     style: TextStyle(
                                                       fontFamily: "Nunito",
                                                       fontSize: 18,

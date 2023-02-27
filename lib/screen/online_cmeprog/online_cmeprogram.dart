@@ -11,6 +11,7 @@ import 'package:hslr/screen/dashboard/dashboard.dart';
 import 'package:hslr/screen/downloaded_videos/video_list.dart';
 import 'package:hslr/screen/online_cmeprog/online_cmeprogram_controller.dart';
 import 'package:hslr/screen/online_cmeprog/video_player_screen.dart';
+import 'package:hslr/screen/quiz/tske_test_instru_screen.dart';
 import 'package:hslr/screen/videoplayerwidget/videoplayerwidget.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -153,7 +154,7 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
       await FlutterDownloader.enqueue(
         url: url,
         headers: {}, // optional: header send with url (auth token etc)
-        savedDir: directory.path+'/jhghjgbj',
+        savedDir: directory.path + '/jhghjgbj',
         showNotification:
             true, // show download progress in status bar (for Android)
         openFileFromNotification:
@@ -696,20 +697,20 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                   children: [
                                                     ElevatedButton(
                                                       onPressed: () async {
-                                                        cmeProgramController
-                                                            .createOrder(
-                                                                amound: cmeProgramController
-                                                                    .allCmeVideos
-                                                                    .value!
-                                                                    .videoList![
-                                                                        index]
-                                                                    .videoAmount
-                                                                    .toString());
+                                                        // cmeProgramController
+                                                        //     .createOrder(
+                                                        //         amound: cmeProgramController
+                                                        //             .allCmeVideos
+                                                        //             .value!
+                                                        //             .videoList![
+                                                        //                 index]
+                                                        //             .videoAmount
+                                                        //             .toString());
 
-                                                        // Get.to(
-                                                        //     TestInstructionScreen(
-                                                        //   index: index,
-                                                        // ));
+                                                        Get.to(
+                                                            TestInstructionScreen(
+                                                          index: index,
+                                                        ));
 
                                                         // cmeProgramController
                                                         //     .getAllQuestionsData(
@@ -775,12 +776,15 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                               separatorBuilder: (context, index) => Container(
                                     height: 20,
                                   ),
-                              itemCount: cmeProgramController.allCmeVideos
-                                          .value!.videoList!.length <
-                                      10
-                                  ? cmeProgramController
-                                      .allCmeVideos.value!.videoList!.length
-                                  : _data.length),
+                              itemCount: cmeProgramController
+                                      .allCmeVideos.value!.videoList!.isEmpty
+                                  ? 0
+                                  : cmeProgramController.allCmeVideos.value!
+                                              .videoList!.length <
+                                          10
+                                      ? cmeProgramController
+                                          .allCmeVideos.value!.videoList!.length
+                                      : _data.length),
                         ),
                       ],
                     ));

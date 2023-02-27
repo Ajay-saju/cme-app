@@ -7,11 +7,13 @@ class Question extends StatefulWidget {
   final bool isGoingtoTest;
   final correctAnswer;
   final quesList;
+  final quesId;
   Question({
     Key? key,
     required this.isGoingtoTest,
     this.quesList,
     this.correctAnswer,
+    this.quesId,
   }) : super(key: key);
 
   @override
@@ -23,6 +25,7 @@ class _QuestionState extends State<Question> {
   final cmeProgramControll = Get.find<CmeProgramController>();
 
   var finalQuesList;
+  var finalQuesId;
 
   // @override
   // void initState() {
@@ -37,10 +40,9 @@ class _QuestionState extends State<Question> {
   @override
   Widget build(BuildContext context) {
     finalQuesList = widget.quesList;
-    // if (qController.cameraController.value.isInitialized)
+    finalQuesId = widget.quesId;
     print(finalQuesList);
-    print(widget.correctAnswer);
-    print('============================================================');
+    print(finalQuesId);
 
     return WillPopScope(
       onWillPop: () async {
@@ -836,6 +838,8 @@ class _QuestionState extends State<Question> {
                                   width: context.width * 0.25,
                                   child: ElevatedButton(
                                       onPressed: () {
+
+
                                         print(qController.answers);
                                         qController.pageChange == 0
                                             ? qController.cancelTest(
@@ -858,6 +862,10 @@ class _QuestionState extends State<Question> {
                                             "page_change--:${qController.pageChange}");
                                         qController.update();
                                       },
+
+
+
+
                                       style: ElevatedButton.styleFrom(
                                           backgroundColor: Colors.black,
                                           shape: RoundedRectangleBorder(
@@ -882,6 +890,18 @@ class _QuestionState extends State<Question> {
                                   width: context.width * 0.25,
                                   child: ElevatedButton(
                                       onPressed: () async {
+
+
+
+
+                                        print(
+                                            qController.pageChange.toString());
+                                        qController.getAnswers(
+                                            option: qController.selectedOption
+                                                .toString()
+                                                .toLowerCase(),
+                                            qid: finalQuesId[
+                                                qController.pageChange]);
                                         qController.pageChange != 14
                                             ? null
                                             : qController.completeTest(
@@ -910,6 +930,10 @@ class _QuestionState extends State<Question> {
                                         print(
                                             "page_change++:${qController.pageChange}");
                                       },
+
+
+
+                                      
                                       style: ElevatedButton.styleFrom(
                                           backgroundColor: Colors.black,
                                           shape: RoundedRectangleBorder(
