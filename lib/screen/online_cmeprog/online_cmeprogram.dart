@@ -53,7 +53,6 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
   }
 
   @override
-  @override
   void initState() {
     IsolateNameServer.registerPortWithName(
         _port.sendPort, 'downloader_send_port');
@@ -147,7 +146,7 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
             ? Permission.photos
             : Permission.storage
         : Permission.photos;
-    late Timer _timer;
+
     // var status = await Permission.storage.request();
     if (await Future.value(setting.isGranted)) {
       final directory = await getApplicationDocumentsDirectory();
