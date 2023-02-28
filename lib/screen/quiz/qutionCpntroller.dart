@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hslr/main.dart';
 import 'package:hslr/screen/test_screen/testscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../services/post_test_result_service.dart';
 import '../online_cmeprog/online_cmeprogram.dart';
 
 class QuestionController extends GetxController {
@@ -103,7 +105,7 @@ class QuestionController extends GetxController {
       if (remainingSecond == 0) {
         timer.cancel();
         if (isCancelTest == false) {
-          completeTest(isGoingtoTest: false);
+          completeTest(isGoingtoTest: false,);
         }
       } else {
         minutes.value = remainingSecond ~/ 60;
@@ -120,14 +122,13 @@ class QuestionController extends GetxController {
   List finalAnswers = [];
 
   List getAnswers({required String qid, required String option}) {
-    
     var newMap = {};
     // newMap.addAll(newMap);
     newMap['QID'] = qid;
     newMap['Ans'] = option;
     print(newMap);
     finalAnswers.add(newMap);
-    print(answers);
+    print(finalAnswers);
 
     return finalAnswers;
   }
@@ -236,9 +237,15 @@ class QuestionController extends GetxController {
     );
   }
 
-  completeTest({bool? isGoingtoTest, input, correctAns, selectedOption, qid}) {
-    answers['Ans'] = selectedOption;
-    answers['QID'] = qid;
+  completeTest(
+      {bool? isGoingtoTest,
+      input,
+      correctAns,
+      selectedOption,
+       spekerId,
+       videoId}) {
+    // answers['Ans'] = selectedOption;
+
     print(answers);
     Get.defaultDialog(
       barrierDismissible: false,
@@ -266,7 +273,11 @@ class QuestionController extends GetxController {
               )),
           onPressed: () {
             testResult(
-                correctAns: correctAns, input: input, isGOingto: isGoingtoTest);
+                spekerId: spekerId,
+                videoId: videoId,
+                correctAns: correctAns,
+                input: input,
+                isGOingto: isGoingtoTest);
             timer!.cancel();
             remainingSecond = 0;
             isCancelTest = true;
@@ -290,8 +301,9 @@ class QuestionController extends GetxController {
     );
   }
 
-  void testResult({input, correctAns, isGOingto}) {
-    var count = 0;
+  var resultCount = 0;
+  void testResult(
+      {input, correctAns, isGOingto, required spekerId, required videoId}) {
     print(input);
     print(correctAns);
     if (correctAns == null) {
@@ -299,12 +311,20 @@ class QuestionController extends GetxController {
     } else {
       for (int i = 0; i < correctAns.length; i++) {
         if (input[i] == correctAns[i]) {
-          count = count + 1;
+          resultCount = resultCount + 1;
         }
       }
     }
 
-    if (count >= 10) {
+    if (resultCount >= 10) {
+      postTestResult(
+          answers: finalAnswers,
+          marks: resultCount.toString(),
+          result: resultCount >= 10 ? 'P' : 'F',
+          speakerId: spekerId,
+          videoId: videoId);
+    }
+    if (resultCount >= 10) {
       Get.defaultDialog(
         titleStyle: TextStyle(
           fontFamily: "Nunito",
@@ -314,7 +334,7 @@ class QuestionController extends GetxController {
         ),
         title: 'Congratulations',
         middleText:
-            'Test pass Successfully\n Your profile  is credited  1 Credit poin \n you scored $count marks',
+            'Test pass Successfully\n Your profile  is credited  1 Credit poin \n you scored $resultCount marks',
         confirm: ElevatedButton(
             style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
@@ -340,7 +360,7 @@ class QuestionController extends GetxController {
           fontFamily: "Nunito",
         ),
         middleText:
-            "You Have scored below cutt of marks please try to take test one more time\n you scored $count marks",
+            "You Have scored below cutt of marks please try to take test one more time\n you scored $resultCount marks",
         titleStyle: TextStyle(
           fontFamily: "Nunito",
         ),
@@ -370,29 +390,38 @@ class QuestionController extends GetxController {
     }
   }
 
-  void saveTest(
+  Future postTestResult(
       {required String speakerId,
       required String videoId,
       required String result,
-      required String mark,
-      required var answers}) {
-    Map<String, dynamic> _resultData = {
-      "cntryId": sessionlog.getInt('country').toString(),
-      "stateId": sessionlog.getString('stateId'),
-      "councilId": sessionlog.getString('councilId'),
-      "memberId": sessionlog.getString('userId'),
-      "speakerId": speakerId,
-      "videoId": videoId,
-      "Result": result,
-      "marks": mark,
-      "Answers": answers,
+      required String marks,
+      required List answers}) async {
+    String catId = await sessionlog.getString('catId').toString();
+    String stateId = await sessionlog.getString('stateId').toString();
+    String councilId = await sessionlog.getString('councilId').toString();
+    String memberId = await sessionlog.getString('userId').toString();
+    var data = {
+      'cntryId': catId,
+      'stateId': stateId,
+      'councilId': councilId,
+      'memberId': memberId,
+      'speakerId': speakerId,
+      'videoId': videoId,
+      'Result': result,
+      'marks': marks,
+      'Answers': answers
     };
-  }
+    String jsonData = json.encode(data);
+    PostTestResultService postTestResultService = PostTestResultService();
 
-  // List<Map<String, String?>> finalAnswers = [];
-
-  void setAnswers({required String qId, required String ans}) {
-    // finalAnswers.add( );
+    try {
+      final response = await postTestResultService.postResult(jsonData);
+      if (response.statusCode == 200) {
+        print('test result posted');
+      }
+    } catch (e) {
+      print(e.toString());
+    }
   }
 }
 

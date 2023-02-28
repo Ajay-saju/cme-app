@@ -15,7 +15,7 @@ class AlertScreen extends StatelessWidget {
       body: SafeArea(
         child: ElevatedButton(
             onPressed: () {
-              Get.to(Question(isGoingtoTest: false,));
+              // Get.to(Question(isGoingtoTest: false,));
             },
             child: Text('Agree')),
       ),

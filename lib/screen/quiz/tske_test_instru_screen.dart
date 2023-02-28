@@ -223,9 +223,18 @@ class _TestInstructionScreenState extends State<TestInstructionScreen> {
                     ),
                     ElevatedButton(
                       onPressed: () {
+                        print(cmeProgramController.allCmeVideos.value!
+                            .videoList![widget.index].speakerId);
+                        print(cmeProgramController.allCmeVideos.value!
+                            .videoList![widget.index].videoId);
                         cmeProgramController.getAllQuestionsData(
-                            cmeProgramController.allCmeVideos.value!
-                                .videoList![widget.index].videoId);
+                          videoId: cmeProgramController.allCmeVideos.value!
+                              .videoList![widget.index].videoId
+                              .toString(),
+                          spekerId: cmeProgramController.allCmeVideos.value!
+                              .videoList![widget.index].speakerId
+                              .toString(),
+                        );
                       },
                       child: Text('OK'),
                       style: ElevatedButton.styleFrom(
