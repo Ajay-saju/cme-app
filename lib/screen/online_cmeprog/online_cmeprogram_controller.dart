@@ -157,7 +157,7 @@ class CmeProgramController extends GetxController {
   Rx<QuestionsAnsList?> questions = QuestionsAnsList().obs;
   var que = [];
 
-  Future getAllQuestionsData({required videoId,required spekerId}) async {
+  Future getAllQuestionsData({required videoId, required spekerId}) async {
     QuestionAnsService questionAnsService = QuestionAnsService();
     var selectedQus;
     try {
@@ -168,7 +168,9 @@ class CmeProgramController extends GetxController {
         selectedQus = selectedQues(
             quesList: questions.value!.qAList!.toList(),
             numberOfQuiestions:
-                int.parse(questions.value!.qAList![0].qlis.toString()), videoId: videoId, spekerId:spekerId );
+                int.parse(questions.value!.qAList![0].qlis.toString()),
+            videoId: videoId,
+            spekerId: spekerId);
         // if (selectedQus != null) {
         //   Get.to(Question(j
         //     correctAnswer: correctAnswer,
@@ -183,7 +185,11 @@ class CmeProgramController extends GetxController {
     update();
   }
 
-  List selectedQues({required List quesList, required int numberOfQuiestions,required videoId,required spekerId}) {
+  List selectedQues(
+      {required List quesList,
+      required int numberOfQuiestions,
+      required videoId,
+      required spekerId}) {
     print(numberOfQuiestions.toString());
     List tempp = [];
     final _random = new Random();
@@ -216,7 +222,7 @@ class CmeProgramController extends GetxController {
     }
     print(temp);
     print(temp1);
-
+    print(correctAnswer);
     finalQuesAns = temp;
     finalQuesId = temp1;
     Get.to(Question(

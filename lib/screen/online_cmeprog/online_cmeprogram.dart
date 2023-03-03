@@ -29,6 +29,9 @@ Future<bool> getAndroidSdk() async {
   return isSdkAndroid13;
 }
 
+String videoId = '';
+String spekerId = '';
+
 class Onlinecmeprogram extends StatefulWidget {
   const Onlinecmeprogram({Key? key}) : super(key: key);
 
@@ -427,7 +430,7 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
 
                         Expanded(
                           // height: context.height * .5,
-                          child: ListView.separated(
+                          child: ListView.separated(controller: _scrollController,
                               shrinkWrap: true,
                               itemBuilder: (context, index) =>
                                   cmeProgramController
@@ -696,6 +699,22 @@ class _OnlinecmeprogramState extends State<Onlinecmeprogram> {
                                                   children: [
                                                     ElevatedButton(
                                                       onPressed: () async {
+                                                        videoId =
+                                                            cmeProgramController
+                                                                .allCmeVideos
+                                                                .value!
+                                                                .videoList![
+                                                                    index]
+                                                                .videoId
+                                                                .toString();
+                                                        spekerId =
+                                                            cmeProgramController
+                                                                .allCmeVideos
+                                                                .value!
+                                                                .videoList![
+                                                                    index]
+                                                                .speakerId
+                                                                .toString();
                                                         // cmeProgramController
                                                         //     .createOrder(
                                                         //         amound: cmeProgramController

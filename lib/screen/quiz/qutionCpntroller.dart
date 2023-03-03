@@ -105,7 +105,9 @@ class QuestionController extends GetxController {
       if (remainingSecond == 0) {
         timer.cancel();
         if (isCancelTest == false) {
-          completeTest(isGoingtoTest: false,);
+          completeTest(
+            isGoingtoTest: false,
+          );
         }
       } else {
         minutes.value = remainingSecond ~/ 60;
@@ -242,11 +244,13 @@ class QuestionController extends GetxController {
       input,
       correctAns,
       selectedOption,
-       spekerId,
-       videoId}) {
+      spekerId,
+      videoId}) {
     // answers['Ans'] = selectedOption;
 
     print(answers);
+    print(spekerId);
+    print(videoId);
     Get.defaultDialog(
       barrierDismissible: false,
       cancel: ElevatedButton(
@@ -323,8 +327,6 @@ class QuestionController extends GetxController {
           result: resultCount >= 10 ? 'P' : 'F',
           speakerId: spekerId,
           videoId: videoId);
-    }
-    if (resultCount >= 10) {
       Get.defaultDialog(
         titleStyle: TextStyle(
           fontFamily: "Nunito",
@@ -354,6 +356,12 @@ class QuestionController extends GetxController {
             )),
       );
     } else {
+      postTestResult(
+          answers: finalAnswers,
+          marks: resultCount.toString(),
+          result: resultCount >= 10 ? 'P' : 'F',
+          speakerId: spekerId,
+          videoId: videoId);
       Get.defaultDialog(
         title: "Test Faild",
         middleTextStyle: TextStyle(
@@ -411,6 +419,7 @@ class QuestionController extends GetxController {
       'marks': marks,
       'Answers': answers
     };
+    print(data);
     String jsonData = json.encode(data);
     PostTestResultService postTestResultService = PostTestResultService();
 

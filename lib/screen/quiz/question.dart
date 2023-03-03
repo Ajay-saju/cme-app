@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hslr/screen/online_cmeprog/online_cmeprogram.dart';
 import 'package:hslr/screen/online_cmeprog/online_cmeprogram_controller.dart';
 import 'package:hslr/screen/quiz/qutionCpntroller.dart';
 
@@ -35,10 +36,11 @@ class _QuestionState extends State<Question> {
   Widget build(BuildContext context) {
     finalQuesList = widget.quesList;
     finalQuesId = widget.quesId;
+    print(widget.correctAnswer);
     print(finalQuesList);
     print(finalQuesId);
-    print(widget.spekerId);
-    print(widget.videoId.toString());
+    print(videoId.toString());
+    print(spekerId.toString());
 
     return WillPopScope(
       onWillPop: () async {
@@ -880,6 +882,8 @@ class _QuestionState extends State<Question> {
                                   width: context.width * 0.25,
                                   child: ElevatedButton(
                                       onPressed: () async {
+                                        print(spekerId);
+                                        print(videoId);
                                         print(
                                             qController.pageChange.toString());
                                         qController.getAnswers(
@@ -891,8 +895,8 @@ class _QuestionState extends State<Question> {
                                         qController.pageChange != 14
                                             ? null
                                             : qController.completeTest(
-                                                spekerId: widget.spekerId,
-                                                videoId: widget.videoId,
+                                                spekerId: spekerId,
+                                                videoId: videoId,
                                                 selectedOption: qController
                                                     .selectedOption
                                                     .toString()
